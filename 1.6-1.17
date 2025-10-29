@@ -1,0 +1,68 @@
+1.6
+
+pi = 3.1415926
+print(f"{pi:.3f}") 
+
+1.7
+
+e = 2.71828
+print(f"{e:.1f}") 
+
+1.8. 
+
+num = input("Введите число:") 
+print("Вы ввели число", num)  
+
+1.9.
+num = input("Введите число: ") 
+print(num, "- вот какое число Вы ввели") 
+
+1.10. 
+
+name = input("Введите ваше имя: ")  
+print(name) 
+1.11. .
+
+team_name = input("Введите название команды: ")  
+print(team_name, "- это чемпион!") 
+
+
+
+name = input("Введите ваше имя: ") 
+print(f"Привет, {name}!") 
+1.13. 
+
+num = int(input("Введите целое число: ")) 
+print(f"Следующее за числом {num} число – {num + 1}.") 
+print(f"Для числа {num} предыдущее число – {num - 1}.") 
+
+1.14. 
+
+a, b, c = input("Введите три числа через пробел: ").split() 
+print(a, b, c, sep='  ') 
+
+1.15.
+
+a, b, c, d = input("Введите четыре числа через пробел: ").split()  
+print(a, b, c, d, sep=' ') 
+
+1.16.
+
+t = int(input("Введите t: ")) 
+v = int(input("Введите v: ")) 
+x = int(input("Введите x: ")) 
+print("5", "10") 
+print("100", t) 
+print("7 см", "1949", v, x)  # Выводим "7 см 1949 v x"
+print("7 см", "1949", v, x)
+
+1.17. 
+
+a = int(input("Введите a: ")) 
+b = int(input("Введите b: ")) 
+x = int(input("Введите x: "))  
+y = int(input("Введите y: ")) 
+print("2 кг") 
+print(a, "1")  
+print(x, y) 
+print("13 17 19", b, "5", y) 
