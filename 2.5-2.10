@@ -1,0 +1,43 @@
+2.5
+
+def circle_diameter(radius):
+    return 2 * radius
+
+2.6
+
+import math
+
+def horizon_distance(height):
+    R = 6350  # Радиус Земли в км
+    return math.sqrt(2 * R * height + height ** 2)
+
+2.7
+
+def cube_properties(edge_length):
+    volume = edge_length ** 3
+    surface_area = 4 * edge_length ** 2
+    return volume, surface_area
+
+2.8
+
+import math
+
+def circle_properties(radius):
+    circumference = 2 * math.pi * radius
+    area = math.pi * radius ** 2
+    return circumference, area
+
+2.9
+
+def calculate_z(x, y):
+    return 2 * x ** 3 - 3.44 * x * y + 2.3 * x ** 2 - 7.1 * y + 2
+
+def calculate_x(a, b):
+    return 3.14 * (a + b) ** 3 + 2.75 * b ** 2 - 12.7 * a - 4.1
+
+2.10
+
+def arithmetic_geometric_mean(a, b):
+    arithmetic = (a + b) / 2
+    geometric = (a * b) ** 0.5
+    return arithmetic, geometric
