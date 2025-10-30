@@ -1,0 +1,45 @@
+2.32
+
+def total_computer_cost(monitor_price, cpu_price, keyboard_price, mouse_price, num_computers):
+    total_price = 3 * (monitor_price + cpu_price + keyboard_price + mouse_price)
+    return total_price * num_computers
+
+2.33
+
+def average_age(tanya_age, mitya_age):
+    average = (tanya_age + mitya_age) / 2
+    tanya_diff = average - tanya_age
+    mitya_diff = average - mitya_age
+    return average, tanya_diff, mitya_diff
+
+2.34
+
+def meeting_time(v1, v2, distance):
+    return distance / (v1 + v2)
+
+2.35
+
+def distance_after_time(v1, v2, s, t=30):
+    return s + (v1 - v2) * (t / 60)  # t в часах
+
+2.36
+
+def temperature_conversion(celsius):
+    fahrenheit = celsius * 1.8 + 32
+    kelvin = celsius - 273.15
+    return fahrenheit, kelvin
+
+2.37
+
+def fahrenheit_to_celsius(fahrenheit):
+    return (fahrenheit - 32) / 1.8
+
+2.38
+
+def operations_on_two_numbers(a, b):
+    sum_ = a + b
+    difference = a - b
+    product = a * b
+    quotient = a / b if b != 0 else None
+    average = (a + b) / 2
+    return sum_, difference, product, quotient, average
