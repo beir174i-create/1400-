@@ -1,0 +1,38 @@
+2.19 & 2.20
+
+def calculate_func_a_b(a, b):
+    return a ** 2 + b ** 2  # Пример функции
+
+
+
+2.21
+
+
+
+2.22
+
+def arithmetic_geometric_mean_of_moduli(a, b):
+    return (abs(a) + abs(b)) / 2, (abs(a) * abs(b)) ** 0.5
+
+2.23
+
+def rectangle_properties(length, width):
+    perimeter = 2 * (length + width)
+    diagonal = (length ** 2 + width ** 2) ** 0.5
+    return perimeter, diagonal
+
+2.24
+
+def basic_operations(a, b):
+    sum_ = a + b
+    difference = a - b
+    product = a * b
+    quotient = a / b if b != 0 else None  # Избегаем деления на ноль
+    return sum_, difference, product, quotient
+
+2.25
+
+def rectangular_prism_properties(length, width, height):
+    volume = length * width * height
+    surface_area = 2 * (length * width + width * height + length * height)
+    return volume, surface_area
