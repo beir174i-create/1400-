@@ -1,0 +1,41 @@
+2.11
+
+def density(volume, mass):
+    return mass / volume
+
+2.12
+
+def population_density(population, area):
+    return population / area
+
+2.13
+
+def solve_linear_equation(a, b):
+    return -b / a
+
+2.14
+
+def right_triangle_hypotenuse(cathetus1, cathetus2):
+    return (cathetus1 ** 2 + cathetus2 ** 2) ** 0.5
+
+2.15
+
+def ring_area(outer_radius, inner_radius):
+    return math.pi * (outer_radius ** 2 - inner_radius ** 2)
+
+2.16
+
+def right_triangle_perimeter(cathetus1, cathetus2):
+    hypotenuse = right_triangle_hypotenuse(cathetus1, cathetus2)
+    return cathetus1 + cathetus2 + hypotenuse
+
+2.17
+
+def isosceles_trapezoid_perimeter(base1, base2, height):
+    side = ((base1 - base2) ** 2 + height ** 2) ** 0.5
+    return base1 + base2 + 2 * side
+
+2.18
+
+def calculate_func_x_y(x, y):
+    return x * y + x ** 2 - y ** 2 
