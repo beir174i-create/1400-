@@ -1,0 +1,147 @@
+def compare_two_numbers(a, b):
+    if a > b:
+        return f"{a} больше, {b} меньше"
+    else:
+        return f"{b} больше, {a} меньше"
+
+4.2
+
+def calculate_y(x):
+    # Здесь необходимо определить уравнение для y в зависимости от x
+    y = x**2 + 3*x + 2  # пример функции
+    return y
+
+4.3
+
+def calculate_y(x):
+    # Здесь также необходимо указать конкретную функцию
+    y = 1 / (x + 1)  # пример функции
+    return y
+
+4.4
+
+def determine_region(x, y):
+    if x > 0 and y > 0:
+        return "I"
+    elif x < 0 and y > 0:
+        return "II"
+    else:
+        return "Точка на границе или в другой области"
+
+4.5
+
+def determine_region(x, y):
+    if x > 0 and y > 3:
+        return "I"
+    elif x < 0 and y > 0:
+        return "II"
+    else:
+        return "Точка на границе или в другой области"
+
+4.6
+
+def calculate_y(x):
+    if x < 0:
+        return -1  # например, значение для y если x < 0
+    elif 0 <= x <= 2:
+        return x**2  # пример функции
+    elif x > 2:
+        return 3  # значение для y если x > 2
+
+4.7
+
+def f(x):
+    if x < 0:
+        return -2 * x
+    elif 0 <= x <= 2:
+        return x**2 + 2
+    else:
+        return 2 * x - 1
+
+4.8
+
+def f(x):
+    if x < -3:
+        return 1
+    elif -3 <= x < 0:
+        return -x - 1
+    elif 0 <= x < 2:
+        return x**2
+    else:
+        return 3
+
+4.9
+
+def min_max(a, b):
+    return min(a, b), max(a, b)
+
+4.10
+
+def compare_distances(km, feet):
+    feet_in_km = feet * 0.0003048
+    if km < feet_in_km:
+        return "Километры меньше"
+    else:
+        return "Футы меньше"
+
+4.11
+
+def compare_speeds(kmh, mps):
+    kmh_to_mps = kmh * (1000 / 3600)
+    if kmh_to_mps > mps:
+        return "Километры в час больше"
+    else:
+        return "Метры в секунду больше"
+
+4.12
+
+import math
+
+def compare_area(radius, side):
+    circle_area = math.pi * radius ** 2
+    square_area = side ** 2
+    if circle_area > square_area:
+        return "Площадь круга больше"
+    else:
+        return "Площадь квадрата больше"
+
+4.13
+
+def compare_density(volume1, mass1, volume2, mass2):
+    density1 = mass1 / volume1
+    density2 = mass2 / volume2
+    if density1 > density2:
+        return "Первый материал более плотный"
+    else:
+        return "Второй материал более плотный"
+
+4.14
+
+def compare_current(resistance1, voltage1, resistance2, voltage2):
+    current1 = voltage1 / resistance1
+    current2 = voltage2 / resistance2
+    if current1 < current2:
+        return "Ток протекает по первому участку меньше"
+    else:
+        return "Ток протекает по второму участку меньше"
+
+4.15
+
+def has_roots(a, b, c):
+    if b**2 - 4*a*c < 0:
+        return "Корней нет"
+    else:
+        return "Корни есть"
+
+4.16
+
+import math
+
+def find_roots(a, b, c):
+    discriminant = b**2 - 4*a*c
+    if discriminant > 0:
+        root1 = (-b + math.sqrt(discriminant)) / (2*a)
+        root2 = (-b - math.sqrt(discriminant)) / (2*a)
+        return root1, root2
+    else:
+        return "Корней нет"
