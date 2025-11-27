@@ -1,0 +1,156 @@
+4.43
+
+def point_in_region_I(x, y):
+    return 0 < x < 3 and 0 < y < 2
+
+4.44
+
+def point_in_areas_I_or_III(x, y):
+    return (x > 0 and y > 0) or (x < 0 and y < 0)  # I or III
+
+4.45
+
+def calculate_f(x):
+    if x < 0:
+        return 2 * x + 1
+    elif 0 <= x <= 1:
+        return x ** 2
+    else:
+        return x ** 3 - 1
+
+4.46
+
+def calculate_f(x):
+    if x < -1:
+        return 1
+    elif -1 <= x <= 2:
+        return 0
+    else:
+        return -x
+
+4.47
+
+def check_inequalities(a, b, c):
+    inequality_1 = a < b < c
+    inequality_2 = b > a > c
+    return inequality_1, inequality_2
+
+4.48
+
+def has_divisor(a, b):
+    return a % b == 0 or b % a == 0
+
+4.49
+
+def check_digit_in_two_digit_number(n, digit):
+    return '3' in str(n), str(digit) in str(n)
+
+4.50
+
+def check_digits_in_two_digit_number(n):
+    return '4' in str(n) or '7' in str(n), any(d in str(n) for d in ['3', '6', '9'])
+
+4.51
+
+def check_digit_in_three_digit_number(n, digit):
+    return '6' in str(n), str(digit) in str(n)
+
+4.52
+
+def check_six_in_three_digit_number(n):
+    return '6' in str(n)
+
+4.53
+
+def check_digits_in_three_digit_number(n):
+    return '4' in str(n) or '7' in str(n), any(d in str(n) for d in ['3', '6', '9'])
+
+4.54
+
+def check_digit_in_four_digit_number(n, digit):
+    return '4' in str(n), str(digit) in str(n)
+
+4.55
+
+def check_digits_in_four_digit_number(n):
+    return '2' in str(n) or '7' in str(n), any(d in str(n) for d in ['3', '6', '9'])
+
+4.56
+
+def is_palindrome(n):
+    str_num = str(n)
+    return str_num == str_num[::-1]
+
+4.57
+
+def check_remainder(a, b, c, d):
+    return a % b == c or a % b == d
+
+4.58
+
+def has_equal_pairs(a, b, c):
+    return a == b or b == c or a == c
+
+4.59
+
+def check_triangle(a, b, c):
+    is_equilateral = a == b == c
+    is_isosceles = a == b or b == c or a == c
+    return is_equilateral, is_isosceles
+
+4.60
+
+def check_equal_heights(height1, height2, height3):
+    return height1 == height2 == height3
+
+4.61
+
+import math
+
+def solve_quadratic(a, b, c):
+    discriminant = b ** 2 - 4 * a * c
+    if discriminant > 0:
+        root1 = (-b + math.sqrt(discriminant)) / (2 * a)
+        root2 = (-b - math.sqrt(discriminant)) / (2 * a)
+        return root1, root2
+    elif discriminant == 0:
+        root = -b / (2 * a)
+        return root,
+    else:
+        return None
+
+4.62
+
+def can_fit_rectangle(a, b, c, d):
+    return (a <= c and b <= d) or (a <= d and b <= c)
+
+4.63
+
+def can_fit_card_in_envelope(a, b, c, d):
+    return (c + 2 <= a and d + 2 <= b) or (d + 2 <= a and c + 2 <= b)
+
+4.64
+
+def can_fit_head_in_window(a, b, d):
+    return (d + 2 <= a and d + 2 <= b)
+
+4.65
+
+def can_fit_brick_in_hole(a, b, c, x, y):
+    return any((a <= x and b <= y), (a <= y and b <= x), (a <= x and c <= y), (a <= y and c <= x),
+               (b <= x and c <= y), (b <= y and c <= x), (c <= x and b <= y), (c <= y and b <= x))
+
+4.66
+
+def can_fit_box_in_suitcase(a1, a2, a3, b1, b2, b3):
+    box_dimensions = sorted([b1, b2, b3])
+    suitcase_dimensions = sorted([a1, a2, a3])
+    return (box_dimensions[0] <= suitcase_dimensions[0] and
+            box_dimensions[1] <= suitcase_dimensions[1] and
+            box_dimensions[2] <= suitcase_dimensions[2])
+
+4.67
+
+def is_lucky_number(n):
+    str_num = str(n)
+    return sum(int(digit) for digit in str_num[:3]) == sum(int(digit) for digit in str_num[3:])
