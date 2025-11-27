@@ -1,0 +1,226 @@
+4.68
+
+def is_leap_year(n):
+    if (n % 4 == 0 and n % 100 != 0) or (n % 400 == 0):
+        return True
+    return False
+
+4.69
+
+def max_domino_on_table(a, b, c, d, e):
+    if a < b:
+        a, b = b, a  # Убедимся, что a > b
+    # Все возможные размещения на столе
+    count1 = (a // c) * (b // d)  # Размещение на стороне c и d
+    count2 = (a // d) * (b // c)  # Размещение на стороне d и c
+    count3 = (a // c) * (b // e)  # Размещение на стороне c и e
+    count4 = (a // e) * (b // c)  # Размещение на стороне e и c
+    count5 = (a // d) * (b // e)  # Размещение на стороне d и e
+    count6 = (a // e) * (b // d)  # Размещение на стороне e и d
+    return max(count1, count2, count3, count4, count5, count6)
+
+4.70
+
+def determine_day(k):
+    day_of_week = (k - 1) % 7  # Понедельник = 0, Воскресенье = 6
+    return "Weekend" if day_of_week == 5 or day_of_week == 6 else "Working Day"
+
+4.71
+
+import math
+
+def will_hit_target(alpha, v0, R, H):
+    g = 9.8
+    # Конвертируем угол в радианы
+    alpha_rad = math.radians(alpha)
+    # Максимальная высота
+    max_height = (v0**2 * (math.sin(alpha_rad) ** 2)) / (2 * g)
+    # Достижение расстояния R
+    reach_time = R / (v0 * math.cos(alpha_rad))
+    height_at_R = v0 * math.sin(alpha_rad) * reach_time - 0.5 * g * reach_time**2
+    return height_at_R >= H
+
+4.72
+
+def rectangles_relationship(x1, y1, w1, h1, x2, y2, w2, h2):
+    # Параметры первого прямоугольника
+    x1_max = x1 + w1
+    y1_max = y1 + h1
+    
+    # Параметры второго прямоугольника
+    x2_max = x2 + w2
+    y2_max = y2 + h2
+    
+    # а) принадлежность точек первого второму
+    points_in_second = x1 >= x2 and x1_max <= x2_max and y1 >= y2 and y1_max <= y2_max
+    
+    # б) принадлежность точек второго первому
+    points_in_first = x2 >= x1 and x2_max <= x1_max and y2 >= y1 and y2_max <= y1_max
+    
+    # в) пересечение
+    overlap = not (x1_max <= x2 or x2_max <= x1 or y1_max <= y2 or y2_max <= y1)
+
+    return points_in_second, points_in_first, overlap
+
+4.73
+
+def digit_difference(a1, a2, b):
+    num1 = 10 * a2 + a1  # Двузначное число
+    num2 = b  # Однозначное число
+    difference = num1 - num2
+    return difference // 10, difference % 10  # Возвращаем десятки и единицы
+
+4.74
+
+def digit_difference_two_numbers(a1, a2, b1, b2):
+    num1 = 10 * a2 + a1  # Первое двузначное число
+    num2 = 10 * b2 + b1  # Второе двузначное число
+    difference = num1 - num2
+    return difference // 10, difference % 10  # Возвращаем десятки и единицы
+
+4.75
+
+def digit_sum(a1, a2, a3, b1, b2):
+    num1 = 100 * a3 + 10 * a2 + a1  # Трехзначное число
+    num2 = 10 * b2 + b1  # Двузначное число
+    total = num1 + num2
+    return total // 100, (total // 10) % 10, total % 10  # Возвращаем сотни, десятки и единицы
+    4.75
+
+def digit_sum(a1, a2, a3, b1, b2):
+    num1 = 100 * a3 + 10 * a2 + a1  # Трехзначное число a3a2a1
+    num2 = 10 * b2 + b1              # Двузначное число b2b1
+    total = num1 + num2
+    return total // 100, (total // 10) % 10, total % 10  # Возвращаем сотни, десятки и единицы
+
+4.76
+
+def rook_threat(a, b, c, d):
+    return a == c or b == d
+
+def bishop_threat(a, b, c, d):
+    return abs(a - c) == abs(b - d)
+
+def king_move(a, b, c, d):
+    return max(abs(a - c), abs(b - d)) == 1
+
+def queen_threat(a, b, c, d):
+    return rook_threat(a, b, c, d) or bishop_threat(a, b, c, d)
+
+def white_pawn_move(a, b, c, d):
+    return (a == c and b + 1 == d) or (a + 1 == c and b + 1 == d)
+
+def black_pawn_move(a, b, c, d):
+    return (a == c and b - 1 == d) or (a - 1 == c and b - 1 == d)
+
+def knight_threat(a, b, c, d):
+    return (abs(a - c) == 2 and abs(b - d) == 1) or (abs(a - c) == 1 and abs(b - d) == 2)
+
+4.77
+
+def can_move_without_threat(white_piece, black_piece, a, b, c, d, e, f):
+    if white_piece == "rook":
+        can_move = rook_threat(a, b, e, f) and not rook_threat(c, d, e, f)
+    elif white_piece == "bishop":
+        can_move = bishop_threat(a, b, e, f) and not bishop_threat(c, d, e, f)
+    # Аналогично для других фигур
+    return can_move
+
+4.78
+
+def same_color(a, b, c, d):
+    return (a + b) % 2 == (c + d) % 2
+
+4.79
+
+def check_triangle_existence(a, b, c):
+    return a + b > c and a + c > b and b + c > a
+
+4.80
+
+def check_right_triangle(a, b, c):
+    sides = sorted([a, b, c])
+    return sides[0]**2 + sides[1]**2 == sides[2]**2
+
+4.81
+
+def classify_triangle(a, b, c):
+    if not (a + b > c and a + c > b and b + c > a):
+        return "Not a triangle"
+    
+    types = []
+    if a == b and b == c:
+        types.append("equilateral")
+    elif a == b or b == c or a == c:
+        types.append("isosceles")
+    if check_right_triangle(a, b, c):
+        types.append("right")
+    elif a**2 + b**2 > c**2 and b**2 + c**2 > a**2 and a**2 + c**2 > b**2:
+        types.append("acute")
+    else:
+        types.append("obtuse")
+    
+    return types
+
+4.82
+
+def age_message(n):
+    if n % 10 == 1 and n % 100 != 11:
+        return f"мне {n} год"
+    elif n % 10 in [2, 3, 4] and not (n % 100 in [12, 13, 14]):
+        return f"мне {n} года"
+    else:
+        return f"мне {n} лет"
+
+4.83
+
+def mushroom_message(k):
+    if k % 10 == 1 and k % 100 != 11:
+        return f"мы нашли {k} гриб"
+    elif k % 10 in [2, 3, 4] and not (k % 100 in [12, 13, 14]):
+        return f"мы нашли {k} гриба"
+    else:
+        return f"мы нашли {k} грибов"
+
+4.84
+
+def price_message(n):
+    rubles = n // 100
+    kopecks = n % 100
+    if kopecks == 0:
+        return f"{rubles} рубль ровно"
+    elif rubles == 1:
+        return f"{rubles} рубль {kopecks} копеек"
+    else:
+        return f"{rubles} рублей {kopecks} копеек"
+
+4.85
+
+def age_in_years_and_months(n):
+    years = n // 12
+    months = n % 12
+    if months == 0:
+        return f"{years} год{'' if years == 1 else 'а'} ровно"
+    return f"{years} год{'' if years == 1 else 'а'} {months} месяц{'' if months == 1 else 'а'}"
+
+4.86
+
+from datetime import datetime
+
+def calculate_age(birth_year, birth_month, birth_day, today_year, today_month, today_day):
+    birth_date = datetime(birth_year, birth_month, birth_day)
+    today_date = datetime(today_year, today_month, today_day)
+    age = today_year - birth_year - ((today_month, today_day) < (birth_month, birth_day))
+    return age
+
+4.87
+
+def compare_ages(birth1, month1, day1, birth2, month2, day2):
+    date1 = datetime(birth1, month1, day1)
+    date2 = datetime(birth2, month2, day2)
+    if date1 < date2:
+        return "Первый человек старше"
+    elif date1 > date2:
+        return "Второй человек старше"
+    else:
+        return "Они родились в один день"
