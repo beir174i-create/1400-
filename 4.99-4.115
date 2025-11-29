@@ -1,0 +1,201 @@
+Задача 4.99 - Определение наибольшего из двух чисел
+
+а) Два неполных условных оператора
+
+def max_of_two(a, b):
+    max_value = a
+    if a < b:
+        max_value = b
+    return max_value
+
+# Пример использования
+print(max_of_two(5.5, 3.2))  # 5.5
+
+б) Один неполный условный оператор
+
+def max_of_two_single(a, b):
+    return (a - b) * (a > b) + (b - a) * (b > a) + (a if (a > b) else b)
+
+# Пример использования
+print(max_of_two_single(5.5, 3.2))  # 5.5
+
+Задача 4.100 - Определение наибольшего и наименьшего из двух чисел
+
+а) Два неполных условных оператора
+
+def min_max_of_two(a, b):
+    max_value = a if a > b else b
+    min_value = a if a < b else b
+    return min_value, max_value
+
+# Пример использования
+print(min_max_of_two(5.5, 3.2))  # (3.2, 5.5)
+
+б) Один неполный условный оператор
+
+def min_max_of_two_single(a, b):
+    max_value = a * (a > b) + b * (b >= a)  # Наибольшее
+    min_value = a * (a < b) + b * (b <= a)  # Наименьшее
+    return min_value, max_value
+
+# Пример использования
+print(min_max_of_two_single(5.5, 3.2))  # (3.2, 5.5)
+
+Задача 4.101 - Определение наибольшего и наименьшего из трех чисел
+
+а) Наибольшее из трех чисел
+
+def max_of_three(a, b, c):
+    return max_of_two(max_of_two(a, b), c)
+
+# Пример использования
+print(max_of_three(1.5, 2.3, 0.7))  # 2.3
+
+б) Наименьшее из трех чисел
+
+def min_of_three(a, b, c):
+    return min_of_two(min_of_two(a, b), c)
+
+# Пример использования
+print(min_of_three(1.5, 2.3, 0.7))  # 0.7
+
+Задача 4.102 - Определение наибольшего и наименьшего из четырех чисел
+
+а) Наибольшее из четырех чисел
+
+def max_of_four(a, b, c, d):
+    return max_of_two(max_of_two(a, b), max_of_two(c, d))
+
+# Пример использования
+print(max_of_four(1.5, 2.5, 3.4, 0.9))  # 3.4
+
+б) Наименьшее из четырех чисел
+
+def min_of_four(a, b, c, d):
+    return min_of_two(min_of_two(a, b), min_of_two(c, d))
+
+# Пример использования
+print(min_of_four(1.5, 2.5, 3.4, 0.9))  # 0.9
+
+Задача 4.103 - Абсолютная величина числа
+
+def absolute_value(num):
+    return (num * (num >= 0)) + (-num * (num < 0))
+
+# Пример использования
+print(absolute_value(-5.5))  # 5.5
+
+Задача 4.104 - Полусумма абсолютных величин
+
+а) Полусумма абсолютных величин
+
+def half_sum_of_abs(a, b):
+    return (absolute_value(a) + absolute_value(b)) / 2
+
+# Пример использования
+print(half_sum_of_abs(-5, 3))  # 4.0
+
+б) Квадратный корень из произведения абсолютных величин
+
+import math
+
+def sqrt_of_product_of_abs(a, b):
+    return math.sqrt(absolute_value(a) * absolute_value(b))
+
+# Пример использования
+print(sqrt_of_product_of_abs(-5, 3))  # 3.872983346207417
+
+Задача 4.105 - Уменьшение первого числа в два раза
+
+def reduce_if_greater(a, b):
+    return a / 2 if absolute_value(a) > absolute_value(b) else a
+
+# Пример использования
+print(reduce_if_greater(-7, 5))  # -3.5
+
+Задача 4.106 - Увеличение второго числа
+
+def increase_if_sqrt_less(a, b):
+    return b * 5 if (math.sqrt(b) < a) else b
+
+# Пример использования
+print(increase_if_sqrt_less(3, 4))  # 20
+
+Задача 4.107 - Вывод четных чисел
+
+def print_even_numbers(a, b, c):
+    evens = []
+    if a % 2 == 0:
+        evens.append(a)
+    if b % 2 == 0:
+        evens.append(b)
+    if c % 2 == 0:
+        evens.append(c)
+    return evens
+
+# Пример использования
+print(print_even_numbers(1, 2, 3))  # [2]
+
+Задача 4.108 - Возведение в квадрат неотрицательных чисел
+
+def square_non_negative(a, b, c):
+    return [(x**2 if x >= 0 else x) for x in (a, b, c)]
+
+# Пример использования
+print(square_non_negative(-1, 2, 3))  # [-1, 4, 9]
+
+Задача 4.109 - Числа в интервале [1.6, 3.8]
+
+def in_range(a, b, c):
+    return [x for x in (a, b, c) if 1.6 <= x <= 3.8]
+
+# Пример использования
+print(in_range(0.9, 2.5, 3.9))  # [2.5]
+
+Задача 4.110 - Отрицательные числа без циклов
+
+def count_negatives(a, b, c, d):
+    return (a < 0) + (b < 0) + (c < 0) + (d < 0)
+
+# Пример использования
+print(count_negatives(-1, 2, -3, 4))  # 2
+
+Задача 4.111 - Четные числа
+
+def count_even(a, b, c, d):
+    return (a % 2 == 0) + (b % 2 == 0) + (c % 2 == 0) + (d % 2 == 0)
+
+# Пример использования
+print(count_even(1, 2, 3, 4))  # 2
+
+Задача 4.112 - Сумма положительных чисел
+
+def sum_of_positive(a, b, c):
+    return (a * (a > 0)) + (b * (b > 0)) + (c * (c > 0))
+
+# Пример использования
+print(sum_of_positive(-1, 2, 3))  # 5
+
+Задача 4.113 - Сумма чисел больше пяти
+
+def sum_greater_than_five(a, b, c, d):
+    return (a * (a > 5)) + (b * (b > 5)) + (c * (c > 5)) + (d * (d > 5))
+
+# Пример использования
+print(sum_greater_than_five(6, 1, 8, 3))  # 14
+
+Задача 4.114 - Сумма кратных трем
+
+def sum_multiples_of_three(a, b, c, d):
+    return (a * (a % 3 == 0)) + (b * (b % 3 == 0)) + (c * (c % 3 == 0)) + (d * (d % 3 == 0))
+
+# Пример использования
+print(sum_multiples_of_three(3, 4, 9, 5))  # 12
+
+Задача 4.115 - Сумма положительных чисел
+
+def sum_of_positives(numbers):
+    return sum(num * (num > 0) for num in numbers)
+
+# Пример использования
+print(sum_of_positives([1, -2, 3, -4, 5, -6]))  # 9
