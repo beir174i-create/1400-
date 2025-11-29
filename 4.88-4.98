@@ -1,0 +1,134 @@
+Задача 4.88 - Определение, кто старше
+
+def older_person(year1, month1, year2, month2):
+    if (year1 < year2) or (year1 == year2 and month1 < month2):
+        return "Второй человек старше"
+    elif (year1 > year2) or (year1 == year2 and month1 > month2):
+        return "Первый человек старше"
+    else:
+        return "Оба человека одного возраста"
+
+# Пример использования
+print(older_person(1990, 5, 1991, 4))  # Возраст первого больше
+
+Задача 4.89 - Поезд на платформе
+
+def is_train_on_platform(a, b, c, d, n, m):
+    arrival_time = a * 60 + b
+    departure_time = c * 60 + d
+    passenger_time = n * 60 + m
+    return arrival_time <= passenger_time <= departure_time
+
+# Пример использования
+print(is_train_on_platform(10, 30, 11, 0, 10, 45))  # Поезд на платформе
+
+Задача 4.90 - Предыдущий и следующий день
+
+def previous_and_next_day(m, n):
+    days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    
+    # Предыдущий день
+    if n > 1:
+        prev_day = n - 1
+        prev_month = m
+    else:
+        prev_month = m - 1
+        if prev_month < 1:
+            prev_month = 12
+        prev_day = days_in_month[prev_month - 1]
+
+    # Следующий день
+    if n < days_in_month[m - 1]:
+        next_day = n + 1
+        next_month = m
+    else:
+        next_month = m + 1
+        if next_month > 12:
+            next_month = 1
+        next_day = 1
+
+    return (prev_month, prev_day), (next_month, next_day)
+
+# Пример использования
+print(previous_and_next_day(3, 1))  # ((2, 28), (3, 2))
+
+Задача 4.91 - Дата с учетом года
+
+def check_leap_year(year):
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
+def previous_and_next_day_with_year(g, m, n):
+    days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    if check_leap_year(g):
+        days_in_month[1] = 29
+
+    # Предыдущий день
+    if n > 1:
+        prev_day = n - 1
+        prev_month = m
+    else:
+        prev_month = m - 1
+        if prev_month < 1:
+            prev_month = 12
+            g -= 1
+        prev_day = days_in_month[prev_month - 1]
+
+    # Следующий день
+    if n < days_in_month[m - 1]:
+        next_day = n + 1
+        next_month = m
+    else:
+        next_month = m + 1
+        if next_month > 12:
+            next_month = 1
+            g += 1
+        next_day = 1
+
+    return (g, prev_month, prev_day), (g, next_month, next_day)
+
+# Пример использования
+print(previous_and_next_day_with_year(2023, 3, 1))  # ((2023, 2, 28), (2023, 3, 2))
+
+Задача 4.92 - Цвет светофора
+
+def traffic_light_color(t):
+    cycle_time = 9  # 6/3/9 минут
+    t %= cycle_time
+    
+    if t < 3:
+        return "Зеленый"
+    elif t < 4:
+        return "Желтый"
+    else:
+        return "Красный"
+
+# Пример использования
+print(traffic_light_color(5))  # Красный
+
+Задача 4.93 - Определение дня недели
+
+def day_of_week(k, d):
+    day_map = {1: "Понедельник", 2: "Вторник", 3: "Среда", 4: "Четверг", 5: "Пятница", 6: "Суббота", 7: "Воскресенье"}
+    day_code = (k - 1 + d - 1) % 7 + 1
+    return day_map[day_code]
+
+# Пример использования
+print(day_of_week(1, 1))  # Понедельник
+
+Задача 4.94 - Нахождение k-й цифры в последовательности
+
+def find_kth_digit(k):
+    concatenated = ''.join(str(i) for i in range(10, 100))  # все двузначные числа
+    return concatenated[k - 1]  # Индексы начинаются с 0
+
+# Пример использования
+print(find_kth_digit(10))  # '1'
+
+Задача 4.98 - Проверка четности суммы квартир
+
+def is_sum_even(a, n):
+    total_sum = sum(a + i for i in range(n))
+    return total_sum % 2 == 0
+
+# Пример использования
+print(is_sum_even(1, 5))  # True, для квартир 1, 2, 3, 4, 5
