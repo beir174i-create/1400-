@@ -1,0 +1,244 @@
+Задача 4.141 - Определение дня недели
+
+а) Если 1 января - понедельник
+
+def day_of_week_1(k):
+    days_of_week = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
+    return days_of_week[(k - 1) % 7]
+
+# Пример использования
+print(day_of_week_1(1))  # Понедельник
+print(day_of_week_1(365))  # Четверг
+
+б) Если 1 января - d-й день недели
+
+def day_of_week_d(k, d):
+    days_of_week = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
+    return days_of_week[(k - 1 + d - 1) % 7]
+
+# Пример использования
+print(day_of_week_d(1, 1))  # Понедельник
+print(day_of_week_d(365, 1))  # Четверг
+print(day_of_week_d(365, 3))  # Суббота
+
+Задача 4.142 - Название месяца через n месяцев и 2 дня
+
+def month_next(n):
+    months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+    # С 01.01.2010, n месяцев и +2 дня
+    month_index = (n + 1) % 12  # +1 так как 1 января - это 0 месяц (индекс 0)
+    return months[month_index]
+
+# Пример использования
+print(month_next(0))  # Январь
+print(month_next(11))  # Декабрь
+
+Задача 4.143 - Предыдущий и следующий день
+
+а) Предыдущий день
+
+def previous_day(n, m):
+    days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    
+    if n > 1:
+        return (n - 1, m)
+    else:
+        if m == 1:
+            return (31, 12)  # 31 декабря
+        else:
+            return (days_in_month[m - 2], m - 1)
+
+# Пример использования
+print(previous_day(1, 3))  # (28, 2) - 28 февраля
+print(previous_day(1, 1))  # (31, 12) - 31 декабря
+
+б) Следующий день
+
+def next_day(n, m):
+    days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    
+    if n < days_in_month[m - 1]:
+        return (n + 1, m)
+    else:
+        if m == 12:
+            return (1, 1)  # 1 января следующего года
+        else:
+            return (1, m + 1)
+
+# Пример использования
+print(next_day(28, 2))  # (1, 3) - 1 марта
+print(next_day(31, 12))  # (1, 1) - 1 января
+
+Задача 4.144 - Предыдущий и следующий день с учетом года
+
+def is_leap(year):
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
+def days_in_month(year):
+    return [31, 29 if is_leap(year) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+def previous_day_v2(g, m, n):
+    dim = days_in_month(g)
+    
+    if n > 1:
+        return (n - 1, m)
+    else:
+        if m == 1:
+            return (31, 12)  # 31 декабря предыдущего года
+        else:
+            return (dim[m - 2], m - 1)
+
+def next_day_v2(g, m, n):
+    dim = days_in_month(g)
+    
+    if n < dim[m - 1]:
+        return (n + 1, m)
+    else:
+        if m == 12:
+            return (1, 1)  # 1 января следующего года
+        else:
+            return (1, m + 1)
+
+# Пример использования
+print(previous_day_v2(2023, 3, 1))  # (28, 2)
+print(next_day_v2(2023, 2, 28))     # (1, 3)
+
+Задача 4.145 - Название года по восточному календарю
+
+def eastern_year(n):
+    animals = ["Крыса", "Корова", "Тигр", "Заяц", "Дракон", "Змея", 
+               "Лошадь", "Овца", "Обезьяна", "Петух", "Собака", "Свинья"]
+    colors = ["Зеленый", "Красный", "Желтый", "Белый", "Черный"]
+    
+    animal = animals[(n - 1) % 12]
+    color = colors[((n - 1) % 60) // 12]
+    
+    return f"{animal}, {color}"
+
+# Пример использования
+print(eastern_year(1984))  # Крыса, Зеленый
+print(eastern_year(2023))  # Кролик, Черный
+
+5.1 - Напечатать ряд чисел 20
+
+print(" ".join(["20"] * 10))
+
+5.2 - Напечатать заданное число заданное число раз
+
+def print_number(num, count):
+    print(" ".join([str(num)] * count))
+
+print_number(5, 10)  # Пример использования
+
+5.3 - Напечатать числа "столбиком"
+
+а) Все целые числа от 20 до 35
+
+for i in range(20, 36):
+    print(i)
+
+б) Квадраты всех целых чисел от a до 50
+
+a = int(input("Введите a (≤ 50): "))
+for i in range(a, 51):
+    print(i ** 2)
+
+в) Кубы всех целых чисел от 10 до b
+
+b = int(input("Введите b (≥ 10): "))
+for i in range(10, b + 1):
+    print(i ** 3)
+
+г) Все целые числа от a до b
+
+a = int(input("Введите a: "))
+b = int(input("Введите b (≥ a): "))
+for i in range(a, b + 1):
+    print(i)
+
+5.4 - Напечатать числа в заданном порядке
+
+а) 10 10.4
+
+for i in range(10, 26):
+    if i % 5 == 0:
+        print(i, i - 0.6)
+    else:
+        print(i, i + 0.4)
+
+5.5 - Напечатать 21 19.2
+
+for i in range(21, 10, -1):
+    print(i, i - 1.8)
+
+5.6 - Напечатать 21 20.4
+
+for i in range(21, 36):
+    print(i, round(i - 0.6, 1))
+
+5.7 - Таблица стоимости товара
+
+price_per_item = 20.4
+for i in range(2, 21):
+    print(f"{i} шт. - {i * price_per_item:.2f} руб.")
+
+5.8 - Таблица соответствия между фунтами и килограммами
+
+print("Фунты\tКг")
+for i in range(1, 11):
+    print(f"{i}\t{(i * 453) / 1000:.2f}")
+
+5.9 - Таблица перевода дюймов в сантиметры
+
+print("Дюймы\tСм")
+for i in range(10, 23):
+    print(f"{i}\t{i * 2.54:.2f}")
+
+5.10 - Таблица перевода долларов в рубли
+
+exchange_rate = float(input("Введите курс доллара: "))
+print("Доллары\tРубли")
+for i in range(1, 21):
+    print(f"{i}\t{i * exchange_rate:.2f}")
+
+5.11 - Расстояние до линии горизонта
+
+R = 6350  # Радиус Земли в км
+for h in range(1, 11):
+    d = (R ** 2 + h ** 2) ** 0.5 - R
+    print(f"Высота: {h} км, Расстояние до горизонта: {d:.2f} км")
+
+5.12 - Плотность воздуха от высоты
+
+import math
+
+p0 = 1.29  # кг/м³
+z = 1.25e-4
+
+print("Высота (м)\tПлотность (кг/м³)")
+for h in range(0, 1001, 100):
+    p = p0 * math.e ** (-z * h)
+    print(f"{h}\t\t{p:.2f}")
+
+5.13 - Таблица умножения на 7
+
+for i in range(1, 10):
+    print(f"{i} x 7 = {i * 7}")
+
+5.14 - Таблица умножения на 9
+
+for i in range(1, 10):
+    print(f"9 x {i} = {9 * i}")
+
+5.15 - Таблица умножения на n
+
+n = int(input("Введите n (1 ≤ n ≤ 9): "))
+for i in range(1, 10):
+    print(f"{i} x {n} = {i * n}")
+
+5.16 - Значения sin
+
+import math
+
+for i in range(2, 16):
+    print(f"sin({i}) = {math.sin(i)}")
