@@ -1,0 +1,218 @@
+5.17. Рассчитываем значения y для x от 4 до 28:
+
+Формула:
+
+где
+
+
+for x in range(4, 29):
+    t = x + 3
+    y = 3 * t**2 + 4.87 * t - 3
+    print(f"x={x}, y={y}")
+
+
+5.18. Рассчитываем значения z для a от 2 до 17:
+
+Формула:
+
+где
+
+
+for a in range(2, 18):
+    t = 3 * a
+    z = 4.3 * t**2 - 8 * t + 13
+    print(f"a={a}, z={z}")
+
+
+5.19. Выводим значения sin от 0.1 до 1.5:
+
+import math
+
+for i in range(1, 16):
+    value = i / 10
+    print(f"sin({value}) = {math.sin(value)}")
+
+
+5.20. Выводим значения от 0.1 до 0.9:
+
+for i in range(1, 10):
+    print(round(i / 10, 1))
+
+
+5.21. Таблица стоимости сыра:
+
+cost_per_kg = float(input("Введите стоимость 1 кг сыра: "))
+for weight in range(50, 1001, 50):
+    cost = cost_per_kg * (weight / 1000)
+    print(f"Стоимость {weight} г = {cost}")
+
+
+5.22. Таблица стоимости конфет:
+
+cost_per_kg = float(input("Введите стоимость 1 кг конфет: "))
+for weight in range(100, 2001, 100):
+    cost = cost_per_kg * (weight / 1000)
+    print(f"Стоимость {weight} г = {cost}")
+
+
+5.23. Числа от 2.1 до 2.8:
+
+for i in range(21, 29):
+    print(round(i / 10, 1))
+
+
+5.24. Числа от 3.2 до 3.9:
+
+for i in range(32, 40):
+    print(round(i / 10, 1))
+
+
+5.25. Числа от 2.2 до 4.2:
+
+for i in range(22, 43, 2):
+    print(round(i / 10, 1))
+
+
+5.26. Числа от 4.4 до 6.4:
+
+for i in range(44, 65, 2):
+    print(round(i / 10, 1))
+
+
+5.27. Сумма целых чисел:
+
+а) от 200 до 600:
+
+
+total_sum = sum(range(200, 601))
+print(total_sum)
+
+б) от a до 400:
+
+
+a = int(input("Введите значение a (a <= 400): "))
+total_sum = sum(range(a, 401))
+print(total_sum)
+
+в) от -15 до b:
+
+
+b = int(input("Введите значение b (b >= -15): "))
+total_sum = sum(range(-15, b + 1))
+print(total_sum)
+
+г) от a до b:
+
+
+a = int(input("Введите значение a: "))
+b = int(input("Введите значение b (b >= a): "))
+total_sum = sum(range(a, b + 1))
+print(total_sum)
+
+
+5.28. Произведение целых чисел:
+
+а) от 7 до 14:
+
+
+product = 1
+for i in range(7, 15):
+    product *= i
+print(product)
+
+б) от a до 15:
+
+
+a = int(input("Введите значение a (1 <= a <= 15): "))
+product = 1
+for i in range(a, 16):
+    product *= i
+print(product)
+
+в) от 1 до b:
+
+
+b = int(input("Введите значение b (1 <= b <= 10): "))
+product = 1
+for i in range(1, b + 1):
+    product *= i
+print(product)
+
+г) от a до b:
+
+
+a = int(input("Введите значение a: "))
+b = int(input("Введите значение b (b >= a): "))
+product = 1
+for i in range(a, b + 1):
+    product *= i
+print(product)
+
+
+5.29. Среднее арифметическое :
+
+а) от 1 до 750:
+
+
+mean = sum(range(1, 751)) / 750
+print(mean)
+
+б) от 150 до b:
+
+
+b = int(input("Введите значение b (b >= 150): "))
+mean = sum(range(150, b + 1)) / (b - 150 + 1)
+print(mean)
+
+в) от a до 200:
+
+
+a = int(input("Введите значение a (a <= 200): "))
+mean = sum(range(a, 201)) / (200 - a + 1)
+print(mean)
+
+г) от a до b:
+
+
+a = int(input("Введите значение a: "))
+b = int(input("Введите значение b (b >= a): "))
+mean = sum(range(a, b + 1)) / (b - a + 1)
+print(mean)
+
+
+5.30. Сумма кубов и квадратов:
+
+а) кубов от 25 до 40:
+
+
+total_sum = sum(i**3 for i in range(25, 41))
+print(total_sum)
+
+б) квадратов от a до 50:
+
+
+a = int(input("Введите значение a (0 <= a <= 50): "))
+total_sum = sum(i**2 for i in range(a, 51))
+print(total_sum)
+
+в) квадратов от 1 до n:
+
+
+n = int(input("Введите значение n (1 <= n <= 100): "))
+total_sum = sum(i**2 for i in range(1, n + 1))
+print(total_sum)
+
+г) квадратов от a до b:
+
+
+a = int(input("Введите значение a: "))
+b = int(input("Введите значение b (b >= a): "))
+total_sum = sum(i**2 for i in range(a, b + 1))
+print(total_sum)
+
+
+5.31. Сумма от n^2 до (2n)^2:
+
+n = int(input("Введите натуральное число n: "))
+total_sum = sum(i**2 for i in range(n, 2 * n + 1))
+print(total_sum)
