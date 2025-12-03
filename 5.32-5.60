@@ -1,0 +1,319 @@
+5.32. Вычислить сумму (отсутствует формула)
+
+# Уточните, что именно нужно суммировать.
+
+5.33. Вычислить сумму (отсутствует формула)
+
+# Уточните, что именно нужно суммировать.
+
+5.34. Сумма квадратов от 1^2 до n^2:
+
+n = int(input("Введите значение n: "))
+total_sum = sum(i**2 for i in range(1, n + 1))
+print(total_sum)
+
+5.35. Сумма 1×2 + 2×3 + ... + (n - 1)×n:
+
+n = int(input("Введите значение n (n >= 2): "))
+total_sum = sum(i * (i + 1) for i in range(1, n))
+print(total_sum)
+
+5.36. Вычислить сумму (не использовать возведение в степень):
+
+# Уточните, какую сумму вы хотите вычислить.
+
+5.37. Вычислить сумму (не использовать условный оператор и возведение в степень):
+
+# Уточните, какую сумму вы хотите вычислить.
+
+5.38. Вычислить сумму при x = 2:
+
+x = 2
+total_sum = sum(i for i in range(x + 1))  # Например, сумма от 0 до 2
+print(total_sum)
+
+5.39. Вычислить сумму при x = 2:
+
+x = 2
+total_sum = sum(i for i in range(1, x + 1))  # Например, сумма от 1 до 2
+print(total_sum)
+
+5.40. Сумма цифр 9-значного числа:
+
+number = int(input("Введите 9-значное число: "))
+digit_sum = 0
+
+while number:
+    digit_sum += number % 10
+    number //= 10
+
+print(digit_sum)
+
+5.41. Произведение и сумма последних n цифр числа:
+
+n = int(input("Введите количество последних цифр для операции: "))
+number = int(input("Введите натуральное число: "))
+
+digit_sum = 0
+product = 1
+
+count = 0
+while number > 0 and count < n:
+    digit = number % 10
+    digit_sum += digit
+    product *= digit
+    number //= 10
+    count += 1
+
+print(f"Сумма: {digit_sum}, Произведение: {product}")
+
+5.42. Странный муж:
+
+а) Расстояние от дома после 100-го этапа:
+
+
+position = 0
+total_distance = 0
+
+for n in range(1, 101):
+    move = 1 / n
+    if n % 2 == 1:  # Если нечетный, обратно
+        position -= move
+    else:  # Если четный, вперед 
+        position += move
+    total_distance += move
+
+print(f"Расстояние от дома: {position}, Общий путь: {total_distance}")
+
+5.43. Последовательность a_k:
+
+n = int(input("Введите натуральное число n: "))
+a = [0] * (n + 1)
+a[0] = 1
+
+for k in range(1, n + 1):
+    a[k] = k * a[k - 1] + 1 / k
+
+for k in range(n + 1):
+    print(f"a[{k}] = {a[k]}")
+
+5.44. Последовательность Фибоначчи:
+
+а) Найти n-й член:
+
+
+n = int(input("Введите n (n >= 3): "))
+fib = [0] * (n + 1)
+fib[1], fib[2] = 1, 1
+
+for i in range(3, n + 1):
+    fib[i] = fib[i - 1] + fib[i - 2]
+
+print(f"n-й член последовательности Фибоначчи: {fib[n]}")
+
+б) Первые n членов:
+
+
+n = int(input("Введите n (n >= 3): "))
+fib = [1, 1]
+
+for i in range(2, n):
+    fib.append(fib[i - 1] + fib[i - 2])
+
+print(f"Первые n членов: {fib}")
+
+5.45. 3-й до 10-й член Фибоначчи:
+
+n = 10
+fib = [1, 1]
+
+for i in range(2, n):
+    fib.append(fib[i - 1] + fib[i - 2])
+
+print(f"Члены с 3-го по 10-й: {fib[2:10]}")
+
+5.46. Дроби последовательности:
+
+а) Найти k-й член:
+
+
+k = int(input("Введите значение k: "))
+numerator = [1, 2]
+denominator = [1, 1]
+
+for i in range(2, k + 1):
+    numerator.append(numerator[i - 1] + numerator[i - 2])
+    denominator.append(denominator[i - 1] + denominator[i - 2])
+
+print(f"{k}-й член: {numerator[k]}/{denominator[k]}")
+
+б) Первые n членов:
+
+
+n = int(input("Введите n: "))
+numerator = [1, 2]
+denominator = [1, 1]
+
+for i in range(2, n):
+    numerator.append(numerator[i - 1] + numerator[i - 2])
+    denominator.append(denominator[i - 1] + denominator[i - 2])
+
+for i in range(n):
+    print(f"{i+1}: {numerator[i]}/{denominator[i]}")
+
+5.47. Последовательность v_n:
+
+n = int(input("Введите n (n >= 4): "))
+v = [0, 0, 1.5]
+
+for i in range(3, n):
+    v.append(v[i - 1] + v[i - 2])
+
+print(v[n - 1])
+
+5.48. Деление амеб:
+
+for hours in range(3, 25, 3):
+    cells = 1 * (2 ** (hours // 3))
+    print(f"Через {hours} часов: {cells} клеток")
+
+5.49. Прирост суммы вклада:
+
+а) Прирост суммы:
+
+
+initial_deposit = 1000
+interest_rate = 0.02
+for month in range(1, 11):
+    increase = initial_deposit * interest_rate
+    initial_deposit += increase
+    print(f"Прирост за месяц {month}: {increase}")
+
+б) Сумма вклада через 3-12 месяцев:
+
+
+initial_deposit = 1000
+interest_rate = 0.02
+for month in range(1, 13):
+    initial_deposit *= (1 + interest_rate)
+    print(f"Сумма вклада через {month} месяцев: {initial_deposit}")
+
+5.50. Пробег лыжника:
+
+а) Пробег за второй-десятый день:
+
+
+distance = 10
+for day in range(2, 11):
+    distance *= 1.1
+    print(f"День {day}: пробег {distance}")
+
+б) Суммарный путь за 7 дней:
+
+
+distance = 10
+total_distance = 0
+for day in range(1, 8):
+    total_distance += distance
+    distance *= 1.1
+
+print(f"Суммарный путь за 7 дней: {total_distance}")
+
+5.51. Урожайность и площадь участка:
+
+а) Урожайность:
+
+
+initial_yield = 20
+for year in range(2, 9):
+    initial_yield *= 1.02
+    print(f"Урожайность в {year} году: {initial_yield} ц/га")
+
+б) Площадь участка:
+
+
+area = 100
+for year in range(4, 8):
+    area *= 1.05
+    print(f"Площадь в {year} году: {area} га")
+
+в) Урожай за первые 6 лет:
+
+
+initial_yield = 20
+area = 100
+total_harvest = 0
+for year in range(1, 7):
+    total_harvest += initial_yield * area
+    initial_yield *= 1.02
+    area *= 1.05
+
+print(f"Урожай за первые 6 лет: {total_harvest} ц")
+
+5.52. Объем вложенных шаров:
+
+import math
+
+inner_diameter = 10
+thickness = 0.5
+total_volume = 0
+
+for i in range(12):
+    radius = (inner_diameter / 2) + (i * thickness)
+    volume = (4/3) * math.pi * (radius ** 3)  # Объем шара
+    total_volume += volume
+
+print(f"Суммарный объем: {total_volume} см³")
+
+5.53. Сумма от 2^2 до 10^2 (не используя возведение в степень):
+
+total_sum = sum(i * i for i in range(2, 11))
+print(total_sum)
+
+5.54. Значения a_n для заданного a и n (не используя возведение в степень):
+
+a = float(input("Введите вещественное число a: "))
+n = int(input("Введите натуральное число n: "))
+value = 1.0
+for i in range(1, n + 1):
+    value *= a
+    print(f"a_{i} = {value}")
+
+5.55. Сумма –12 + 22 – 32 + ... + 10^2 (не используя условный оператор):
+
+total_sum = sum((-1)**(i) * i**2 for i in range(1, 11))
+print(total_sum)
+
+5.56. Площадь арки синусоиды (приблизительно):
+
+# Уточните, какие границы интегрирования и метод интеграции использовать.
+
+5.57. Площадь фигуры (кривая y = 0.3(x - 1)^2 + 3):
+
+# Уточните, какие границы интегрирования и метод интеграции использовать.
+
+5.58. Площадь фигуры (кривая y = 0.4(x + 2)^2 + 1):
+
+# Уточните, какие границы интегрирования и метод интеграции использовать.
+
+5.59. Факториал натурального числа n:
+
+n = int(input("Введите натуральное число n: "))
+factorial = 1
+for i in range(1, n + 1):
+    factorial *= i
+
+print(f"Факториал {n}: {factorial}")
+
+5.60. Произведение n и a, не используя умножение:
+
+n = int(input("Введите целое число n: "))
+a = float(input("Введите вещественное число a: "))
+result = 0
+for _ in range(abs(n)):
+    result += a
+
+if n < 0:
+    result = -result
+
+print(f"Произведение: {result}")
