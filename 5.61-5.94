@@ -1,0 +1,318 @@
+
+5.61. Произведение x · y, используя лишь операцию сложения
+
+Способ 1:
+
+
+x = int(input("Введите натуральное число x: "))
+y = int(input("Введите натуральное число y: "))
+
+product = 0
+for _ in range(y):
+    product += x
+
+print(f"Произведение {x} * {y} равно {product}")
+
+Способ 2:
+
+
+x = int(input("Введите натуральное число x: "))
+y = int(input("Введите натуральное число y: "))
+
+product = x
+for _ in range(1, y):
+    product += x
+
+print(f"Произведение {x} * {y} равно {product}")
+
+5.62. Вычисление  без возведения в степень
+
+a = float(input("Введите вещественное число a: "))
+n = int(input("Введите целое число n: "))
+
+result = 1
+for _ in range(n):
+    result *= a  # Используем операцию умножения
+
+print(f"{a} в степени {n} равно {result}")
+
+5.63. Вычислить значение выражения 
+
+result = 12 / 19
+print(f"Результат выражения 12 / 19: {result}")
+
+5.64. Получить число, прочитанное справа налево
+
+number = int(input("Введите семизначное число: "))
+reversed_number = 0
+
+while number > 0:
+    digit = number % 10
+    reversed_number = reversed_number * 10 + digit
+    number //= 10
+
+print(f"Число, прочитанное справа налево: {reversed_number}")
+
+5.65. Возведение натурального числа в квадрат
+
+n = int(input("Введите натуральное число n: "))
+square = 0
+
+for i in range(1, n + 1):
+    square += (2 * i - 1)
+
+print(f"{n} в квадрате равно {square}")
+
+5.66. Сумма 
+
+total_sum = 0
+
+for i in range(1, 13):
+    square = 0
+    for j in range(1, i + 1):
+        square += (2 * j - 1)
+    total_sum += square
+
+print(f"Сумма от 12 до 122 квадратов: {total_sum}")
+
+5.67. Возведение натурального числа в третью степень
+
+n = int(input("Введите натуральное число n: "))
+cube = 0
+num_terms = n * (n + 1) // 2  # Общее количество слагаемых в сумме
+
+for i in range(num_terms):
+    cube += (2 * i + 1)
+
+print(f"{n} в третьей степени равно {cube}")
+
+5.68. Сумма факториалов от 1! до n!
+
+n = int(input("Введите n (1 < n ≤ 10): "))
+total_sum = 0
+factorial = 1
+
+for i in range(1, n + 1):
+    factorial *= i
+    total_sum += factorial
+
+print(f"Сумма от 1! до {n}! равна {total_sum}")
+
+5.69. Сумма факториалов от 1! до n!
+
+n = int(input("Введите n (1 < n ≤ 10): "))
+sum_factorials = 0
+factorial = 1
+
+for i in range(1, n + 1):
+    factorial *= i
+    sum_factorials += factorial
+
+print(f"Сумма: {sum_factorials}")
+
+5.70. Сумма факториалов от 1! до n!
+
+n = int(input("Введите n (1 < n ≤ 10): "))
+sum_factorials = 0
+factorial = 1
+
+# Выводим факториалы
+for i in range(1, n + 1):
+    factorial *= i
+    sum_factorials += factorial
+
+print(f"Сумма факториалов: {sum_factorials}")
+
+5.74. Нечетные числа из интервала [10, 100]
+
+1) С использованием условного оператора:
+
+
+for number in range(10, 101):
+    if number % 2 != 0:
+        print(number)
+
+2) Без использования условного оператора:
+
+
+for number in range(11, 101, 2):
+    print(number)
+
+5.75. Целые числа от 100 до 200, кратные 3
+
+for number in range(100, 201):
+    if number % 3 == 0:
+        print(number)
+
+5.76. Целые числа от a до b, кратные c
+
+a = int(input("Введите a: "))
+b = int(input("Введите b: "))
+c = int(input("Введите c: "))
+
+for number in range(a, b + 1):
+    if number % c == 0:
+        print(number)
+
+5.77. Нечетные двузначные числа с последней цифрой 3 или 7
+
+for number in range(11, 100, 2):
+    if number % 10 == 3 or number % 10 == 7:
+        print(number)
+
+5.78. Трехзначные числа, делящиеся по условиям
+
+for number in range(100, 1000):
+    if number % 47 == 43 and number % 43 == 45:
+        print(number)
+
+5.79. Четырехзначные числа, делящиеся по условиям
+
+for number in range(1000, 10000):
+    if number % 133 == 125 and number % 134 == 111:
+        print(number)
+
+5.80. Двузначные числа, делящиеся на n или содержащие цифру n
+
+n = int(input("Введите двузначное число n: "))
+for number in range(10, 100):
+    if number % n == 0 or str(n) in str(number):
+        print(number)
+
+5.81. Трехзначные числа с условиями
+
+а) Квадраты чисел:
+
+
+for number in range(100, 1000):
+    if (number**2) % 1000 == number:
+        print(number)
+
+б) Трехзначные числа, кратные семи и сумма цифр кратна семи:
+
+
+for number in range(100, 1000):
+    if number % 7 == 0:
+        if sum(int(digit) for digit in str(number)) % 7 == 0:
+            print(number)
+
+5.82. Двузначные числа, сумма квадратов цифр делится на 13
+
+а)
+
+
+for number in range(10, 100):
+    digits = [int(d) for d in str(number)]
+    if sum(d ** 2 for d in digits) % 13 == 0:
+        print(number)
+
+б)
+
+
+for number in range(10, 100):
+    digits = [int(d) for d in str(number)]
+    if number == (sum(digits) + sum(d ** 2 for d in digits)):
+        print(number)
+
+5.83. Сумма нечетных чисел, меньших 50
+
+total_sum = sum(number for number in range(1, 50, 2))
+print(f"Сумма положительных нечетных чисел меньше 50: {total_sum}")
+
+5.84. Сумма четных трехзначных чисел
+
+total_sum = sum(number for number in range(100, 1000, 2))
+print(f"Сумма всех четных трехзначных чисел: {total_sum}")
+
+5.85. Сумма положительных чисел от a до b, кратных 4
+
+a = int(input("Введите a: "))
+b = int(input("Введите b: "))
+total_sum = sum(number for number in range(a, b + 1) if number % 4 == 0)
+print(f"Сумма чисел от {a} до {b}, кратных 4: {total_sum}")
+
+5.86. Сумма целых чисел, больших 30 и меньше 100, кратных 3 и заканчивающихся на 2, 4, 8
+
+total_sum = sum(number for number in range(31, 100) if number % 3 == 0 and number % 10 in [2, 4, 8])
+print(f"Сумма: {total_sum}")
+
+5.87. Количество натуральных чисел с суммой цифр 15
+
+count = 0
+for number in range(100, 501):
+    if sum(int(d) for d in str(number)) == 15:
+        count += 1
+print(f"Количество чисел: {count}")
+
+5.88. Количество трехзначных чисел с заданной суммой
+
+s = int(input("Введите значение s (0 < s ≤ 27): "))
+count = 0
+for number in range(100, 1000):
+    if sum(int(d) for d in str(number)) == s:
+        count += 1
+print(f"Количество трехзначных чисел с суммой цифр {s}: {count}")
+
+5.89. Количество трехзначных чисел, кратных 7 и сумма цифр кратна 7
+
+count = 0
+for number in range(100, 1000):
+    if number % 7 == 0 and sum(int(d) for d in str(number)) % 7 == 0:
+        count += 1
+print(f"Количество таких чисел: {count}")
+
+5.90. Сумма первых n членов последовательности Фибоначчи четное число?
+
+n = int(input("Введите n: "))
+fib = [1, 1]
+for i in range(2, n):
+    fib.append(fib[-1] + fib[-2])
+
+total_sum = sum(fib[:n])
+print(f"Сумма первых {n} членов Фибоначчи: {total_sum}, четное: {total_sum % 2 == 0}")
+
+5.91. Делители натурального числа
+
+n = int(input("Введите натуральное число: "))
+divisors = []
+for i in range(1, n + 1):
+    if n % i == 0:
+        divisors.append(i)
+
+print(f"Делители: {divisors}")
+print(f"Сумма делителей: {sum(divisors)}")
+print(f"Сумма четных делителей: {sum(d for d in divisors if d % 2 == 0)}")
+print(f"Количество делителей: {len(divisors)}")
+print(f"Количество нечетных делителей: {len([d for d in divisors if d % 2 != 0])}")
+print(f"Делители больше d: {len([d for d in divisors if d > d_value])}")
+
+5.92. Проверка простоты числа
+
+n = int(input("Введите натуральное число: "))
+
+is_prime = True
+if n < 2:
+    is_prime = False
+else:
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            is_prime = False
+            break
+
+print(f"{n} - простое: {is_prime}")
+
+5.93. Проверка совершенного числа
+
+n = int(input("Введите натуральное число: "))
+sum_divisors = sum(i for i in range(1, n) if n % i == 0)
+
+is_perfect = sum_divisors == n
+print(f"{n} - совершенное: {is_perfect}")
+
+5.94. Натуральные числа, квадрат которых не превышает n
+
+n = int(input("Введите число n: "))
+number = 1
+while number**2 <= n:
+    print(number)
+    number += 1
