@@ -1,0 +1,183 @@
+Задача 6.27
+
+Найти 15 первых натуральных чисел, делящихся нацело на 19 в интервале от 100.
+
+
+start = 100
+count = 0
+result = []
+
+while count < 15:
+    if start % 19 == 0:
+        result.append(start)
+        count += 1
+    start += 1
+
+print(result)
+
+Задача 6.28
+
+Найти 20 первых натуральных чисел, делящихся на 13 или на 17 в интервале от 500.
+
+
+start = 500
+count = 0
+result = []
+
+while count < 20:
+    if start % 13 == 0 or start % 17 == 0:
+        result.append(start)
+        count += 1
+    start += 1
+
+print(result)
+
+Задача 6.29
+
+Найти 10 первых натуральных чисел, оканчивающихся на 7, кратных 9 в интервале от 100.
+
+
+start = 100
+count = 0
+result = []
+
+while count < 10:
+    if start % 9 == 0 and start % 10 == 7:
+        result.append(start)
+        count += 1
+    start += 1
+
+print(result)
+
+Задача 6.30
+
+Даны натуральные числа a и b. Определите:
+
+
+а) результат целочисленного деления b на a;
+б) остаток от деления b на a.
+
+def integer_division_and_remainder(b, a):
+    quotient = 0
+    remainder = b
+    
+    while remainder >= a:
+        remainder -= a
+        quotient += 1
+        
+    return quotient, remainder
+
+# Пример использования
+b, a = 20, 3
+result = integer_division_and_remainder(b, a)
+print(result)  # (6, 2)
+
+Задача 6.31
+
+Гражданин открыл счет в банке, вложив 1000 руб. Определить:
+
+
+а) за какой месяц величина ежемесячного увеличения превысит 30 руб.;
+б) через сколько месяцев размер вклада превысит 1200 руб.
+
+initial_amount = 1000
+monthly_rate = 0.02
+month = 0
+
+while True:
+    month += 1
+    increase = initial_amount * monthly_rate
+    if increase > 30:
+        print(f"Увеличение превышает 30 рублей на {month}-м месяце.")
+        break
+    initial_amount += increase
+
+# Reset initial amount for second part
+initial_amount = 1000
+month = 0
+
+while initial_amount <= 1200:
+    month += 1
+    initial_amount += initial_amount * monthly_rate
+
+print(f"Вклад превысит 1200 рублей через {month} месяцев.")
+
+Задача 6.32
+
+Лыжник пробегает 10 км в первый день и увеличивает пробег на 10 % каждый день.
+
+
+а) в какой день он пробежит больше 20 км;
+б) в какой день суммарный пробег превысит 100 км.
+
+initial_run = 10
+percent_increase = 0.10
+total_distance = 0
+day = 0
+
+# Вопрос а
+while True:
+    day += 1
+    total_distance += initial_run
+    if initial_run > 20:
+        print(f"Лыжник пробежит больше 20 км на {day}-й день.")
+        break
+    initial_run += initial_run * percent_increase
+
+# Вопрос б
+initial_run = 10
+total_distance = 0
+day = 0
+
+while total_distance <= 100:
+    day += 1
+    total_distance += initial_run
+    initial_run += initial_run * percent_increase
+
+print(f"Суммарный пробег превысит 100 км на {day}-й день.")
+
+Задача 6.33
+
+Определить урожайность ячменя на участке при увеличении площади и урожайности каждый год.
+
+
+а) когда урожайность превысит 22 ц с гектара;
+б) когда площадь участка станет больше 120 га;
+в) когда общий урожай превысит 800 ц.
+
+area = 100  # в га
+yield_per_hectare = 20  # в ц
+years = 0
+total_yield = 0
+
+# Урожайность
+while yield_per_hectare <= 22:
+    years += 1
+    area *= 1.05  # увеличение площади на 5%
+    yield_per_hectare *= 1.02  # увеличение урожайности на 2%
+
+print(f"Урожайность превысит 22 ц на {years}-й год.")
+
+# Площадь
+years = 0
+area = 100  # сбрасываем значение площади
+
+while area <= 120:
+    years += 1
+    area *= 1.05
+
+print(f"Площадь превысит 120 га на {years}-й год.")
+
+# Общий урожай
+years = 0
+area = 100  # сбрасываем значение площади
+yield_per_hectare = 20  # сбрасываем начальную урожайность
+total_yield = 0
+
+while total_yield <= 800:
+    years += 1
+    area *= 1.05
+    yield_per_hectare *= 1.02
+    total_yield += area * yield_per_hectare
+
+print(f"Общий урожай превысит 800 ц на {years}-й год.")
