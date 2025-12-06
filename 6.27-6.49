@@ -1,0 +1,537 @@
+Задача 6.27
+
+Найти 15 первых натуральных чисел, делящихся нацело на 19 в интервале от 100.
+
+
+start = 100
+count = 0
+result = []
+
+while count < 15:
+    if start % 19 == 0:
+        result.append(start)
+        count += 1
+    start += 1
+
+print(result)
+
+Задача 6.28
+
+Найти 20 первых натуральных чисел, делящихся на 13 или на 17 в интервале от 500.
+
+
+start = 500
+count = 0
+result = []
+
+while count < 20:
+    if start % 13 == 0 or start % 17 == 0:
+        result.append(start)
+        count += 1
+    start += 1
+
+print(result)
+
+Задача 6.29
+
+Найти 10 первых натуральных чисел, оканчивающихся на 7, кратных 9 в интервале от 100.
+
+
+start = 100
+count = 0
+result = []
+
+while count < 10:
+    if start % 9 == 0 and start % 10 == 7:
+        result.append(start)
+        count += 1
+    start += 1
+
+print(result)
+
+Задача 6.30
+
+Даны натуральные числа a и b. Определите:
+
+
+а) результат целочисленного деления b на a;
+б) остаток от деления b на a.
+
+def integer_division_and_remainder(b, a):
+    quotient = 0
+    remainder = b
+    
+    while remainder >= a:
+        remainder -= a
+        quotient += 1
+        
+    return quotient, remainder
+
+# Пример использования
+b, a = 20, 3
+result = integer_division_and_remainder(b, a)
+print(result)  # (6, 2)
+
+Задача 6.31
+
+Гражданин открыл счет в банке, вложив 1000 руб. Определить:
+
+
+а) за какой месяц величина ежемесячного увеличения превысит 30 руб.;
+б) через сколько месяцев размер вклада превысит 1200 руб.
+
+initial_amount = 1000
+monthly_rate = 0.02
+month = 0
+
+while True:
+    month += 1
+    increase = initial_amount * monthly_rate
+    if increase > 30:
+        print(f"Увеличение превышает 30 рублей на {month}-м месяце.")
+        break
+    initial_amount += increase
+
+# Reset initial amount for second part
+initial_amount = 1000
+month = 0
+
+while initial_amount <= 1200:
+    month += 1
+    initial_amount += initial_amount * monthly_rate
+
+print(f"Вклад превысит 1200 рублей через {month} месяцев.")
+
+Задача 6.32
+
+Лыжник пробегает 10 км в первый день и увеличивает пробег на 10 % каждый день.
+
+
+а) в какой день он пробежит больше 20 км;
+б) в какой день суммарный пробег превысит 100 км.
+
+initial_run = 10
+percent_increase = 0.10
+total_distance = 0
+day = 0
+
+# Вопрос а
+while True:
+    day += 1
+    total_distance += initial_run
+    if initial_run > 20:
+        print(f"Лыжник пробежит больше 20 км на {day}-й день.")
+        break
+    initial_run += initial_run * percent_increase
+
+# Вопрос б
+initial_run = 10
+total_distance = 0
+day = 0
+
+while total_distance <= 100:
+    day += 1
+    total_distance += initial_run
+    initial_run += initial_run * percent_increase
+
+print(f"Суммарный пробег превысит 100 км на {day}-й день.")
+
+Задача 6.33
+
+Определить урожайность ячменя на участке при увеличении площади и урожайности каждый год.
+
+
+а) когда урожайность превысит 22 ц с гектара;
+б) когда площадь участка станет больше 120 га;
+в) когда общий урожай превысит 800 ц.
+
+area = 100  # в га
+yield_per_hectare = 20  # в ц
+years = 0
+total_yield = 0
+
+# Урожайность
+while yield_per_hectare <= 22:
+    years += 1
+    area *= 1.05  # увеличение площади на 5%
+    yield_per_hectare *= 1.02  # увеличение урожайности на 2%
+
+print(f"Урожайность превысит 22 ц на {years}-й год.")
+
+# Площадь
+years = 0
+area = 100  # сбрасываем значение площади
+
+while area <= 120:
+    years += 1
+    area *= 1.05
+
+print(f"Площадь превысит 120 га на {years}-й год.")
+
+# Общий урожай
+years = 0
+area = 100  # сбрасываем значение площади
+yield_per_hectare = 20  # сбрасываем начальную урожайность
+total_yield = 0
+
+while total_yield <= 800:
+    years += 1
+    area *= 1.05
+    yield_per_hectare *= 1.02
+    total_yield += area * yield_per_hectare
+
+print(f"Общий урожай превысит 800 ц на {years}-й год.")
+Задача 6.33
+
+Определить:
+
+
+а) в каком году урожайность превысит 22 ц с гектара;
+б) в каком году площадь участка станет больше 120 га;
+в) в каком году общий урожай, собранный за все время, превысит 800 ц.
+
+# Инициализация переменных
+area = 100  # площадь в га
+yield_per_hectare = 20  # урожайность в ц/га
+years = 0
+total_yield = 0
+
+# Поиск года, когда урожайность превысит 22 ц/га
+while yield_per_hectare <= 22:
+    years += 1
+    area *= 1.05
+    yield_per_hectare *= 1.02
+
+print(f"Урожайность превысит 22 ц на {years}-й год.")
+
+# Resetting variables for the second question
+years = 0
+area = 100  # сбрасываем значение площади
+
+# Найти год, когда площадь превысит 120 га
+while area <= 120:
+    years += 1
+    area *= 1.05
+
+print(f"Площадь превысит 120 га на {years}-й год.")
+
+# Resetting variables for the third question
+years = 0
+area = 100  # сбрасываем площадь
+yield_per_hectare = 20  # сбрасываем урожайность
+total_yield = 0
+
+# Найти год, когда общий урожай превысит 800 ц
+while total_yield <= 800:
+    years += 1
+    area *= 1.05
+    yield_per_hectare *= 1.02
+    total_yield += area * yield_per_hectare
+
+print(f"Общий урожай превысит 800 ц на {years}-й год.")
+
+Задача 6.34
+
+Получить все кратные взаимно простым натуральным числам m и n, не превышающие m·n.
+
+
+def multiples_of_coprimes(m, n):
+    limit = m * n
+    result = []
+    
+    # Используем один цикл для генерации кратных чисел
+    for i in range(1, limit + 1):
+        if i % m == 0 or i % n == 0:
+            result.append(i)
+    
+    return result
+
+# Пример использования
+m, n = 3, 5
+result = multiples_of_coprimes(m, n)
+print(result)
+
+Задача 6.35
+
+Определить:
+
+
+а) количество цифр 3 в числе;
+б) сколько раз в нем встречается последняя цифра;
+в) количество четных цифр;
+г) сумма цифр, больших пяти;
+д) произведение цифр, больших семи;
+е) сколько раз встречаются цифры 0 и 5.
+
+number = 12345678035  # Пример числа
+str_num = str(number)
+count_3 = sum(1 for digit in str_num if digit == '3')
+last_digit = str_num[-1]
+count_last_digit = str_num.count(last_digit)
+count_even = sum(1 for digit in str_num if int(digit) % 2 == 0)
+sum_greater_5 = sum(int(digit) for digit in str_num if int(digit) > 5)
+product_greater_7 = 1
+count_greater_7 = sum(1 for digit in str_num if int(digit) > 7)
+
+for digit in str_num:
+    if int(digit) > 7:
+        product_greater_7 *= int(digit)
+
+count_0_and_5 = str_num.count('0') + str_num.count('5')
+
+print(f"Количество цифр 3: {count_3}")
+print(f"Количество последней цифры: {count_last_digit}")
+print(f"Количество четных цифр: {count_even}")
+print(f"Сумма цифр > 5: {sum_greater_5}")
+print(f"Произведение цифр > 7: {product_greater_7}")
+print(f"Количество 0 и 5: {count_0_and_5}")
+
+Задача 6.36
+
+Определить:
+
+
+а) сколько раз в числе встречается цифра a;
+б) сумма его цифр, больших a;
+в) сумма четных цифр;
+г) сколько раз встречаются цифры x и y.
+
+number = 12345678035  # Пример числа
+a = 3  # Пример цифры a
+x, y = 2, 5  # Примеры цифр x и y
+str_num = str(number)
+
+# Решение
+count_a = str_num.count(str(a))
+sum_greater_a = sum(int(digit) for digit in str_num if int(digit) > a)
+sum_even = sum(int(digit) for digit in str_num if int(digit) % 2 == 0)
+count_x = str_num.count(str(x))
+count_y = str_num.count(str(y))
+
+print(f"Количество цифр {a}: {count_a}")
+print(f"Сумма цифр > {a}: {sum_greater_a}")
+print(f"Сумма четных цифр: {sum_even}")
+print(f"Количество цифры {x}: {count_x}")
+print(f"Количество цифры {y}: {count_y}")
+
+Задача 6.37 и 6.38
+
+Определить номер цифры 8 или 3 в числе, считая от конца. Если такой цифры нет, ответ 0.
+
+
+number = 12345678035  # Пример числа
+str_num = str(number)
+
+def find_position_of_digit(digit):
+    position = str_num[::-1].find(str(digit))
+    return position if position != -1 else 0
+
+position_8 = find_position_of_digit(8)
+position_3 = find_position_of_digit(3)
+
+print(f"Позиция цифры 8 от конца: {position_8}")
+print(f"Позиция цифры 3 от конца: {position_3}")
+
+Задача 6.39
+
+Вывести на экран «столбиком» цифры заданного натурального числа.
+
+
+number = 123456  # Пример числа
+str_num = str(number)
+
+# Вывод цифр столбиком
+for digit in str_num:
+    print(digit)
+
+Задача 6.40
+
+Определить, сколько раз в числе встречается первая цифра.
+
+
+number = 12345678035  # Пример числа
+str_num = str(number)
+first_digit = str_num[0]
+
+count_first_digit = str_num.count(first_digit)
+print(f"Количество первой цифры {first_digit}: {count_first_digit}")
+
+Задача 6.41
+
+Определить максимальную и минимальную цифры числа.
+
+
+number = 12345678035  # Пример числа
+str_num = str(number)
+
+max_digit = max(str_num)
+min_digit = min(str_num)
+
+print(f"Максимальная цифра: {max_digit}")
+print(f"Минимальная цифра: {min_digit}")
+
+Задача 6.42
+
+Определить максимальную и минимальную цифры, разницу и сумму.
+
+
+number = 12345678035  # Пример числа
+str_num = str(number)
+
+max_digit = max(str_num)
+min_digit = min(str_num)
+
+difference = int(max_digit) - int(min_digit)
+sum_of_digits = int(max_digit) + int(min_digit)
+
+print(f"Максимальная цифра: {max_digit}")
+print(f"Минимальная цифра: {min_digit}")
+print(f"Разница: {difference}")
+print(f"Сумма: {sum_of_digits}")
+
+Задача 6.43
+
+Определить, является ли сумма максимальной и минимальной цифр кратной числу a.
+
+
+number = 12345678035  # Пример числа
+a = 3  # Пример числа a
+str_num = str(number)
+
+max_digit = max(str_num)
+min_digit = min(str_num)
+sum_of_digits = int(max_digit) + int(min_digit)
+
+is_multiple = sum_of_digits % a == 0
+print(f"Сумма максимальной и минимальной цифр кратна {a}: {is_multiple}")
+
+Задача 6.44
+
+Определить, является ли разность максимальной и минимальной цифр четным числом.
+
+
+number = 12345678035  # Пример числа
+str_num = str(number)
+
+max_digit = max(str_num)
+min_digit = min(str_num)
+difference = int(max_digit) - int(min_digit)
+
+is_even = difference % 2 == 0
+print(f"Разность максимальной и минимальной цифр четная: {is_even}")
+
+Задача 6.45
+
+Определить порядковые номера максимальной и минимальной цифр, считая от начала и конца.
+
+
+number = 12345678035  # Пример числа
+str_num = str(number)
+
+max_digit = max(str_num)
+min_digit = min(str_num)
+
+position_max_from_start = str_num.index(max_digit) + 1
+position_min_from_start = str_num.index(min_digit) + 1
+
+position_max_from_end = len(str_num) - position_max_from_start + 1
+position_min_from_end = len(str_num) - position_min_from_start + 1
+
+print(f"Порядковый номер максимальной цифры от начала: {position_max_from_start}")
+print(f"Порядковый номер минимальной цифры от начала: {position_min_from_start}")
+print(f"Порядковый номер максимальной цифры от конца: {position_max_from_end}")
+print(f"Порядковый номер минимальной цифры от конца: {position_min_from_end}")
+
+Задача 6.46
+
+Определить порядковые номера максимальной и минимальной цифр с учетом того, что они различны.
+
+
+number = 12345678035  # Пример числа
+str_num = str(number)
+
+max_digit = max(str_num)
+min_digit = min(str_num)
+
+position_max_from_start = str_num.index(max_digit) + 1
+position_min_from_start = str_num.index(min_digit) + 1
+
+position_max_from_end = len(str_num) - position_max_from_start + 1
+position_min_from_end = len(str_num) - position_min_from_start + 1
+
+print(f"Порядковый номер максимальной цифры от начала: {position_max_from_start}")
+print(f"Порядковый номер минимальной цифры от начала: {position_min_from_start}")
+print(f"Порядковый номер максимальной цифры от конца: {position_max_from_end}")
+print(f"Порядковый номер минимальной цифры от конца: {position_min_from_end}")
+
+Задача 6.47
+
+Определить, какая цифра расположена левее: максимальная или минимальная.
+
+
+number = 12345678035  # Пример числа
+str_num = str(number)
+
+max_digit = max(str_num)
+min_digit = min(str_num)
+
+position_max = str_num.index(max_digit)
+position_min = str_num.index(min_digit)
+
+if position_max < position_min:
+    print(f"Левее расположена цифра: {max_digit}")
+else:
+    print(f"Левее расположена цифра: {min_digit}")
+
+Задача 6.48
+
+Определить максимальную нечетную цифру и номер минимальной цифры.
+
+
+number = 12345678035  # Пример числа
+str_num = str(number)
+
+# максимальная нечетная цифра
+max_odd_digit = max((digit for digit in str_num if int(digit) % 2 != 0), default=None)
+
+# номер минимальной цифры
+min_digit = min(str_num)
+position_min = str_num.index(min_digit)
+
+print(f"Максимальная нечетная цифра: {max_odd_digit}")
+print(f"Порядковый номер минимальной цифры от начала: {position_min + 1}")
+
+Задача 6.49
+
+Определить:
+
+
+а) сумма цифр больше 10;
+б) произведение цифр меньше 50;
+в) количество цифр четное;
+г) четырехзначное число;
+д) первая цифра не превышает 6;
+е) число начинается и заканчивается одной и той же цифрой;
+ж) какая цифра больше: первая или последняя.
+
+number = 1234  # Пример числа
+str_num = str(number)
+
+# проверки
+is_sum_greater_10 = sum(int(digit) for digit in str_num) > 10
+is_product_less_50 = (lambda x: (prod := 1, [prod := prod * int(digit) for digit in str_num], prod)[-1])() < 50
+is_even_digit_count = len(str_num) % 2 == 0
+is_four_digit = len(str_num) == 4
+first_digit = int(str_num[0])
+last_digit = int(str_num[-1])
+is_first_digit_not_exceeds_6 = first_digit <= 6
+is_same_first_last_digit = first_digit == last_digit
+is_first_digit_greater_than_last = first_digit > last_digit
+
+print(f"Сумма цифр больше 10: {is_sum_greater_10}")
+print(f"Произведение цифр меньше 50: {is_product_less_50}")
+print(f"Количество цифр четное: {is_even_digit_count}")
+print(f"Это число четырехзначное: {is_four_digit}")
+print(f"Первая цифра не превышает 6: {is_first_digit_not_exceeds_6}")
+print(f"Число начинается и заканчивается одной и той же цифрой: {is_same_first_last_digit}")
+print(f"Первая цифра больше последней: {is_first_digit_greater_than_last}")
