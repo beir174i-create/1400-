@@ -1,0 +1,332 @@
+6.71. Проверка на число Фибоначчи
+python
+n = int(input("Введите натуральное число: "))
+
+if n < 0:
+    print("Число не является членом последовательности Фибоначчи")
+else:
+    a, b = 0, 1
+    is_fibonacci = False
+    
+    while a <= n:
+        if a == n:
+            is_fibonacci = True
+            break
+        a, b = b, a + b
+    
+    print(f"Число {n} {'является' if is_fibonacci else 'не является'} числом Фибоначчи")
+6.72. Проверка на член арифметической прогрессии
+python
+n = int(input("Введите число для проверки: "))
+f = int(input("Введите первый член прогрессии: "))
+s = int(input("Введите шаг прогрессии: "))
+
+# Проверяем, является ли n членом арифметической прогрессии
+# n = f + k*s, где k - целое число
+if s == 0:
+    is_member = (n == f)
+else:
+    is_member = ((n - f) % s == 0) and ((n - f) // s >= 0)
+
+print(f"Число {n} {'является' if is_member else 'не является'} членом арифметической прогрессии")
+6.73. Проверка на член геометрической прогрессии
+python
+n = int(input("Введите число для проверки: "))
+g = int(input("Введите первый член прогрессии: "))
+z = int(input("Введите знаменатель прогрессии: "))
+
+# Проверяем, является ли n членом геометрической прогрессии
+# n = g * z^k, где k - целое число
+is_member = False
+
+if z == 1:
+    is_member = (n == g)
+elif z == 0:
+    if g == 0:
+        is_member = (n == 0)
+    else:
+        is_member = False
+else:
+    # Проверяем, является ли n степенью z, начиная с g
+    temp = g
+    while temp <= n:
+        if temp == n:
+            is_member = True
+            break
+        temp *= z
+
+print(f"Число {n} {'является' if is_member else 'не является'} членом геометрической прогрессии")
+6.74. Проверка на степень числа
+а) Степень числа 3
+python
+n = int(input("Введите натуральное число: "))
+
+if n <= 0:
+    print("Число не является степенью 3")
+else:
+    temp = n
+    is_power_of_3 = True
+    
+    while temp > 1:
+        if temp % 3 != 0:
+            is_power_of_3 = False
+            break
+        temp //= 3
+    
+    print(f"Число {n} {'является' if is_power_of_3 else 'не является'} степенью числа 3")
+б) Степень числа 5
+python
+n = int(input("Введите натуральное число: "))
+
+if n <= 0:
+    print("Число не является степенью 5")
+else:
+    temp = n
+    is_power_of_5 = True
+    
+    while temp > 1:
+        if temp % 5 != 0:
+            is_power_of_5 = False
+            break
+        temp //= 5
+    
+    print(f"Число {n} {'является' if is_power_of_5 else 'не является'} степенью числа 5")
+6.75. Метод деления отрезка пополам (бисекции)
+а) Уравнение: f(x) = x⁴ + 2x³ - x - 1
+python
+def f_a(x):
+    return x**4 + 2*x**3 - x - 1
+
+a = 0
+b = 1
+epsilon = 0.001
+
+print(f"Решение уравнения x⁴ + 2x³ - x - 1 = 0 на отрезке [{a}, {b}]")
+print(f"Точность: {epsilon}")
+
+while b - a > epsilon:
+    c = (a + b) / 2
+    if f_a(a) * f_a(c) < 0:
+        b = c
+    else:
+        a = c
+
+root = (a + b) / 2
+print(f"Приближенный корень: {root:.4f}")
+print(f"Значение функции в корне: {f_a(root):.6f}")
+б) Уравнение: f(x) = x³ - 0.2x² - 0.2x - 1.2
+python
+def f_b(x):
+    return x**3 - 0.2*x**2 - 0.2*x - 1.2
+
+a = 1
+b = 1.5
+epsilon = 0.001
+
+print(f"Решение уравнения x³ - 0.2x² - 0.2x - 1.2 = 0 на отрезке [{a}, {b}]")
+print(f"Точность: {epsilon}")
+
+while b - a > epsilon:
+    c = (a + b) / 2
+    if f_b(a) * f_b(c) < 0:
+        b = c
+    else:
+        a = c
+
+root = (a + b) / 2
+print(f"Приближенный корень: {root:.4f}")
+print(f"Значение функции в корне: {f_b(root):.6f}")
+6.76. Спиральная дорожка (длина ограждения)
+python
+def calculate_fence_length(a, b):
+    """
+    Вычисляет длину ограждения для спиральной дорожки
+    на прямоугольнике a×b метров
+    """
+    length = 0
+    direction = 0  # 0: вправо, 1: вниз, 2: влево, 3: вверх
+    x, y = 0, 0
+    visited = [[False] * b for _ in range(a)]
+    
+    # Начинаем с левого верхнего угла
+    visited[0][0] = True
+    
+    while True:
+        moved = False
+        
+        if direction == 0:  # вправо
+            while y + 1 < b and not visited[x][y + 1]:
+                visited[x][y + 1] = True
+                y += 1
+                length += 1
+                moved = True
+        
+        elif direction == 1:  # вниз
+            while x + 1 < a and not visited[x + 1][y]:
+                visited[x + 1][y] = True
+                x += 1
+                length += 1
+                moved = True
+        
+        elif direction == 2:  # влево
+            while y - 1 >= 0 and not visited[x][y - 1]:
+                visited[x][y - 1] = True
+                y -= 1
+                length += 1
+                moved = True
+        
+        else:  # вверх
+            while x - 1 >= 0 and not visited[x - 1][y]:
+                visited[x - 1][y] = True
+                x -= 1
+                length += 1
+                moved = True
+        
+        if not moved:
+            break
+        
+        direction = (direction + 1) % 4
+    
+    return length
+
+# Пример для лужайки 4×6
+a = 4
+b = 6
+fence_length = calculate_fence_length(a, b)
+print(f"Для лужайки размером {a}×{b} метров")
+print(f"Длина ограждения спиральной дорожки: {fence_length} метров")
+6.77. Проверка чисел
+а) Состоит ли из одинаковых цифр
+python
+number = input("Введите натуральное число: ")
+
+all_same = True
+first_digit = number[0]
+
+for digit in number:
+    if digit != first_digit:
+        all_same = False
+        break
+
+print(f"Число {'состоит' if all_same else 'не состоит'} из одинаковых цифр")
+б) Есть ли две одинаковые цифры рядом
+python
+number = input("Введите натуральное число: ")
+
+has_adjacent_duplicates = False
+
+for i in range(len(number) - 1):
+    if number[i] == number[i + 1]:
+        has_adjacent_duplicates = True
+        break
+
+print(f"В числе {'есть' if has_adjacent_duplicates else 'нет'} двух одинаковых цифр, стоящих рядом")
+6.78. Упорядоченность справа налево по возрастанию
+python
+number = input("Введите натуральное число: ")
+
+is_ordered = True
+
+# Проверяем от последней цифры к первой
+for i in range(len(number) - 1, 0, -1):
+    current_digit = int(number[i])
+    prev_digit = int(number[i - 1])
+    
+    if current_digit >= prev_digit:  # должно быть строго меньше
+        is_ordered = False
+        break
+
+print(f"При просмотре справа налево цифры {'упорядочены' if is_ordered else 'не упорядочены'} по возрастанию")
+6.79. Упорядоченность справа налево по неубыванию
+python
+number = input("Введите натуральное число: ")
+
+is_non_decreasing = True
+
+# Проверяем от последней цифры к первой
+for i in range(len(number) - 1, 0, -1):
+    current_digit = int(number[i])
+    prev_digit = int(number[i - 1])
+    
+    if current_digit > prev_digit:  # должно быть <=
+        is_non_decreasing = False
+        break
+
+print(f"При просмотре справа налево цифры {'упорядочены' if is_non_decreasing else 'не упорядочены'} по неубыванию")
+6.80. Упорядоченность слева направо по возрастанию
+python
+number = input("Введите натуральное число: ")
+
+is_ordered = True
+
+# Проверяем от первой цифры к последней
+for i in range(len(number) - 1):
+    current_digit = int(number[i])
+    next_digit = int(number[i + 1])
+    
+    if current_digit >= next_digit:  # должно быть строго меньше
+        is_ordered = False
+        break
+
+print(f"При просмотре слева направо цифры {'упорядочены' if is_ordered else 'не упорядочены'} по возрастанию")
+6.81. Монотонно возрастающая последовательность
+python
+number = input("Введите натуральное число: ")
+
+is_monotonic_increasing = True
+
+for i in range(len(number) - 1):
+    if int(number[i]) >= int(number[i + 1]):
+        is_monotonic_increasing = False
+        break
+
+if len(number) < 2:
+    is_monotonic_increasing = False
+
+print(f"Цифры {'образуют' if is_monotonic_increasing else 'не образуют'} монотонно возрастающую последовательность")
+6.82. Упорядоченность слева направо по неубыванию
+python
+number = input("Введите натуральное число: ")
+
+is_non_decreasing = True
+
+# Проверяем от первой цифры к последней
+for i in range(len(number) - 1):
+    current_digit = int(number[i])
+    next_digit = int(number[i + 1])
+    
+    if current_digit > next_digit:  # должно быть <=
+        is_non_decreasing = False
+        break
+
+print(f"При просмотре слева направо цифры {'упорядочены' if is_non_decreasing else 'не упорядочены'} по неубыванию")
+6.83. Монотонная последовательность (возрастающая или убывающая)
+python
+number = input("Введите натуральное число: ")
+
+if len(number) < 2:
+    print("Число слишком короткое для проверки монотонности")
+else:
+    # Проверяем, возрастающая ли последовательность
+    is_increasing = True
+    for i in range(len(number) - 1):
+        if int(number[i]) >= int(number[i + 1]):
+            is_increasing = False
+            break
+    
+    # Проверяем, убывающая ли последовательность
+    is_decreasing = True
+    for i in range(len(number) - 1):
+        if int(number[i]) <= int(number[i + 1]):
+            is_decreasing = False
+            break
+    
+    is_monotonic = is_increasing or is_decreasing
+    
+    if is_monotonic:
+        if is_increasing:
+            print("Цифры образуют монотонно возрастающую последовательность")
+        else:
+            print("Цифры образуют монотонно убывающую последовательность")
+    else:
+        print("Цифры не образуют монотонную последовательность")
