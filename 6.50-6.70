@@ -1,0 +1,707 @@
+6.50. Верно ли, что:
+а) Сумма цифр меньше a
+python
+number = int(input("Введите натуральное число: "))
+a = int(input("Введите число a: "))
+
+digit_sum = 0
+temp = number
+
+while temp > 0:
+    digit_sum += temp % 10
+    temp //= 10
+
+print("Верно" if digit_sum < a else "Неверно")
+б) Произведение цифр больше b
+python
+number = int(input("Введите натуральное число: "))
+b = int(input("Введите число b: "))
+
+digit_product = 1
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    digit_product *= digit
+    temp //= 10
+
+print("Верно" if digit_product > b else "Неверно")
+в) Число k-значное
+python
+number = int(input("Введите натуральное число: "))
+k = int(input("Введите k: "))
+
+digit_count = 0
+temp = number
+
+while temp > 0:
+    digit_count += 1
+    temp //= 10
+
+print("Верно" if digit_count == k else "Неверно")
+г) Первая цифра превышает m
+python
+number = int(input("Введите натуральное число: "))
+m = int(input("Введите m: "))
+
+first_digit = number
+while first_digit >= 10:
+    first_digit //= 10
+
+print("Верно" if first_digit > m else "Неверно")
+6.51. Верно ли, что:
+а) Сумма цифр больше k, а число четное
+python
+number = int(input("Введите натуральное число: "))
+k = int(input("Введите k: "))
+
+digit_sum = 0
+temp = number
+
+while temp > 0:
+    digit_sum += temp % 10
+    temp //= 10
+
+is_even = number % 2 == 0
+print("Верно" if digit_sum > k and is_even else "Неверно")
+б) Количество цифр четное, а число не превышает b
+python
+number = int(input("Введите натуральное число: "))
+b = int(input("Введите b: "))
+
+digit_count = 0
+temp = number
+
+while temp > 0:
+    digit_count += 1
+    temp //= 10
+
+has_even_digits = digit_count % 2 == 0
+within_limit = number <= b
+print("Верно" if has_even_digits and within_limit else "Неверно")
+г) Число начинается цифрой x и заканчивается цифрой y
+python
+number = int(input("Введите натуральное число: "))
+x = int(input("Введите первую цифру x: "))
+y = int(input("Введите последнюю цифру y: "))
+
+# Последняя цифра
+last_digit = number % 10
+
+# Первая цифра
+first_digit = number
+while first_digit >= 10:
+    first_digit //= 10
+
+starts_with_x = first_digit == x
+ends_with_y = last_digit == y
+print("Верно" if starts_with_x and ends_with_y else "Неверно")
+д) Произведение цифр меньше a, а число делится на b
+python
+number = int(input("Введите натуральное число: "))
+a = int(input("Введите a: "))
+b = int(input("Введите b: "))
+
+digit_product = 1
+temp = number
+
+while temp > 0:
+    digit_product *= temp % 10
+    temp //= 10
+
+product_small = digit_product < a
+divisible = number % b == 0
+print("Верно" if product_small and divisible else "Неверно")
+е) Сумма цифр больше m, а число делится на n
+python
+number = int(input("Введите натуральное число: "))
+m = int(input("Введите m: "))
+n = int(input("Введите n: "))
+
+digit_sum = 0
+temp = number
+
+while temp > 0:
+    digit_sum += temp % 10
+    temp //= 10
+
+sum_greater = digit_sum > m
+divisible = number % n == 0
+print("Верно" if sum_greater and divisible else "Неверно")
+6.52. Определить:
+а) Есть ли цифра 3
+python
+number = int(input("Введите натуральное число: "))
+
+has_three = False
+temp = number
+
+while temp > 0:
+    if temp % 10 == 3:
+        has_three = True
+        break
+    temp //= 10
+
+print("Да, есть цифра 3" if has_three else "Нет цифры 3")
+б) Есть ли цифры 2 и 5
+python
+number = int(input("Введите натуральное число: "))
+
+has_two = False
+has_five = False
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    if digit == 2:
+        has_two = True
+    if digit == 5:
+        has_five = True
+    temp //= 10
+
+if has_two and has_five:
+    print("Есть и цифра 2, и цифра 5")
+elif has_two:
+    print("Есть только цифра 2")
+elif has_five:
+    print("Есть только цифра 5")
+else:
+    print("Нет ни цифры 2, ни цифры 5")
+6.53. Дано натуральное число:
+а) Есть ли цифра a
+python
+number = int(input("Введите натуральное число: "))
+a = int(input("Введите цифру для поиска: "))
+
+found = False
+temp = number
+
+while temp > 0:
+    if temp % 10 == a:
+        found = True
+        break
+    temp //= 10
+
+print(f"Цифра {a} {'найдена' if found else 'не найдена'}")
+б) Верно ли, что нет цифры b
+python
+number = int(input("Введите натуральное число: "))
+b = int(input("Введите цифру b: "))
+
+has_b = False
+temp = number
+
+while temp > 0:
+    if temp % 10 == b:
+        has_b = True
+        break
+    temp //= 10
+
+print(f"Верно, что нет цифры {b}" if not has_b else f"Неверно, цифра {b} есть")
+в) Верно ли, что цифра a встречается более k раз
+python
+number = int(input("Введите натуральное число: "))
+a = int(input("Введите цифру a: "))
+k = int(input("Введите k: "))
+
+count = 0
+temp = number
+
+while temp > 0:
+    if temp % 10 == a:
+        count += 1
+    temp //= 10
+
+print(f"Верно, цифра {a} встречается более {k} раз" if count > k else f"Неверно, встречается {count} раз")
+г) Есть ли цифры a и b
+python
+number = int(input("Введите натуральное число: "))
+a = int(input("Введите цифру a: "))
+b = int(input("Введите цифру b: "))
+
+has_a = False
+has_b = False
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    if digit == a:
+        has_a = True
+    if digit == b:
+        has_b = True
+    temp //= 10
+
+if has_a and has_b:
+    print(f"Есть и цифра {a}, и цифра {b}")
+elif has_a:
+    print(f"Есть только цифра {a}")
+elif has_b:
+    print(f"Есть только цифру {b}")
+else:
+    print("Нет ни одной из указанных цифр")
+6.54. Какая цифра встречается чаще: 0 или 9
+python
+number = int(input("Введите натуральное число: "))
+
+count_zero = 0
+count_nine = 0
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    if digit == 0:
+        count_zero += 1
+    elif digit == 9:
+        count_nine += 1
+    temp //= 10
+
+if count_zero > count_nine:
+    print("Цифра 0 встречается чаще")
+elif count_nine > count_zero:
+    print("Цифра 9 встречается чаще")
+else:
+    print("Цифры 0 и 9 встречаются одинаково часто")
+6.55. Цифра a встречается реже, чем цифра b
+python
+number = int(input("Введите натуральное число: "))
+a = int(input("Введите цифру a: "))
+b = int(input("Введите цифру b: "))
+
+count_a = 0
+count_b = 0
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    if digit == a:
+        count_a += 1
+    if digit == b:
+        count_b += 1
+    temp //= 10
+
+print(f"Верно, {a} встречается реже чем {b}" if count_a < count_b else f"Неверно, {a} встречается не реже")
+Это первые 7 задач. Если нужно продолжение, дайте знать! Код написан в понятном стиле с хорошими названиями переменных и комментариями.
+
+продолжай и сделай все задачи
+Продолжим с остальными задачами. Вот решения для задач 6.56-6.83:
+
+6.56. Какая цифра (2 или 5) расположена левее
+python
+number = int(input("Введите натуральное число: "))
+
+# Переводим число в строку для удобства поиска слева
+num_str = str(number)
+pos_2 = num_str.find('2')
+pos_5 = num_str.find('5')
+
+if pos_2 == -1 and pos_5 == -1:
+    print("В числе нет ни цифры 2, ни цифры 5")
+elif pos_2 == -1:
+    print("В числе есть только цифра 5")
+elif pos_5 == -1:
+    print("В числе есть только цифра 2")
+else:
+    if pos_2 < pos_5:
+        print("Цифра 2 расположена левее цифры 5")
+    else:
+        print("Цифра 5 расположена левее цифры 2")
+6.57. Какая цифра (a или b) расположена правее
+python
+number = int(input("Введите натуральное число: "))
+a = input("Введите цифру a: ")
+b = input("Введите цифру b: ")
+
+num_str = str(number)
+# Ищем самые правые позиции
+pos_a = num_str.rfind(a)
+pos_b = num_str.rfind(b)
+
+if pos_a == -1 and pos_b == -1:
+    print(f"В числе нет ни цифры {a}, ни цифры {b}")
+elif pos_a == -1:
+    print(f"В числе есть только цифра {b}")
+elif pos_b == -1:
+    print(f"В числе есть только цифра {a}")
+else:
+    if pos_a > pos_b:
+        print(f"Цифра {a} расположена правее цифры {b}")
+    else:
+        print(f"Цифра {b} расположена правее цифры {a}")
+6.58. Сколько раз встречается максимальная цифра
+Способ 1: с двумя циклами
+python
+number = int(input("Введите натуральное число: "))
+
+# Первый цикл: находим максимальную цифру
+temp = number
+max_digit = 0
+while temp > 0:
+    digit = temp % 10
+    if digit > max_digit:
+        max_digit = digit
+    temp //= 10
+
+# Второй цикл: считаем сколько раз встречается максимальная цифра
+temp = number
+count = 0
+while temp > 0:
+    if temp % 10 == max_digit:
+        count += 1
+    temp //= 10
+
+print(f"Максимальная цифра {max_digit} встречается {count} раз")
+Способ 2: с одним циклом
+python
+number = int(input("Введите натуральное число: "))
+
+max_digit = 0
+max_count = 0
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    
+    if digit > max_digit:
+        max_digit = digit
+        max_count = 1
+    elif digit == max_digit:
+        max_count += 1
+    
+    temp //= 10
+
+print(f"Максимальная цифра {max_digit} встречается {max_count} раз")
+6.59. Сколько раз встречается минимальная цифра
+Способ 1: с двумя циклами
+python
+number = int(input("Введите натуральное число: "))
+
+# Первый цикл: находим минимальную цифру
+temp = number
+min_digit = 9
+while temp > 0:
+    digit = temp % 10
+    if digit < min_digit:
+        min_digit = digit
+    temp //= 10
+
+# Второй цикл: считаем сколько раз встречается минимальная цифра
+temp = number
+count = 0
+while temp > 0:
+    if temp % 10 == min_digit:
+        count += 1
+    temp //= 10
+
+print(f"Минимальная цифра {min_digit} встречается {count} раз")
+Способ 2: с одним циклом
+python
+number = int(input("Введите натуральное число: "))
+
+min_digit = 9
+min_count = 0
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    
+    if digit < min_digit:
+        min_digit = digit
+        min_count = 1
+    elif digit == min_digit:
+        min_count += 1
+    
+    temp //= 10
+
+print(f"Минимальная цифра {min_digit} встречается {min_count} раз")
+6.60. Найти две максимальные/минимальные цифры (все цифры различны)
+а) Две максимальные цифры
+python
+number = int(input("Введите натуральное число (все цифры различны): "))
+
+max1 = 0  # Самая большая цифра
+max2 = 0  # Вторая по величине цифра
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    
+    if digit > max1:
+        max2 = max1
+        max1 = digit
+    elif digit > max2 and digit != max1:
+        max2 = digit
+    
+    temp //= 10
+
+print(f"Две максимальные цифры: {max1} и {max2}")
+б) Две минимальные цифры
+python
+number = int(input("Введите натуральное число (все цифры различны): "))
+
+min1 = 9  # Самая маленькая цифра
+min2 = 9  # Вторая по малости цифра
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    
+    if digit < min1:
+        min2 = min1
+        min1 = digit
+    elif digit < min2 and digit != min1:
+        min2 = digit
+    
+    temp //= 10
+
+print(f"Две минимальные цифры: {min1} и {min2}")
+6.61. Порядковые номера двух максимальных/минимальных цифр
+а) Порядковые номера двух максимальных цифр
+python
+number = int(input("Введите натуральное число (все цифры различны): "))
+
+max1 = 0  # Значение первой максимальной цифры
+max2 = 0  # Значение второй максимальной цифры
+pos_max1_from_end = 0
+pos_max2_from_end = 0
+pos_max1_from_start = 0
+pos_max2_from_start = 0
+
+position = 1
+temp = number
+
+# Находим позиции от конца (справа)
+while temp > 0:
+    digit = temp % 10
+    
+    if digit > max1:
+        max2 = max1
+        max1 = digit
+        pos_max2_from_end = pos_max1_from_end
+        pos_max1_from_end = position
+    elif digit > max2:
+        max2 = digit
+        pos_max2_from_end = position
+    
+    position += 1
+    temp //= 10
+
+# Находим позиции от начала (слева)
+num_str = str(number)
+pos_max1_from_start = num_str.find(str(max1)) + 1
+pos_max2_from_start = num_str.find(str(max2)) + 1
+
+print(f"Максимальные цифры: {max1} и {max2}")
+print(f"Позиции от конца: {pos_max1_from_end} и {pos_max2_from_end}")
+print(f"Позиции от начала: {pos_max1_from_start} и {pos_max2_from_start}")
+6.62. Найти число:
+а) Перевернутое число
+python
+number = int(input("Введите натуральное число: "))
+
+reversed_num = 0
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    reversed_num = reversed_num * 10 + digit
+    temp //= 10
+
+print(f"Число наоборот: {reversed_num}")
+б) С двойками в начале и конце
+python
+number = int(input("Введите натуральное число: "))
+
+result = int('2' + str(number) + '2')
+print(f"Число с двойками: {result}")
+в) Без цифр a
+python
+number = input("Введите натуральное число: ")
+a = input("Введите цифру для удаления: ")
+
+result_str = number.replace(a, '')
+if result_str == '':
+    result = 0
+else:
+6.62. Найти число:
+а) Перевернутое число
+python
+number = int(input("Введите натуральное число: "))
+
+reversed_num = 0
+temp = number
+
+while temp > 0:
+    digit = temp % 10
+    reversed_num = reversed_num * 10 + digit
+    temp //= 10
+
+print(f"Число наоборот: {reversed_num}")
+б) С двойками в начале и конце
+python
+number = int(input("Введите натуральное число: "))
+
+result = int('2' + str(number) + '2')
+print(f"Число с двойками: {result}")
+в) Без цифр a
+python
+number = input("Введите натуральное число: ")
+a = input("Введите цифру для удаления: ")
+
+result_str = number.replace(a, '')
+if result_str == '':
+    result = 0
+else:
+    result = int(result_str)
+
+print(f"Число без цифры {a}: {result}")
+г) С переставленными первой и последней цифрами
+python
+number = input("Введите натуральное число: ")
+
+if len(number) == 1:
+    result = number
+else:
+    first = number[0]
+    last = number[-1]
+    middle = number[1:-1]
+    result = last + middle + first
+
+print(f"Число с переставленными цифрами: {result}")
+д) Удвоенное приписыванием
+python
+number = int(input("Введите натуральное число: "))
+
+# Для числа 123 -> 123123
+num_str = str(number)
+result = int(num_str + num_str)
+
+print(f"Удвоенное число: {result}")
+6.63. Проверка на палиндром
+python
+number = input("Введите натуральное число: ")
+
+is_palindrome = number == number[::-1]
+print(f"Число {'является' if is_palindrome else 'не является'} палиндромом")
+6.64. Выплата суммы купюрами 1, 2, 4, 8, 16, 32, 64
+python
+n = int(input("Введите сумму для выплаты: "))
+
+denominations = [64, 32, 16, 8, 4, 2, 1]
+remaining = n
+
+print(f"Сумма {n} выплачивается купюрами:")
+for denom in denominations:
+    count = remaining // denom
+    if count > 0:
+        print(f"Купюр номиналом {denom}: {count}")
+        remaining %= denom
+6.65. НОД по алгоритму Евклида
+python
+a = int(input("Введите первое число: "))
+b = int(input("Введите второе число: "))
+
+num1, num2 = a, b
+while num2 != 0:
+    num1, num2 = num2, num1 % num2
+
+print(f"НОД({a}, {b}) = {num1}")
+6.66. НОД трех чисел
+python
+def gcd(x, y):
+    while y != 0:
+        x, y = y, x % y
+    return x
+
+a = int(input("Введите первое число: "))
+b = int(input("Введите второе число: "))
+c = int(input("Введите третье число: "))
+
+gcd_ab = gcd(a, b)
+gcd_abc = gcd(gcd_ab, c)
+
+print(f"НОД({a}, {b}, {c}) = {gcd_abc}")
+6.67. НОК двух чисел
+python
+a = int(input("Введите первое число: "))
+b = int(input("Введите второе число: "))
+
+# НОК = a * b / НОД
+num1, num2 = a, b
+while num2 != 0:
+    num1, num2 = num2, num1 % num2
+
+gcd_value = num1
+lcm_value = a * b // gcd_value
+
+print(f"НОК({a}, {b}) = {lcm_value}")
+6.68. Сокращение дроби
+python
+a = int(input("Введите числитель: "))
+b = int(input("Введите знаменатель: "))
+
+# Находим НОД
+num1, num2 = a, b
+while num2 != 0:
+    num1, num2 = num2, num1 % num2
+
+gcd_value = num1
+p = a // gcd_value
+q = b // gcd_value
+
+print(f"Сокращенная дробь: {p}/{q}")
+print(f"Проверка: {a}/{b} = {p}/{q}")
+6.69. Разрезание прямоугольника 425×131 на квадраты
+python
+a = 425
+b = 131
+
+print(f"Исходный прямоугольник: {a}×{b}")
+while a > 0 and b > 0:
+    if a >= b:
+        count = a // b
+        print(f"Квадратов со стороной {b}: {count}")
+        a %= b
+    else:
+        count = b // a
+        print(f"Квадратов со стороной {a}: {count}")
+        b %= a
+6.70. Разрезание произвольного прямоугольника на квадраты
+python
+a = int(input("Введите длину прямоугольника: "))
+b = int(input("Введите ширину прямоугольника: "))
+
+print(f"Разрезание прямоугольника {a}×{b} на квадраты:")
+while a > 0 and b > 0:
+    if a >= b:
+        count = a // b
+        print(f"Квадратов со стороной {b}: {count}")
+        a %= b
+    else:
+        count = b // a
+        print(f"Квадратов со стороной {a}: {count}")
+        b %= a
+    result = int(result_str)
+
+print(f"Число без цифры {a}: {result}")
+г) С переставленными первой и последней цифрами
+python
+number = input("Введите натуральное число: ")
+
+if len(number) == 1:
+    result = number
+else:
+    first = number[0]
+    last = number[-1]
+    middle = number[1:-1]
+    result = last + middle + first
+
+print(f"Число с переставленными цифрами: {result}")
+д) Удвоенное приписыванием
+python
+number = int(input("Введите натуральное число: "))
+
+# Для числа 123 -> 123123
+num_str = str(number)
+result = int(num_str + num_str)
+
+print(f"Удвоенное число: {result}")
