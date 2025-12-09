@@ -1,0 +1,332 @@
+7.1. Сумма 10 чисел
+python
+# Ввод 10 чисел
+numbers = []
+for i in range(10):
+    num = float(input(f"Введите число a{i+1}: "))
+    numbers.append(num)
+
+total_sum = sum(numbers)
+print(f"Сумма всех чисел: {total_sum}")
+7.2. Сумма n вещественных чисел
+python
+n = int(input("Введите количество чисел n: "))
+total = 0.0
+
+for i in range(n):
+    num = float(input(f"Введите число a{i+1}: "))
+    total += num
+
+print(f"Сумма всех вещественных чисел: {total}")
+7.3. Периметр 12-угольника
+python
+perimeter = 0.0
+print("Введите длины 12 сторон многоугольника:")
+
+for i in range(12):
+    side = float(input(f"Сторона {i+1}: "))
+    perimeter += side
+
+print(f"Периметр 12-угольника: {perimeter}")
+7.4. Общая масса груза
+python
+n = int(input("Сколько предметов загружаем? "))
+total_mass = 0.0
+
+for i in range(n):
+    mass = float(input(f"Масса предмета {i+1} (кг): "))
+    total_mass += mass
+
+print(f"Общая масса груза: {total_mass:.2f} кг")
+7.5. Общая сумма зарплат
+python
+n = int(input("Сколько сотрудников в ведомости? "))
+total_salary = 0.0
+
+for i in range(n):
+    salary = float(input(f"Зарплата сотрудника {i+1}: "))
+    total_salary += salary
+
+print(f"Общая сумма выплат: {total_salary:.2f}")
+7.6. Общее сопротивление (последовательное)
+python
+n = int(input("Сколько элементов в цепи? "))
+total_resistance = 0.0
+
+for i in range(n):
+    resistance = float(input(f"Сопротивление элемента {i+1} (Ом): "))
+    total_resistance += resistance
+
+print(f"Общее сопротивление цепи: {total_resistance:.2f} Ом")
+7.7. Общее сопротивление (параллельное)
+python
+n = int(input("Сколько элементов в цепи? "))
+inverse_total = 0.0
+
+for i in range(n):
+    resistance = float(input(f"Сопротивление элемента {i+1} (Ом): "))
+    if resistance != 0:
+        inverse_total += 1 / resistance
+
+if inverse_total != 0:
+    total_resistance = 1 / inverse_total
+    print(f"Общее сопротивление цепи: {total_resistance:.2f} Ом")
+else:
+    print("Ошибка: все сопротивления равны нулю")
+7.8. Последовательность, оканчивающаяся нулем
+python
+# а) Сумма всех чисел
+total = 0
+count = 0
+
+print("Вводите числа (0 для окончания):")
+while True:
+    num = int(input("Число: "))
+    if num == 0:
+        break
+    total += num
+    count += 1
+
+print(f"а) Сумма всех чисел: {total}")
+print(f"б) Количество всех чисел: {count}")
+7.9. Сумма оценок двух учеников по 4 предметам
+python
+print("Введите оценки первого ученика:")
+student1_total = 0
+for i in range(4):
+    grade = int(input(f"Предмет {i+1}: "))
+    student1_total += grade
+
+print("\nВведите оценки второго ученика:")
+student2_total = 0
+for i in range(4):
+    grade = int(input(f"Предмет {i+1}: "))
+    student2_total += grade
+
+print(f"\nСумма оценок первого ученика: {student1_total}")
+print(f"Сумма оценок второго ученика: {student2_total}")
+7.10. Сумма баллов спортсменов-пятиборцев
+python
+print("Результаты первого спортсмена:")
+athlete1_total = 0
+for i in range(5):
+    score = int(input(f"Вид спорта {i+1}: "))
+    athlete1_total += score
+
+print("\nРезультаты второго спортсмена:")
+athlete2_total = 0
+for i in range(5):
+    score = int(input(f"Вид спорта {i+1}: "))
+    athlete2_total += score
+
+print(f"\nСумма баллов первого спортсмена: {athlete1_total}")
+print(f"Сумма баллов второго спортсмена: {athlete2_total}")
+7.11. Произведение 8 чисел
+python
+product = 1
+print("Введите 8 чисел:")
+for i in range(8):
+    num = float(input(f"Число a{i+1}: "))
+    product *= num
+
+print(f"Произведение всех чисел: {product}")
+7.12. Последовательность с нулем на конце
+python
+print("Вводите положительные целые числа (0 для окончания):")
+product = 1
+first = True
+
+while True:
+    num = int(input("Число: "))
+    if num == 0:
+        print("0")
+        break
+    
+    product *= num
+    if first:
+        print(num)
+        first = False
+    else:
+        print(product)
+7.13. Сумма квадратов 10 чисел
+python
+sum_of_squares = 0
+print("Введите 10 чисел:")
+for i in range(10):
+    num = float(input(f"Число a{i+1}: "))
+    sum_of_squares += num ** 2
+
+print(f"Сумма квадратов: {sum_of_squares}")
+7.14. Сумма квадратов n вещественных чисел
+python
+n = int(input("Введите количество чисел n: "))
+sum_of_squares = 0.0
+
+for i in range(n):
+    num = float(input(f"Число a{i+1}: "))
+    sum_of_squares += num ** 2
+
+print(f"Сумма квадратов: {sum_of_squares}")
+7.15. Проверка суммы 10 вещественных чисел
+python
+total = 0.0
+print("Введите 10 вещественных чисел:")
+for i in range(10):
+    num = float(input(f"Число a{i+1}: "))
+    total += num
+
+if total > 100.78:
+    print(f"Верно, сумма {total:.2f} превышает 100.78")
+else:
+    print(f"Неверно, сумма {total:.2f} не превышает 100.78")
+7.16. Проверка суммы n целых чисел
+python
+n = int(input("Введите n: "))
+p = int(input("Введите p: "))
+
+total = 0
+for i in range(n):
+    num = int(input(f"Число b{i+1}: "))
+    total += num
+
+if total < p:
+    print(f"Верно, сумма {total} меньше {p}")
+else:
+    print(f"Неверно, сумма {total} не меньше {p}")
+7.17. Проверка четности суммы 9 чисел
+python
+total = 0
+print("Введите 9 целых чисел:")
+for i in range(9):
+    num = int(input(f"Число a{i+1}: "))
+    total += num
+
+if total % 2 == 0:
+    print(f"Верно, сумма {total} четная")
+else:
+    print(f"Неверно, сумма {total} нечетная")
+7.18. Проверка кратности суммы
+python
+n = int(input("Введите количество чисел n: "))
+b = int(input("Введите число b: "))
+
+total = 0
+for i in range(n):
+    num = int(input(f"Число x{i+1}: "))
+    total += num
+
+if total % b == 0:
+    print(f"Верно, сумма {total} кратна {b}")
+else:
+    print(f"Неверно, сумма {total} не кратна {b}")
+7.19. Сравнение осадков с прошлым годом
+python
+# Для февраля обычно 28 дней
+last_year = float(input("Количество осадков за февраль прошлого года: "))
+this_year_total = 0.0
+
+print("Введите количество осадков за каждый день февраля:")
+for day in range(1, 29):  # 28 дней в феврале
+    precipitation = float(input(f"День {day}: "))
+    this_year_total += precipitation
+
+if this_year_total > last_year:
+    print(f"Верно, в этом году {this_year_total} мм > {last_year} мм")
+else:
+    print(f"Неверно, в этом году {this_year_total} мм <= {last_year} мм")
+7.20. Проверка грузоподъемности
+python
+load_capacity = float(input("Грузоподъемность автомобиля (кг): "))
+n = int(input("Сколько грузов загружаем? "))
+
+total_mass = 0.0
+for i in range(n):
+    mass = float(input(f"Масса груза {i+1} (кг): "))
+    total_mass += mass
+
+if total_mass > load_capacity:
+    print(f"Превышено! Общая масса {total_mass} кг > {load_capacity} кг")
+else:
+    print(f"В пределах нормы. Общая масса {total_mass} кг <= {load_capacity} кг")
+7.21. Лучший результат десятиборца
+python
+print("Результаты первого десятиборца:")
+athlete1_total = 0
+for i in range(10):
+    score = int(input(f"Вид спорта {i+1}: "))
+    athlete1_total += score
+
+print("\nРезультаты второго десятиборца:")
+athlete2_total = 0
+for i in range(10):
+    score = int(input(f"Вид спорта {i+1}: "))
+    athlete2_total += score
+
+print(f"\nПервый спортсмен: {athlete1_total} баллов")
+print(f"Второй спортсмен: {athlete2_total} баллов")
+
+if athlete1_total > athlete2_total:
+    print("Первый спортсмен показал лучший результат")
+elif athlete2_total > athlete1_total:
+    print("Второй спортсмен показал лучший результат")
+else:
+    print("Результаты равны")
+7.22. Более дешевый набор из 8 предметов
+python
+print("Стоимости предметов первого набора:")
+set1_total = 0.0
+for i in range(8):
+    price = float(input(f"Предмет {i+1}: "))
+    set1_total += price
+
+print("\nСтоимости предметов второго набора:")
+set2_total = 0.0
+for i in range(8):
+    price = float(input(f"Предмет {i+1}: "))
+    set2_total += price
+
+print(f"\nПервый набор: {set1_total:.2f}")
+print(f"Второй набор: {set2_total:.2f}")
+
+if set1_total < set2_total:
+    print("Первый набор дешевле")
+elif set2_total < set1_total:
+    print("Второй набор дешевле")
+else:
+    print("Наборы стоят одинаково")
+7.23. Проверка произведения 8 чисел
+python
+product = 1
+print("Введите 8 чисел:")
+for i in range(8):
+    num = float(input(f"Число a{i+1}: "))
+    product *= num
+
+if product < 10000:
+    print(f"Верно, произведение {product:.2f} < 10000")
+else:
+    print(f"Неверно, произведение {product:.2f} >= 10000")
+7.24. Проверка произведения n вещественных чисел
+python
+n = int(input("Введите количество чисел n: "))
+s = float(input("Введите число s: "))
+
+product = 1.0
+for i in range(n):
+    num = float(input(f"Число d{i+1}: "))
+    product *= num
+
+if product > s:
+    print(f"Верно, произведение {product:.2f} > {s}")
+else:
+    print(f"Неверно, произведение {product:.2f} <= {s}")
+7.25. Среднее арифметическое 10 чисел
+python
+total = 0.0
+print("Введите 10 чисел:")
+for i in range(10):
+    num = float(input(f"Число a{i+1}: "))
+    total += num
+
+average = total / 10
+print(f"Среднее арифметическое: {average}")
