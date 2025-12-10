@@ -1,0 +1,344 @@
+7.26. Среднее арифметическое n чисел
+python
+n = int(input("Введите количество чисел n: "))
+total = 0.0
+
+for i in range(n):
+    num = float(input(f"Число a{i+1}: "))
+    total += num
+
+average = total / n
+print(f"Среднее арифметическое: {average}")
+7.27. Средняя оценка по физике для 20 учеников
+python
+total_grade = 0
+print("Введите оценки по физике для 20 учеников:")
+
+for i in range(20):
+    grade = int(input(f"Ученик {i+1}: "))
+    total_grade += grade
+
+average = total_grade / 20
+print(f"Средняя оценка по физике: {average:.1f}")
+7.28. Средняя оценка ученика по 10 предметам
+python
+total_grade = 0
+print("Введите оценки по 10 предметам:")
+
+for i in range(10):
+    grade = int(input(f"Предмет {i+1}: "))
+    total_grade += grade
+
+average = total_grade / 10
+print(f"Средняя оценка ученика: {average:.1f}")
+7.29. Средняя оценка по алгебре в классе
+python
+n = int(input("Сколько учеников в классе? "))
+total_grade = 0
+
+for i in range(n):
+    grade = int(input(f"Оценка ученика {i+1} по алгебре: "))
+    total_grade += grade
+
+average = total_grade / n
+print(f"Средняя оценка по алгебре: {average:.1f}")
+7.30. Средняя масса предметов
+python
+n = int(input("Сколько предметов в наборе? "))
+total_mass = 0.0
+
+for i in range(n):
+    mass = float(input(f"Масса предмета {i+1} (кг): "))
+    total_mass += mass
+
+average_mass = total_mass / n
+print(f"Средняя масса: {average_mass:.2f} кг")
+7.31. Среднее арифметическое последовательности до отрицательного числа
+python
+total = 0
+count = 0
+
+print("Вводите неотрицательные числа (отрицательное для окончания):")
+while True:
+    num = int(input("Число: "))
+    if num < 0:
+        break
+    total += num
+    count += 1
+
+if count > 0:
+    average = total / count
+    print(f"Среднее арифметическое: {average}")
+else:
+    print("Не было введено положительных чисел")
+7.32. Средний возраст в двух классах
+python
+print("Возраст учеников первого класса (20 человек):")
+age1_total = 0.0
+for i in range(20):
+    age = float(input(f"Ученик {i+1}: "))
+    age1_total += age
+
+average_age1 = age1_total / 20
+
+print("\nВозраст учеников второго класса (20 человек):")
+age2_total = 0.0
+for i in range(20):
+    age = float(input(f"Ученик {i+1}: "))
+    age2_total += age
+
+average_age2 = age2_total / 20
+
+print(f"\nСредний возраст в первом классе: {average_age1:.1f} лет")
+print(f"Средний возраст во втором классе: {average_age2:.1f} лет")
+7.33. Среднедневное количество осадков за январь и март
+python
+# Январь - 31 день
+print("Осадки за январь (31 день):")
+jan_total = 0.0
+for day in range(1, 32):
+    precipitation = float(input(f"Январь, день {day}: "))
+    jan_total += precipitation
+
+jan_average = jan_total / 31
+
+# Март - 31 день
+print("\nОсадки за март (31 день):")
+mar_total = 0.0
+for day in range(1, 32):
+    precipitation = float(input(f"Март, день {day}: "))
+    mar_total += precipitation
+
+mar_average = mar_total / 31
+
+print(f"\nСреднедневные осадки:")
+print(f"Январь: {jan_average:.1f} мм/день")
+print(f"Март: {mar_average:.1f} мм/день")
+7.34. Средний рост в двух классах
+python
+students_count = int(input("Сколько учеников в каждом классе? "))
+
+print(f"Рост учеников первого класса ({students_count} человек):")
+height1_total = 0.0
+for i in range(students_count):
+    height = float(input(f"Ученик {i+1} (см): "))
+    height1_total += height
+
+average_height1 = height1_total / students_count
+
+print(f"\nРост учеников второго класса ({students_count} человек):")
+height2_total = 0.0
+for i in range(students_count):
+    height = float(input(f"Ученик {i+1} (см): "))
+    height2_total += height
+
+average_height2 = height2_total / students_count
+
+print(f"\nСредний рост:")
+print(f"Первый класс: {average_height1:.1f} см")
+print(f"Второй класс: {average_height2:.1f} см")
+7.35. Средняя оценка по физике в двух классах
+python
+students_count = int(input("Сколько учеников в каждом классе? "))
+
+print(f"Оценки по физике в первом классе ({students_count} человек):")
+grade1_total = 0
+for i in range(students_count):
+    grade = int(input(f"Ученик {i+1}: "))
+    grade1_total += grade
+
+average_grade1 = grade1_total / students_count
+
+print(f"\nОценки по физике во втором классе ({students_count} человек):")
+grade2_total = 0
+for i in range(students_count):
+    grade = int(input(f"Ученик {i+1}: "))
+    grade2_total += grade
+
+average_grade2 = grade2_total / students_count
+
+print(f"\nСредние оценки по физике:")
+print(f"Первый класс: {average_grade1:.1f}")
+print(f"Второй класс: {average_grade2:.1f}")
+7.36. Урожай пшеницы в области
+python
+total_area = 0.0
+total_yield = 0.0
+total_wheat = 0.0
+
+print("Данные по 10 районам области:")
+for district in range(1, 11):
+    area = float(input(f"Район {district}, площадь под пшеницей (га): "))
+    productivity = float(input(f"Район {district}, урожайность (ц/га): "))
+    
+    wheat = area * productivity
+    
+    total_area += area
+    total_yield += productivity * area  # взвешенная сумма для средней
+    total_wheat += wheat
+
+if total_area > 0:
+    average_productivity = total_yield / total_area
+else:
+    average_productivity = 0
+
+print(f"\nИтоги по области:")
+print(f"Общее количество пшеницы: {total_wheat:.1f} ц")
+print(f"Средняя урожайность: {average_productivity:.1f} ц/га")
+7.37. Средняя плотность населения в области
+python
+total_population = 0.0
+total_area = 0.0
+
+print("Данные по 12 районам области:")
+for district in range(1, 13):
+    population = float(input(f"Район {district}, население (тыс. чел.): "))
+    area = float(input(f"Район {district}, площадь (км²): "))
+    
+    total_population += population
+    total_area += area
+
+average_density = total_population / total_area if total_area > 0 else 0
+
+print(f"\nИтоги по области:")
+print(f"Общая площадь: {total_area:.1f} км²")
+print(f"Общее население: {total_population:.1f} тыс. чел.")
+print(f"Средняя плотность населения: {average_density:.3f} тыс. чел./км²")
+7.38. Общая площадь территории области
+python
+total_population = 0.0
+total_area = 0.0
+
+print("Данные по 12 районам области:")
+for district in range(1, 13):
+    population = float(input(f"Район {district}, население (тыс. чел.): "))
+    density = float(input(f"Район {district}, плотность (тыс. чел./км²): "))
+    
+    area = population / density if density > 0 else 0
+    
+    total_population += population
+    total_area += area
+
+print(f"\nИтоги по области:")
+print(f"Общее население: {total_population:.1f} тыс. чел.")
+print(f"Общая площадь: {total_area:.1f} км²")
+7.39. Операции над последовательностью
+python
+n = int(input("Введите количество чисел n: "))
+numbers = []
+
+# Ввод чисел
+for i in range(n):
+    num = int(input(f"Число a{i+1}: "))
+    numbers.append(num)
+
+# а) Сумма модулей
+sum_abs = sum(abs(x) for x in numbers)
+print(f"а) Сумма модулей: {sum_abs}")
+
+# б) Произведение модулей
+product_abs = 1
+for x in numbers:
+    product_abs *= abs(x)
+print(f"б) Произведение модулей: {product_abs}")
+
+# в) Суммы соседних элементов
+print("в) Суммы соседних элементов:")
+for i in range(n - 1):
+    pair_sum = numbers[i] + numbers[i + 1]
+    print(f"  a{i+1} + a{i+2} = {pair_sum}")
+
+# г) Знакочередующаяся сумма
+alt_sum = 0
+sign = 1
+for i in range(n):
+    alt_sum += sign * numbers[i]
+    sign = -sign  # меняем знак
+print(f"г) Знакочередующаяся сумма: {alt_sum}")
+7.40. Сумма чисел больше 10.75
+python
+total = 0.0
+print("Введите 12 вещественных чисел:")
+
+for i in range(12):
+    num = float(input(f"Число a{i+1}: "))
+    if num > 10.75:
+        total += num
+
+print(f"Сумма чисел, больших 10.75: {total}")
+7.41. Сумма чисел больше p
+python
+n = int(input("Введите количество чисел n: "))
+p = float(input("Введите число p: "))
+
+total = 0.0
+for i in range(n):
+    num = float(input(f"Число b{i+1}: "))
+    if num > p:
+        total += num
+
+print(f"Сумма чисел, больших {p}: {total}")
+7.42. Сумма четных чисел
+python
+total = 0
+print("Введите 10 целых чисел:")
+
+for i in range(10):
+    num = int(input(f"Число d{i+1}: "))
+    if num % 2 == 0:
+        total += num
+
+print(f"Сумма четных чисел: {total}")
+7.43. Сумма чисел, оканчивающихся нулем
+python
+total = 0
+print("Введите 10 целых чисел:")
+
+for i in range(10):
+    num = int(input(f"Число {i+1}: "))
+    if num % 10 == 0:
+        total += num
+
+print(f"Сумма чисел, оканчивающихся нулем: {total}")
+7.44. Сумма с четными индексами (начиная со второго)
+python
+total = 0
+print("Введите 20 целых чисел:")
+
+for i in range(20):
+    num = int(input(f"Число a{i+1}: "))
+    # Индексация с 1: нужно a2, a4, a6, ...
+    if (i + 1) % 2 == 0:  # i+1 потому что индексация в условии с 1
+        total += num
+
+print(f"Сумма чисел с четными номерами: {total}")
+7.45. Сумма с отрицанием для нечетных позиций
+python
+total = 0.0
+print("Введите 15 вещественных чисел:")
+
+for i in range(15):
+    num = float(input(f"Число c{i+1}: "))
+    # c1, c3, c5, ... с минусом
+    if (i + 1) % 2 == 1:  # нечетные позиции
+        total -= num
+
+print(f"Сумма -c1 - c3 - c5 - ... : {total}")
+7.46. Сумма первого и последнего, разность второго и предпоследнего
+python
+n = int(input("Введите количество чисел n: "))
+numbers = []
+
+for i in range(n):
+    num = int(input(f"Число a{i+1}: "))
+    numbers.append(num)
+
+# a) Сумма первого и последнего
+if n >= 1:
+    sum_first_last = numbers[0] + numbers[-1]
+    print(f"а) a1 + a{n} = {sum_first_last}")
+
+# б) Разность второго и предпоследнего
+if n >= 2:
+    diff_second_penultimate = numbers[1] - numbers[-2]
+    print(f"б) a2 - a{n-1} = {diff_second_penultimate}")
