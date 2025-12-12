@@ -1,0 +1,476 @@
+7.47. Средняя масса полных и обычных людей
+python
+n = int(input("Сколько человек в группе? "))
+
+heavy_total = 0
+heavy_count = 0
+normal_total = 0
+normal_count = 0
+
+for i in range(n):
+    mass = float(input(f"Масса человека {i+1} (кг): "))
+    if mass > 100:
+        heavy_total += mass
+        heavy_count += 1
+    else:
+        normal_total += mass
+        normal_count += 1
+
+if heavy_count > 0:
+    heavy_average = heavy_total / heavy_count
+    print(f"Средняя масса полных людей: {heavy_average:.1f} кг")
+else:
+    print("Нет полных людей")
+
+if normal_count > 0:
+    normal_average = normal_total / normal_count
+    print(f"Средняя масса остальных людей: {normal_average:.1f} кг")
+else:
+    print("Нет обычных людей")
+7.48. Средний рост мальчиков и девочек
+python
+n = int(input("Сколько учеников в классе? "))
+
+boys_total = 0
+boys_count = 0
+girls_total = 0
+girls_count = 0
+
+for i in range(n):
+    height = float(input(f"Рост ученика {i+1} (см, отрицательное для мальчиков): "))
+    if height < 0:
+        boys_total += abs(height)  # берем модуль для суммы
+        boys_count += 1
+    else:
+        girls_total += height
+        girls_count += 1
+
+if boys_count > 0:
+    boys_average = boys_total / boys_count
+    print(f"Средний рост мальчиков: {boys_average:.1f} см")
+
+if girls_count > 0:
+    girls_average = girls_total / girls_count
+    print(f"Средний рост девочек: {girls_average:.1f} см")
+7.49. Поиск чисел равных 10
+python
+n = int(input("Введите количество чисел n: "))
+numbers = []
+
+for i in range(n):
+    num = int(input(f"Число a{i+1}: "))
+    numbers.append(num)
+
+# а) Номер последнего равного 10
+last_index = -1
+for i in range(n):
+    if numbers[i] == 10:
+        last_index = i + 1  # +1 потому что в условии нумерация с 1
+
+if last_index != -1:
+    print(f"а) Номер последнего числа, равного 10: {last_index}")
+else:
+    print("а) Число 10 не найдено")
+
+# б) Номер первого равного 10
+first_index = -1
+for i in range(n):
+    if numbers[i] == 10:
+        first_index = i + 1
+        break  # нашли первый, можно прервать цикл
+
+if first_index != -1:
+    print(f"б) Номер первого числа, равного 10: {first_index}")
+else:
+    print("б) Число 10 не найдено")
+
+# Ответ на вопрос:
+# а) Можно использовать цикл с условием while, но проще с for
+# б) Для поиска первого можно использовать break после нахождения
+7.50. Номер последнего числа больше 100
+python
+n = int(input("Введите количество чисел n: "))
+
+last_index = -1
+
+for i in range(n):
+    num = int(input(f"Число b{i+1}: "))
+    if num > 100:
+        last_index = i + 1  # сохраняем номер последнего найденного
+
+if last_index != -1:
+    print(f"Номер последнего числа, большего 100: {last_index}")
+else:
+    print("Числа больше 100 не найдены (хотя по условию должны быть)")
+7.51. Номер последнего отрицательного числа
+python
+k = int(input("Введите количество чисел k: "))
+
+last_index = -1
+
+for i in range(k):
+    num = int(input(f"Число a{i+1}: "))
+    if num < 0:
+        last_index = i + 1  # сохраняем номер последнего найденного
+
+if last_index != -1:
+    print(f"Номер последнего отрицательного числа: {last_index}")
+else:
+    print("Отрицательные числа не найдены (хотя по условию должны быть)")
+7.52. Максимальное и минимальное из вещественных чисел
+python
+n = int(input("Введите количество чисел n: "))
+
+# а) Только максимальное
+max_num = float('-inf')
+for i in range(n):
+    num = float(input(f"Число x{i+1}: "))
+    if num > max_num:
+        max_num = num
+print(f"а) Максимальное число: {max_num}")
+
+# б) Только минимальное
+min_num = float('inf')
+for i in range(n):
+    num = float(input(f"Число x{i+1}: "))
+    if num < min_num:
+        min_num = num
+print(f"б) Минимальное число: {min_num}")
+
+# в) Оба сразу за один проход
+print("\nТеперь найдем оба значения за один проход:")
+n = int(input("Введите количество чисел n: "))
+
+max_num = float('-inf')
+min_num = float('inf')
+
+for i in range(n):
+    num = float(input(f"Число x{i+1}: "))
+    if num > max_num:
+        max_num = num
+    if num < min_num:
+        min_num = num
+
+print(f"в) Максимальное: {max_num}, Минимальное: {min_num}")
+7.53. Номер максимального и минимального
+python
+n = int(input("Введите количество чисел n: "))
+numbers = []
+
+for i in range(n):
+    num = int(input(f"Число a{i+1}: "))
+    numbers.append(num)
+
+# а) Номер последнего максимального
+max_value = numbers[0]
+max_index = 1
+
+for i in range(1, n):
+    if numbers[i] >= max_value:  # >= чтобы найти последний
+        max_value = numbers[i]
+        max_index = i + 1
+
+print(f"а) Номер последнего максимального: {max_index}")
+
+# б) Номер первого минимального
+min_value = numbers[0]
+min_index = 1
+
+for i in range(1, n):
+    if numbers[i] < min_value:  # < чтобы найти первый
+        min_value = numbers[i]
+        min_index = i + 1
+
+print(f"б) Номер первого минимального: {min_index}")
+7.54. Номер последнего максимального и последнего минимального
+python
+n = int(input("Введите количество чисел n: "))
+
+max_value = None
+min_value = None
+max_index = -1
+min_index = -1
+
+for i in range(n):
+    num = int(input(f"Число a{i+1}: "))
+    
+    if max_value is None or num >= max_value:
+        max_value = num
+        max_index = i + 1
+    
+    if min_value is None or num <= min_value:
+        min_value = num
+        min_index = i + 1
+
+print(f"Номер последнего максимального: {max_index}")
+print(f"Номер последнего минимального: {min_index}")
+7.55. Лучший результат лыжников в реальном времени
+python
+n = int(input("Сколько спортсменов уже пришло к финишу? "))
+
+best_time = float('inf')  # начинаем с очень большого числа
+
+for i in range(n):
+    time = float(input(f"Время спортсмена {i+1} (мин): "))
+    if time < best_time:
+        best_time = time
+    print(f"Лучший результат после спортсмена {i+1}: {best_time:.2f} мин")
+
+print(f"\nИтоговый лучший результат: {best_time:.2f} мин")
+7.56. Расстояние до самого удаленного города
+python
+n = int(input("Сколько городов в списке? "))
+
+max_distance = 0
+
+for i in range(n):
+    distance = float(input(f"Расстояние до города {i+1} (км): "))
+    if distance > max_distance:
+        max_distance = distance
+
+print(f"Расстояние до самого удаленного города: {max_distance} км")
+7.57. Максимальная скорость самого быстрого автомобиля
+python
+max_speed = 0
+
+print("Введите максимальные скорости 20 марок автомобилей:")
+for i in range(20):
+    speed = int(input(f"Марка {i+1} (км/ч): "))
+    if speed > max_speed:
+        max_speed = speed
+
+print(f"Максимальная скорость самого быстрого автомобиля: {max_speed} км/ч")
+7.58. Радиус самого маленького круга
+python
+import math
+
+n = int(input("Сколько кругов? "))
+
+min_radius = float('inf')
+
+for i in range(n):
+    area = float(input(f"Площадь круга {i+1}: "))
+    radius = math.sqrt(area / math.pi)
+    if radius < min_radius:
+        min_radius = radius
+
+print(f"Радиус самого маленького круга: {min_radius:.2f}")
+7.59. Диагональ самого большого квадрата
+python
+import math
+
+n = int(input("Сколько квадратов? "))
+
+max_diagonal = 0
+
+for i in range(n):
+    area = float(input(f"Площадь квадрата {i+1}: "))
+    side = math.sqrt(area)
+    diagonal = side * math.sqrt(2)
+    if diagonal > max_diagonal:
+        max_diagonal = diagonal
+
+print(f"Длина диагонали самого большого квадрата: {max_diagonal:.2f}")
+7.60. Квартира с максимальным числом жильцов
+python
+n = int(input("Сколько квартир в доме? "))
+
+max_residents = 0
+max_apartment = 0
+
+for apartment in range(1, n + 1):
+    residents = int(input(f"Квартира {apartment}, количество жильцов: "))
+    if residents >= max_residents:  # >= чтобы найти последнюю
+        max_residents = residents
+        max_apartment = apartment
+
+print(f"Квартира {max_apartment} имеет больше всего жильцов: {max_residents}")
+7.61. Порядковый номер лучшего лыжника
+python
+n = int(input("Сколько участников в соревнованиях? "))
+
+best_time = float('inf')
+best_athlete = 0
+
+for athlete in range(1, n + 1):
+    time = float(input(f"Время спортсмена №{athlete} (мин): "))
+    if time < best_time:
+        best_time = time
+        best_athlete = athlete
+
+print(f"Лучший результат показал спортсмен №{best_athlete}: {best_time:.2f} мин")
+7.62. Команда с наименьшим количеством очков
+python
+n = int(input("Сколько команд в чемпионате? "))
+
+min_points = float('inf')
+min_team = 0
+
+for team in range(1, n + 1):
+    points = int(input(f"Команда {team}, количество очков: "))
+    if points < min_points:
+        min_points = points
+        min_team = team
+
+print(f"Наименьшее количество очков у команды {min_team}: {min_points}")
+7.63. День с максимальным количеством осадков
+python
+days = int(input("Сколько дней в месяце? "))
+
+max_precipitation = 0
+max_day = 0
+
+for day in range(1, days + 1):
+    precipitation = float(input(f"День {day}, количество осадков (мм): "))
+    if precipitation >= max_precipitation:  # >= чтобы найти последний
+        max_precipitation = precipitation
+        max_day = day
+
+print(f"Максимальное количество осадков было {max_day} числа: {max_precipitation} мм")
+7.64. Оценка в фигурном катании
+python
+n = int(input("Сколько судей оценивают выступление? "))
+
+scores = []
+
+for i in range(n):
+    score = float(input(f"Оценка судьи {i+1}: "))
+    scores.append(score)
+
+# Удаляем максимальную оценку
+if scores:
+    max_score = max(scores)
+    scores.remove(max_score)
+
+# Удаляем минимальную оценку
+if scores:
+    min_score = min(scores)
+    scores.remove(min_score)
+
+# Вычисляем среднее оставшихся оценок
+if scores:
+    final_score = sum(scores) / len(scores)
+    print(f"Итоговая оценка: {final_score:.2f}")
+else:
+    print("Недостаточно оценок для расчета")
+7.65. Разница между самым высоким и самым низким
+python
+n = int(input("Сколько человек в группе? "))
+
+max_height = 0
+min_height = float('inf')
+
+for i in range(n):
+    height = float(input(f"Рост человека {i+1} (см): "))
+    if height > max_height:
+        max_height = height
+    if height < min_height:
+        min_height = height
+
+difference = max_height - min_height
+print(f"Самый высокий: {max_height} см")
+print(f"Самый низкий: {min_height} см")
+print(f"Разница: {difference:.1f} см")
+7.66. Разница в численности классов
+python
+max_students = 0
+min_students = float('inf')
+
+print("Численность 20 классов:")
+for i in range(20):
+    students = int(input(f"Класс {i+1}: "))
+    if students > max_students:
+        max_students = students
+    if students < min_students:
+        min_students = students
+
+difference = max_students - min_students
+print(f"Самый большой класс: {max_students} учеников")
+print(f"Самый маленький класс: {min_students} учеников")
+print(f"Разница: {difference} учеников")
+7.67. Пары чисел
+python
+n = int(input("Сколько пар чисел? "))
+
+max_sum = float('-inf')
+min_product = float('inf')
+
+for i in range(n):
+    a = float(input(f"Пара {i+1}, число a: "))
+    b = float(input(f"Пара {i+1}, число b: "))
+    
+    current_sum = a + b
+    current_product = a * b
+    
+    if current_sum > max_sum:
+        max_sum = current_sum
+    
+    if current_product < min_product:
+        min_product = current_product
+
+print(f"а) Максимальная сумма в паре: {max_sum}")
+print(f"б) Минимальное произведение в паре: {min_product}")
+7.68. Среднее арифметическое и геометрическое в парах
+python
+import math
+
+n = int(input("Сколько пар положительных чисел? "))
+
+max_avg = 0
+max_avg_index = 0
+
+min_geom = float('inf')
+min_geom_index = 0
+
+for i in range(n):
+    a = float(input(f"Пара {i+1}, число a: "))
+    b = float(input(f"Пара {i+1}, число b: "))
+    
+    # а) Среднее арифметическое
+    current_avg = (a + b) / 2
+    if current_avg >= max_avg:  # >= чтобы найти последнюю
+        max_avg = current_avg
+        max_avg_index = i + 1
+    
+    # б) Среднее геометрическое
+    current_geom = math.sqrt(a * b)
+    if current_geom < min_geom:  # < чтобы найти первую
+        min_geom = current_geom
+        min_geom_index = i + 1
+
+print(f"а) Максимальное среднее арифметическое в паре {max_avg_index}: {max_avg}")
+print(f"б) Минимальное среднее геометрическое в паре {min_geom_index}: {min_geom:.2f}")
+7.69. Максимальная плотность материала
+python
+n = int(input("Сколько тел? "))
+
+max_density = 0
+
+for i in range(n):
+    mass = float(input(f"Тело {i+1}, масса (кг): "))
+    volume = float(input(f"Тело {i+1}, объем (см³): "))
+    
+    if volume > 0:
+        density = mass / (volume / 1000000)  # переводим см³ в м³
+        # или density = mass * 1000000 / volume для кг/м³
+        if density > max_density:
+            max_density = density
+
+print(f"Максимальная плотность материала: {max_density:.2f} кг/м³")
+7.70. Минимальная плотность населения
+python
+n = int(input("Сколько государств? "))
+
+min_density = float('inf')
+
+for i in range(n):
+    population = float(input(f"Государство {i+1}, население (млн): "))
+    area = float(input(f"Государство {i+1}, площадь (тыс. км²): "))
+    
+    if area > 0:
+        density = population * 1000 / area  # млн/тыс.км² = тыс.чел/км²
+        # или просто population / area для млн/тыс.км²
+        if density < min_density:
+            min_density = density
+
+print(f"Минимальная плотность населения: {min_density:.2f} тыс.чел./км²")
