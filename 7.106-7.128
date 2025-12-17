@@ -1,0 +1,513 @@
+7.106. Количество положительных чисел кратно трем
+python
+m = int(input("Введите количество чисел m: "))
+
+positive_count = 0
+for i in range(m):
+    num = int(input(f"Число d{i+1}: "))
+    if num > 0:
+        positive_count += 1
+
+if positive_count % 3 == 0:
+    print(f"Верно, количество положительных чисел ({positive_count}) кратно 3")
+else:
+    print(f"Неверно, количество положительных чисел ({positive_count}) не кратно 3")
+7.107. Количество отрицательных чисел превышает x
+python
+n = int(input("Введите количество чисел n: "))
+x = int(input("Введите число x: "))
+
+negative_count = 0
+for i in range(n):
+    num = int(input(f"Число a{i+1}: "))
+    if num < 0:
+        negative_count += 1
+
+if negative_count > x:
+    print(f"Верно, количество отрицательных чисел ({negative_count}) > {x}")
+else:
+    print(f"Неверно, количество отрицательных чисел ({negative_count}) ≤ {x}")
+7.108. Количество чисел больше m кратно p
+python
+m = int(input("Введите количество чисел m: "))
+p = int(input("Введите число p: "))
+
+count_gt_m = 0
+for i in range(m):
+    num = int(input(f"Число a{i+1}: "))
+    if num > m:  # сравниваем с m (количеством чисел)
+        count_gt_m += 1
+
+if count_gt_m % p == 0:
+    print(f"Верно, количество чисел >{m} ({count_gt_m}) кратно {p}")
+else:
+    print(f"Неверно, количество чисел >{m} ({count_gt_m}) не кратно {p}")
+7.109. Проверка наличия троек в оценках
+python
+has_grade_3 = False
+print("Введите оценки по 12 предметам:")
+
+for i in range(12):
+    grade = int(input(f"Предмет {i+1}: "))
+    if grade == 3:
+        has_grade_3 = True
+
+if not has_grade_3:
+    print("Верно, среди оценок нет троек")
+else:
+    print("Неверно, среди оценок есть тройки")
+
+# Ответ на вопрос: Можно использовать цикл с условием while,
+# например, прервать цикл при нахождении первой тройки
+# Пример с while:
+"""
+i = 0
+has_grade_3 = False
+while i < 12 and not has_grade_3:
+    grade = int(input(f"Предмет {i+1}: "))
+    if grade == 3:
+        has_grade_3 = True
+    i += 1
+"""
+7.110. Проверка дней без осадков
+python
+days_without_precipitation = 0
+print("Введите количество осадков за каждый день марта (31 день):")
+
+for day in range(1, 32):
+    precipitation = float(input(f"День {day}: "))
+    if precipitation == 0:
+        days_without_precipitation += 1
+
+if days_without_precipitation == 10:
+    print(f"Верно, осадков не было ровно 10 дней")
+else:
+    print(f"Неверно, осадков не было {days_without_precipitation} дней")
+
+# Ответ на вопрос: Можно использовать цикл с условием while,
+# но он не очень удобен, так как нам нужно пройти все 31 день
+# Можно было бы прервать цикл, если уже понятно, что условие не выполнится
+7.111. Сравнение средней стоимости автомобилей и мотоциклов
+python
+# Ввод количества автомобилей и мотоциклов
+car_count = int(input("Сколько марок автомобилей? "))
+motorcycle_count = int(input("Сколько марок мотоциклов? "))
+
+# Стоимость автомобилей
+car_total = 0.0
+print("Введите стоимость автомобилей (каждый > $5000):")
+for i in range(car_count):
+    while True:
+        price = float(input(f"Автомобиль {i+1} ($): "))
+        if price > 5000:
+            car_total += price
+            break
+        else:
+            print("Стоимость автомобиля должна быть > $5000")
+
+# Стоимость мотоциклов
+motorcycle_total = 0.0
+print("\nВведите стоимость мотоциклов:")
+for i in range(motorcycle_count):
+    price = float(input(f"Мотоцикл {i+1} ($): "))
+    motorcycle_total += price
+
+# Средние стоимости
+car_avg = car_total / car_count if car_count > 0 else 0
+motorcycle_avg = motorcycle_total / motorcycle_count if motorcycle_count > 0 else 0
+
+# Проверка условия
+if car_avg > 3 * motorcycle_avg:
+    print(f"Верно, средняя стоимость автомобилей (${car_avg:.2f}) > 3 * средняя стоимость мотоциклов (${motorcycle_avg:.2f})")
+else:
+    print(f"Неверно, средняя стоимость автомобилей (${car_avg:.2f}) ≤ 3 * средняя стоимость мотоциклов (${motorcycle_avg:.2f})")
+7.112. Сравнение среднего роста мальчиков и девочек
+python
+n = int(input("Сколько учеников в классе? "))
+
+boys_total = 0
+boys_count = 0
+girls_total = 0
+girls_count = 0
+
+for i in range(n):
+    height = float(input(f"Рост ученика {i+1} (см, отрицательное для мальчиков): "))
+    if height < 0:
+        boys_total += abs(height)
+        boys_count += 1
+    else:
+        girls_total += height
+        girls_count += 1
+
+boys_avg = boys_total / boys_count if boys_count > 0 else 0
+girls_avg = girls_total / girls_count if girls_count > 0 else 0
+
+if boys_avg - girls_avg > 10:
+    print(f"Верно, средний рост мальчиков ({boys_avg:.1f} см) > средний рост девочек ({girls_avg:.1f} см) более чем на 10 см")
+else:
+    print(f"Неверно, разница среднего роста мальчиков и девочек ≤ 10 см")
+7.113. Среднее чисел больше 10
+python
+total_gt_10 = 0.0
+count_gt_10 = 0
+
+print("Введите 9 вещественных чисел:")
+for i in range(9):
+    num = float(input(f"Число b{i+1}: "))
+    if num > 10:
+        total_gt_10 += num
+        count_gt_10 += 1
+
+if count_gt_10 > 0:
+    average = total_gt_10 / count_gt_10
+    print(f"Среднее арифметическое чисел > 10: {average:.2f}")
+else:
+    print("Среди чисел нет значений больше 10")
+7.114. Среднее чисел больше n
+python
+x = int(input("Введите количество чисел x: "))
+n = int(input("Введите число n: "))
+
+total_gt_n = 0
+count_gt_n = 0
+
+for i in range(x):
+    num = int(input(f"Число a{i+1}: "))
+    if num > n:
+        total_gt_n += num
+        count_gt_n += 1
+
+if count_gt_n > 0:
+    average = total_gt_n / count_gt_n
+    print(f"Среднее арифметическое чисел > {n}: {average:.2f}")
+else:
+    print(f"Среди чисел нет значений больше {n}")
+7.115. Среднее четных чисел
+python
+even_total = 0
+even_count = 0
+
+print("Введите 12 целых чисел:")
+for i in range(12):
+    num = int(input(f"Число c{i+1}: "))
+    if num % 2 == 0:
+        even_total += num
+        even_count += 1
+
+if even_count > 0:
+    average = even_total / even_count
+    print(f"Среднее арифметическое четных чисел: {average:.2f}")
+else:
+    print("Среди чисел нет четных значений")
+7.116. Среднее чисел кратных n
+python
+m = int(input("Введите количество чисел m: "))
+n = int(input("Введите число n: "))
+
+total_multiple = 0
+count_multiple = 0
+
+for i in range(m):
+    num = int(input(f"Число a{i+1}: "))
+    if num % n == 0:
+        total_multiple += num
+        count_multiple += 1
+
+if count_multiple > 0:
+    average = total_multiple / count_multiple
+    print(f"Среднее арифметическое чисел, кратных {n}: {average:.2f}")
+else:
+    print(f"Среди чисел нет значений, кратных {n}")
+7.117. Номер последнего числа равного 100
+python
+n = int(input("Введите количество чисел n: "))
+
+last_index = -1
+for i in range(n):
+    num = int(input(f"Число b{i+1}: "))
+    if num == 100:
+        last_index = i + 1  # сохраняем номер последнего найденного
+
+if last_index != -1:
+    print(f"Номер последнего числа, равного 100: {last_index}")
+else:
+    print("Число 100 не найдено")
+7.118. Номер последнего отрицательного числа
+python
+k = int(input("Введите количество чисел k: "))
+
+last_index = -1
+for i in range(k):
+    num = int(input(f"Число a{i+1}: "))
+    if num < 0:
+        last_index = i + 1  # сохраняем номер последнего найденного
+
+if last_index != -1:
+    print(f"Номер последнего отрицательного числа: {last_index}")
+else:
+    print("Отрицательные числа не найдены")
+7.119. Проверка разницы между max и min
+python
+n = int(input("Введите количество чисел n: "))
+
+numbers = []
+for i in range(n):
+    num = int(input(f"Число a{i+1}: "))
+    numbers.append(num)
+
+max_num = max(numbers)
+min_num = min(numbers)
+
+if max_num - min_num <= 25:
+    print(f"Верно, разница между max ({max_num}) и min ({min_num}) = {max_num - min_num} ≤ 25")
+else:
+    print(f"Неверно, разница между max ({max_num}) и min ({min_num}) = {max_num - min_num} > 25")
+7.120. Проверка отношения массы самого тяжелого к самому легкому
+python
+n = int(input("Сколько человек в группе? "))
+
+max_mass = 0
+min_mass = float('inf')
+
+for i in range(n):
+    mass = float(input(f"Масса человека {i+1} (кг): "))
+    if mass > max_mass:
+        max_mass = mass
+    if mass < min_mass:
+        min_mass = mass
+
+if min_mass > 0 and max_mass / min_mass > 2:
+    print(f"Верно, масса самого тяжелого ({max_mass} кг) > 2 * масса самого легкого ({min_mass} кг)")
+else:
+    print(f"Неверно, масса самого тяжелого ({max_mass} кг) ≤ 2 * масса самого легкого ({min_mass} кг)")
+7.121. Что встретится раньше: max или min
+python
+n = int(input("Введите количество чисел n: "))
+
+first_max_index = -1
+first_min_index = -1
+max_value = float('-inf')
+min_value = float('inf')
+
+for i in range(n):
+    num = int(input(f"Число x{i+1}: "))
+    
+    if num > max_value:
+        max_value = num
+        first_max_index = i + 1
+    
+    if num < min_value:
+        min_value = num
+        first_min_index = i + 1
+
+print(f"Первое максимальное число встретилось на позиции: {first_max_index}")
+print(f"Первое минимальное число встретилось на позиции: {first_min_index}")
+
+if first_max_index < first_min_index:
+    print("Максимальное число встретилось раньше минимального")
+elif first_min_index < first_max_index:
+    print("Минимальное число встретилось раньше максимального")
+else:
+    print("Максимальное и минимальное числа встретились на одной позиции")
+7.122. Кто раньше: самый старший или самый молодой
+python
+n = int(input("Сколько людей в списке? "))
+
+oldest_index = -1
+youngest_index = -1
+max_age = 0
+min_age = float('inf')
+
+for i in range(n):
+    age = int(input(f"Человек {i+1}, возраст: "))
+    
+    if age > max_age:
+        max_age = age
+        oldest_index = i + 1
+    
+    if age < min_age:
+        min_age = age
+        youngest_index = i + 1
+
+print(f"Самый старший (возраст {max_age}) на позиции: {oldest_index}")
+print(f"Самый молодой (возраст {min_age}) на позиции: {youngest_index}")
+
+if oldest_index < youngest_index:
+    print("Самый старший указан в списке раньше самого молодого")
+elif youngest_index < oldest_index:
+    print("Самый молодой указан в списке раньше самого старшего")
+else:
+    print("Один и тот же человек оказался и самым старшим, и самым молодым")
+7.123. Проверка порядка этапов в гонках
+python
+n = int(input("Сколько этапов в гонках? "))
+
+first_place_index = -1
+last_place_index = -1
+best_time = float('inf')
+worst_time = 0
+
+for i in range(n):
+    time = float(input(f"Этап {i+1}, время (мин): "))
+    
+    if time < best_time:
+        best_time = time
+        first_place_index = i + 1
+    
+    if time > worst_time:
+        worst_time = time
+        last_place_index = i + 1
+
+print(f"Первый этап, который выиграл гонщик: {first_place_index}")
+print(f"Последний этап, где гонщик был последним: {last_place_index}")
+
+if first_place_index < last_place_index:
+    print("Верно, выигранный этап был раньше проигранного")
+else:
+    print("Неверно, выигранный этап был не раньше проигранного")
+7.124. Неубывающая последовательность с повторениями
+python
+numbers = []
+print("Введите 20 чисел неубывающей последовательности:")
+
+for i in range(20):
+    num = int(input(f"Число {i+1}: "))
+    numbers.append(num)
+
+# Найти количество чисел, идущих подряд и равных между собой
+equal_in_row_count = 0
+current_count = 1
+
+for i in range(1, 20):
+    if numbers[i] == numbers[i-1]:
+        current_count += 1
+    else:
+        if current_count > 1:
+            equal_in_row_count += current_count
+        current_count = 1
+
+# Учесть последнюю группу
+if current_count > 1:
+    equal_in_row_count += current_count
+
+# Найти количество различных чисел
+different_numbers = len(set(numbers))
+
+print(f"Количество чисел, идущих подряд и равных между собой: {equal_in_row_count}")
+print(f"Количество различных чисел в последовательности: {different_numbers}")
+7.125. Количество различных чисел в неубывающей последовательности
+python
+numbers = []
+print("Введите 30 чисел неубывающей последовательности:")
+
+for i in range(30):
+    num = int(input(f"Число {i+1}: "))
+    numbers.append(num)
+
+# В неубывающей последовательности различные числа идут подряд
+# Можно просто посчитать переходы на новые числа
+different_count = 1  # первое число всегда новое
+
+for i in range(1, 30):
+    if numbers[i] != numbers[i-1]:
+        different_count += 1
+
+print(f"Количество различных чисел в последовательности: {different_count}")
+7.126. Проверка ряда костей домино
+python
+print("Введите 20 чисел от 0 до 66 (обозначения костей домино):")
+
+dominoes = []
+for i in range(20):
+    while True:
+        num = int(input(f"Кость {i+1}: "))
+        if 0 <= num <= 66:
+            dominoes.append(num)
+            break
+        else:
+            print("Число должно быть от 0 до 66")
+
+# Случай а) последняя цифра - правая половина
+print("\nСлучай а) (последняя цифра - правая половина):")
+valid_a = True
+for i in range(1, 20):
+    last_digit_prev = dominoes[i-1] % 10  # правая половина предыдущей
+    first_digit_curr = dominoes[i] // 10  # левая половина текущей
+    
+    if last_digit_prev != first_digit_curr:
+        valid_a = False
+        print(f"Нарушение между костью {i} и {i+1}: {dominoes[i-1]} -> {dominoes[i]}")
+        break
+
+if valid_a:
+    print("Последовательность соответствует правилам домино")
+else:
+    print("Последовательность НЕ соответствует правилам домино")
+
+# Случай б) любая цифра может быть правой или левой
+print("\nСлучай б) (любая цифра может быть правой или левой):")
+valid_b = True
+for i in range(1, 20):
+    prev_num = dominoes[i-1]
+    curr_num = dominoes[i]
+    
+    # Извлекаем цифры
+    prev_digits = [prev_num // 10, prev_num % 10]
+    curr_digits = [curr_num // 10, curr_num % 10]
+    
+    # Проверяем, есть ли общая цифра
+    common_digit = False
+    for d1 in prev_digits:
+        for d2 in curr_digits:
+            if d1 == d2:
+                common_digit = True
+                break
+        if common_digit:
+            break
+    
+    if not common_digit:
+        valid_b = False
+        print(f"Нарушение между костью {i} и {i+1}: {dominoes[i-1]} -> {dominoes[i]}")
+        break
+
+if valid_b:
+    print("Последовательность соответствует правилам домино")
+else:
+    print("Последовательность НЕ соответствует правилам домино")
+7.127. Проверка на простое число
+python
+n = int(input("Введите натуральное число: "))
+
+if n <= 1:
+    is_prime = False
+else:
+    is_prime = True
+    # Проверяем делители от 2 до n-1 с помощью цикла for
+    for i in range(2, n):
+        if n % i == 0:
+            is_prime = False
+            break  # нашли делитель, прерываем цикл
+
+if is_prime:
+    print(f"Число {n} является простым")
+else:
+    print(f"Число {n} не является простым")
+7.128. Проверка на совершенное число
+python
+n = int(input("Введите натуральное число: "))
+
+if n <= 1:
+    is_perfect = False
+else:
+    # Находим сумму делителей
+    divisors_sum = 0
+    for i in range(1, n):
+        if n % i == 0:
+            divisors_sum += i
+    
+    is_perfect = (divisors_sum == n)
+
+if is_perfect:
+    print(f"Число {n} является совершенным (сумма делителей = {n})")
+else:
+    print(f"Число {n} не является совершенным (сумма делителей = {divisors_sum})")
