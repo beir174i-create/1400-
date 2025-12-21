@@ -1,0 +1,372 @@
+8.1. Числа 1, 4, 9, 16, ... не превышающие n
+python
+n = int(input("Введите число n: "))
+i = 1
+square = i * i
+
+while square <= n:
+    print(square, end=" ")
+    i += 1
+    square = i * i
+
+# Альтернативный вариант без отдельной переменной square
+"""
+n = int(input("Введите число n: "))
+i = 1
+while i * i <= n:
+    print(i * i, end=" ")
+    i += 1
+"""
+8.2. Первое число больше n (два способа)
+Способ 1: с использованием цикла с условием
+python
+n = int(input("Введите число n: "))
+
+i = 1
+while True:
+    square = i * i
+    if square > n:
+        print(f"Первое число больше {n}: {square}")
+        break
+    i += 1
+Способ 2: без использования цикла с условием
+python
+n = int(input("Введите число n: "))
+
+# Используем цикл for с большим диапазоном
+for i in range(1, n + 2):  # n+2 чтобы гарантированно найти
+    square = i * i
+    if square > n:
+        print(f"Первое число больше {n}: {square}")
+        break
+8.3. Числа 1, 1/2, 1/3, ... не меньше a (разные варианты)
+Вариант 1: с использованием while
+python
+a = float(input("Введите число a (0 < a ≤ 1): "))
+
+znam = 1
+value = 1.0 / znam
+
+while value >= a:
+    print(f"1/{znam} = {value:.4f}")
+    znam += 1
+    value = 1.0 / znam
+Вариант 2: с ограничением на количество итераций
+python
+a = float(input("Введите число a (0 < a ≤ 1): "))
+
+for znam in range(1, 1000):  # ограничиваем количество итераций
+    value = 1.0 / znam
+    if value >= a:
+        print(f"1/{znam} = {value:.4f}")
+    else:
+        break
+Вариант 3: с предварительным вычислением максимального знаменателя
+python
+a = float(input("Введите число a (0 < a ≤ 1): "))
+
+max_znam = int(1 / a) + 1
+for znam in range(1, max_znam + 1):
+    value = 1.0 / znam
+    print(f"1/{znam} = {value:.4f}")
+8.4. Первое число меньше a
+python
+a = float(input("Введите число a (0 < a ≤ 1): "))
+
+znam = 1
+while True:
+    value = 1.0 / znam
+    if value < a:
+        print(f"Первое число меньше {a}: 1/{znam} = {value:.4f}")
+        break
+    znam += 1
+8.5. Числа 1 + 1/2, 1 + 1/3, ... не меньше a
+Вариант 1: через while
+python
+a = float(input("Введите число a (1 < a ≤ 1.5): "))
+
+n = 2
+value = 1 + 1.0 / n
+
+while value >= a:
+    print(f"1 + 1/{n} = {value:.4f}")
+    n += 1
+    value = 1 + 1.0 / n
+Вариант 2: через for с break
+python
+a = float(input("Введите число a (1 < a ≤ 1.5): "))
+
+for n in range(2, 1000):
+    value = 1 + 1.0 / n
+    if value >= a:
+        print(f"1 + 1/{n} = {value:.4f}")
+    else:
+        break
+8.6. Числа 1 + 1/2, 1 + 1/3, ... не меньше a (исправление: должно быть не больше?)
+python
+# По смыслу задачи, вероятно, нужно найти числа не БОЛЬШЕ a,
+# так как последовательность убывающая
+a = float(input("Введите число a (1 < a ≤ 1.5): "))
+
+n = 2
+value = 1 + 1.0 / n
+
+while value >= a:  # пока значение не меньше a
+    print(f"1 + 1/{n} = {value:.4f}")
+    n += 1
+    value = 1 + 1.0 / n
+8.7. Первое число меньше a
+python
+a = float(input("Введите число a (1 < a ≤ 1.5): "))
+
+n = 2
+while True:
+    value = 1 + 1.0 / n
+    if value < a:
+        print(f"Первое число меньше {a}: 1 + 1/{n} = {value:.4f}")
+        break
+    n += 1
+8.8. Все n, при которых числа не меньше a
+python
+a = float(input("Введите число a (1 < a ≤ 1.5): "))
+
+# Нужно найти все n, при которых 1 + 1/n >= a
+# Это эквивалентно 1/n >= a-1, или n <= 1/(a-1)
+
+max_n = int(1 / (a - 1)) + 1
+print(f"Значения n, при которых все числа последовательности ≥ {a}:")
+for n in range(2, max_n + 1):
+    print(n, end=" ")
+8.9. Наименьшее n, что последнее число меньше a
+python
+a = float(input("Введите число a (1 < a ≤ 1.5): "))
+
+# Нужно найти наименьшее n, при котором 1 + 1/n < a
+# Решаем неравенство: 1 + 1/n < a
+# 1/n < a - 1
+# n > 1/(a-1)
+
+min_n = int(1 / (a - 1)) + 1
+print(f"Наименьшее n: {min_n}")
+print(f"Проверка: 1 + 1/{min_n} = {1 + 1.0/min_n:.4f} < {a}")
+8.10. Числа 1, 1 + 1/2, 1 + 1/3, ... меньше a
+python
+a = float(input("Введите число a: "))
+
+n = 1
+value = 1.0
+
+while value < a:
+    print(f"{value:.4f}", end=" ")
+    n += 1
+    value = 1 + 1.0 / n
+
+# Для начального значения 1
+if 1 < a:
+    print("1.0000", end=" ")
+    n = 2
+    value = 1 + 1.0 / n
+    while value < a:
+        print(f"{value:.4f}", end=" ")
+        n += 1
+        value = 1 + 1.0 / n
+8.11. Первое число больше n
+python
+n = float(input("Введите число n: "))
+
+sum_val = 1.0
+k = 1
+
+while sum_val <= n:
+    k += 1
+    sum_val += 1.0 / k
+
+print(f"Первое число больше {n}: {sum_val:.4f}")
+print(f"Оно получено как сумма 1 + 1/2 + ... + 1/{k}")
+8.12. Все n, при которых 1 + 1/2 + ... + 1/n < a
+python
+a = float(input("Введите число a: "))
+
+sum_val = 0
+n = 0
+results = []
+
+while True:
+    n += 1
+    sum_val += 1.0 / n
+    if sum_val < a:
+        results.append(n)
+    else:
+        break
+
+print(f"Значения n, при которых сумма < {a}:")
+print(results)
+8.13. Наименьшее n, что 1 + 1/2 + ... + 1/n > a
+python
+a = float(input("Введите число a: "))
+
+sum_val = 0
+n = 0
+
+while sum_val <= a:
+    n += 1
+    sum_val += 1.0 / n
+
+print(f"Наименьшее n: {n}")
+print(f"Сумма 1 + 1/2 + ... + 1/{n} = {sum_val:.4f} > {a}")
+8.14. Первое число 1/n меньше a (разные варианты)
+Вариант 1: простой цикл
+python
+a = float(input("Введите число a (0 < a ≤ 1): "))
+
+n = 1
+while True:
+    value = 1.0 / n
+    if value < a:
+        print(f"Первое число меньше {a}: 1/{n} = {value:.4f}")
+        break
+    n += 1
+Вариант 2: с предварительной оценкой
+python
+a = float(input("Введите число a (0 < a ≤ 1): "))
+
+# Оценка: нужно 1/n < a => n > 1/a
+start_n = int(1 / a) + 1
+for n in range(start_n, start_n + 10):  # проверяем несколько значений
+    value = 1.0 / n
+    if value < a:
+        print(f"Первое число меньше {a}: 1/{n} = {value:.4f}")
+        break
+8.15. Числа y = 1/√x, меньшие m
+python
+import math
+
+m = float(input("Введите число m (0.52 ≤ m ≤ 33.7): "))
+
+print(f"Числа y = 1/√x, меньшие {m}:")
+for x in range(1, 101):
+    y = 1 / math.sqrt(x)
+    if y < m:
+        print(f"x={x}: y={y:.4f}")
+
+# Вариант 2: с while
+"""
+x = 1
+while x <= 100:
+    y = 1 / math.sqrt(x)
+    if y < m:
+        print(f"x={x}: y={y:.4f}")
+    x += 1
+"""
+8.16. Последовательность значений sin(π/n), меньшие m
+python
+import math
+
+m = float(input("Введите число m (0.5 < m < 1): "))
+
+n = 1
+while True:
+    value = math.sin(math.pi / n)
+    if value < m:
+        print(f"n={n}: sin(π/{n}) = {value:.4f}")
+    else:
+        # Если значение стало больше или равно m, 
+        # можно проверить еще несколько значений
+        if n > 10:  # ограничиваем поиск
+            break
+    n += 1
+
+# Вариант с ограниченным диапазоном
+"""
+print("\nВ диапазоне n от 1 до 100:")
+for n in range(1, 101):
+    value = math.sin(math.pi / n)
+    if value < m:
+        print(f"n={n}: {value:.4f}")
+"""
+8.17. Последовательность дробей с Фибоначчи
+python
+# Числители: 1, 2, 3, 5, 8, ...
+# Знаменатели: 1, 1, 2, 3, 5, ...
+
+num_prev2 = 1  # числитель два члена назад
+num_prev1 = 2  # числитель предыдущий член
+den_prev2 = 1  # знаменатель два члена назад  
+den_prev1 = 1  # знаменатель предыдущий член
+
+value_prev = num_prev2 / den_prev2  # первый член
+value_current = num_prev1 / den_prev1  # второй член
+n = 2
+
+while abs(value_current - value_prev) > 0.001:
+    # Вычисляем следующий член
+    num_next = num_prev1 + num_prev2
+    den_next = den_prev1 + den_prev2
+    
+    # Сдвигаем значения
+    num_prev2, num_prev1 = num_prev1, num_next
+    den_prev2, den_prev1 = den_prev1, den_next
+    value_prev, value_current = value_current, num_next / den_next
+    n += 1
+
+print(f"Первый член, отличающийся от предыдущего не более чем на 0.001:")
+print(f"Член {n}: {value_current:.6f}")
+print(f"Разница с предыдущим: {abs(value_current - value_prev):.6f}")
+8.18. Последовательность по закону
+python
+a = float(input("Введите a (>0): "))
+x = float(input("Введите x (>0): "))
+epsilon = float(input("Введите ε (>0): "))
+
+y_prev = a
+y_current = 0.5 * (y_prev + x / y_prev)
+n = 2
+
+while abs(y_current**2 - y_prev**2) >= epsilon:
+    y_prev, y_current = y_current, 0.5 * (y_current + x / y_current)
+    n += 1
+
+print(f"Первый член y{n}, для которого |y{n}² - y{n-1}²| < {epsilon}:")
+print(f"y{n} = {y_current:.6f}")
+print(f"|y{n}² - y{n-1}²| = {abs(y_current**2 - y_prev**2):.6f}")
+8.19. Последовательность Фибоначчи
+а) Сумма чисел не превосходящих 1000
+python
+fib1 = 1
+fib2 = 1
+fib_sum = fib1 + fib2
+fib_next = fib1 + fib2
+
+while fib_next <= 1000:
+    fib_sum += fib_next
+    fib1, fib2 = fib2, fib_next
+    fib_next = fib1 + fib2
+
+print(f"Сумма чисел Фибоначчи, не превосходящих 1000: {fib_sum}")
+
+# Вывод всех чисел для проверки
+print("\nЧисла Фибоначчи до 1000:")
+fib1, fib2 = 1, 1
+print(fib1, fib2, end=" ")
+fib_next = fib1 + fib2
+while fib_next <= 1000:
+    print(fib_next, end=" ")
+    fib1, fib2 = fib2, fib_next
+    fib_next = fib1 + fib2
+б) Первое число больше n
+python
+n = int(input("Введите число n (>1): "))
+
+fib1 = 1
+fib2 = 1
+
+if n < 1:
+    print("Первое число больше n: 1")
+else:
+    while fib2 <= n:
+        fib1, fib2 = fib2, fib1 + fib2
+    
+    print(f"Первое число Фибоначчи больше {n}: {fib2}")
+    
+    # Вывод нескольких предыдущих для контекста
+    print(f"Предыдущие числа: ..., {fib1}"
