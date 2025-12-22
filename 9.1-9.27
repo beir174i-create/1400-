@@ -1,0 +1,899 @@
+9.1. Печать чисел в виде таблиц
+а)
+python
+for i in range(5):
+    for j in range(3):
+        print("8", end=" ")
+    print()
+б)
+python
+for i in range(1, 8):
+    for j in range(5):
+        print(i, end=" ")
+    print()
+в)
+python
+for i in range(1, 9):
+    for j in range(4):
+        print(i * 10, end=" ")
+    print()
+г)
+python
+for i in range(1, 9):
+    for j in range(4):
+        print(i * 10 + 2, end=" ")
+    print()
+д)
+python
+for i in range(5):
+    for j in range(2, 21):
+        print(j, end=" ")
+    print()
+е)
+python
+for i in range(4):
+    for j in range(15, 2, -1):
+        print(j, end=" ")
+    print()
+ж)
+python
+for i in range(6, 0, -1):
+    for j in range(i):
+        print("0", end=" ")
+    print()
+з)
+python
+for i in range(8):
+    for j in range(8, i, -1):
+        print(j, end=" ")
+    print()
+и)
+python
+for i in range(2, 10):
+    for j in range(i, 11):
+        print(j, end=" ")
+    print()
+й)
+python
+for i in range(1, 10):
+    for j in range(2, 2 + i):
+        print(j, end=" ")
+    print()
+к)
+python
+for i in range(3, 7):
+    for j in range(i):
+        print(i, end=" ")
+    print()
+л)
+python
+for i in range(1, 6):
+    for j in range(i):
+        print(20 + i, end=" ")
+    print()
+м)
+python
+for i in range(1, 6):
+    for j in range(9 - i):
+        print(i, end=" ")
+    print()
+н)
+python
+for i in range(1, 6):
+    for j in range(i):
+        print(i * 10, end=" ")
+    print()
+о)
+python
+for i in range(5, 10):
+    for j in range(10 - i):
+        print(i, end=" ")
+    print()
+п)
+python
+for i in range(1, 6):
+    for j in range(6 - i):
+        print(i * 5, end=" ")
+    print()
+р)
+python
+for i in range(0, 7):
+    for j in range(1, 6):
+        print(100 + i * 10 + j, end=" ")
+    print()
+с)
+python
+for i in range(5, 1, -1):
+    for j in range(1, 9):
+        print(i * 10 + j, end=" ")
+    print()
+9.2. Таблица сложения
+а)
+python
+for b in range(1, 10):
+    for a in range(1, 10):
+        print(f"{a} + {b} = {a+b}", end="\t")
+    print()
+б)
+python
+for a in range(1, 10):
+    for b in range(1, 10):
+        print(f"{a} + {b} = {a+b}", end="\t")
+    print()
+9.3. Таблица умножения
+а)
+python
+for a in range(1, 10):
+    for b in range(1, 10):
+        print(f"{a} × {b} = {a*b}", end="\t")
+    print()
+б)
+python
+for b in range(1, 10):
+    for a in range(1, 10):
+        print(f"{a} × {b} = {a*b}", end="\t")
+    print()
+9.4. Оценки учеников (сумма)
+Вариант 1: по строкам
+python
+students = 12
+subjects = 3
+total_sum = 0
+
+print("Ввод оценок по строкам:")
+for i in range(students):
+    print(f"Ученик {i+1}:")
+    for j in range(subjects):
+        grade = int(input(f"Предмет {j+1}: "))
+        total_sum += grade
+
+print(f"Сумма всех оценок: {total_sum}")
+Вариант 2: по столбцам
+python
+students = 12
+subjects = 3
+total_sum = 0
+
+print("Ввод оценок по столбцам:")
+for j in range(subjects):
+    print(f"Предмет {j+1}:")
+    for i in range(students):
+        grade = int(input(f"Ученик {i+1}: "))
+        total_sum += grade
+
+print(f"Сумма всех оценок: {total_sum}")
+9.5. Зарплата работников за квартал
+python
+workers = 12
+months = 3
+salaries = [[0] * months for _ in range(workers)]
+
+# Ввод данных
+print("Ввод зарплат работников:")
+for i in range(workers):
+    print(f"\nРаботник {i+1}:")
+    for j in range(months):
+        salary = float(input(f"Месяц {j+1}: "))
+        salaries[i][j] = salary
+
+# а) Общая сумма за квартал
+total_quarter = 0
+for i in range(workers):
+    for j in range(months):
+        total_quarter += salaries[i][j]
+print(f"\nа) Общая сумма за квартал: {total_quarter:.2f}")
+
+# б) Зарплата каждого работника за квартал
+print("\nб) Зарплата каждого работника за квартал:")
+for i in range(workers):
+    worker_total = sum(salaries[i])
+    print(f"Работник {i+1}: {worker_total:.2f}")
+
+# в) Общая зарплата за каждый месяц
+print("\nв) Общая зарплата за каждый месяц:")
+for j in range(months):
+    month_total = 0
+    for i in range(workers):
+        month_total += salaries[i][j]
+    print(f"Месяц {j+1}: {month_total:.2f}")
+9.6. Результаты фигурного катания
+python
+athletes = 15
+programs = 3
+scores = [[0] * programs for _ in range(athletes)]
+
+# Ввод данных
+print("Ввод результатов фигурного катания:")
+for i in range(athletes):
+    print(f"\nСпортсмен {i+1}:")
+    for j in range(programs):
+        score = float(input(f"Программа {j+1}: "))
+        scores[i][j] = score
+
+# а) Средний балл каждого спортсмена
+print("\nа) Средний балл каждого спортсмена:")
+for i in range(athletes):
+    avg_score = sum(scores[i]) / programs
+    print(f"Спортсмен {i+1}: {avg_score:.2f}")
+
+# б) Средний балл по каждой программе
+print("\nб) Средний балл по каждой программе:")
+for j in range(programs):
+    program_total = 0
+    for i in range(athletes):
+        program_total += scores[i][j]
+    avg_program = program_total / athletes
+    print(f"Программа {j+1}: {avg_program:.2f}")
+9.7. Оценки учеников по предметам
+python
+students = 18
+subjects = 3
+grades = [[0] * subjects for _ in range(students)]
+
+# Ввод данных
+print("Ввод оценок учеников:")
+for i in range(students):
+    print(f"\nУченик {i+1}:")
+    for j in range(subjects):
+        grade = int(input(f"Предмет {j+1}: "))
+        grades[i][j] = grade
+
+# а) Общее количество пятерок
+fives_count = 0
+for i in range(students):
+    for j in range(subjects):
+        if grades[i][j] == 5:
+            fives_count += 1
+print(f"а) Общее количество пятерок: {fives_count}")
+
+# б) Количество троек у каждого ученика
+print("\nб) Количество троек у каждого ученика:")
+for i in range(students):
+    threes_count = 0
+    for j in range(subjects):
+        if grades[i][j] == 3:
+            threes_count += 1
+    print(f"Ученик {i+1}: {threes_count} троек")
+
+# в) Количество двоек по каждому предмету
+print("\nв) Количество двоек по каждому предмету:")
+for j in range(subjects):
+    twos_count = 0
+    for i in range(students):
+        if grades[i][j] == 2:
+            twos_count += 1
+    print(f"Предмет {j+1}: {twos_count} двоек")
+9.8. Оценки студентов в сессию
+python
+students = 14
+subjects = 3
+grades = [[0] * subjects for _ in range(students)]
+
+# Ввод данных
+print("Ввод оценок студентов:")
+for i in range(students):
+    print(f"\nСтудент {i+1}:")
+    for j in range(subjects):
+        grade = int(input(f"Предмет {j+1}: "))
+        grades[i][j] = grade
+
+# а) Количество студентов без двоек
+students_without_twos = 0
+for i in range(students):
+    has_two = False
+    for j in range(subjects):
+        if grades[i][j] == 2:
+            has_two = True
+            break
+    if not has_two:
+        students_without_twos += 1
+print(f"а) Студентов без двоек: {students_without_twos}")
+
+# б) Количество предметов с оценками только 5 и 4
+subjects_only_5_and_4 = 0
+for j in range(subjects):
+    only_5_and_4 = True
+    for i in range(students):
+        if grades[i][j] not in [4, 5]:
+            only_5_and_4 = False
+            break
+    if only_5_and_4:
+        subjects_only_5_and_4 += 1
+print(f"б) Предметов с оценками только 5 и 4: {subjects_only_5_and_4}")
+
+# в) Количество двоек по каждому предмету
+print("\nв) Количество двоек по каждому предмету:")
+for j in range(subjects):
+    twos_count = 0
+    for i in range(students):
+        if grades[i][j] == 2:
+            twos_count += 1
+    print(f"Предмет {j+1}: {twos_count} двоек")
+9.9. Баллы пятиборцев
+python
+athletes = 8
+sports = 5
+scores = [[0] * sports for _ in range(athletes)]
+
+# Ввод данных
+print("Ввод баллов пятиборцев:")
+for i in range(athletes):
+    print(f"\nСпортсмен {i+1}:")
+    for j in range(sports):
+        score = int(input(f"Вид спорта {j+1}: "))
+        scores[i][j] = score
+
+# а) Максимальная оценка
+max_score = scores[0][0]
+for i in range(athletes):
+    for j in range(sports):
+        if scores[i][j] > max_score:
+            max_score = scores[i][j]
+print(f"а) Максимальная оценка: {max_score}")
+
+# б) Баллы победителя
+winner_score = 0
+winner_index = 0
+for i in range(athletes):
+    athlete_total = sum(scores[i])
+    if athlete_total > winner_score:
+        winner_score = athlete_total
+        winner_index = i
+
+print(f"б) Победитель: спортсмен {winner_index + 1}")
+print(f"   Сумма баллов: {winner_score}")
+9.10. Анализ зарплат
+python
+workers = 12
+months = 3
+salaries = [[0] * months for _ in range(workers)]
+
+# Ввод данных
+print("Ввод зарплат работников:")
+for i in range(workers):
+    print(f"\nРаботник {i+1}:")
+    for j in range(months):
+        salary = float(input(f"Месяц {j+1}: "))
+        salaries[i][j] = salary
+
+# а) Максимальная зарплата
+max_salary = salaries[0][0]
+for i in range(workers):
+    for j in range(months):
+        if salaries[i][j] > max_salary:
+            max_salary = salaries[i][j]
+print(f"а) Максимальная зарплата: {max_salary:.2f}")
+
+# б) Работник с наибольшей суммой за квартал
+max_total = 0
+max_worker = 0
+for i in range(workers):
+    worker_total = sum(salaries[i])
+    if worker_total > max_total:
+        max_total = worker_total
+        max_worker = i
+print(f"б) Работник с наибольшей суммой: №{max_worker + 1} ({max_total:.2f})")
+
+# в) Месяц с максимальной общей зарплатой
+month_totals = [0] * months
+for j in range(months):
+    for i in range(workers):
+        month_totals[j] += salaries[i][j]
+
+max_month_total = max(month_totals)
+max_month = month_totals.index(max_month_total) + 1
+print(f"в) Месяц с максимальной общей зарплатой: {max_month} ({max_month_total:.2f})")
+9.11. Поиск максимумов в зарплатах
+python
+workers = 12
+months = 3
+salaries = [[0] * months for _ in range(workers)]
+
+# Ввод данных
+print("Ввод зарплат работников:")
+for i in range(workers):
+    print(f"\nРаботник {i+1}:")
+    for j in range(months):
+        salary = float(input(f"Месяц {j+1}: "))
+        salaries[i][j] = salary
+
+# а) Для каждого работника - месяц с наибольшей зарплатой
+print("\nа) Месяц с наибольшей зарплатой для каждого работника:")
+for i in range(workers):
+    max_salary = salaries[i][0]
+    max_month = 1
+    for j in range(1, months):
+        if salaries[i][j] > max_salary:
+            max_salary = salaries[i][j]
+            max_month = j + 1
+    print(f"Работник {i+1}: месяц {max_month} ({max_salary:.2f})")
+
+# б) Для каждого месяца - работник с наибольшей зарплатой
+print("\nб) Работник с наибольшей зарплатой в каждом месяце:")
+for j in range(months):
+    max_salary = salaries[0][j]
+    max_worker = 1
+    for i in range(1, workers):
+        if salaries[i][j] > max_salary:
+            max_salary = salaries[i][j]
+            max_worker = i + 1
+    print(f"Месяц {j+1}: работник {max_worker} ({max_salary:.2f})")
+9.12. Количество учеников в классах
+python
+parallels = 11
+classes = 4
+students = [[0] * classes for _ in range(parallels)]
+
+# Ввод данных
+print("Ввод количества учеников:")
+for i in range(parallels):
+    print(f"\nПараллель {i+1}:")
+    for j in range(classes):
+        count = int(input(f"Класс {chr(65+j)}: "))
+        students[i][j] = count
+
+# а) Самый малочисленный класс
+min_students = students[0][0]
+for i in range(parallels):
+    for j in range(classes):
+        if students[i][j] < min_students:
+            min_students = students[i][j]
+print(f"а) В самом малочисленном классе: {min_students} учеников")
+
+# б) Минимальное количество учеников в параллели
+parallel_totals = []
+for i in range(parallels):
+    parallel_total = sum(students[i])
+    parallel_totals.append(parallel_total)
+min_parallel_total = min(parallel_totals)
+print(f"б) Минимальное количество учеников в параллели: {min_parallel_total}")
+
+# в) Минимальное количество учеников в классах с каждой буквой
+class_totals = [0] * classes
+for j in range(classes):
+    for i in range(parallels):
+        class_totals[j] += students[i][j]
+
+min_class_total = min(class_totals)
+letter_index = class_totals.index(min_class_total)
+letter = chr(65 + letter_index)
+print(f"в) Минимальное количество учеников в классах '{letter}': {min_class_total}")
+9.13. Самые малочисленные классы по разным критериям
+python
+parallels = 11
+classes = 4
+students = [[0] * classes for _ in range(parallels)]
+
+# Ввод данных
+print("Ввод количества учеников:")
+for i in range(parallels):
+    print(f"\nПараллель {i+1}:")
+    for j in range(classes):
+        count = int(input(f"Класс {chr(65+j)}: "))
+        students[i][j] = count
+
+# а) Самый малочисленный класс в каждой параллели
+print("\nа) Самый малочисленный класс в каждой параллели:")
+for i in range(parallels):
+    min_in_parallel = min(students[i])
+    class_index = students[i].index(min_in_parallel)
+    class_letter = chr(65 + class_index)
+    print(f"Параллель {i+1}: класс {class_letter} ({min_in_parallel} учеников)")
+
+# б) Самый малочисленный класс среди классов с каждой буквой
+print("\nб) Самый малочисленный класс среди классов с каждой буквой:")
+for j in range(classes):
+    min_for_letter = students[0][j]
+    min_parallel = 1
+    for i in range(1, parallels):
+        if students[i][j] < min_for_letter:
+            min_for_letter = students[i][j]
+            min_parallel = i + 1
+    
+    class_letter = chr(65 + j)
+    print(f"Классы '{class_letter}': параллель {min_parallel} ({min_for_letter} учеников)")
+9.14. Доход магазинов
+python
+shops = 3
+days = 10
+income = [[0] * days for _ in range(shops)]
+
+# Ввод данных
+print("Ввод дохода магазинов:")
+for i in range(shops):
+    print(f"\nМагазин {i+1}:")
+    for j in range(days):
+        day_income = float(input(f"День {j+1}: "))
+        income[i][j] = day_income
+
+# а) Магазин с максимальным общим доходом
+shop_totals = []
+for i in range(shops):
+    shop_total = sum(income[i])
+    shop_totals.append(shop_total)
+
+max_shop_total = max(shop_totals)
+max_shop = shop_totals.index(max_shop_total) + 1
+print(f"а) Максимальный общий доход у магазина {max_shop}: {max_shop_total:.2f}")
+
+# б) День с максимальным общим доходом фирмы
+day_totals = []
+for j in range(days):
+    day_total = 0
+    for i in range(shops):
+        day_total += income[i][j]
+    day_totals.append(day_total)
+
+max_day_total = max(day_totals)
+max_day = day_totals.index(max_day_total) + 1
+print(f"б) Максимальный общий доход фирмы был {max_day} числа: {max_day_total:.2f}")
+
+# в) Максимальный доход за день (магазин и день)
+max_daily_income = income[0][0]
+max_shop_day = (1, 1)
+for i in range(shops):
+    for j in range(days):
+        if income[i][j] > max_daily_income:
+            max_daily_income = income[i][j]
+            max_shop_day = (i + 1, j + 1)
+
+print(f"в) Максимальный доход за день: магазин {max_shop_day[0]}, день {max_shop_day[1]} ({max_daily_income:.2f})")
+9.15. Анализ доходов магазинов
+python
+shops = 3
+days = 10
+income = [[0] * days for _ in range(shops)]
+
+# Ввод данных
+print("Ввод дохода магазинов:")
+for i in range(shops):
+    print(f"\nМагазин {i+1}:")
+    for j in range(days):
+        day_income = float(input(f"День {j+1}: "))
+        income[i][j] = day_income
+
+# а) Для каждого магазина - день с максимальным доходом
+print("\nа) День с максимальным доходом для каждого магазина:")
+for i in range(shops):
+    max_day_income = max(income[i])
+    max_day = income[i].index(max_day_income) + 1
+    print(f"Магазин {i+1}: день {max_day} ({max_day_income:.2f})")
+
+# б) Для каждого дня - магазин с максимальным доходом
+print("\nб) Магазин с максимальным доходом в каждый день:")
+for j in range(days):
+    max_shop_income = income[0][j]
+    max_shop = 1
+    for i in range(1, shops):
+        if income[i][j] > max_shop_income:
+            max_shop_income = income[i][j]
+            max_shop = i + 1
+    print(f"День {j+1}: магазин {max_shop} ({max_shop_income:.2f})")
+9.16. Количество студентов в группах
+python
+courses = 5
+groups = 6
+students = [[0] * groups for _ in range(courses)]
+
+# Ввод данных
+print("Ввод количества студентов:")
+for i in range(courses):
+    print(f"\nКурс {i+1}:")
+    for j in range(groups):
+        count = int(input(f"Группа {j+1}: "))
+        students[i][j] = count
+
+# а) Курс с наименьшим количеством студентов
+course_totals = []
+for i in range(courses):
+    course_total = sum(students[i])
+    course_totals.append(course_total)
+
+min_course_total = min(course_totals)
+min_course = course_totals.index(min_course_total) + 1
+print(f"а) Меньше всего студентов на курсе {min_course}: {min_course_total}")
+
+# б) Самая малочисленная группа
+min_students = students[0][0]
+min_course_group = (1, 1)
+for i in range(courses):
+    for j in range(groups):
+        if students[i][j] < min_students:
+            min_students = students[i][j]
+            min_course_group = (i + 1, j + 1)
+
+print(f"б) Самая малочисленная группа: курс {min_course_group[0]}, группа {min_course_group[1]} ({min_students} студентов)")
+
+# в) Самая малочисленная группа на каждом курсе
+print("\nв) Самая малочисленная группа на каждом курсе:")
+for i in range(courses):
+    min_in_course = min(students[i])
+    group_index = students[i].index(min_in_course) + 1
+    print(f"Курс {i+1}: группа {group_index} ({min_in_course} студентов)")
+9.17. Доход от продажи товаров
+python
+products = 5
+days = 6
+
+# Ввод стоимостей товаров
+prices = []
+print("Ввод стоимости товаров:")
+for i in range(products):
+    price = float(input(f"Товар {i+1}: "))
+    prices.append(price)
+
+# Ввод количества проданных товаров
+quantities = [[0] * days for _ in range(products)]
+print("\nВвод количества проданных товаров:")
+for i in range(products):
+    print(f"\nТовар {i+1}:")
+    for j in range(days):
+        quantity = int(input(f"День {j+1}: "))
+        quantities[i][j] = quantity
+
+# а) Общий доход от каждого вида товара
+print("\nа) Общий доход от каждого вида товара:")
+product_incomes = []
+for i in range(products):
+    product_income = 0
+    for j in range(days):
+        product_income += prices[i] * quantities[i][j]
+    product_incomes.append(product_income)
+    print(f"Товар {i+1}: {product_income:.2f}")
+
+# б) Общий доход за каждый день
+print("\nб) Общий доход за каждый день:")
+day_incomes = []
+for j in range(days):
+    day_income = 0
+    for i in range(products):
+        day_income += prices[i] * quantities[i][j]
+    day_incomes.append(day_income)
+    print(f"День {j+1}: {day_income:.2f}")
+
+# в) Общий доход магазина
+total_income = sum(day_incomes)
+print(f"в) Общий доход магазина: {total_income:.2f}")
+
+# г) Товар с максимальным общим доходом
+max_product_income = max(product_incomes)
+max_product = product_incomes.index(max_product_income) + 1
+print(f"г) Максимальный доход от товара {max_product}: {max_product_income:.2f}")
+
+# д) День с максимальным общим доходом
+max_day_income = max(day_incomes)
+max_day = day_incomes.index(max_day_income) + 1
+print(f"д) Максимальный общий доход был {max_day} дня: {max_day_income:.2f}")
+
+# е) Дни с доходом выше a
+a = float(input("\nВведите значение a: "))
+days_above_a = 0
+for j in range(days):
+    if day_incomes[j] > a:
+        days_above_a += 1
+print(f"е) Дней с доходом выше {a}: {days_above_a}")
+9.18. Лучшая группа по среднему баллу
+python
+groups = 3
+students_per_group = 20
+exams = 3
+
+# Создаем трехмерный список для хранения оценок
+grades = [[[0] * exams for _ in range(students_per_group)] for _ in range(groups)]
+
+# Ввод данных
+print("Ввод оценок студентов:")
+for g in range(groups):
+    print(f"\nГруппа {g+1}:")
+    for s in range(students_per_group):
+        print(f"Студент {s+1}:")
+        for e in range(exams):
+            grade = int(input(f"Экзамен {e+1}: "))
+            grades[g][s][e] = grade
+
+# Вычисление среднего балла для каждой группы
+group_averages = []
+for g in range(groups):
+    group_total = 0
+    for s in range(students_per_group):
+        for e in range(exams):
+            group_total += grades[g][s][e]
+    group_average = group_total / (students_per_group * exams)
+    group_averages.append(group_average)
+
+# Определение лучшей группы
+max_average = max(group_averages)
+best_group = group_averages.index(max_average) + 1
+
+print(f"\nРезультаты:")
+for g in range(groups):
+    print(f"Группа {g+1}: средний балл = {group_averages[g]:.2f}")
+print(f"\nЛучшая группа: №{best_group} со средним баллом {max_average:.2f}")
+9.19. Количество делителей чисел от 120 до 140
+python
+print("Число\tКоличество делителей")
+print("-" * 30)
+
+for num in range(120, 141):
+    divisor_count = 0
+    for i in range(1, num + 1):
+        if num % i == 0:
+            divisor_count += 1
+    print(f"{num}\t{divisor_count}")
+9.20. Графическое изображение делимости чисел
+python
+n = int(input("Введите n: "))
+
+print("Число\tДелители")
+print("-" * 30)
+
+for num in range(1, n + 1):
+    divisor_count = 0
+    for i in range(1, num + 1):
+        if num % i == 0:
+            divisor_count += 1
+    
+    print(f"{num}\t", end="")
+    for i in range(divisor_count):
+        print("+", end="")
+    print()
+9.21. Числа с ровно 5 делителями от 1 до 300
+python
+print("Числа от 1 до 300 с ровно 5 делителями:")
+
+for num in range(1, 301):
+    divisor_count = 0
+    for i in range(1, num + 1):
+        if num % i == 0:
+            divisor_count += 1
+            if divisor_count > 5:  # Оптимизация: если уже больше 5, прерываем
+                break
+    
+    if divisor_count == 5:
+        print(f"{num}", end=" ")
+        # Выводим делители для проверки
+        divisors = []
+        for i in range(1, num + 1):
+            if num % i == 0:
+                divisors.append(i)
+        print(f"(делители: {divisors})")
+9.22. Числа с ровно 6 делителями от 200 до 500
+python
+print("Числа от 200 до 500 с ровно 6 делителями:")
+
+for num in range(200, 501):
+    divisor_count = 0
+    for i in range(1, int(num**0.5) + 1):
+        if num % i == 0:
+            divisor_count += 1
+            if i != num // i:
+                divisor_count += 1
+        if divisor_count > 6:
+            break
+    
+    if divisor_count == 6:
+        print(f"{num}", end=" ")
+        # Выводим делители для проверки
+        divisors = []
+        for i in range(1, num + 1):
+            if num % i == 0:
+                divisors.append(i)
+        print(f"(делители: {divisors})")
+9.23. Числа с k делителями от a до b
+python
+a = int(input("Введите начало интервала a: "))
+b = int(input("Введите конец интервала b: "))
+k = int(input("Введите количество делителей k: "))
+
+print(f"Числа от {a} до {b} с {k} делителями:")
+
+for num in range(a, b + 1):
+    divisor_count = 0
+    # Более эффективная проверка делителей
+    for i in range(1, int(num**0.5) + 1):
+        if num % i == 0:
+            divisor_count += 1
+            if i != num // i:
+                divisor_count += 1
+        if divisor_count > k:
+            break
+    
+    if divisor_count == k:
+        print(f"{num}", end=" ")
+9.24. Число с максимальным количеством делителей
+а) Максимальное из них
+python
+a = int(input("Введите начало интервала a: "))
+b = int(input("Введите конец интервала b: "))
+
+max_divisors = 0
+max_number = a
+
+for num in range(a, b + 1):
+    divisor_count = 0
+    for i in range(1, int(num**0.5) + 1):
+        if num % i == 0:
+            divisor_count += 1
+            if i != num // i:
+                divisor_count += 1
+    
+    if divisor_count > max_divisors or (divisor_count == max_divisors and num > max_number):
+        max_divisors = divisor_count
+        max_number = num
+
+print(f"Число с максимальным количеством делителей: {max_number}")
+print(f"Количество делителей: {max_divisors}")
+б) Минимальное из них
+python
+a = int(input("Введите начало интервала a: "))
+b = int(input("Введите конец интервала b: "))
+
+max_divisors = 0
+min_number = a
+
+for num in range(a, b + 1):
+    divisor_count = 0
+    for i in range(1, int(num**0.5) + 1):
+        if num % i == 0:
+            divisor_count += 1
+            if i != num // i:
+                divisor_count += 1
+    
+    if divisor_count > max_divisors or (divisor_count == max_divisors and num < min_number):
+        max_divisors = divisor_count
+        min_number = num
+
+print(f"Число с максимальным количеством делителей (минимальное из таких): {min_number}")
+print(f"Количество делителей: {max_divisors}")
+9.25. Трехзначные простые числа
+python
+print("Трехзначные простые числа:")
+
+prime_count = 0
+for num in range(100, 1000):
+    is_prime = True
+    
+    # Проверяем делители до корня из числа
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            is_prime = False
+            break
+    
+    if is_prime:
+        print(num, end=" ")
+        prime_count += 1
+        if prime_count % 10 == 0:
+            print()
+
+print(f"\n\nВсего найдено: {prime_count} простых чисел")
+9.26. Первые 100 простых чисел
+python
+print("Первые 100 простых чисел:")
+
+prime_count = 0
+num = 2  # начинаем с первого простого числа
+
+while prime_count < 100:
+    is_prime = True
+    
+    # Проверяем делители до корня из числа
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            is_prime = False
+            break
+    
+    if is_prime:
+        print(f"{num:4d}", end=" ")
+        prime_count += 1
+        if prime_count % 10 == 0:
+            print()
+    
+    num += 1
+9.27. Сумма делителей чисел от 50 до 70
+python
+print("Число\tСумма делителей")
+print("-" * 25)
+
+for num in range(50, 71):
+    divisor_sum = 0
+    for i in
