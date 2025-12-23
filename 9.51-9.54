@@ -1,0 +1,120 @@
+9.52. Делители числа q, взаимно простые с p
+python
+def gcd(a, b):
+    """Наибольший общий делитель (алгоритм Евклида)"""
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+p = int(input("Введите число p: "))
+q = int(input("Введите число q: "))
+
+print(f"Делители числа {q}, взаимно простые с {p}:")
+
+divisors = []
+# Находим все делители q
+for i in range(1, q + 1):
+    if q % i == 0:
+        # Проверяем взаимную простоту с p
+        if gcd(i, p) == 1:
+            divisors.append(i)
+
+if divisors:
+    print("Делители:", divisors)
+    print(f"Всего: {len(divisors)}")
+else:
+    print(f"Нет делителей числа {q}, взаимно простых с {p}")
+9.53. Наименьшее число, представимое двумя способами как сумма кубов
+python
+print("Поиск наименьшего натурального числа n, которое можно")
+print("представить двумя различными способами как сумму кубов двух натуральных чисел")
+
+# Будем искать до определенного предела
+limit = 2000  # начальный предел поиска
+found = False
+result = None
+representations = {}
+
+# Перебираем все пары чисел
+for a in range(1, int(limit ** (1/3)) + 2):
+    for b in range(a, int(limit ** (1/3)) + 2):
+        n = a**3 + b**3
+        if n <= limit:
+            if n not in representations:
+                representations[n] = []
+            representations[n].append((a, b))
+
+# Ищем число с хотя бы двумя представлениями
+for n in sorted(representations.keys()):
+    if len(representations[n]) >= 2:
+        result = n
+        found = True
+        break
+
+if found:
+    print(f"\nНаименьшее такое число: n = {result}")
+    print("Представления в виде суммы кубов:")
+    for i, (a, b) in enumerate(representations[result][:2], 1):
+        print(f"  {i}. {a}³ + {b}³ = {a**3} + {b**3} = {result}")
+else:
+    print(f"В пределах {limit} такое число не найдено.")
+    
+# Дополнительно: проверим известные числа (1729 - число Харди-Рамануджана)
+print("\nПроверка известных чисел:")
+known_numbers = [1729, 4104, 13832]
+for num in known_numbers:
+    if num <= limit:
+        reps = []
+        max_a = int(num ** (1/3)) + 1
+        for a in range(1, max_a):
+            for b in range(a, max_a):
+                if a**3 + b**3 == num:
+                    reps.append((a, b))
+        if len(reps) >= 2:
+            print(f"\n{num}:")
+            for a, b in reps:
+                print(f"  {a}³ + {b}³")
+9.54. Простые несократимые дроби между 0 и 1 со знаменателем ≤ 7
+python
+def gcd(a, b):
+    """Наибольший общий делитель"""
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+max_denominator = 7
+
+print(f"Простые несократимые дроби между 0 и 1 со знаменателем ≤ {max_denominator}:")
+print("(дроби упорядочены по возрастанию)")
+
+fractions = []
+
+# Перебираем все возможные дроби
+for denominator in range(2, max_denominator + 1):
+    for numerator in range(1, denominator):
+        # Проверяем несократимость (НОД = 1)
+        if gcd(numerator, denominator) == 1:
+            value = numerator / denominator
+            fractions.append((value, numerator, denominator))
+
+# Сортируем по значению дроби
+fractions.sort()
+
+# Выводим в виде таблицы
+print("\nДробь   Десятичное значение")
+print("-" * 30)
+for value, numerator, denominator in fractions:
+    print(f"{numerator}/{denominator} = {value:.3f}")
+
+# Также сгруппируем по знаменателям
+print("\nСгруппировано по знаменателям:")
+for denominator in range(2, max_denominator + 1):
+    denom_fractions = []
+    for numerator in range(1, denominator):
+        if gcd(numerator, denominator) == 1:
+            denom_fractions.append(f"{numerator}/{denominator}")
+    
+    if denom_fractions:
+        print(f"Знаменатель {denominator}: {', '.join(denom_fractions)}")
+
+print(f"\nВсего дробей: {len(fractions)}")
