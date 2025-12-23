@@ -1,0 +1,635 @@
+9.28. Числа от 100 до 300 с суммой делителей = 50
+python
+print("Числа от 100 до 300 с суммой делителей = 50:")
+
+for num in range(100, 301):
+    divisor_sum = 0
+    # Находим все делители и их сумму
+    for i in range(1, num // 2 + 1):  # проверяем только до num/2
+        if num % i == 0:
+            divisor_sum += i
+            # Если делитель не является квадратным корнем, добавляем и парный делитель
+            if i != num // i and i * i != num:
+                # Но в этом цикле мы идем только до num/2, так что парные делители > num/2 не учитываются
+                pass
+    
+    # Добавляем само число, если оно не является делителем самого себя в обычном смысле
+    # Но по условию задачи "сумма всех своих делителей (естественно, кроме самого числа)"
+    # так что само число не добавляем
+    
+    if divisor_sum == 50:
+        print(f"{num} (сумма делителей: {divisor_sum})")
+        
+        # Для проверки выводим делители
+        divisors = []
+        for i in range(1, num):
+            if num % i == 0:
+                divisors.append(i)
+        print(f"  Делители: {divisors}")
+        print(f"  Сумма: {sum(divisors)}")
+9.29. Числа от 300 до 600 с суммой делителей кратной 10
+python
+print("Числа от 300 до 600 с суммой делителей кратной 10:")
+
+for num in range(300, 601):
+    divisor_sum = 0
+    # Находим сумму всех делителей (кроме самого числа)
+    for i in range(1, num):
+        if num % i == 0:
+            divisor_sum += i
+    
+    if divisor_sum % 10 == 0:
+        print(f"{num}: сумма делителей = {divisor_sum}")
+9.30. Трехзначное совершенное число
+python
+print("Трехзначные совершенные числа:")
+
+for num in range(100, 1000):
+    divisor_sum = 0
+    # Находим сумму всех делителей (кроме самого числа)
+    for i in range(1, num):
+        if num % i == 0:
+            divisor_sum += i
+    
+    if divisor_sum == num:
+        print(f"Найдено совершенное число: {num}")
+        print(f"Его делители (кроме самого числа): ", end="")
+        divisors = []
+        for i in range(1, num):
+            if num % i == 0:
+                divisors.append(i)
+        print(divisors)
+        print(f"Сумма делителей: {sum(divisors)} = {num}")
+        break  # нашли первое, можно прервать
+else:
+    print("Трехзначных совершенных чисел не найдено")
+9.31. Все совершенные числа меньше 100000
+python
+print("Совершенные числа меньше 100000:")
+
+num = 6  # первое совершенное число
+count = 0
+
+while num < 100000:
+    divisor_sum = 0
+    # Находим сумму всех делителей (кроме самого числа)
+    i = 1
+    while i <= num // 2:
+        if num % i == 0:
+            divisor_sum += i
+        i += 1
+    
+    if divisor_sum == num:
+        print(f"{num:6d}", end=" ")
+        count += 1
+        if count % 5 == 0:
+            print()
+    
+    num += 1
+
+print(f"\n\nВсего найдено: {count} совершенных чисел")
+9.32. Число с максимальной суммой делителей
+python
+a = int(input("Введите начало интервала a: "))
+b = int(input("Введите конец интервала b: "))
+
+max_sum = 0
+max_num = a
+
+for num in range(a, b + 1):
+    divisor_sum = 0
+    # Находим сумму всех делителей (кроме самого числа)
+    for i in range(1, num):
+        if num % i == 0:
+            divisor_sum += i
+    
+    if divisor_sum > max_sum:
+        max_sum = divisor_sum
+        max_num = num
+
+print(f"Число с максимальной суммой делителей: {max_num}")
+print(f"Сумма его делителей: {max_sum}")
+9.33. Дружественные числа меньше 50000
+python
+print("Пары дружественных чисел меньше 50000:")
+
+# Функция для вычисления суммы делителей
+def sum_of_divisors(n):
+    total = 0
+    for i in range(1, n):
+        if n % i == 0:
+            total += i
+    return total
+
+pairs_found = []
+for a in range(1, 50000):
+    b = sum_of_divisors(a)
+    if b > a and b < 50000:
+        if sum_of_divisors(b) == a:
+            pairs_found.append((a, b))
+            print(f"{a} и {b}")
+
+print(f"\nВсего найдено {len(pairs_found)} пар дружественных чисел")
+
+# Вывод с пояснениями
+for a, b in pairs_found:
+    print(f"\nПара {a} и {b}:")
+    print(f"  Делители {a}: ", end="")
+    div_a = [i for i in range(1, a) if a % i == 0]
+    print(f"{div_a}, сумма = {sum(div_a)} = {b}")
+    print(f"  Делители {b}: ", end="")
+    div_b = [i for i in range(1, b) if b % i == 0]
+    print(f"{div_b}, сумма = {sum(div_b)} = {a}")
+9.34. Способы выплаты суммы монетами
+а) Число способов выплаты
+python
+n = int(input("Введите сумму n рублей (n < 100): "))
+
+count = 0
+
+# Перебираем все возможные количества купюр по 10 рублей
+for ten in range(n // 10 + 1):
+    remaining_after_ten = n - ten * 10
+    
+    # Перебираем все возможные количества монет по 5 рублей
+    for five in range(remaining_after_ten // 5 + 1):
+        remaining_after_five = remaining_after_ten - five * 5
+        
+        # Перебираем все возможные количества монет по 2 рубля
+        for two in range(remaining_after_five // 2 + 1):
+            remaining_after_two = remaining_after_five - two * 2
+            
+            # Оставшаяся сумма выплачивается монетами по 1 рублю
+            one = remaining_after_two
+            
+            count += 1
+
+print(f"Число способов выплаты {n} рублей: {count}")
+б) Все способы выплаты с указанием монет
+python
+n = int(input("Введите сумму n рублей (n < 100): "))
+
+ways = []
+print(f"\nВсе способы выплаты {n} рублей:")
+
+# Перебираем все возможные количества купюр по 10 рублей
+for ten in range(n // 10 + 1):
+    remaining_after_ten = n - ten * 10
+    
+    # Перебираем все возможные количества монет по 5 рублей
+    for five in range(remaining_after_ten // 5 + 1):
+        remaining_after_five = remaining_after_ten - five * 5
+        
+        # Перебираем все возможные количества монет по 2 рубля
+        for two in range(remaining_after_five // 2 + 1):
+            remaining_after_two = remaining_after_five - two * 2
+            
+            # Оставшаяся сумма выплачивается монетами по 1 рублю
+            one = remaining_after_two
+            
+            ways.append((ten, five, two, one))
+            
+            # Красивый вывод
+            parts = []
+            if ten > 0:
+                parts.append(f"{ten}×10р")
+            if five > 0:
+                parts.append(f"{five}×5р")
+            if two > 0:
+                parts.append(f"{two}×2р")
+            if one > 0:
+                parts.append(f"{one}×1р")
+            
+            print(f"Способ {len(ways)}: {' + '.join(parts)}")
+
+print(f"\nВсего способов: {len(ways)}")
+9.35. Выплата сумм монетами 1, 2, 4, 8, 16, 32, 64
+python
+n = int(input("Введите начальную сумму n: "))
+
+denominations = [64, 32, 16, 8, 4, 2, 1]
+
+print(f"\nВыплата сумм от {n} до {n+10} минимальным количеством купюр:")
+print("Сумма\t64\t32\t16\t8\t4\t2\t1\tВсего")
+
+for amount in range(n, n + 11):
+    remaining = amount
+    counts = []
+    total_coins = 0
+    
+    for denom in denominations:
+        count = remaining // denom
+        counts.append(count)
+        total_coins += count
+        remaining %= denom
+    
+    print(f"{amount}\t", end="")
+    for count in counts:
+        print(f"{count}\t", end="")
+    print(f"{total_coins}")
+9.36. Прямоугольники с площадью s
+а) Разные (с учетом перестановки)
+python
+s = int(input("Введите площадь s: "))
+
+print(f"\nВсе прямоугольники с площадью {s} (разные, даже при перестановке):")
+count = 0
+
+for a in range(1, s + 1):
+    for b in range(1, s + 1):
+        if a * b == s:
+            print(f"{count+1:3d}. {a} × {b}")
+            count += 1
+
+print(f"\nВсего: {count} прямоугольников")
+б) Совпадающие (без учета перестановки)
+python
+s = int(input("Введите площадь s: "))
+
+print(f"\nВсе прямоугольники с площадью {s} (без учета перестановки):")
+count = 0
+
+for a in range(1, int(s**0.5) + 1):
+    if s % a == 0:
+        b = s // a
+        print(f"{count+1:3d}. {a} × {b}")
+        count += 1
+
+print(f"\nВсего: {count} различных прямоугольников")
+9.37. Параллелепипеды с объемом v
+а) Разные (с учетом перестановки)
+python
+v = int(input("Введите объем v: "))
+
+print(f"\nВсе параллелепипеды с объемом {v} (разные, даже при перестановке):")
+count = 0
+
+for a in range(1, v + 1):
+    for b in range(1, v + 1):
+        for c in range(1, v + 1):
+            if a * b * c == v:
+                print(f"{count+1:3d}. {a} × {b} × {c}")
+                count += 1
+
+print(f"\nВсего: {count} параллелепипедов")
+б) Совпадающие (без учета перестановки)
+python
+v = int(input("Введите объем v: "))
+
+print(f"\nВсе параллелепипеды с объемом {v} (без учета перестановки):")
+count = 0
+found = set()
+
+for a in range(1, int(v**(1/3)) + 1):
+    if v % a == 0:
+        v_ab = v // a
+        for b in range(a, int(v_ab**0.5) + 1):
+            if v_ab % b == 0:
+                c = v_ab // b
+                if b <= c:  # чтобы избежать дубликатов
+                    # Создаем отсортированный кортеж для уникальности
+                    dimensions = tuple(sorted((a, b, c)))
+                    if dimensions not in found:
+                        found.add(dimensions)
+                        print(f"{len(found):3d}. {a} × {b} × {c}")
+                        count += 1
+
+print(f"\nВсего: {count} различных параллелепипедов")
+9.38. Решения уравнения x² + y² = k²
+python
+print("Решения уравнения x² + y² = k² для x, y, k от 1 до 30:")
+print("(решения с перестановкой x и y считаются совпадающими)")
+
+solutions = set()
+count = 0
+
+for x in range(1, 31):
+    for y in range(x, 31):  # начинаем с x, чтобы избежать дубликатов
+        k_squared = x*x + y*y
+        k = int(k_squared**0.5)
+        
+        if k <= 30 and k*k == k_squared:
+            # Сохраняем как отсортированный кортеж для уникальности
+            solution = (x, y, k)
+            if solution not in solutions:
+                solutions.add(solution)
+                count += 1
+                print(f"{count:2d}. {x}² + {y}² = {k}²  ({x} + {y} = {k})")
+
+print(f"\nВсего найдено: {count} решений")
+9.39. Вычисление 1ⁿ + 2ⁿ + ... + mⁿ
+python
+m = int(input("Введите m: "))
+n = int(input("Введите n: "))
+
+total = 0
+for i in range(1, m + 1):
+    term = 1
+    for _ in range(n):  # возводим в степень n
+        term *= i
+    total += term
+
+print(f"1^{n} + 2^{n} + ... + {m}^{n} = {total}")
+
+# Вывод пошагово для наглядности
+print("\nВычисление по шагам:")
+for i in range(1, m + 1):
+    term = i ** n
+    print(f"{i}^{n} = {term}")
+    if i < m:
+        print("+")
+9.40. Вычисление 1¹ + 2² + ... + nⁿ
+python
+n = int(input("Введите n: "))
+
+total = 0
+print(f"Вычисление 1¹ + 2² + ... + {n}ⁿ:")
+
+for i in range(1, n + 1):
+    term = 1
+    for _ in range(i):  # возводим i в степень i
+        term *= i
+    total += term
+    print(f"{i}^{i} = {term}")
+
+print(f"\nСумма: {total}")
+9.41. Трехзначные числа с суммой цифр = n
+python
+n = int(input("Введите n (n ≤ 27): "))
+
+print(f"Трехзначные числа, сумма цифр которых равна {n}:")
+
+count = 0
+for num in range(100, 1000):
+    # Извлекаем цифры без использования операций деления
+    digits = str(num)
+    digit_sum = 0
+    for digit in digits:
+        digit_sum += int(digit)
+    
+    if digit_sum == n:
+        print(num, end=" ")
+        count += 1
+        if count % 10 == 0:
+            print()
+
+print(f"\n\nВсего найдено: {count} чисел")
+9.42. Трехзначные числа без повторяющихся цифр
+python
+print("Трехзначные числа без повторяющихся цифр в возрастающем порядке:")
+
+count = 0
+for num in range(100, 1000):
+    digits = str(num)
+    
+    # Проверяем, что все цифры разные
+    if len(set(digits)) == 3:
+        print(num, end=" ")
+        count += 1
+        if count % 10 == 0:
+            print()
+
+print(f"\n\nВсего найдено: {count} чисел")
+9.43. НОД нескольких чисел
+python
+def gcd(a, b):
+    """Алгоритм Евклида для двух чисел"""
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+n = int(input("Сколько чисел? "))
+
+numbers = []
+for i in range(n):
+    num = int(input(f"Введите число {i+1}: "))
+    numbers.append(num)
+
+# Находим НОД всех чисел
+result = numbers[0]
+for i in range(1, n):
+    result = gcd(result, numbers[i])
+
+print(f"НОД чисел {numbers} = {result}")
+9.44. Способы составления веса гирями
+python
+weights = [100, 200, 300, 500, 1000, 1200, 1400, 1500, 2000, 3000]
+v = int(input("Введите вес v в граммах: "))
+
+count = 0
+print(f"Способы составить вес {v} г из гирь {weights}:")
+
+# Всего 2^10 = 1024 возможных комбинаций (каждая гиря либо берется, либо нет)
+for mask in range(1 << 10):  # от 0 до 1023
+    total_weight = 0
+    combination = []
+    
+    for i in range(10):
+        if mask & (1 << i):  # если i-й бит установлен
+            total_weight += weights[i]
+            combination.append(weights[i])
+    
+    if total_weight == v:
+        count += 1
+        print(f"{count}. {combination}")
+
+print(f"\nВсего способов: {count}")
+9.45. Числа с квадратом суммы цифр = m
+python
+m = int(input("Введите m: "))
+n = int(input("Введите n: "))
+
+print(f"Натуральные числа < {n}, квадрат суммы цифр которых = {m}:")
+
+for num in range(1, n):
+    # Вычисляем сумму цифр
+    digit_sum = 0
+    temp = num
+    while temp > 0:
+        digit_sum += temp % 10
+        temp //= 10
+    
+    if digit_sum * digit_sum == m:
+        print(f"{num} (сумма цифр: {digit_sum}, квадрат: {digit_sum*digit_sum})")
+9.46. Цифровой корень числа
+python
+def digital_root(num):
+    while num >= 10:
+        # Вычисляем сумму цифр
+        digit_sum = 0
+        temp = num
+        while temp > 0:
+            digit_sum += temp % 10
+            temp //= 10
+        num = digit_sum
+    return num
+
+n = int(input("Введите натуральное число: "))
+
+root = digital_root(n)
+print(f"Цифровой корень числа {n} = {root}")
+
+# Пошаговый вывод
+print("\nВычисление по шагам:")
+num = n
+step = 1
+while num >= 10:
+    digits = [int(d) for d in str(num)]
+    digit_sum = sum(digits)
+    print(f"Шаг {step}: {num} → {'+'.join(map(str, digits))} = {digit_sum}")
+    num = digit_sum
+    step += 1
+print(f"Цифровой корень: {num}")
+9.47. Задача о быках, коровах и телятах
+python
+print("Задача: купить 100 голов скота на 100 рублей")
+print("Бык - 10 руб, корова - 5 руб, теленок - 0.5 руб")
+
+solutions = []
+for bulls in range(0, 11):  # максимум 10 быков на 100 рублей
+    for cows in range(0, 21):  # максимум 20 коров на 100 рублей
+        # Количество телят вычисляем из условий
+        calves = 100 - bulls - cows
+        
+        if calves >= 0:
+            total_cost = bulls * 10 + cows * 5 + calves * 0.5
+            
+            if total_cost == 100:
+                solutions.append((bulls, cows, calves))
+                print(f"Решение: {bulls} быков, {cows} коров, {calves} телят")
+
+print(f"\nВсего решений: {len(solutions)}")
+9.48. Разложение на простые множители
+Вариант 1: каждый множитель один раз
+python
+n = int(input("Введите натуральное число: "))
+
+print(f"Разложение числа {n} на простые множители (каждый множитель один раз):")
+
+factors = []
+temp = n
+d = 2
+
+while d * d <= temp:
+    if temp % d == 0:
+        factors.append(d)
+        while temp % d == 0:
+            temp //= d
+    d += 1
+
+if temp > 1:
+    factors.append(temp)
+
+print(f"{n} = ", end="")
+print(" × ".join(map(str, factors)))
+Вариант 2: с учетом кратности
+python
+n = int(input("Введите натуральное число: "))
+
+print(f"Разложение числа {n} на простые множители (с учетом кратности):")
+
+factors = []
+temp = n
+d = 2
+
+while d * d <= temp:
+    while temp % d == 0:
+        factors.append(d)
+        temp //= d
+    d += 1
+
+if temp > 1:
+    factors.append(temp)
+
+print(f"{n} = ", end="")
+if factors:
+    # Группируем одинаковые множители
+    from collections import Counter
+    counter = Counter(factors)
+    
+    parts = []
+    for factor, count in sorted(counter.items()):
+        if count == 1:
+            parts.append(str(factor))
+        else:
+            parts.append(f"{factor}^{count}")
+    
+    print(" × ".join(parts))
+else:
+    print("1")
+9.49. Все простые делители числа
+python
+n = int(input("Введите натуральное число: "))
+
+print(f"Все простые делители числа {n}:")
+
+prime_divisors = set()
+temp = n
+d = 2
+
+while d * d <= temp:
+    if temp % d == 0:
+        # Проверяем, что d простое
+        is_prime = True
+        for i in range(2, int(d**0.5) + 1):
+            if d % i == 0:
+                is_prime = False
+                break
+        
+        if is_prime:
+            prime_divisors.add(d)
+        temp //= d
+    else:
+        d += 1
+
+if temp > 1:
+    # Проверяем, что temp простое
+    is_prime = True
+    for i in range(2, int(temp**0.5) + 1):
+        if temp % i == 0:
+            is_prime = False
+            break
+    if is_prime:
+        prime_divisors.add(temp)
+
+if prime_divisors:
+    print("Простые делители:", sorted(prime_divisors))
+else:
+    print(f"У числа {n} нет простых делителей (оно само простое)")
+9.50. Числа, взаимно простые с n
+python
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+n = int(input("Введите натуральное число n: "))
+
+print(f"Натуральные числа, меньшие {n} и взаимно простые с ним:")
+
+coprime_numbers = []
+for i in range(1, n):
+    if gcd(i, n) == 1:
+        coprime_numbers.append(i)
+
+print(coprime_numbers)
+print(f"\nВсего: {len(coprime_numbers)} чисел")
+9.51. Числа, взаимно простые с p
+python
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+n = int(input("Введите натуральное число n: "))
+p = int(input("Введите натуральное число p: "))
+
+print(f"Натуральные числа, меньшие {n} и взаимно простые с {p}:")
+
+coprime_numbers = []
+for i in range(1, n):
+    if gcd(i, p) == 1:
+        coprime_numbers.append(i)
+
+print(coprime_numbers)
+print(f"\nВсего: {len(coprime_numbers)} чисел")
