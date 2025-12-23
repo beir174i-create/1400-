@@ -1,0 +1,746 @@
+import random
+
+# 10.1. Случайные вещественные числа
+print("10.1. Случайные вещественные числа")
+print("=" * 40)
+
+# а) 8 случайных чисел от 0 до 1
+print("а) 8 случайных чисел [0, 1):")
+for i in range(8):
+    print(f"{random.random():.4f}", end=" ")
+print("\n")
+
+# б) k случайных чисел от 0 до 1
+k = int(input("б) Введите k: "))
+print(f"{k} случайных чисел [0, 1):")
+for i in range(k):
+    print(f"{random.random():.4f}", end=" ")
+print("\n")
+
+# в) 15 случайных чисел от 25 до 26
+print("в) 15 случайных чисел [25, 26):")
+for i in range(15):
+    print(f"{random.uniform(25, 26):.4f}", end=" ")
+print("\n")
+
+# г) 20 случайных чисел от 0 до 15
+print("г) 20 случайных чисел [0, 15):")
+for i in range(20):
+    print(f"{random.uniform(0, 15):.4f}", end=" ")
+print("\n")
+
+# д) k случайных чисел от 0 до b, где k ≤ a
+print("д) Случайное количество чисел")
+a = int(input("  Введите a: "))
+b = float(input("  Введите b: "))
+k = random.randint(1, a)
+print(f"  k = {k} случайных чисел [0, {b}):")
+for i in range(k):
+    print(f"{random.uniform(0, b):.4f}", end=" ")
+print("\n")
+
+# е) 10 случайных чисел от -40 до 40
+print("е) 10 случайных чисел [-40, 40):")
+for i in range(10):
+    print(f"{random.uniform(-40, 40):.4f}", end=" ")
+print("\n")
+
+# ж) k случайных чисел от a до b, где k ≤ m
+print("ж) Случайное количество чисел в заданном диапазоне")
+m = int(input("  Введите m: "))
+a = float(input("  Введите a: "))
+b = float(input("  Введите b: "))
+k = random.randint(1, m)
+print(f"  k = {k} случайных чисел [{a}, {b}):")
+for i in range(k):
+    print(f"{random.uniform(a, b):.4f}", end=" ")
+print("\n" + "=" * 40)
+
+# 10.2. Случайные целые числа
+print("\n10.2. Случайные целые числа")
+print("=" * 40)
+
+# а) 10 чисел от 0 до 10 включительно
+print("а) 10 чисел [0, 10]:")
+for i in range(10):
+    print(random.randint(0, 10), end=" ")
+print()
+
+# б) k чисел от 0 до a включительно
+k = int(input("\nб) Введите k: "))
+a = int(input("  Введите a: "))
+print(f"{k} чисел [0, {a}]:")
+for i in range(k):
+    print(random.randint(0, a), end=" ")
+print()
+
+# в) 20 чисел от 10 до 20 включительно
+print("\nв) 20 чисел [10, 20]:")
+for i in range(20):
+    print(random.randint(10, 20), end=" ")
+print()
+
+# г) k чисел от -10 до a включительно
+k = int(input("\nг) Введите k: "))
+a = int(input("  Введите a: "))
+print(f"{k} чисел [-10, {a}]:")
+for i in range(k):
+    print(random.randint(-10, a), end=" ")
+print()
+
+# д) k чисел от a до b, где k ≤ 15
+print("\nд) Случайное количество чисел в диапазоне")
+a = int(input("  Введите a: "))
+b = int(input("  Введите b: "))
+k = random.randint(1, 15)
+print(f"k = {k} чисел [{a}, {b}]:")
+for i in range(k):
+    print(random.randint(a, b), end=" ")
+print("\n" + "=" * 40)
+
+# 10.3. Комбинация случайных чисел
+print("\n10.3. Комбинация случайных чисел")
+print("=" * 40)
+
+a = int(input("Введите a: "))
+b = int(input("Введите b: "))
+
+m = random.randint(1, 20)
+n = random.randint(1, 20)
+
+print(f"m = {m}, n = {n}")
+
+print(f"\n{n} целых чисел [{a}, {b}]:")
+for i in range(n):
+    print(random.randint(a, b), end=" ")
+
+print(f"\n\n{m} вещественных чисел [0, {n}]:")
+for i in range(m):
+    print(f"{random.uniform(0, n):.2f}", end=" ")
+print("\n" + "=" * 40)
+
+# 10.4. 50 чисел от 0 до 3, выводим только 0 и 1
+print("\n10.4. 50 чисел от 0 до 3, выводим только 0 и 1")
+print("=" * 40)
+
+for i in range(50):
+    num = random.randint(0, 3)
+    if num in (0, 1):
+        print(num, end=" ")
+print("\n" + "=" * 40)
+
+# 10.5. 30 чисел от 0 до 5, выводим только нечетные
+print("\n10.5. 30 чисел от 0 до 5, выводим только нечетные")
+print("=" * 40)
+
+for i in range(30):
+    num = random.randint(0, 5)
+    if num % 2 != 0:
+        print(num, end=" ")
+print("\n" + "=" * 40)
+
+# 10.6. 50 чисел 0 или 1, подсчет количества
+print("\n10.6. 50 чисел 0 или 1, подсчет количества")
+print("=" * 40)
+
+count_0 = 0
+count_1 = 0
+
+for i in range(50):
+    num = random.randint(0, 1)
+    print(num, end=" ")
+    if num == 0:
+        count_0 += 1
+    else:
+        count_1 += 1
+
+print(f"\nНулей: {count_0}, единиц: {count_1}")
+print("=" * 40)
+
+# 10.7. Разные случайные числа
+print("\n10.7. Разные случайные числа")
+print("=" * 40)
+
+# а) два разных числа
+a = random.randint(0, 1)
+b = random.randint(0, 2)
+while b == a and a < 2:
+    b = random.randint(0, 2)
+print(f"а) a = {a}, b = {b}")
+
+# б) три разных числа
+a = random.randint(1, 2)
+b = random.randint(0, 2)
+while b == a:
+    b = random.randint(0, 2)
+c = random.randint(1, 3)
+while c == a or c == b:
+    c = random.randint(1, 3)
+print(f"б) a = {a}, b = {b}, c = {c}")
+
+# в) 15 чисел: 7 двоек и 8 троек
+print("в) 15 чисел (7 двоек и 8 троек):")
+numbers = [2] * 7 + [3] * 8
+random.shuffle(numbers)
+for num in numbers:
+    print(num, end=" ")
+print("\n" + "=" * 40)
+
+# 10.8. Подбрасывание монеты
+print("\n10.8. Подбрасывание монеты")
+print("=" * 40)
+
+coin = random.randint(0, 1)
+if coin == 0:
+    print("Выпал ОРЕЛ (0)")
+else:
+    print("Выпала РЕШКА (1)")
+print("=" * 40)
+
+# 10.9. Относительная частота появления 0 и 1
+print("\n10.9. Относительная частота появления 0 и 1")
+print("=" * 40)
+
+# При 100 подбрасываниях
+count_0 = 0
+count_1 = 0
+
+print("100 подбрасываний:")
+for i in range(100):
+    coin = random.randint(0, 1)
+    if coin == 0:
+        count_0 += 1
+    else:
+        count_1 += 1
+
+print(f"Орел: {count_0} ({count_0/100:.2%})")
+print(f"Решка: {count_1} ({count_1/100:.2%})")
+
+# При 1000 подбрасываниях
+count_0 = 0
+count_1 = 0
+
+print("\n1000 подбрасываний:")
+for i in range(1000):
+    coin = random.randint(0, 1)
+    if coin == 0:
+        count_0 += 1
+    else:
+        count_1 += 1
+
+print(f"Орел: {count_0} ({count_0/1000:.2%})")
+print(f"Решка: {count_1} ({count_1/1000:.2%})")
+print("=" * 40)
+
+# 10.10. Игра "Чет или нечет"
+print("\n10.10. Игра 'Чет или нечет'")
+print("=" * 40)
+
+# а) один раз
+print("а) Один раз:")
+print("Чет (введите 2) или нечет (введите 1)?")
+user_choice = int(input("Ваш выбор: "))
+
+computer_number = random.randint(1, 100)
+computer_parity = 2 if computer_number % 2 == 0 else 1
+
+print(f"Компьютер загадал число {computer_number} ({'четное' if computer_parity == 2 else 'нечетное'})")
+
+if user_choice == computer_parity:
+    print("Поздравляем! Вы угадали!")
+else:
+    print("К сожалению, вы не угадали.")
+
+# б) n раз
+print("\nб) Несколько раз:")
+n = int(input("Сколько раз сыграем? "))
+
+user_wins = 0
+computer_wins = 0
+
+for game in range(n):
+    print(f"\nИгра {game + 1}:")
+    print("Чет (2) или нечет (1)?")
+    user_choice = int(input("Ваш выбор: "))
+    
+    computer_number = random.randint(1, 100)
+    computer_parity = 2 if computer_number % 2 == 0 else 1
+    
+    if user_choice == computer_parity:
+        user_wins += 1
+        print("Вы выиграли этот раунд!")
+    else:
+        computer_wins += 1
+        print("Компьютер выиграл этот раунд!")
+
+print(f"\nСчет {user_wins}:{computer_wins}", end=" ")
+if user_wins > computer_wins:
+    print("в вашу пользу. Вы выиграли!")
+elif computer_wins > user_wins:
+    print("в пользу компьютера. Вы проиграли!")
+else:
+    print("ничья!")
+
+# в) До тех пор, пока не скажем "Нет"
+print("\nв) Играем до тех пор, пока не надоест:")
+correct = 0
+incorrect = 0
+
+while True:
+    print("\nЧет (2) или нечет (1)?")
+    user_choice = int(input("Ваш выбор: "))
+    
+    computer_number = random.randint(1, 100)
+    computer_parity = 2 if computer_number % 2 == 0 else 1
+    
+    if user_choice == computer_parity:
+        correct += 1
+        print("Верно!")
+    else:
+        incorrect += 1
+        print("Неверно!")
+    
+    continue_game = input("Продолжить еще раз? (да/нет): ").lower()
+    if continue_game != "да":
+        break
+
+print(f"\nИтог: верных ответов - {correct}, неверных - {incorrect}")
+print("=" * 40)
+
+# 10.11. Бросание кубика
+print("\n10.11. Бросание кубика")
+print("=" * 40)
+
+dice = random.randint(1, 6)
+print(f"Выпало: {dice}")
+print("=" * 40)
+
+# 10.12. Бросание кубика двумя игроками
+print("\n10.12. Бросание кубика двумя игроками")
+print("=" * 40)
+
+player1 = random.randint(1, 6)
+player2 = random.randint(1, 6)
+
+print(f"Игрок 1: {player1}")
+print(f"Игрок 2: {player2}")
+
+if player1 > player2:
+    print("Победил игрок 1!")
+elif player2 > player1:
+    print("Победил игрок 2!")
+else:
+    print("Ничья!")
+print("=" * 40)
+
+# 10.13. Варианты игры с кубиком
+print("\n10.13. Варианты игры с кубиком")
+print("=" * 40)
+
+# Вариант 1: каждый бросает два раза
+print("Вариант 1: каждый бросает кубик два раза")
+
+player1_total = 0
+player2_total = 0
+
+print("\nПервый игрок:")
+for i in range(2):
+    roll = random.randint(1, 6)
+    player1_total += roll
+    print(f"  Бросок {i+1}: {roll}")
+
+print("\nВторой игрок:")
+for i in range(2):
+    roll = random.randint(1, 6)
+    player2_total += roll
+    print(f"  Бросок {i+1}: {roll}")
+
+print(f"\nИтог: игрок 1 - {player1_total}, игрок 2 - {player2_total}")
+if player1_total > player2_total:
+    print("Победил игрок 1!")
+elif player2_total > player1_total:
+    print("Победил игрок 2!")
+else:
+    print("Ничья!")
+
+# Вариант 2: несколько раундов
+print("\nВариант 2: несколько раундов")
+rounds = int(input("Сколько раундов сыграем? "))
+
+player1_wins = 0
+player2_wins = 0
+draws = 0
+
+for round_num in range(rounds):
+    player1 = random.randint(1, 6)
+    player2 = random.randint(1, 6)
+    
+    if player1 > player2:
+        player1_wins += 1
+    elif player2 > player1:
+        player2_wins += 1
+    else:
+        draws += 1
+
+print(f"\nРезультаты после {rounds} раундов:")
+print(f"Игрок 1 выиграл: {player1_wins} раз")
+print(f"Игрок 2 выиграл: {player2_wins} раз")
+print(f"Ничьих: {draws} раз")
+
+if player1_wins > player2_wins:
+    print("Общий победитель: игрок 1!")
+elif player2_wins > player1_wins:
+    print("Общий победитель: игрок 2!")
+else:
+    print("Общая ничья!")
+print("=" * 40)
+
+# 10.14. Бросание кубиков тремя игроками
+print("\n10.14. Бросание кубиков тремя игроками")
+print("=" * 40)
+
+K = int(input("Сколько кубиков бросает каждый игрок? "))
+
+player_scores = [0, 0, 0]
+player_names = ["Игрок 1", "Игрок 2", "Игрок 3"]
+
+for player in range(3):
+    print(f"\n{player_names[player]}:")
+    for i in range(K):
+        roll = random.randint(1, 6)
+        player_scores[player] += roll
+        print(f"  Кубик {i+1}: {roll}")
+    print(f"  Сумма: {player_scores[player]}")
+
+max_score = max(player_scores)
+winners = [i for i, score in enumerate(player_scores) if score == max_score]
+
+if len(winners) == 1:
+    print(f"\nПобедитель: {player_names[winners[0]]} с суммой {max_score}!")
+else:
+    print(f"\nНичья между: {', '.join([player_names[i] for i in winners])} с суммой {max_score}")
+print("=" * 40)
+
+# 10.15. Относительная частота выпадения граней кубика
+print("\n10.15. Относительная частота выпадения граней кубика")
+print("=" * 40)
+
+# При 100 бросаниях
+counts = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+
+print("100 бросаний:")
+for i in range(100):
+    roll = random.randint(1, 6)
+    counts[roll] += 1
+
+for num in range(1, 7):
+    print(f"{num}: {counts[num]} ({counts[num]/100:.2%})")
+
+# При 1000 бросаниях
+counts = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+
+print("\n1000 бросаний:")
+for i in range(1000):
+    roll = random.randint(1, 6)
+    counts[roll] += 1
+
+for num in range(1, 7):
+    print(f"{num}: {counts[num]} ({counts[num]/1000:.2%})")
+print("=" * 40)
+
+# 10.16. Выбор кости домино
+print("\n10.16. Выбор кости домино")
+print("=" * 40)
+
+# Все кости домино от 0-0 до 6-6
+all_dominoes = []
+for i in range(7):
+    for j in range(i, 7):
+        all_dominoes.append((i, j))
+
+selected = random.choice(all_dominoes)
+print(f"Выбрана кость {selected[0]}-{selected[1]}")
+print("=" * 40)
+
+# 10.17. Выбор двух костей домино
+print("\n10.17. Выбор двух костей домино")
+print("=" * 40)
+
+# Выбираем две разные кости
+selected_indices = random.sample(range(len(all_dominoes)), 2)
+bone1 = all_dominoes[selected_indices[0]]
+bone2 = all_dominoes[selected_indices[1]]
+
+print(f"Выбраны кости: {bone1[0]}-{bone1[1]} и {bone2[0]}-{bone2[1]}")
+
+# Проверяем, можно ли приставить их друг к другу
+can_connect = False
+for i in range(2):
+    for j in range(2):
+        if bone1[i] == bone2[j]:
+            can_connect = True
+            break
+
+if can_connect:
+    print("Эти кости можно приставить друг к другу по правилам домино")
+else:
+    print("Эти кости нельзя приставить друг к другу")
+print("=" * 40)
+
+# 10.18. Проверка знания таблицы умножения
+print("\n10.18. Проверка знания таблицы умножения")
+print("=" * 40)
+
+# а) один вопрос
+print("а) Один вопрос:")
+a = random.randint(1, 9)
+b = random.randint(1, 9)
+correct_answer = a * b
+
+user_answer = int(input(f"Чему равно произведение {a}×{b}? "))
+
+if user_answer == correct_answer:
+    print("Правильно!")
+else:
+    print(f"Неправильно! Правильный ответ: {correct_answer}")
+
+# б) 20 вопросов
+print("\nб) 20 вопросов:")
+correct_count = 0
+incorrect_count = 0
+
+for i in range(20):
+    a = random.randint(1, 9)
+    b = random.randint(1, 9)
+    correct_answer = a * b
+    
+    user_answer = int(input(f"{i+1}. {a}×{b} = "))
+    
+    if user_answer == correct_answer:
+        correct_count += 1
+        print("  Верно!")
+    else:
+        incorrect_count += 1
+        print(f"  Неверно! Правильно: {correct_answer}")
+
+print(f"\nИтог: правильно {correct_count}, неправильно {incorrect_count}")
+
+# в) вопросы до ответа 0
+print("\nв) Вопросы до ответа 0:")
+question_num = 1
+
+while True:
+    a = random.randint(1, 9)
+    b = random.randint(1, 9)
+    correct_answer = a * b
+    
+    user_answer = int(input(f"{question_num}. {a}×{b} = "))
+    
+    if user_answer == 0:
+        print("Игра завершена.")
+        break
+    elif user_answer == correct_answer:
+        print("  Верно!")
+    else:
+        print(f"  Неверно! Правильно: {correct_answer}")
+    
+    question_num += 1
+print("=" * 40)
+
+# 10.19. Выбор карты одной масти
+print("\n10.19. Выбор карты одной масти")
+print("=" * 40)
+
+cards = ["6", "7", "8", "9", "10", "валет", "дама", "король", "туз"]
+selected_card = random.choice(cards)
+print(f"Выбрана карта: {selected_card}")
+print("=" * 40)
+
+# 10.20. Выбор карты из полной колоды
+print("\n10.20. Выбор карты из полной колоды")
+print("=" * 40)
+
+suits = ["пик", "треф", "бубен", "червей"]
+cards = ["шестерка", "семерка", "восьмерка", "девятка", "десятка", 
+         "валет", "дама", "король", "туз"]
+
+selected_suit = random.choice(suits)
+selected_card = random.choice(cards)
+
+# Склонение для бубен и червей
+if selected_suit in ["бубен", "червей"]:
+    suit_form = selected_suit
+else:
+    suit_form = selected_suit if selected_suit == "треф" else selected_suit[:-1] + "и"
+
+print(f"Выбрана {selected_card} {suit_form}")
+print("=" * 40)
+
+# 10.21. Сравнение карт двух игроков
+print("\n10.21. Сравнение карт двух игроков")
+print("=" * 40)
+
+# Создаем полную колоду
+deck = []
+for suit_idx, suit in enumerate(suits):
+    for card_idx, card in enumerate(cards):
+        deck.append((suit_idx, card_idx, card, suit))
+
+# Выбираем две разные карты
+card1, card2 = random.sample(deck, 2)
+
+print(f"Игрок 1: {card1[2]} {card1[3]}")
+print(f"Игрок 2: {card2[2]} {card2[3]}")
+
+# Сравниваем карты
+if card1[0] > card2[0]:  # сравнение по масти
+    print("Победил игрок 1 (старше масть)")
+elif card2[0] > card1[0]:
+    print("Победил игрок 2 (старше масть)")
+else:  # одинаковые масти, сравниваем достоинства
+    if card1[1] > card2[1]:
+        print("Победил игрок 1 (старше карта в одной масти)")
+    elif card2[1] > card1[1]:
+        print("Победил игрок 2 (старше карта в одной масти)")
+    else:
+        print("Ничья (одинаковые карты)")
+print("=" * 40)
+
+# 10.22. Неоднократный выбор карт
+print("\n10.22. Неоднократный выбор карт")
+print("=" * 40)
+
+rounds = int(input("Сколько раундов сыграем? "))
+player1_wins = 0
+player2_wins = 0
+
+for round_num in range(1, rounds + 1):
+    print(f"\nРаунд {round_num}:")
+    
+    # Выбираем две разные карты
+    card1, card2 = random.sample(deck, 2)
+    
+    print(f"  Игрок 1: {card1[2]} {card1[3]}")
+    print(f"  Игрок 2: {card2[2]} {card2[3]}")
+    
+    # Определяем победителя раунда
+    if card1[0] > card2[0]:
+        player1_wins += 1
+        print("  Победил игрок 1")
+    elif card2[0] > card1[0]:
+        player2_wins += 1
+        print("  Победил игрок 2")
+    else:
+        if card1[1] > card2[1]:
+            player1_wins += 1
+            print("  Победил игрок 1")
+        elif card2[1] > card1[1]:
+            player2_wins += 1
+            print("  Победил игрок 2")
+        else:
+            print("  Ничья")
+
+print(f"\nИтог после {rounds} раундов:")
+print(f"Игрок 1: {player1_wins} побед")
+print(f"Игрок 2: {player2_wins} побед")
+
+if player1_wins > player2_wins:
+    print("Общий победитель: игрок 1!")
+elif player2_wins > player1_wins:
+    print("Общий победитель: игрок 2!")
+else:
+    print("Общая ничья!")
+print("=" * 40)
+
+# 10.23. Игра с козырной мастью
+print("\n10.23. Игра с козырной мастью")
+print("=" * 40)
+
+# Выбираем козырную масть
+trump_suit_idx = random.randint(0, 3)
+trump_suit = suits[trump_suit_idx]
+print(f"Козырная масть: {trump_suit}")
+
+# Выбираем две карты
+card1, card2 = random.sample(deck, 2)
+
+print(f"\nИгрок 1: {card1[2]} {card1[3]}")
+print(f"Игрок 2: {card2[2]} {card2[3]}")
+
+# Сравниваем с учетом козыря
+if card1[0] == trump_suit_idx and card2[0] != trump_suit_idx:
+    print("Победил игрок 1 (у него козырь)")
+elif card2[0] == trump_suit_idx and card1[0] != trump_suit_idx:
+    print("Победил игрок 2 (у него козырь)")
+elif card1[0] == trump_suit_idx and card2[0] == trump_suit_idx:
+    # Оба козыри, сравниваем достоинства
+    if card1[1] > card2[1]:
+        print("Победил игрок 1 (старший козырь)")
+    elif card2[1] > card1[1]:
+        print("Победил игрок 2 (старший козырь)")
+    else:
+        print("Ничья (одинаковые козыри)")
+else:
+    # Оба некозыри, сравниваем как обычно
+    if card1[0] > card2[0]:
+        print("Победил игрок 1 (старше масть)")
+    elif card2[0] > card1[0]:
+        print("Победил игрок 2 (старше масть)")
+    else:
+        if card1[1] > card2[1]:
+            print("Победил игрок 1 (старше карта в одной масти)")
+        elif card2[1] > card1[1]:
+            print("Победил игрок 2 (старше карта в одной масти)")
+        else:
+            print("Ничья (одинаковые карты)")
+print("=" * 40)
+
+# 10.24. Шахматные задачи
+print("\n10.24. Шахматные задачи")
+print("=" * 40)
+
+def generate_valid_position():
+    """Генерация валидной позиции на шахматной доске"""
+    return random.randint(1, 8), random.randint(1, 8)
+
+# а) Ладья не угрожает полю
+print("а) Ладья не угрожает полю")
+while True:
+    a, b = generate_valid_position()
+    c, d = generate_valid_position()
+    # Ладья угрожает, если на одной вертикали или горизонтали
+    if not (a == c or b == d):
+        print(f"Ладья на ({a},{b}) не угрожает полю ({c},{d})")
+        break
+
+# б) Слон не угрожает полю
+print("\nб) Слон не угрожает полю")
+while True:
+    a, b = generate_valid_position()
+    c, d = generate_valid_position()
+    # Слон угрожает, если на одной диагонали
+    if abs(a - c) != abs(b - d):
+        print(f"Слон на ({a},{b}) не угрожает полю ({c},{d})")
+        break
+
+# в) Король может попасть на поле за один ход
+print("\nв) Король может попасть на поле за один ход")
+while True:
+    a, b = generate_valid_position()
+    c, d = generate_valid_position()
+    # Король может ходить на 1 клетку в любом направлении
+    if max(abs(a - c), abs(b - d)) == 1:
+        print(f"Король на ({a},{b}) может попасть на ({c},{d}) за один ход")
+        break
+
+# г) Ферзь не угрожает полю
+print("\nг) Ферзь не угрожает полю")
+while True:
+    a, b = generate_valid_position()
+    c, d = generate_valid_position()
+    # Ферзь угрожает, если на одной вертикали, горизонтали или диагонали
+    if not (a == c or b == d or abs(a - c) == abs(b - d)):
+        print(f"Ферзь на ({a},{b}) не угрожает полю ({c},{d})")
+        break
+
+print("=" * 40)
