@@ -1,0 +1,655 @@
+10.26. Шахматные задачи
+python
+import random
+
+# Генерация случайных позиций
+a = random.randint(1, 8)
+b = random.randint(1, 8)
+c = random.randint(1, 8)
+d = random.randint(1, 8)
+e = random.randint(1, 8)
+f = random.randint(1, 8)
+
+print(f"Белая фигура на поле ({a}, {b})")
+print(f"Черная фигура на поле ({c}, {d})")
+print(f"Целевое поле для белой фигуры ({e}, {f})")
+
+# Функции проверки возможных ходов
+def can_rook_move(x1, y1, x2, y2):
+    """Может ли ладья пойти с (x1,y1) на (x2,y2)"""
+    return x1 == x2 or y1 == y2
+
+def can_bishop_move(x1, y1, x2, y2):
+    """Может ли слон пойти с (x1,y1) на (x2,y2)"""
+    return abs(x1 - x2) == abs(y1 - y2)
+
+def can_queen_move(x1, y1, x2, y2):
+    """Может ли ферзь пойти с (x1,y1) на (x2,y2)"""
+    return can_rook_move(x1, y1, x2, y2) or can_bishop_move(x1, y1, x2, y2)
+
+def can_knight_move(x1, y1, x2, y2):
+    """Может ли конь пойти с (x1,y1) на (x2,y2)"""
+    dx = abs(x1 - x2)
+    dy = abs(y1 - y2)
+    return (dx == 1 and dy == 2) or (dx == 2 and dy == 1)
+
+def can_king_move(x1, y1, x2, y2):
+    """Может ли король пойти с (x1,y1) на (x2,y2)"""
+    dx = abs(x1 - x2)
+    dy = abs(y1 - y2)
+    return dx <= 1 and dy <= 1
+
+# Проверка, бьет ли черная фигура поле (e,f)
+def black_attacks(white_piece, black_piece, e, f):
+    """Проверяет, бьет ли черная фигура поле (e,f)"""
+    x1, y1 = c, d  # позиция черной фигуры
+    if black_piece == "rook":
+        return can_rook_move(x1, y1, e, f)
+    elif black_piece == "bishop":
+        return can_bishop_move(x1, y1, e, f)
+    elif black_piece == "queen":
+        return can_queen_move(x1, y1, e, f)
+    elif black_piece == "knight":
+        return can_knight_move(x1, y1, e, f)
+    elif black_piece == "king":
+        return can_king_move(x1, y1, e, f)
+    return False
+
+# Проверка, может ли белая фигура пойти на (e,f)
+def white_can_move(white_piece, e, f):
+    """Проверяет, может ли белая фигура пойти на (e,f)"""
+    x1, y1 = a, b  # позиция белой фигуры
+    if white_piece == "rook":
+        return can_rook_move(x1, y1, e, f)
+    elif white_piece == "bishop":
+        return can_bishop_move(x1, y1, e, f)
+    elif white_piece == "queen":
+        return can_queen_move(x1, y1, e, f)
+    elif white_piece == "knight":
+        return can_knight_move(x1, y1, e, f)
+    elif white_piece == "king":
+        return can_king_move(x1, y1, e, f)
+    return False
+
+# Функция для проверки всех вариантов
+def check_variant(white, black):
+    """Проверяет, может ли белая фигура пойти на (e,f), не попав под удар"""
+    can_move = white_can_move(white, e, f)
+    attacked = black_attacks(white, black, e, f)
+    
+    if can_move and not attacked:
+        return f"Белая {white} МОЖЕТ пойти на ({e},{f}), не попав под удар черной {black}"
+    elif can_move and attacked:
+        return f"Белая {white} МОЖЕТ пойти на ({e},{f}), но попадет под удар черной {black}"
+    else:
+        return f"Белая {white} НЕ МОЖЕТ пойти на ({e},{f})"
+
+# Проверка всех вариантов из задания
+variants = [
+    ("ладья", "ладья"),
+    ("ладья", "ферзь"),
+    ("ладья", "конь"),
+    ("ладья", "слон"),
+    ("ферзь", "ферзь"),
+    ("ферзь", "ладья"),
+    ("ферзь", "конь"),
+    ("ферзь", "слон"),
+    ("конь", "конь"),
+    ("конь", "ладья"),
+    ("конь", "ферзь"),
+    ("конь", "слон"),
+    ("слон", "слон"),
+    ("слон", "ферзь"),
+    ("слон", "конь"),
+    ("слон", "ладья"),
+    ("король", "слон"),
+    ("король", "ферзь"),
+    ("король", "конь"),
+    ("король", "ладья"),
+]
+
+print("\nРезультаты проверки:")
+print("=" * 50)
+for white, black in variants:
+    result = check_variant(white, black)
+    print(result)
+
+# Дополнительная проверка: не стоит ли белая фигура под шахом сейчас
+print("\n" + "=" * 50)
+print("Дополнительная информация:")
+for white, black in [("ладья", "ладья")]:  # Проверим один вариант
+    if black_attacks(white, black, a, b):
+        print(f"ВНИМАНИЕ! Белая {white} СЕЙЧАС находится под ударом черной {black}!")
+10.27. Метод Монте-Карло для вычисления площади
+а) Половина синусоиды (0 ≤ x ≤ π)
+python
+import random
+import math
+
+def monte_carlo_sinusoid(n=1000000):
+    """Вычисление площади под половиной синусоиды методом Монте-Карло"""
+    count_inside = 0
+    
+    for _ in range(n):
+        x = random.uniform(0, math.pi)
+        y = random.uniform(0, 1)
+        
+        if y <= math.sin(x):
+            count_inside += 1
+    
+    rectangle_area = math.pi * 1  # площадь прямоугольника 0≤x≤π, 0≤y≤1
+    estimated_area = (count_inside / n) * rectangle_area
+    exact_area = 2  # ∫sin(x)dx от 0 до π = 2
+    
+    return estimated_area, exact_area
+
+area, exact = monte_carlo_sinusoid()
+print(f"Площадь под половиной синусоиды (0≤x≤π):")
+print(f"  Метод Монте-Карло: {area:.6f}")
+print(f"  Точное значение: {exact:.6f}")
+print(f"  Погрешность: {abs(area - exact):.6f}")
+б) Квадратная парабола y = x², 0 ≤ x ≤ 3
+python
+def monte_carlo_parabola(n=1000000):
+    """Вычисление площади под параболой y=x² от 0 до 3"""
+    count_inside = 0
+    
+    for _ in range(n):
+        x = random.uniform(0, 3)
+        y = random.uniform(0, 9)  # y от 0 до 9 (максимум x² при x=3)
+        
+        if y <= x**2:
+            count_inside += 1
+    
+    rectangle_area = 3 * 9  # площадь прямоугольника 0≤x≤3, 0≤y≤9
+    estimated_area = (count_inside / n) * rectangle_area
+    exact_area = 9  # ∫x²dx от 0 до 3 = 27/3 = 9
+    
+    return estimated_area, exact_area
+
+area, exact = monte_carlo_parabola()
+print(f"\nПлощадь под параболой y=x² (0≤x≤3):")
+print(f"  Метод Монте-Карло: {area:.6f}")
+print(f"  Точное значение: {exact:.6f}")
+print(f"  Погрешность: {abs(area - exact):.6f}")
+10.28. Вычисление π методом Монте-Карло
+python
+import random
+
+def estimate_pi(accuracy=0.0001, max_iterations=10000000):
+    """Вычисление π методом Монте-Карло с заданной точностью"""
+    count_inside = 0
+    total = 0
+    pi_estimate = 0
+    prev_estimate = 0
+    
+    while True:
+        total += 1
+        x = random.uniform(-1, 1)
+        y = random.uniform(-1, 1)
+        
+        if x**2 + y**2 <= 1:
+            count_inside += 1
+        
+        # Обновляем оценку π каждые 1000 точек
+        if total % 1000 == 0:
+            prev_estimate = pi_estimate
+            pi_estimate = 4 * count_inside / total
+            
+            # Проверяем достигнута ли требуемая точность
+            if abs(pi_estimate - prev_estimate) < accuracy and total > 10000:
+                break
+        
+        if total >= max_iterations:
+            break
+    
+    return pi_estimate, total
+
+pi_est, iterations = estimate_pi(accuracy=0.0001)
+print(f"\nВычисление числа π методом Монте-Карло:")
+print(f"  Оценка π: {pi_est:.6f}")
+print(f"  Точное π: {math.pi:.6f}")
+print(f"  Погрешность: {abs(pi_est - math.pi):.6f}")
+print(f"  Количество итераций: {iterations}")
+print(f"  Точек внутри круга: {int(iterations * pi_est / 4)}")
+11.1. Заполнение массива фиксированными значениями
+python
+# а) Заполнение массива фиксированными значениями
+array = [37, 0, 50, 46, 34, 46, 0, 13]
+print("Массив:", array)
+print("Длина массива:", len(array))
+11.2. Заполнение массива с клавиатуры
+python
+# б) Заполнение массива с клавиатуры
+n = 10
+array = []
+print(f"Введите {n} элементов массива:")
+for i in range(n):
+    value = int(input(f"Элемент {i+1}: "))
+    array.append(value)
+
+print("Полученный массив:", array)
+11.3. Заполнение массива случайными числами
+python
+import random
+
+# а) Вещественные значения от 0 до 1
+array_a = [random.random() for _ in range(15)]
+print("а) Вещественные от 0 до 1:")
+print(array_a)
+
+# б) Вещественные значения от 22 до 23
+array_b = [random.uniform(22, 23) for _ in range(15)]
+print("\nб) Вещественные от 22 до 23:")
+print(array_b)
+
+# в) Вещественные значения от 0 до 10
+array_c = [random.uniform(0, 10) for _ in range(15)]
+print("\nв) Вещественные от 0 до 10:")
+print(array_c)
+
+# г) Вещественные значения от -50 до 50
+array_d = [random.uniform(-50, 50) for _ in range(15)]
+print("\nг) Вещественные от -50 до 50:")
+print(array_d)
+
+# д) Целые значения от 0 до 10 включительно
+array_e = [random.randint(0, 10) for _ in range(15)]
+print("\nд) Целые от 0 до 10 включительно:")
+print(array_e)
+11.4. Заполнение массива символами '#'
+python
+array = ['#' for _ in range(20)]
+print("Массив из 20 символов '#':")
+print(''.join(array))  # Выводим как строку для наглядности
+print("Как список:", array)
+11.5. Росты 12 человек
+python
+import random
+
+heights = [random.randint(163, 190) for _ in range(12)]
+print("Росты 12 человек (163-190 см):")
+print(heights)
+print(f"Средний рост: {sum(heights)/len(heights):.1f} см")
+11.6. Веса 20 человек
+python
+weights = [random.randint(50, 100) for _ in range(20)]
+print("Веса 20 человек (50-100 кг):")
+print(weights)
+print(f"Средний вес: {sum(weights)/len(weights):.1f} кг")
+11.7. Заполнение массива n случайными числами от a до b
+python
+def fill_random_array(n, a, b):
+    """Заполняет массив из n элементов случайными числами от a до b включительно"""
+    import random
+    return [random.randint(a, b) for _ in range(n)]
+
+# Пример использования
+n = 10
+a = 1
+b = 100
+array = fill_random_array(n, a, b)
+print(f"Массив из {n} элементов от {a} до {b}:")
+print(array)
+11.8. Вывод элемента массива по индексу
+python
+array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+index = int(input("Введите индекс элемента (0-9): "))
+if 0 <= index < len(array):
+    print(f"Элемент с индексом {index}: {array[index]}")
+else:
+    print(f"Ошибка: индекс должен быть от 0 до {len(array)-1}")
+11.9. Вывод массива в обратном порядке
+python
+array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print("Исходный массив:", array)
+print("В обратном порядке:", array[::-1])
+
+# Альтернативный способ
+print("В обратном порядке (альтернативный вывод):")
+for i in range(len(array)-1, -1, -1):
+    print(array[i], end=" ")
+print()
+11.10. Заполнение массива числами от 1 до 12
+python
+array = list(range(1, 13))
+print("Массив чисел от 1 до 12:")
+print(array)
+11.11. Заполнение массива + добавление чисел
+python
+# Создаем массив из 25 первых натуральных чисел
+array = list(range(1, 26))
+print("Первые 25 натуральных чисел:")
+print(array)
+
+# Добавляем числа 100 и 200
+array.append(100)
+array.append(200)
+print("\nПосле добавления 100 и 200:")
+print(array)
+11.12. Заполнение массива числами от 20 до 1
+python
+array = list(range(20, 0, -1))
+print("Массив чисел от 20 до 1:")
+print(array)
+11.13. Заполнение массива степенями числа 2
+python
+n = 10  # например, первые 10 степеней
+array = [2**i for i in range(1, n+1)]
+print(f"Первые {n} степеней числа 2:")
+print(array)
+11.14. Заполнение массива цифрами числа в обратном порядке
+python
+def number_to_reverse_array(n, max_digits=6):
+    """Преобразует число в массив цифр в обратном порядке"""
+    digits = []
+    while n > 0:
+        digits.append(n % 10)
+        n //= 10
+    
+    # Дополняем нулями до max_digits
+    while len(digits) < max_digits:
+        digits.append(0)
+    
+    return digits
+
+# Пример использования
+n = int(input("Введите натуральное число (≤999999): "))
+array = number_to_reverse_array(n, 6)
+print(f"Цифры числа {n} в обратном порядке:")
+print(array)
+print("Обычный порядок цифр:", array[::-1])
+11.15. Заполнение массива последовательностями
+а) Убывающая последовательность
+python
+# Например: 10, 9, 8, 7, 6, 5, 4, 3
+array = list(range(10, 2, -1))
+print("Убывающая последовательность:")
+print(array)
+б) Возрастающая последовательность
+python
+# Например: 1, 2, 3, 4, 5, 6, 7, 8
+array = list(range(1, 9))
+print("Возрастающая последовательность:")
+print(array)
+11.16. Арифметическая и геометрическая прогрессии
+а) Арифметическая прогрессия
+python
+def arithmetic_progression(a, d, n):
+    """Возвращает первые n членов арифметической прогрессии"""
+    return [a + i*d for i in range(n)]
+
+a = 5  # первый член
+d = 3  # разность
+n = 10  # количество членов
+array = arithmetic_progression(a, d, n)
+print(f"Первые {n} членов арифметической прогрессии (a={a}, d={d}):")
+print(array)
+б) Геометрическая прогрессия
+python
+def geometric_progression(a, q, n):
+    """Возвращает первые n членов геометрической прогрессии"""
+    return [a * (q**i) for i in range(n)]
+
+a = 2  # первый член
+q = 3  # знаменатель
+n = 20  # количество членов
+array = geometric_progression(a, q, n)
+print(f"\nПервые {n} членов геометрической прогрессии (a={a}, q={q}):")
+print(array)
+11.17. Числа Фибоначчи
+python
+def fibonacci(n):
+    """Возвращает первые n чисел Фибоначчи"""
+    if n == 0:
+        return []
+    elif n == 1:
+        return [1]
+    elif n == 2:
+        return [1, 1]
+    
+    fib = [1, 1]
+    for i in range(2, n):
+        fib.append(fib[i-1] + fib[i-2])
+    return fib
+
+array = fibonacci(10)
+print("Первые 10 чисел Фибоначчи:")
+print(array)
+11.18. Специальные последовательности
+а) Числа, делящиеся на 13 или 17, начиная с 300
+python
+def find_numbers(count=20):
+    """Находит первые count чисел, делящихся на 13 или 17, начиная с 300"""
+    result = []
+    num = 300
+    while len(result) < count:
+        if num % 13 == 0 or num % 17 == 0:
+            result.append(num)
+        num += 1
+    return result
+
+array = find_numbers(20)
+print("Первые 20 чисел ≥300, делящихся на 13 или 17:")
+print(array)
+б) Первые 30 простых чисел
+python
+def is_prime(n):
+    """Проверяет, является ли число простым"""
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def first_primes(count):
+    """Находит первые count простых чисел"""
+    primes = []
+    num = 2
+    while len(primes) < count:
+        if is_prime(num):
+            primes.append(num)
+        num += 1
+    return primes
+
+array = first_primes(30)
+print("\nПервые 30 простых чисел:")
+print(array)
+11.19. Первые 10 простых чисел, начиная с 100
+python
+def primes_from_100(count=10):
+    """Находит первые count простых чисел, начиная с 100"""
+    primes = []
+    num = 100
+    while len(primes) < count:
+        if is_prime(num):
+            primes.append(num)
+        num += 1
+    return primes
+
+array = primes_from_100(10)
+print("Первые 10 простых чисел, начиная с 100:")
+print(array)
+11.20. Проверка знания таблицы умножения
+python
+import random
+
+def multiplication_test():
+    """Тест на знание таблицы умножения"""
+    answers = []
+    correct_answers = []
+    
+    print("ТЕСТ НА ЗНАНИЕ ТАБЛИЦЫ УМНОЖЕНИЯ")
+    print("=" * 40)
+    
+    for i in range(20):
+        a = random.randint(2, 9)
+        b = random.randint(2, 9)
+        correct = a * b
+        
+        print(f"\nВопрос {i+1}: Чему равно произведение {a} на {b}?")
+        answer = int(input("Ваш ответ: "))
+        
+        answers.append(answer)
+        correct_answers.append(correct)
+        
+        if answer == correct:
+            print("Верно! ✓")
+        else:
+            print(f"Неверно. Правильный ответ: {correct}")
+    
+    # Подсчет результатов
+    correct_count = sum(1 for i in range(20) if answers[i] == correct_answers[i])
+    score = correct_count / 20 * 100
+    
+    print("\n" + "=" * 40)
+    print("РЕЗУЛЬТАТЫ ТЕСТА:")
+    print(f"Правильных ответов: {correct_count} из 20")
+    print(f"Оценка: {score:.1f}%")
+    
+    return answers, correct_answers, score
+
+# Запуск теста
+answers_array, correct_array, score = multiplication_test()
+print(f"\nМассив ответов пользователя: {answers_array}")
+print(f"Массив правильных ответов: {correct_array}")
+11.21. Массив с неповторяющимися числами
+python
+import random
+
+def unique_random_array(size, min_val=1, max_val=100):
+    """Создает массив заданного размера с неповторяющимися случайными числами"""
+    if max_val - min_val + 1 < size:
+        raise ValueError("Диапазон значений слишком мал для заданного размера массива")
+    
+    numbers = set()
+    while len(numbers) < size:
+        numbers.add(random.randint(min_val, max_val))
+    
+    return list(numbers)
+
+# Создание массива из 20 неповторяющихся чисел от 1 до 100
+array = unique_random_array(20, 1, 100)
+print("Массив из 20 неповторяющихся чисел (1-100):")
+print(sorted(array))  # Выводим отсортированным для наглядности
+print(f"Длина массива: {len(array)}")
+print(f"Уникальных значений: {len(set(array))}")
+11.22. Вывод элементов массива с условиями
+а) Все неотрицательные элементы
+python
+array = [5, -3, 0, 8, -1, 10, -7, 2, -4, 6]
+print("Исходный массив:", array)
+print("Неотрицательные элементы:", [x for x in array if x >= 0])
+б) Все элементы, не превышающие 100
+python
+array = [50, 120, 75, 200, 30, 99, 150, 80, 101, 60]
+print("\nИсходный массив:", array)
+print("Элементы ≤ 100:", [x for x in array if x <= 100])
+11.23. Вывод четных элементов и элементов, оканчивающихся нулем
+а) Все четные элементы
+python
+array = [15, 24, 37, 42, 58, 63, 71, 89, 96, 100]
+print("Исходный массив:", array)
+print("Четные элементы:", [x for x in array if x % 2 == 0])
+б) Все элементы, оканчивающиеся нулем
+python
+array = [10, 25, 30, 47, 50, 68, 70, 89, 100, 125]
+print("\nИсходный массив:", array)
+print("Элементы, оканчивающиеся нулем:", [x for x in array if x % 10 == 0])
+11.24. Вывод элементов по количеству цифр
+а) Двузначные числа
+python
+array = [5, 23, 456, 78, 9, 123, 45, 678, 90, 1]
+print("Исходный массив:", array)
+print("Двузначные числа:", [x for x in array if 10 <= x <= 99])
+б) Трехзначные числа
+python
+array = [5, 23, 456, 78, 9, 123, 45, 678, 90, 1000]
+print("\nИсходный массив:", array)
+print("Трехзначные числа:", [x for x in array if 100 <= x <= 999])
+11.25. Выборка элементов
+а) Второй, четвертый и т.д. элементы
+python
+array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+print("Исходный массив:", array)
+print("Элементы с четными индексами (начиная с 0):")
+result = [array[i] for i in range(len(array)) if i % 2 == 0]
+print(result)
+б) Третий, шестой и т.д. элементы
+python
+array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+print("\nИсходный массив:", array)
+print("Каждый третий элемент (начиная с индекса 2):")
+result = [array[i] for i in range(2, len(array), 3)]
+print(result)
+11.26. Вывод сначала неотрицательных, затем отрицательных
+python
+array = [5, -3, 8, -1, 0, 4, -7, 2, -9, 6]
+print("Исходный массив:", array)
+
+non_negative = [x for x in array if x >= 0]
+negative = [x for x in array if x < 0]
+
+print("Неотрицательные элементы:", non_negative)
+print("Отрицательные элементы:", negative)
+print("Объединенный вывод:", non_negative + negative)
+11.27. Вывод сначала четных, затем нечетных
+python
+array = [15, 24, 37, 42, 58, 63, 71, 89, 96, 100]
+print("Исходный массив:", array)
+
+even = [x for x in array if x % 2 == 0]
+odd = [x for x in array if x % 2 != 0]
+
+print("Четные элементы:", even)
+print("Нечетные элементы:", odd)
+print("Объединенный вывод:", even + odd)
+11.28. Номера элементов, оканчивающихся нулем
+python
+array = [10, 25, 30, 47, 50, 68, 70, 89, 100, 125]
+print("Исходный массив:", array)
+
+indices = [i for i, x in enumerate(array) if x % 10 == 0]
+print("Индексы элементов, оканчивающихся нулем:", indices)
+print("Эти элементы:", [array[i] for i in indices])
+11.29. Дни января без осадков
+python
+import random
+
+# Генерация случайных данных об осадках за январь (31 день)
+# 0 означает отсутствие осадков, положительные числа - количество осадков
+precipitation = [random.randint(0, 20) for _ in range(31)]
+
+print("Количество осадков по дням января:")
+for i, p in enumerate(precipitation, 1):
+    print(f"{i:2} января: {p:2} мм", end=" | ")
+    if i % 5 == 0:
+        print()
+
+# Находим дни без осадков
+dry_days = [i for i, p in enumerate(precipitation, 1) if p == 0]
+
+print(f"\nДней без осадков: {len(dry_days)}")
+print("Это следующие дни:", dry_days)
+11.30. Футбольные команды с менее чем 3 победами
+python
+import random
+
+# Генерация случайного количества побед для 20 команд
+# От 0 до 10 побед за сезон
+wins = [random.randint(0, 10) for _ in range(20)]
+
+print("Количество побед 20 футбольных команд:")
+for i, w in enumerate(wins, 1):
+    print(f"Команда {i:2}: {w} побед", end=" | ")
+    if i % 5 == 0:
+        print()
+
+# Находим команды с менее чем 3 победами
+teams_with_few_wins = [i for i, w in enumerate(wins, 1) if w < 3]
+
+print(f"\nКоманд с менее чем 3 победами: {len(teams_with_few_wins)}")
+print("Номера этих команд:", teams_with_few_wins)
+print("Их результаты:", [wins[i-1] for i in teams_with_few_wins])
