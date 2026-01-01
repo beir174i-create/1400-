@@ -1,0 +1,653 @@
+
+
+Задача 11.31
+python
+# Вывод элементов на четных местах, затем на нечетных
+def print_even_odd(arr):
+    print("Элементы на четных местах:")
+    for i in range(len(arr)):
+        if (i + 1) % 2 == 0:  # i+1 потому что индексация с 0
+            print(arr[i], end=" ")
+    
+    print("\nЭлементы на нечетных местах:")
+    for i in range(len(arr)):
+        if (i + 1) % 2 != 0:
+            print(arr[i], end=" ")
+
+# Пример использования
+arr = [1, 2, 3, 4, 5, 6, 7, 8]
+print_even_odd(arr)
+Задача 11.32а
+python
+# Замена отрицательных элементов их абсолютной величиной
+def replace_negative_with_abs(arr):
+    for i in range(len(arr)):
+        if arr[i] < 0:
+            arr[i] = abs(arr[i])
+    return arr
+
+# Пример использования
+arr = [1.5, -2.3, 4.7, -3.1, 0, 5.2]
+result = replace_negative_with_abs(arr)
+print(result)
+2. Как я могу помочь:
+Выберите конкретную задачу, и я напишу для нее решение на Python
+
+Объясню алгоритм для любой задачи из списка
+
+Покажу шаблоны решения для типичных категорий задач:
+
+Поиск сумм/произведений
+
+Подсчет элементов по условию
+
+Поиск минимума/максимума
+
+Преобразование элементов
+
+Анализ последовательностей
+
+3. Категории задач в вашем списке:
+Вывод и преобразование (11.31-11.40)
+
+Вычисление сумм и средних (11.41-11.52)
+
+Статистический анализ (11.53-11.76)
+
+Подсчет элементов (11.77-11.86)
+
+Работа со средними значениями (11.87-11.104)
+
+Анализ последовательностей (11.105-11.112)
+
+Поиск экстремумов (11.113-11.149)
+
+Какую конкретную задачу или тип задач вы хотите решить? Или вам нужна помощь с пониманием какого-то конкретного алгоритма?
+
+Реши их все по очереди
+Я решу задачи по порядку, начиная с 11.31. Поскольку задач очень много, я буду давать решения постепенно.
+
+Задача 11.31
+python
+def task_11_31(arr):
+    """Вывести элементы на четных местах, затем на нечетных"""
+    print("Элементы на четных местах:", end=" ")
+    for i in range(1, len(arr), 2):  # индексы 1, 3, 5...
+        print(arr[i], end=" ")
+    
+    print("\nЭлементы на нечетных местах:", end=" ")
+    for i in range(0, len(arr), 2):  # индексы 0, 2, 4...
+        print(arr[i], end=" ")
+    print()
+
+# Пример использования
+# task_11_31([10, 20, 30, 40, 50, 60])
+Задача 11.32
+python
+import math
+
+def task_11_32(arr):
+    """а) Отрицательные элементы заменить абсолютной величиной
+       б) Элементы с нечетными номерами заменить квадратным корнем"""
+    result = arr.copy()
+    
+    # а) Замена отрицательных элементов
+    for i in range(len(result)):
+        if result[i] < 0:
+            result[i] = abs(result[i])
+    
+    # б) Замена элементов с нечетными номерами
+    for i in range(len(result)):
+        if (i + 1) % 2 != 0:  # нечетные номера (индексация с 1)
+            result[i] = math.sqrt(result[i]) if result[i] >= 0 else math.nan
+    
+    return result
+
+# Пример использования
+# print(task_11_32([4, -9, 16, -25, 36]))
+Задача 11.33
+python
+import math
+
+def task_11_33(arr):
+    """а) Элементы >10 заменить квадратным корнем
+       б) Элементы с четными номерами заменить на ???"""
+    result = arr.copy()
+    
+    # а) Замена элементов >10
+    for i in range(len(result)):
+        if result[i] > 10:
+            result[i] = math.sqrt(result[i])
+    
+    # б) В условии не указано, на что заменить, предположим на 0
+    for i in range(len(result)):
+        if (i + 1) % 2 == 0:  # четные номера
+            result[i] = 0  # или другое значение по условию
+    
+    return result
+Задача 11.34
+python
+def task_11_34(arr, k1, k2):
+    """а) Из положительных вычесть элемент k1, из остальных - k2
+       б) Нечетные номера увеличить на 1, четные уменьшить на 1"""
+    result = arr.copy()
+    
+    # а)
+    for i in range(len(result)):
+        if result[i] > 0:
+            result[i] -= arr[k1] if 0 <= k1 < len(arr) else 0
+        else:
+            result[i] -= arr[k2] if 0 <= k2 < len(arr) else 0
+    
+    # б) В задаче указано уменьшить на что-то, но не указано на сколько
+    # Предположим уменьшить на 1
+    for i in range(len(result)):
+        if (i + 1) % 2 != 0:  # нечетные номера
+            result[i] += 1
+        else:  # четные номера
+            result[i] -= 1
+    
+    return result
+Задача 11.35
+python
+def task_11_35(arr, m1, m2):
+    """а) К отрицательным прибавить m1, к остальным - m2
+       б) Четные удвоить, нечетные уменьшить на 1"""
+    result = arr.copy()
+    
+    # а)
+    for i in range(len(result)):
+        if result[i] < 0:
+            result[i] += arr[m1] if 0 <= m1 < len(arr) else 0
+        else:
+            result[i] += arr[m2] if 0 <= m2 < len(arr) else 0
+    
+    # б)
+    for i in range(len(result)):
+        if (i + 1) % 2 == 0:  # четные номера
+            result[i] *= 2
+        else:  # нечетные номера
+            result[i] -= 1
+    
+    return result
+Задача 11.36
+python
+def task_11_36(arr, k1, n):
+    """а) Из положительных вычесть элемент k1, из отрицательных - n
+       б) К нулевым прибавить n, из положительных вычесть a, к отрицательным прибавить b"""
+    result = arr.copy()
+    
+    # а)
+    for i in range(len(result)):
+        if result[i] > 0:
+            result[i] -= arr[k1] if 0 <= k1 < len(arr) else 0
+        elif result[i] < 0:
+            result[i] -= n
+    
+    # б) Нужны параметры a и b
+    def task_11_36_b(arr, n, a, b):
+        result = arr.copy()
+        for i in range(len(result)):
+            if result[i] == 0:
+                result[i] += n
+            elif result[i] > 0:
+                result[i] -= a
+            else:
+                result[i] += b
+        return result
+    
+    return result
+Задача 11.37
+python
+def task_11_37(arr, a1, b):
+    """а) К отрицательным прибавить a1, из нулевых вычесть b
+       б) Из положительных вычесть a, из отрицательных вычесть b, к нулевым прибавить c"""
+    result = arr.copy()
+    
+    # а)
+    for i in range(len(result)):
+        if result[i] < 0:
+            result[i] += arr[a1] if 0 <= a1 < len(arr) else 0
+        elif result[i] == 0:
+            result[i] -= b
+    
+    # б) Нужны параметры a, b, c
+    def task_11_37_b(arr, a, b, c):
+        result = arr.copy()
+        for i in range(len(result)):
+            if result[i] > 0:
+                result[i] -= a
+            elif result[i] < 0:
+                result[i] -= b
+            else:
+                result[i] += c
+        return result
+    
+    return result
+Задача 11.38
+python
+def task_11_38(arr):
+    """а) Элементы, оканчивающиеся на 4, уменьшить вдвое
+       б) Четные заменить квадратами, нечетные удвоить
+       в) Четные элементы увеличить на a, из элементов с четными номерами вычесть b"""
+    result = arr.copy()
+    
+    # а)
+    for i in range(len(result)):
+        if abs(result[i]) % 10 == 4:
+            result[i] //= 2  # для целых чисел
+    
+    # б)
+    result_b = arr.copy()
+    for i in range(len(result_b)):
+        if result_b[i] % 2 == 0:
+            result_b[i] = result_b[i] ** 2
+        else:
+            result_b[i] *= 2
+    
+    # в) Нужны параметры a и b
+    def task_11_38_c(arr, a, b):
+        result = arr.copy()
+        for i in range(len(result)):
+            if result[i] % 2 == 0:  # четные элементы
+                result[i] += a
+            if (i + 1) % 2 == 0:  # элементы с четными номерами
+                result[i] -= b
+        return result
+    
+    return result, result_b
+Задача 11.39
+python
+def task_11_39(arr):
+    """а) Элементы, кратные 10, заменить нулем
+       б) Нечетные удвоить, четные уменьшить вдвое
+       в) Нечетные элементы уменьшить на m, элементы с нечетными номерами увеличить на n"""
+    result = arr.copy()
+    
+    # а)
+    for i in range(len(result)):
+        if result[i] % 10 == 0:
+            result[i] = 0
+    
+    # б)
+    result_b = arr.copy()
+    for i in range(len(result_b)):
+        if result_b[i] % 2 != 0:
+            result_b[i] *= 2
+        else:
+            result_b[i] //= 2
+    
+    # в) Нужны параметры m и n
+    def task_11_39_c(arr, m, n):
+        result = arr.copy()
+        for i in range(len(result)):
+            if result[i] % 2 != 0:  # нечетные элементы
+                result[i] -= m
+            if (i + 1) % 2 != 0:  # элементы с нечетными номерами
+                result[i] += n
+        return result
+    
+    return result, result_b
+Задача 11.40
+python
+import math
+
+def task_11_40():
+    """а) Квадратный корень из любого элемента
+       б) Среднее арифметическое двух любых элементов"""
+    
+    def sqrt_of_element(arr, index):
+        """а) Квадратный корень из элемента с индексом index"""
+        if 0 <= index < len(arr):
+            return math.sqrt(arr[index]) if arr[index] >= 0 else math.nan
+        return None
+    
+    def average_of_two(arr, index1, index2):
+        """б) Среднее арифметическое двух элементов"""
+        if 0 <= index1 < len(arr) and 0 <= index2 < len(arr):
+            return (arr[index1] + arr[index2]) / 2
+        return None
+    
+    return sqrt_of_element, average_of_two
+
+# Пример использования
+# sqrt_func, avg_func = task_11_40()
+# arr = [4, 9, 16, 25]
+# print(sqrt_func(arr, 2))  # корень из arr[2] = 4.0
+# print(avg_func(arr, 0, 3))  # среднее arr[0] и arr[3] = 14.5
+Задача 11.41
+python
+def task_11_41(arr, s, k):
+    """а) Является ли s-й элемент положительным
+       б) Является ли k-й элемент четным
+       в) Какой элемент больше: k-й или s-й"""
+    
+    # Проверка корректности индексов
+    if not (0 <= s < len(arr) and 0 <= k < len(arr)):
+        return None, None, None
+    
+    # а)
+    is_s_positive = arr[s] > 0
+    
+    # б)
+    is_k_even = arr[k] % 2 == 0
+    
+    # в)
+    if arr[k] > arr[s]:
+        comparison = f"k-й элемент ({arr[k]}) больше s-го ({arr[s]})"
+    elif arr[k] < arr[s]:
+        comparison = f"s-й элемент ({arr[s]}) больше k-го ({arr[k]})"
+    else:
+        comparison = "Элементы равны"
+    
+    return is_s_positive, is_k_even, comparison
+
+# Пример использования
+# arr = [10, -5, 8, 3, -2]
+# print(task_11_41(arr, 0, 2))
+Задача 11.42
+python
+def task_11_42(arr, k1=None, k2=None, s1=None, s2=None):
+    """Различные суммы и произведения элементов массива"""
+    n = len(arr)
+    
+    # а) Сумма всех элементов
+    total_sum = sum(arr)
+    
+    # б) Произведение всех элементов
+    product = 1
+    for num in arr:
+        product *= num
+    
+    # в) Сумма квадратов
+    sum_of_squares = sum(x**2 for x in arr)
+    
+    # г) Сумма шести первых элементов
+    sum_first_six = sum(arr[:6]) if n >= 6 else sum(arr)
+    
+    # д) Сумма с k1 по k2
+    if k1 is not None and k2 is not None and 0 <= k1 <= k2 < n:
+        sum_k1_k2 = sum(arr[k1:k2+1])
+    else:
+        sum_k1_k2 = None
+    
+    # е) Среднее арифметическое всех элементов
+    average_all = total_sum / n if n > 0 else 0
+    
+    # ж) Среднее арифметическое с s1 по s2
+    if s1 is not None and s2 is not None and 0 <= s1 <= s2 < n:
+        avg_s1_s2 = sum(arr[s1:s2+1]) / (s2 - s1 + 1)
+    else:
+        avg_s1_s2 = None
+    
+    return {
+        'total_sum': total_sum,
+        'product': product,
+        'sum_of_squares': sum_of_squares,
+        'sum_first_six': sum_first_six,
+        'sum_k1_k2': sum_k1_k2,
+        'average_all': average_all,
+        'avg_s1_s2': avg_s1_s2
+    }
+
+# Пример использования
+# arr = [1, 2, 3, 4, 5, 6, 7, 8]
+# print(task_11_42(arr, 2, 5, 1, 4))
+Задача 11.43
+python
+def task_11_43(arr):
+    """Знакопеременная сумма a[0] - a[1] + a[2] - a[3] + ..."""
+    result = 0
+    sign = 1  # начинаем с плюса
+    
+    for i in range(len(arr)):
+        result += sign * arr[i]
+        sign *= -1  # меняем знак
+    
+    return result
+
+# Пример использования
+# print(task_11_43([1, 2, 3, 4, 5]))  # 1-2+3-4+5 = 3
+Задача 11.44
+python
+def task_11_44(precipitation):
+    """Общее количество осадков за январь (31 день)"""
+    if len(precipitation) != 31:
+        return "Массив должен содержать данные за 31 день января"
+    
+    total = sum(precipitation)
+    return total
+
+# Пример использования
+# january_precip = [2.5, 0, 1.3, 0, 0, 5.2, ...]  # 31 значение
+# print(task_11_44(january_precip))
+Задача 11.45
+python
+def task_11_45(prices):
+    """Общая стоимость 12 предметов"""
+    if len(prices) != 12:
+        return "Массив должен содержать 12 значений"
+    
+    total_cost = sum(prices)
+    return total_cost
+Задача 11.46
+python
+def task_11_46(resistances):
+    """Общее сопротивление последовательной цепи (20 элементов)"""
+    if len(resistances) != 20:
+        return "Массив должен содержать 20 значений"
+    
+    # Для последовательного соединения сопротивления складываются
+    total_resistance = sum(resistances)
+    return total_resistance
+Задача 11.47
+python
+def task_11_47(resistances):
+    """Общее сопротивление параллельной цепи (20 элементов)"""
+    if len(resistances) != 20:
+        return "Массив должен содержать 20 значений"
+    
+    # Для параллельного соединения: 1/R_total = Σ(1/R_i)
+    inverse_sum = sum(1/r for r in resistances if r != 0)
+    
+    if inverse_sum == 0:
+        return 0
+    
+    total_resistance = 1 / inverse_sum
+    return total_resistance
+Задача 11.48
+python
+def task_11_48(june_precipitation):
+    """Количество осадков по декадам июня (30 дней)"""
+    if len(june_precipitation) != 30:
+        return "Массив должен содержать данные за 30 дней июня"
+    
+    # Первая декада: 1-10 дни (индексы 0-9)
+    first_decade = sum(june_precipitation[:10])
+    
+    # Вторая декада: 11-20 дни (индексы 10-19)
+    second_decade = sum(june_precipitation[10:20])
+    
+    # Третья декада: 21-30 дни (индексы 20:30])
+    third_decade = sum(june_precipitation[20:])
+    
+    return {
+        'first_decade': first_decade,
+        'second_decade': second_decade,
+        'third_decade': third_decade
+    }
+Продолжим с остальными задачами. Хотите, чтобы я продолжил?
+
+Продолжай
+Продолжаю с задачами:
+
+Задача 11.49
+python
+def task_11_49(february_precipitation):
+    """Среднедневное количество осадков в феврале"""
+    # Февраль может быть 28 или 29 дней
+    n = len(february_precipitation)
+    if n not in [28, 29]:
+        return "Массив должен содержать данные за 28 или 29 дней февраля"
+    
+    average_precipitation = sum(february_precipitation) / n
+    return average_precipitation
+Задача 11.50
+python
+def task_11_50(september_precipitation):
+    """Среднее количество осадков по декадам сентября (30 дней)"""
+    if len(september_precipitation) != 30:
+        return "Массив должен содержать данные за 30 дней сентября"
+    
+    # Декады по 10 дней
+    avg_first_decade = sum(september_precipitation[:10]) / 10
+    avg_second_decade = sum(september_precipitation[10:20]) / 10
+    avg_third_decade = sum(september_precipitation[20:]) / 10
+    
+    return {
+        'avg_first_decade': avg_first_decade,
+        'avg_second_decade': avg_second_decade,
+        'avg_third_decade': avg_third_decade
+    }
+Задача 11.51
+python
+def task_11_51(arr):
+    """Верно ли, что сумма элементов массива неотрицательна"""
+    total_sum = sum(arr)
+    return total_sum >= 0
+Задача 11.52
+python
+def task_11_52(arr):
+    """а) Верно ли, что сумма элементов четна
+       б) Верно ли, что сумма квадратов - пятизначное число"""
+    
+    # а)
+    total_sum = sum(arr)
+    is_sum_even = total_sum % 2 == 0
+    
+    # б)
+    sum_of_squares = sum(x**2 for x in arr)
+    is_five_digit = 10000 <= sum_of_squares <= 99999
+    
+    return is_sum_even, is_five_digit
+Задача 11.53
+python
+def task_11_53(students_per_class):
+    """Верно ли, что общее число учеников - четырехзначное число"""
+    if len(students_per_class) != 42:
+        return "Массив должен содержать данные для 42 классов"
+    
+    total_students = sum(students_per_class)
+    return 1000 <= total_students <= 9999
+Задача 11.54
+python
+def task_11_54(books_per_section):
+    """Верно ли, что общее число книг - шестизначное число"""
+    if len(books_per_section) != 35:
+        return "Массив должен содержать данные для 35 разделов"
+    
+    total_books = sum(books_per_section)
+    return 100000 <= total_books <= 999999
+Задача 11.55
+python
+def task_11_55(item_weights, max_capacity):
+    """Не превышает ли общая масса грузоподъемность автомобиля"""
+    if len(item_weights) != 30:
+        return "Массив должен содержать массы 30 предметов"
+    
+    total_weight = sum(item_weights)
+    return total_weight <= max_capacity, total_weight
+Задача 11.56
+python
+def task_11_56(sports_scores, qualification_score):
+    """Вышел ли спортсмен в следующий этап соревнований"""
+    if len(sports_scores) != 10:
+        return "Массив должен содержать баллы по 10 видам спорта"
+    
+    total_score = sum(sports_scores)
+    return total_score > qualification_score, total_score
+Задача 11.57
+python
+def task_11_57(june_precipitation):
+    """а) В какой период больше осадков: первая или вторая половина июня
+       б) В какую декаду выпало больше всего осадков"""
+    if len(june_precipitation) != 30:
+        return "Массив должен содержать данные за 30 дней июня"
+    
+    # а) Сравнение первой и второй половины
+    first_half = sum(june_precipitation[:15])
+    second_half = sum(june_precipitation[15:])
+    
+    if first_half > second_half:
+        half_result = "В первой половине июня выпало больше осадков"
+    elif second_half > first_half:
+        half_result = "Во второй половине июня выпало больше осадков"
+    else:
+        half_result = "Осадков выпало поровну в обеих половинах"
+    
+    # б) Поиск декады с максимальными осадками
+    dec1 = sum(june_precipitation[:10])
+    dec2 = sum(june_precipitation[10:20])
+    dec3 = sum(june_precipitation[20:])
+    
+    max_decade = max(dec1, dec2, dec3)
+    if max_decade == dec1:
+        decade_result = "Больше всего осадков выпало в первой декаде"
+    elif max_decade == dec2:
+        decade_result = "Больше всего осадков выпало во второй декаде"
+    else:
+        decade_result = "Больше всего осадков выпало в третьей декаде"
+    
+    return half_result, decade_result, {'dec1': dec1, 'dec2': dec2, 'dec3': dec3}
+Задача 11.58
+python
+def task_11_58(skating_scores):
+    """По какому виду программы спортсмен показал лучший результат"""
+    if len(skating_scores) != 18:
+        return "Массив должен содержать 18 оценок"
+    
+    # Первые 6 оценок - обязательная программа
+    compulsory_scores = skating_scores[:6]
+    
+    # Остальные 12 оценок - произвольная программа
+    free_scores = skating_scores[6:]
+    
+    avg_compulsory = sum(compulsory_scores) / len(compulsory_scores)
+    avg_free = sum(free_scores) / len(free_scores)
+    
+    if avg_compulsory > avg_free:
+        return "Лучший результат в обязательной программе", avg_compulsory, avg_free
+    elif avg_free > avg_compulsory:
+        return "Лучший результат в произвольной программе", avg_free, avg_compulsory
+    else:
+        return "Результаты равны в обеих программах", avg_compulsory, avg_free
+Задача 11.59
+python
+def task_11_59(arr, number):
+    """а) Сумма элементов ≤ 2
+       б) Сумма элементов > заданного числа"""
+    
+    sum_le_2 = sum(x for x in arr if x <= 2)
+    sum_gt_number = sum(x for x in arr if x > number)
+    
+    return sum_le_2, sum_gt_number
+Задача 11.60
+python
+def task_11_60(arr, divisor, a=None, b=None):
+    """а) Сумма нечетных элементов
+       б) Сумма элементов, кратных заданному числу
+       в) Сумма элементов, кратных a или b"""
+    
+    # а)
+    sum_odd = sum(x for x in arr if x % 2 != 0)
+    
+    # б)
+    sum_divisible = sum(x for x in arr if x % divisor == 0)
+    
+    # в)
+    if a is not None and b is not None:
+        sum_divisible_a_b = sum(x for x in arr if x % a == 0 or x % b == 0)
+    else:
+        sum_divisible_a_b = None
+    
+    return sum_odd, sum_divisible, sum_divisible_a_b
