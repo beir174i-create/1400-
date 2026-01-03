@@ -1,0 +1,387 @@
+Задача 11.61
+python
+def task_11_61(arr):
+    """Сумма второго, четвертого, шестого и т.д. элементов"""
+    # Индексы: 1, 3, 5... (четные позиции, если считать с 1)
+    total = 0
+    for i in range(1, len(arr), 2):
+        total += arr[i]
+    return total
+Задача 11.62
+python
+def task_11_62(february_precipitation):
+    """Общее число осадков по четным числам февраля"""
+    # Предполагаем, что февраль имеет 28 дней
+    if len(february_precipitation) != 28:
+        return "Массив должен содержать данные за 28 дней февраля"
+    
+    total_even_days = 0
+    # Дни: 2, 4, 6, ..., 28 (индексы: 1, 3, 5, ..., 27)
+    for i in range(1, 28, 2):
+        total_even_days += february_precipitation[i]
+    
+    return total_even_days
+Задача 11.63
+python
+def task_11_63(monthly_precipitation):
+    """Общее число осадков в марте, июне, сентябре и декабре"""
+    if len(monthly_precipitation) != 12:
+        return "Массив должен содержать данные за 12 месяцев"
+    
+    # Месяцы: март (3), июнь (6), сентябрь (9), декабрь (12)
+    # Индексы: 2, 5, 8, 11
+    total = (monthly_precipitation[2] + monthly_precipitation[5] + 
+             monthly_precipitation[8] + monthly_precipitation[11])
+    
+    return total
+Задача 11.64
+python
+def task_11_64(arr):
+    """Частное от деления суммы положительных на модуль суммы отрицательных"""
+    sum_positive = sum(x for x in arr if x > 0)
+    sum_negative = sum(x for x in arr if x < 0)
+    
+    if sum_negative == 0:
+        return "Ошибка: сумма отрицательных элементов равна 0"
+    
+    quotient = sum_positive / abs(sum_negative)
+    return quotientЗадача 11.61
+python
+def task_11_61(arr):
+    """Сумма второго, четвертого, шестого и т.д. элементов"""
+    # Индексы: 1, 3, 5... (четные позиции, если считать с 1)
+    total = 0
+    for i in range(1, len(arr), 2):
+        total += arr[i]
+    return total
+Задача 11.62
+python
+def task_11_62(february_precipitation):
+    """Общее число осадков по четным числам февраля"""
+    # Предполагаем, что февраль имеет 28 дней
+    if len(february_precipitation) != 28:
+        return "Массив должен содержать данные за 28 дней февраля"
+    
+    total_even_days = 0
+    # Дни: 2, 4, 6, ..., 28 (индексы: 1, 3, 5, ..., 27)
+    for i in range(1, 28, 2):
+        total_even_days += february_precipitation[i]
+    
+    return total_even_days
+Задача 11.63
+python
+def task_11_63(monthly_precipitation):
+    """Общее число осадков в марте, июне, сентябре и декабре"""
+    if len(monthly_precipitation) != 12:
+        return "Массив должен содержать данные за 12 месяцев"
+    
+    # Месяцы: март (3), июнь (6), сентябрь (9), декабрь (12)
+    # Индексы: 2, 5, 8, 11
+    total = (monthly_precipitation[2] + monthly_precipitation[5] + 
+             monthly_precipitation[8] + monthly_precipitation[11])
+    Задача 11.65
+python
+def task_11_65(arr):
+    """а) Верно ли, что сумма элементов >20 превышает 100
+       б) Верно ли, что сумма элементов <50 четна"""
+    
+    sum_gt_20 = sum(x for x in arr if x > 20)
+    sum_lt_50 = sum(x for x in arr if x < 50)
+    
+    condition_a = sum_gt_20 > 100
+    condition_b = sum_lt_50 % 2 == 0
+    
+    return condition_a, condition_b
+Задача 11.66
+python
+def task_11_66(february_precipitation):
+    """Верно ли, что по четным числам выпало больше осадков, чем по нечетным"""
+    if len(february_precipitation) != 28:
+        return "Массив должен содержать данные за 28 дней февраля"
+    
+    sum_even_days = 0  # дни: 2, 4, 6, ..., 28
+    sum_odd_days = 0   # дни: 1, 3, 5, ..., 27
+    
+    for i in range(len(february_precipitation)):
+    return totalЗадача 11.67
+python
+def task_11_67(residents):
+    """На какой стороне улицы проживает больше жителей"""
+    odd_houses = 0   # нечетные номера домов
+    even_houses = 0  # четные номера домов
+    
+    for i in range(len(residents)):
+        if (i + 1) % 2 != 0:  # нечетные номера
+            odd_houses += residents[i]
+        else:  # четные номера
+            even_houses += residents[i]
+    
+    if odd_houses > even_houses:
+        return "Больше жителей на стороне с нечетными номерами", odd_houses, even_houses
+    elif even_houses > odd_houses:
+        return "Больше жителей на стороне с четными номерами", even_houses, odd_houses
+    else:
+        return "Количество жителей на обеих сторонах одинаково", odd_houses, even_houses
+Задача 11.68
+python
+def task_11_68(arr):
+    """Количество неотрицательных элементов"""
+    count = sum(1 for x in arr if x >= 0)
+    return count
+Задача 11.69
+python
+def task_11_69(arr, divisor=None):
+    """а) Количество элементов, отличных от последнего
+       б) Количество элементов, кратных divisor"""
+    
+    # а)
+    last_element = arr[-1] if arr else None
+    count_diff_from_last = sum(1 for x in arr if x != last_element)
+    
+    # б)
+    if divisor is not None:
+        count_divisible = sum(1 for x in arr if x % divisor == 0)
+    else:
+        count_divisible = None
+    
+    return count_diff_from_last, count_divisible Задача 11.70
+python
+def task_11_70(february_precipitation):
+    """Количество дней, когда осадков не было"""
+    if len(february_precipitation) != 28:
+        return "Массив должен содержать данные за 28 дней февраля"
+    
+    count_no_precipitation = sum(1 for x in february_precipitation if x == 0)
+    return count_no_precipitation
+Задача 11.71
+python
+def task_11_71(chemistry_grades):
+    """Количество неуспевающих по химии (оценка < 3)"""
+    if len(chemistry_grades) != 25:
+        return "Массив должен содержать оценки 25 учеников"
+    
+    count_failing = sum(1 for grade in chemistry_grades if grade < 3)
+    return count_failing
+Задача 11.72
+python
+def task_11_72(daily_sales, threshold):
+    """Количество дней, когда стоимость проданных товаров превысила threshold"""
+    if len(daily_sales) != 31:
+        return "Массив должен содержать данные за 31 день марта"
+    
+    count_above_threshold = sum(1 for sales in daily_sales if sales > threshold)
+    return count_above_threshold
+Задача 11.73
+python
+def task_11_73(heights, max_height):
+    """Количество учеников с ростом ≤ max_height"""
+    if len(heights) != 22:
+        return "Массив должен содержать рост 22 учеников"
+    
+    count_below_height = sum(1 for height in heights if height <= max_height)
+    return count_below_heightЗадача 11.73
+python
+def task_11_73(heights, max_height):
+    """Количество учеников с ростом ≤ max_height"""
+    if len(heights) != 22:
+        return "Массив должен содержать рост 22 учеников"
+    
+    count_below_height = sum(1 for height in heights if height <= max_height)
+    return count_below_height
+Задача 11.74
+python
+def task_11_74(arr, a, b):
+    """Количество элементов в промежутке [a, b]"""
+    if b <= a:
+        return "b должно быть больше a"
+    
+    count_in_range = sum(1 for x in arr if a <= x <= b)
+    return count_in_range
+Задача 11.75
+python
+def task_11_75(game_results):
+    """Количество выигрышей (3) и ничьих (1) в 20 играх"""
+    if len(game_results) != 20:
+        return "Массив должен содержать результаты 20 игр"
+    
+    wins = sum(1 for result in game_results if result == 3)
+    draws = sum(1 for result in game_results if result == 1)
+    
+    return wins, draws, wins + draws
+Задача 11.76
+python
+def task_11_76(student_grades):
+    """Количество четверок (4) и пятерок (5)"""
+    if len(student_grades) != 10:
+        return "Массив должен содержать 10 оценок"
+    
+    count_4 = sum(1 for grade in student_grades if grade == 4)
+    count_5 = sum(1 for grade in student_grades if grade == 5)
+    
+    return count_4, count_5, count_4 + count_5Задача 11.77
+python
+def task_11_77(arr):
+    """Количество положительных и отрицательных элементов"""
+    count_positive = sum(1 for x in arr if x > 0)
+    count_negative = sum(1 for x in arr if x < 0)
+    count_zero = sum(1 for x in arr if x == 0)
+    
+    return count_positive, count_negative, count_zero
+Задача 11.78
+python
+def task_11_78(arr):
+    """Количество четных элементов и элементов, оканчивающихся на 5"""
+    count_even = sum(1 for x in arr if x % 2 == 0)
+    count_ends_with_5 = sum(1 for x in arr if abs(x) % 10 == 5)
+    
+    return count_even, count_ends_with_5
+Задача 11.79
+python
+def task_11_79(game_results):
+    """Количество выигрышей (3), ничьих (1) и проигрышей (2)"""
+    if len(game_results) != 20:
+        return "Массив должен содержать результаты 20 игр"
+    
+    wins = sum(1 for result in game_results if result == 3)
+    draws = sum(1 for result in game_results if result == 1)
+    losses = sum(1 for result in game_results if result == 2)
+    
+    return wins, draws, losses
+Задача 11.80
+python
+def task_11_80(language_grades):
+    """Количество пятерок, четверок, троек и двоек"""
+    if len(language_grades) != 22:
+        return "Массив должен содержать оценки 22 учеников"
+    
+    count_5 = sum(1 for grade in language_grades if grade == 5)
+    count_4 = sum(1 for grade in language_grades if grade == 4)
+    count_3 = sum(1 for grade in language_grades if grade == 3)
+    count_2 = sum(1 for grade in language_grades if grade == 2)
+    
+    return {'5': count_5, '4': count_4, '3': count_3, '2': count_2}Задача 11.81
+python
+def task_11_81(arr):
+    """Число пар соседних элементов, являющихся четными числами"""
+    count = 0
+    for i in range(len(arr) - 1):
+        if arr[i] % 2 == 0 and arr[i + 1] % 2 == 0:
+            count += 1
+    return count
+Задача 11.82
+python
+def task_11_82(arr):
+    """Число пар соседних элементов, оканчивающихся нулем"""
+    count = 0
+    for i in range(len(arr) - 1):
+        if arr[i] % 10 == 0 and arr[i + 1] % 10 == 0:
+            count += 1
+    return count
+Задача 11.83
+python
+def task_11_83(arr):
+    """Число элементов, которые больше своих соседей"""
+    if len(arr) < 3:
+        return 0
+    
+    count = 0
+    for i in range(1, len(arr) - 1):  # исключаем первый и последний
+        if arr[i] > arr[i - 1] and arr[i] > arr[i + 1]:
+            count += 1
+    return count
+Задача 11.84
+python
+def task_11_84(arr, k):
+    """а) Верно ли, что количество положительных ≤ k
+       б) Верно ли, что количество элементов ≤ 50.55 кратно 4"""
+    
+    # а)
+    count_positive = sum(1 for x in arr if x > 0)
+    condition_a = count_positive <= k
+    
+    # б)
+    count_le_5055 = sum(1 for x in arr if x <= 50.55)
+    condition_b = count_le_5055 % 4 == 0
+    
+    return condition_a, condition_bЗадача 11.85
+python
+def task_11_85(heights):
+    """Сколько учеников имеют рост > 170 см.
+       Можно ли сформировать баскетбольную команду (≥5 чел.)"""
+    if len(heights) != 30:
+        return "Массив должен содержать рост 30 учеников"
+    
+    count_tall = sum(1 for height in heights if height > 170)
+    can_form_team = count_tall >= 5
+    
+    return count_tall, can_form_team
+Задача 11.86
+python
+def task_11_86(march_precipitation):
+    """Верно ли, что осадков не было 10 дней в марте"""
+    if len(march_precipitation) != 31:
+        return "Массив должен содержать данные за 31 день марта"
+    
+    count_no_precip = sum(1 for precip in march_precipitation if precip == 0)
+    return count_no_precip == 10, count_no_precip
+Задача 11.87
+python
+def task_11_87(arr):
+    """Среднее арифметическое элементов > 10"""
+    elements_gt_10 = [x for x in arr if x > 10]
+    
+    if not elements_gt_10:
+        return "Нет элементов > 10", 0
+    
+    average = sum(elements_gt_10) / len(elements_gt_10)
+    return average, len(elements_gt_10)
+Задача 11.88
+python
+def task_11_88(arr, m):
+    """Среднее арифметическое элементов < m"""
+    elements_lt_m = [x for x in arr if x < m]
+    
+    if not elements_lt_m:
+        return f"Нет элементов < {m}", 0
+    
+    average = sum(elements_lt_m) / len(elements_lt_m)
+    return average, len(elements_lt_m)Задача 11.89
+python
+def task_11_89(august_precipitation):
+    """Среднее количество осадков в дни, когда шел дождь"""
+    if len(august_precipitation) != 31:
+        return "Массив должен содержать данные за 31 день августа"
+    
+    # Предположим, что дождь был, если осадков > 0
+    rainy_days = [precip for precip in august_precipitation if precip > 0]
+    
+    if not rainy_days:
+        return "Не было дождливых дней", 0
+    
+    average = sum(rainy_days) / len(rainy_days)
+    return average, len(rainy_days)
+Задача 11.90
+python
+def task_11_90(arr):
+    """Средние арифметические положительных и отрицательных элементов"""
+    positive_nums = [x for x in arr if x > 0]
+    negative_nums = [x for x in arr if x < 0]
+    
+    avg_positive = sum(positive_nums) / len(positive_nums) if positive_nums else 0
+    avg_negative = sum(negative_nums) / len(negative_nums) if negative_nums else 0
+    
+    return avg_positive, avg_negative, len(positive_nums), len(negative_nums)
+Задача 11.91
+python
+def task_11_91(weights):
+    """Средняя масса полных людей (>100 кг) и остальных"""
+    if len(weights) != 25:
+        return "Массив должен содержать массу 25 человек"
+    
+    overweight = [w for w in weights if w > 100]
+    normal = [w for w in weights if w <= 100]
+    
+    avg_overweight = sum(overweight) / len(overweight) if overweight else 0
+    avg_normal = sum(normal) / len(normal) if normal else 0
+    
+    return avg_overweight, avg_normal, len(overweight), len(normal)
