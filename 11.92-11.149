@@ -1,0 +1,1116 @@
+Задача 11.92
+python
+def task_11_92(heights):
+    """Средний рост мальчиков (отрицательные значения) и девочек (положительные)"""
+    if len(heights) != 22:
+        return "Массив должен содержать рост 22 учеников"
+    
+    boys = [abs(h) for h in heights if h < 0]  # модуль для получения положительного роста
+    girls = [h for h in heights if h > 0]
+    
+    avg_boys = sum(boys) / len(boys) if boys else 0
+    avg_girls = sum(girls) / len(girls) if girls else 0
+    
+    return avg_boys, avg_girls, len(boys), len(girls)
+Задача 11.93
+python
+def task_11_93(prices):
+    """Верно ли, что средняя стоимость авто превышает среднюю стоимость мотоциклов >3 раза"""
+    # Предположим: автомобили > 5000, мотоциклы <= 5000
+    cars = [p for p in prices if p > 5000]
+    motorcycles = [p for p in prices if p <= 5000]
+    
+    if not cars or not motorcycles:
+        return "Недостаточно данных для сравнения", 0, 0
+    
+    avg_cars = sum(cars) / len(cars)
+    avg_motorcycles = sum(motorcycles) / len(motorcycles)
+    
+    if avg_motorcycles == 0:
+        return "Средняя стоимость мотоциклов равна 0", avg_cars, avg_motorcycles
+    
+    ratio = avg_cars / avg_motorcycles
+    return ratio > 3, ratio, avg_cars, avg_motorcycles
+Задача 11.94
+python
+def task_11_94(heights):
+    """Верно ли, что средний рост мальчиков превышает средний рост девочек >10 см"""
+    boys = [abs(h) for h in heights if h < 0]
+    girls = [h for h in heights if h > 0]
+    
+    if not boys or not girls:
+        return "Недостаточно данных для сравнения", 0, 0
+    
+    avg_boys = sum(boys) / len(boys)
+    avg_girls = sum(girls) / len(girls)
+    
+    difference = avg_boys - avg_girls
+    return difference > 10, difference, avg_boys, avg_girlsЗадача 11.95
+python
+def task_11_95(arr):
+    """Количество элементов > суммы всех элементов и их номера"""
+    total_sum = sum(arr)
+    
+    indices = []
+    for i, x in enumerate(arr):
+        if x > total_sum:
+            indices.append(i)
+    
+    return len(indices), indices
+Задача 11.96
+python
+def task_11_96(arr):
+    """Элементы > среднего арифметического min и max"""
+    if not arr:
+        return 0, []
+    
+    min_val = min(arr)
+    max_val = max(arr)
+    threshold = (min_val + max_val) / 2
+    
+    indices = []
+    for i, x in enumerate(arr):
+        if x > threshold:
+            indices.append(i)
+    
+    return len(indices), indices, threshold
+Задача 11.97
+python
+def task_11_97(heights):
+    """Количество учеников с ростом > среднего"""
+    if len(heights) != 25:
+        return "Массив должен содержать рост 25 учеников"
+    
+    avg_height = sum(heights) / len(heights)
+    
+    count_above_avg = sum(1 for h in heights if h > avg_height)
+    return count_above_avg, avg_height
+Задача 11.98
+python
+def task_11_98(prices):
+    """Количество видов товара со стоимостью < средней"""
+    if len(prices) != 20:
+        return "Массив должен содержать стоимость 20 видов товара"
+    
+    avg_price = sum(prices) / len(prices)
+    
+    count_below_avg = sum(1 for p in prices if p < avg_price)
+    return count_below_avg, avg_priceЗадача 11.99
+python
+def task_11_99(january_precipitation):
+    """Количество дней с осадками > средних и их даты"""
+    if len(january_precipitation) != 31:
+        return "Массив должен содержать данные за 31 день января"
+    
+    avg_precip = sum(january_precipitation) / len(january_precipitation)
+    
+    days_above_avg = []
+    for day, precip in enumerate(january_precipitation, 1):
+        if precip > avg_precip:
+            days_above_avg.append(day)
+    
+    return len(days_above_avg), days_above_avg, avg_precip
+Задача 11.100
+python
+def task_11_100(grades):
+    """Количество учеников с оценкой < средней и их номера"""
+    if len(grades) != 22:
+        return "Массив должен содержать оценки 22 учеников"
+    
+    avg_grade = sum(grades) / len(grades)
+    
+    indices_below_avg = []
+    for i, grade in enumerate(grades):
+        if grade < avg_grade:
+            indices_below_avg.append(i)
+    
+    return len(indices_below_avg), indices_below_avg, avg_grade
+Задача 11.101
+python
+def task_11_101(yearly_precipitation):
+    """Среднее количество осадков за 15 лет и отклонение для каждого года"""
+    if len(yearly_precipitation) != 15:
+        return "Массив должен содержать данные за 15 лет"
+    
+    avg_precip = sum(yearly_precipitation) / len(yearly_precipitation)
+    
+    deviations = []
+    for year, precip in enumerate(yearly_precipitation, 1):
+        deviation = precip - avg_precip
+        deviations.append((year, precip, deviation))
+    Задача 11.102
+python
+def task_11_102(arr):
+    """Элемент, наиболее близкий к среднему значению"""
+    if not arr:
+        return None
+    
+    avg = sum(arr) / len(arr)
+    
+    # Находим элемент с минимальной разницей со средним
+    closest_element = arr[0]
+    min_diff = abs(arr[0] - avg)
+    
+    for x in arr:
+        diff = abs(x - avg)
+        if diff < min_diff:
+            min_diff = diff
+            closest_element = x
+    
+    return closest_element, avg, min_diff
+Задача 11.103
+python
+def task_11_103(arr):
+    """Пять соседних элементов с максимальной суммой"""
+    if len(arr) < 5:
+        return "Массив должен содержать не менее 5 элементов"
+    
+    max_sum = float('-inf')
+    max_start_index = 0
+    
+    for i in range(len(arr) - 4):
+        current_sum = sum(arr[i:i+5])
+        if current_sum > max_sum:
+            max_sum = current_sum
+            max_start_index = i
+    
+    max_elements = arr[max_start_index:max_start_index+5]
+    return max_sum, max_start_index, max_elements
+Задача 11.104
+python
+def task_11_104(july_temperatures):
+    """Самые теплые 7 дней подряд в июле"""
+    if len(july_temperatures) != 31:
+        return "Массив должен содержать данные за 31 день июля"
+    
+    max_avg_temp = float('-inf')
+    best_start_day = 0
+    
+    for i in range(25):  # 31 - 7 + 1 = 25 возможных позиций
+        week_temps = july_temperatures[i:i+7]
+        avg_temp = sum(week_temps) / 7
+        
+        if avg_temp > max_avg_temp:
+            max_avg_temp = avg_temp
+            best_start_day = i + 1  # +1 для номера дня
+    
+    return max_avg_temp, best_start_day, list(range(best_start_day, best_start_day+7))
+    return avg_precip, deviationsЗадача 11.105
+python
+def task_11_105(arr):
+    """Проверить, есть ли в массиве одинаковые элементы"""
+    # Способ 1: Используем множество
+    if len(set(arr)) < len(arr):
+        return True, len(set(arr)), len(arr) - len(set(arr))
+    
+    # Способ 2: Проверка пар
+    for i in range(len(arr)):
+        for j in range(i + 1, len(arr)):
+            if arr[i] == arr[j]:
+                return True, arr[i], i, j
+    
+    return False
+Задача 11.106
+python
+def task_11_106(arr):
+    """Проверить, есть ли в массиве только два одинаковых элемента"""
+    from collections import Counter
+    
+    counter = Counter(arr)
+    
+    # Находим элементы, которые встречаются более 1 раза
+    duplicates = [elem for elem, count in counter.items() if count > 1]
+    
+    if len(duplicates) == 1 and counter[duplicates[0]] == 2:
+        return True, duplicates[0]
+    
+    return False, duplicates
+Задача 11.107
+python
+def task_11_107(arr):
+    """Найти два одинаковых элемента (если известно, что их только два)"""
+    seen = {}
+    
+    for i, x in enumerate(arr):
+        if x in seen:
+            return x, seen[x], i  # элемент и два его индекса
+        seen[x] = i
+    
+    return None  # не должно случиться по условиюЗадача 11.108
+python
+def task_11_108(arr):
+    """Сколько раз элементы меняют знак при просмотре от начала"""
+    if not arr:
+        return 0
+    
+    sign_changes = 0
+    current_sign = 1 if arr[0] > 0 else -1 if arr[0] < 0 else 0
+    
+    for i in range(1, len(arr)):
+        if arr[i] > 0:
+            new_sign = 1
+        elif arr[i] < 0:
+            new_sign = -1
+        else:
+            new_sign = 0
+        
+        if new_sign != 0 and current_sign != 0 and new_sign != current_sign:
+            sign_changes += 1
+            current_sign = new_sign
+        elif current_sign == 0 and new_sign != 0:
+            current_sign = new_sign
+    
+    return sign_changes
+Задача 11.109
+python
+def task_11_109(arr):
+    """Для неубывающей последовательности: 
+       количество равных подряд элементов и количество различных чисел"""
+    if len(arr) != 20:
+        return "Массив должен содержать 20 элементов"
+    
+    # Проверяем, что последовательность неубывающая
+    for i in range(len(arr) - 1):
+        if arr[i] > arr[i + 1]:
+            return "Последовательность не является неубывающей"
+    
+    # Количество различных чисел
+    distinct_count = len(set(arr))
+    
+    # Находим максимальную длину последовательности равных элементов
+    max_equal_length = 1
+    current_length = 1
+    
+    for i in range(1, len(arr)):
+        if arr[i] == arr[i - 1]:
+            current_length += 1
+            max_equal_length = max(max_equal_length, current_length)
+        else:
+            current_length = 1
+    
+    return distinct_count, max_equal_lengthЗадача 11.110
+python
+def task_11_110(arr):
+    """Для неубывающей последовательности: количество различных чисел"""
+    if len(arr) != 30:
+        return "Массив должен содержать 30 элементов"
+    
+    # Проверяем, что последовательность неубывающая
+    for i in range(len(arr) - 1):
+        if arr[i] > arr[i + 1]:
+            return "Последовательность не является неубывающей"
+    
+    # Подсчитываем различные числа (для неубывающей последовательности)
+    distinct_count = 1  # первый элемент всегда новый
+    for i in range(1, len(arr)):
+        if arr[i] != arr[i - 1]:
+            distinct_count += 1
+    
+    return distinct_count
+Задача 11.111
+python
+def task_11_111(arr):
+    """Наибольшая длина отрезка из нечетных чисел"""
+    max_length = 0
+    current_length = 0
+    
+    for x in arr:
+        if x % 2 != 0:  # нечетное число
+            current_length += 1
+            max_length = max(max_length, current_length)
+        else:
+            current_length = 0
+    
+    return max_length
+Задача 11.112
+python
+def task_11_112(arr):
+    """а) Максимальный элемент
+       б) Минимальный элемент
+       в) На сколько max > min
+       г) Индекс max
+       д) Индексы min и max"""
+    
+    if not arr:
+        return "Массив пуст"
+    
+    max_val = max(arr)
+    min_val = min(arr)
+    
+    max_index = arr.index(max_val)
+    min_index = arr.index(min_val)
+    
+    difference = max_val - min_val
+    
+    return {
+        'max': max_val,
+        'min': min_val,
+        'difference': difference,
+        'max_index': max_index,
+        'min_index': min_index
+    }
+Задача 11.113
+python
+def task_11_113(book_pages):
+    """Количество страниц в самой толстой книге (100 книг)"""
+    if len(book_pages) != 100:
+        return "Массив должен содержать данные для 100 книг"
+    
+    max_pages = max(book_pages)
+    return max_pages
+Задача 11.114
+python
+def task_11_114(car_prices):
+    """Стоимость самого дорогого автомобиля (50 марок)"""
+    if len(car_prices) != 50:
+        return "Массив должен содержать данные для 50 марок автомобилей"
+    
+    max_price = max(car_prices)
+    return max_price
+Задача 11.115
+python
+def task_11_115(candy_prices):
+    """Стоимость самых дешевых конфет (20 видов)"""
+    if len(candy_prices) != 20:
+        return "Массив должен содержать данные для 20 видов конфет"
+    
+    min_price = min(candy_prices)
+    return min_price
+Задача 11.116
+python
+def task_11_116(results):
+    """Результат победителя лыжной гонки (25 спортсменов)"""
+    if len(results) != 25:
+        return "Массив должен содержать результаты 25 спортсменов"
+    
+    # В лыжной гонке лучший результат - минимальное время
+    winner_result = min(results)
+    return winner_result
+Задача 11.117
+python
+def task_11_117(heights):
+    """На сколько рост самого высокого превышает рост самого низкого"""
+    if len(heights) != 25:
+        return "Массив должен содержать рост 25 человек"
+    
+    max_height = max(heights)
+    min_height = min(heights)
+    
+    difference = max_height - min_height
+    return difference, max_height, min_height
+Задача 11.118
+python
+def task_11_118(birth_years):
+    """На сколько лет возраст самого старого превышает возраст самого молодого"""
+    if len(birth_years) != 30:
+        return "Массив должен содержать год рождения 30 человек"
+    
+    # Самый старый - минимальный год рождения
+    oldest_year = min(birth_years)
+    # Самый молодой - максимальный год рождения
+    youngest_year = max(birth_years)
+    
+    age_difference = youngest_year - oldest_year
+    return age_difference, oldest_year, youngest_year
+Продолжим с остальными задачами?
+
+Да
+Продолжаем:
+
+Задача 11.119
+python
+def task_11_119(scores):
+    """Расчет оценки фигуриста с удалением самой высокой и самой низкой"""
+    if len(scores) != 8:
+        return "Массив должен содержать 8 оценок судей"
+    
+    # Находим индексы самой высокой и самой низкой оценок
+    max_score = max(scores)
+    min_score = min(scores)
+    
+    # Находим индексы (только первый и последний)
+    max_index = scores.index(max_score)
+    min_index = scores.index(min_score)
+    
+    # Создаем копию без одной максимальной и одной минимальной оценки
+    filtered_scores = scores.copy()
+    filtered_scores.pop(max_index)
+    
+    # Корректируем индекс минимальной оценки, если нужно
+    if min_index > max_index:
+        min_index -= 1
+    filtered_scores.pop(min_index)
+    
+    # Вычисляем среднее арифметическое
+    final_score = sum(filtered_scores) / len(filtered_scores)
+    
+    return {
+        'original_scores': scores,
+        'removed_max': max_score,
+        'removed_min': min_score,
+        'filtered_scores': filtered_scores,
+        'final_score': final_score
+    }
+Задача 11.120
+python
+def task_11_120(car_speeds):
+    """Порядковый номер самого быстрого автомобиля (40 марок)"""
+    if len(car_speeds) != 40:
+        return "Массив должен содержать данные для 40 марок автомобилей"
+    
+    max_speed = max(car_speeds)
+    
+    # а) Первый самый быстрый
+    first_index = car_speeds.index(max_speed) + 1  # +1 для порядкового номера
+    
+    # б) Последний самый быстрый
+    last_index = len(car_speeds) - 1 - car_speeds[::-1].index(max_speed) + 1
+    
+    return {
+        'max_speed': max_speed,
+        'first_fastest_index': first_index,
+        'last_fastest_index': last_index
+    }
+Задача 11.121
+python
+def task_11_121(july_precipitation):
+    """Дата самого дождливого дня в июле"""
+    if len(july_precipitation) != 31:
+        return "Массив должен содержать данные за 31 день июля"
+    
+    max_precip = max(july_precipitation)
+    
+    # а) Первый самый дождливый день
+    first_day = july_precipitation.index(max_precip) + 1
+    
+    # б) Последний самый дождливый день
+    last_day = len(july_precipitation) - 1 - july_precipitation[::-1].index(max_precip) + 1
+    
+    return {
+        'max_precipitation': max_precip,
+        'first_rainy_day': first_day,
+        'last_rainy_day': last_day
+    }
+Задача 11.122
+python
+def task_11_122(candy_prices):
+    """Порядковый номер самого дешевого вида конфет (30 видов)"""
+    if len(candy_prices) != 30:
+        return "Массив должен содержать данные для 30 видов конфет"
+    
+    min_price = min(candy_prices)
+    
+    # а) Первый самый дешевый
+    first_index = candy_prices.index(min_price) + 1
+    
+    # б) Последний самый дешевый
+    last_index = len(candy_prices) - 1 - candy_prices[::-1].index(min_price) + 1
+    
+    return {
+        'min_price': min_price,
+        'first_cheapest_index': first_index,
+        'last_cheapest_index': last_index
+    }
+Задача 11.123
+python
+def task_11_123(birth_years):
+    """Порядковый номер самого старшего человека (30 человек)"""
+    if len(birth_years) != 30:
+        return "Массив должен содержать год рождения 30 человек"
+    
+    # Самый старый - минимальный год рождения
+    oldest_year = min(birth_years)
+    
+    # а) Первый самый старый
+    first_index = birth_years.index(oldest_year) + 1
+    
+    # б) Последний самый старый
+    last_index = len(birth_years) - 1 - birth_years[::-1].index(oldest_year) + 1
+    
+    return {
+        'oldest_year': oldest_year,
+        'first_oldest_index': first_index,
+        'last_oldest_index': last_index
+    }
+Задача 11.124
+python
+def task_11_124(arr):
+    """Количество максимальных и минимальных элементов без двух проходов"""
+    if not arr:
+        return 0, 0
+    
+    max_val = arr[0]
+    min_val = arr[0]
+    max_count = 1
+    min_count = 1
+    
+    for i in range(1, len(arr)):
+        if arr[i] > max_val:
+            max_val = arr[i]
+            max_count = 1
+        elif arr[i] == max_val:
+            max_count += 1
+        
+        if arr[i] < min_val:
+            min_val = arr[i]
+            min_count = 1
+        elif arr[i] == min_val:
+            min_count += 1
+    
+    return max_count, min_count, max_val, min_val
+Задача 11.125
+python
+def task_11_125(heights):
+    """Сколько человек имеет самый большой рост (35 человек)"""
+    if len(heights) != 35:
+        return "Массив должен содержать рост 35 человек"
+    
+    max_height = max(heights)
+    count_max_height = heights.count(max_height)
+    
+    return count_max_height, max_height
+Задача 11.126
+python
+def task_11_126(october_precipitation):
+    """Количество дней с максимальным числом осадков в октябре"""
+    if len(october_precipitation) != 31:
+        return "Массив должен содержать данные за 31 день октября"
+    
+    max_precip = max(october_precipitation)
+    count_max_days = october_precipitation.count(max_precip)
+    
+    return count_max_days, max_precip
+Задача 11.127
+python
+def task_11_127(book_prices):
+    """Количество самых дешевых книг (60 книг)"""
+    if len(book_prices) != 60:
+        return "Массив должен содержать цены 60 книг"
+    
+    min_price = min(book_prices)
+    count_min_price = book_prices.count(min_price)
+    
+    return count_min_price, min_price
+Задача 11.128
+python
+def task_11_128(july_temperatures):
+    """Количество самых прохладных дней в июле"""
+    if len(july_temperatures) != 31:
+        return "Массив должен содержать данные за 31 день июля"
+    
+    min_temp = min(july_temperatures)
+    count_min_temp = july_temperatures.count(min_temp)
+    
+    return count_min_temp, min_temp
+Задача 11.129
+python
+def task_11_129(arr):
+    """Найти номера всех элементов с минимальным и максимальным значением"""
+    if not arr:
+        return [], []
+    
+    min_val = min(arr)
+    max_val = max(arr)
+    
+    min_indices = [i for i, x in enumerate(arr) if x == min_val]
+    max_indices = [i for i, x in enumerate(arr) if x == max_val]
+    
+    return min_indices, max_indices, min_val, max_val
+Задача 11.130
+python
+def task_11_130(arr):
+    """а) max превышает min не более чем на 25
+       б) min меньше max более чем в 2 раза"""
+    
+    if not arr:
+        return None, None
+    
+    min_val = min(arr)
+    max_val = max(arr)
+    
+    condition_a = (max_val - min_val) <= 25
+    condition_b = min_val < (max_val / 2) if max_val != 0 else False
+    
+    return condition_a, condition_b, max_val, min_val
+Задача 11.131
+python
+def task_11_131(weights):
+    """Верно ли, что вес самого тяжелого превышает массу самого легкого >2 раза"""
+    if not weights:
+        return "Массив пуст"
+    
+    max_weight = max(weights)
+    min_weight = min(weights)
+    
+    if min_weight == 0:
+        return "Масса самого легкого равна 0"
+    
+    ratio = max_weight / min_weight
+    return ratio > 2, ratio, max_weight, min_weight
+Задача 11.132
+python
+def task_11_132(class_sizes):
+    """Верно ли, что в самом многочисленном классе на 10 учеников больше"""
+    if len(class_sizes) != 40:
+        return "Массив должен содержать данные для 40 классов"
+    
+    max_students = max(class_sizes)
+    min_students = min(class_sizes)
+    
+    difference = max_students - min_students
+    return difference == 10, difference, max_students, min_students
+Задача 11.133
+python
+def task_11_133(arr):
+    """Какое число встретится раньше: максимальное или минимальное?"""
+    if not arr:
+        return "Массив пуст"
+    
+    min_val = min(arr)
+    max_val = max(arr)
+    
+    min_first_index = arr.index(min_val)
+    max_first_index = arr.index(max_val)
+    
+    if min_first_index < max_first_index:
+        return "Минимальное число встретилось раньше", min_first_index, max_first_index
+    elif max_first_index < min_first_index:
+        return "Максимальное число встретилось раньше", max_first_index, min_first_index
+    else:
+        return "Минимальное и максимальное числа совпадают", min_first_index
+Задача 11.134
+python
+def task_11_134(ages):
+    """Какой человек указан раньше: самый старый или самый молодой?"""
+    if not ages:
+        return "Массив пуст"
+    
+    min_age = min(ages)
+    max_age = max(ages)
+    
+    youngest_first_index = ages.index(max_age)  # самый молодой - максимальный возраст
+    oldest_first_index = ages.index(min_age)    # самый старый - минимальный возраст
+    
+    if youngest_first_index < oldest_first_index:
+        return "Самый молодой указан раньше", youngest_first_index, oldest_first_index
+    elif oldest_first_index < youngest_first_index:
+        return "Самый старый указан раньше", oldest_first_index, youngest_first_index
+    else:
+        return "Самый молодой и самый старый - один человек", youngest_first_index
+Задача 11.135
+python
+def task_11_135(game_results):
+    """Что было раньше: первый выигрыш (3) или первый проигрыш (0)?"""
+    first_win_index = None
+    first_loss_index = None
+    
+    for i, result in enumerate(game_results):
+        if result == 3 and first_win_index is None:
+            first_win_index = i
+        if result == 0 and first_loss_index is None:
+            first_loss_index = i
+        
+        if first_win_index is not None and first_loss_index is not None:
+            break
+    
+    if first_win_index is None and first_loss_index is None:
+        return "Не было ни выигрышей, ни проигрышей"
+    elif first_win_index is None:
+        return "Был проигрыш, но не было выигрышей", first_loss_index
+    elif first_loss_index is None:
+        return "Был выигрыш, но не было проигрышей", first_win_index
+    elif first_win_index < first_loss_index:
+        return "Выигрыш был раньше проигрыша", first_win_index, first_loss_index
+    elif first_loss_index < first_win_index:
+        return "Проигрыш был раньше выигрыша", first_loss_index, first_win_index
+    else:
+        return "Выигрыш и проигрыш одновременно", first_win_index
+Задача 11.136
+python
+def task_11_136(wind_directions):
+    """Определить расположение жилого комплекса по отношению к комбинату"""
+    if len(wind_directions) != 365:
+        return "Массив должен содержать данные за 365 дней"
+    
+    # Частота каждого направления ветра
+    direction_count = {i: 0 for i in range(1, 9)}
+    
+    for direction in wind_directions:
+        if 1 <= direction <= 8:
+            direction_count[direction] += 1
+    
+    # Находим направление с минимальной частотой
+    min_freq_direction = min(direction_count, key=direction_count.get)
+    min_freq = direction_count[min_freq_direction]
+    
+    # Соответствие направлениям:
+    direction_names = {
+        1: "северный",
+        2: "южный", 
+        3: "восточный",
+        4: "западный",
+        5: "северо-западный",
+        6: "северо-восточный",
+        7: "юго-западный",
+        8: "юго-восточный"
+    }
+    
+    # Рекомендация по расположению
+    recommendations = {
+        1: "Расположить на севере от комбината",
+        2: "Расположить на юге от комбината",
+        3: "Расположить на востоке от комбината",
+        4: "Расположить на западе от комбината",
+        5: "Расположить на северо-западе от комбината",
+        6: "Расположить на северо-востоке от комбината",
+        7: "Расположить на юго-западе от комбината",
+        8: "Расположить на юго-востоке от комбината"
+    }
+    
+    return {
+        'min_freq_direction': min_freq_direction,
+        'direction_name': direction_names[min_freq_direction],
+        'min_frequency': min_freq,
+        'recommendation': recommendations[min_freq_direction],
+        'all_frequencies': direction_count
+    }
+Задача 11.137
+python
+def task_11_137(arr):
+    """а) Максимальный и второй максимальный
+       б) Минимальный и второй минимальный
+       в, г) Их номера"""
+    
+    if len(arr) < 2:
+        return "Массив должен содержать минимум 2 элемента"
+    
+    # Инициализация
+    if arr[0] > arr[1]:
+        max1, max2 = arr[0], arr[1]
+        max1_idx, max2_idx = 0, 1
+        min1, min2 = arr[1], arr[0]
+        min1_idx, min2_idx = 1, 0
+    else:
+        max1, max2 = arr[1], arr[0]
+        max1_idx, max2_idx = 1, 0
+        min1, min2 = arr[0], arr[1]
+        min1_idx, min2_idx = 0, 1
+    
+    # Один проход по массиву
+    for i in range(2, len(arr)):
+        # Обработка максимумов
+        if arr[i] > max1:
+            max2, max1 = max1, arr[i]
+            max2_idx, max1_idx = max1_idx, i
+        elif arr[i] > max2 and arr[i] != max1:
+            max2, max2_idx = arr[i], i
+        
+        # Обработка минимумов
+        if arr[i] < min1:
+            min2, min1 = min1, arr[i]
+            min2_idx, min1_idx = min1_idx, i
+        elif arr[i] < min2 and arr[i] != min1:
+            min2, min2_idx = arr[i], i
+    
+    return {
+        'max1': max1, 'max2': max2,
+        'max1_idx': max1_idx, 'max2_idx': max2_idx,
+        'min1': min1, 'min2': min2,
+        'min1_idx': min1_idx, 'min2_idx': min2_idx
+    }
+Задача 11.138
+python
+def task_11_138(car_speeds):
+    """Скорости двух самых быстрых автомобилей (40 марок)"""
+    if len(car_speeds) < 2:
+        return "Массив должен содержать минимум 2 элемента"
+    
+    # Инициализация
+    if car_speeds[0] > car_speeds[1]:
+        fastest, second_fastest = car_speeds[0], car_speeds[1]
+    else:
+        fastest, second_fastest = car_speeds[1], car_speeds[0]
+    
+    # Один проход по массиву
+    for speed in car_speeds[2:]:
+        if speed > fastest:
+            second_fastest, fastest = fastest, speed
+        elif speed > second_fastest and speed != fastest:
+            second_fastest = speed
+    
+    return fastest, second_fastest
+Задача 11.139
+python
+def task_11_139(product_prices):
+    """Стоимость двух самых дорогих видов товара (30 видов)"""
+    if len(product_prices) < 2:
+        return "Массив должен содержать минимум 2 элемента"
+    
+    # Инициализация
+    if product_prices[0] > product_prices[1]:
+        most_expensive, second_expensive = product_prices[0], product_prices[1]
+    else:
+        most_expensive, second_expensive = product_prices[1], product_prices[0]
+    
+    # Один проход по массиву
+    for price in product_prices[2:]:
+        if price > most_expensive:
+            second_expensive, most_expensive = most_expensive, price
+        elif price > second_expensive and price != most_expensive:
+            second_expensive = price
+    
+    return most_expensive, second_expensive
+Задача 11.140
+python
+def task_11_140(running_results):
+    """Результаты спортсменов, занявших 1 и 2 места (22 спортсмена, 100м)"""
+    if len(running_results) < 2:
+        return "Массив должен содержать минимум 2 элемента"
+    
+    # В беге на 100м лучшее время - минимальное
+    # Инициализация
+    if running_results[0] < running_results[1]:
+        first_place, second_place = running_results[0], running_results[1]
+    else:
+        first_place, second_place = running_results[1], running_results[0]
+    
+    # Один проход по массиву
+    for result in running_results[2:]:
+        if result < first_place:
+            second_place, first_place = first_place, result
+        elif result < second_place and result != first_place:
+            second_place = result
+    
+    return first_place, second_place
+Задача 11.141
+python
+def task_11_141(birth_years):
+    """Годы рождения двух самых старших людей (30 человек)"""
+    if len(birth_years) < 2:
+        return "Массив должен содержать минимум 2 элемента"
+    
+    # Самый старый - минимальный год рождения
+    # Инициализация
+    if birth_years[0] < birth_years[1]:
+        oldest, second_oldest = birth_years[0], birth_years[1]
+    else:
+        oldest, second_oldest = birth_years[1], birth_years[0]
+    
+    # Один проход по массиву
+    for year in birth_years[2:]:
+        if year < oldest:
+            second_oldest, oldest = oldest, year
+        elif year < second_oldest and year != oldest:
+            second_oldest = year
+    
+    return oldest, second_oldest
+Задача 11.142
+python
+def task_11_142(team_points):
+    """Команды, занявшие 1 и 2 места (20 команд)"""
+    if len(team_points) < 2:
+        return "Массив должен содержать минимум 2 элемента"
+    
+    # Лучшая команда - максимальное количество очков
+    # Инициализация
+    if team_points[0] > team_points[1]:
+        first_place, second_place = team_points[0], team_points[1]
+        first_idx, second_idx = 0, 1
+    else:
+        first_place, second_place = team_points[1], team_points[0]
+        first_idx, second_idx = 1, 0
+    
+    # Один проход по массиву
+    for i in range(2, len(team_points)):
+        if team_points[i] > first_place:
+            second_place, first_place = first_place, team_points[i]
+            second_idx, first_idx = first_idx, i
+        elif team_points[i] > second_place and team_points[i] != first_place:
+            second_place, second_idx = team_points[i], i
+    
+    return {
+        'first_place_points': first_place,
+        'second_place_points': second_place,
+        'first_place_team': first_idx + 1,  # +1 для номера команды
+        'second_place_team': second_idx + 1
+    }
+Задача 11.143
+python
+def task_11_143(july_temperatures):
+    """Даты двух самых теплых дней в июле"""
+    if len(july_temperatures) < 2:
+        return "Массив должен содержать минимум 2 элемента"
+    
+    # Инициализация
+    if july_temperatures[0] > july_temperatures[1]:
+        hottest, second_hottest = july_temperatures[0], july_temperatures[1]
+        hottest_day, second_hottest_day = 1, 2
+    else:
+        hottest, second_hottest = july_temperatures[1], july_temperatures[0]
+        hottest_day, second_hottest_day = 2, 1
+    
+    # Один проход по массиву
+    for i in range(2, len(july_temperatures)):
+        day = i + 1
+        temp = july_temperatures[i]
+        
+        if temp > hottest:
+            second_hottest, hottest = hottest, temp
+            second_hottest_day, hottest_day = hottest_day, day
+        elif temp > second_hottest and temp != hottest:
+            second_hottest, second_hottest_day = temp, day
+    
+    return hottest_day, second_hottest_day, hottest, second_hottest
+Задача 11.144
+python
+def task_11_144(residents_per_floor):
+    """Два этажа с минимальным количеством жильцов (15 этажей)"""
+    if len(residents_per_floor) < 2:
+        return "Массив должен содержать минимум 2 элемента"
+    
+    # Инициализация
+    if residents_per_floor[0] < residents_per_floor[1]:
+        min1, min2 = residents_per_floor[0], residents_per_floor[1]
+        floor1, floor2 = 1, 2
+    else:
+        min1, min2 = residents_per_floor[1], residents_per_floor[0]
+        floor1, floor2 = 2, 1
+    
+    # Один проход по массиву
+    for i in range(2, len(residents_per_floor)):
+        floor = i + 1
+        residents = residents_per_floor[i]
+        
+        if residents < min1:
+            min2, min1 = min1, residents
+            floor2, floor1 = floor1, floor
+        elif residents < min2 and residents != min1:
+            min2, floor2 = residents, floor
+    
+    return floor1, floor2, min1, min2
+Задача 11.145
+python
+def task_11_145(february_temperatures):
+    """Даты двух самых холодных дней в феврале"""
+    if len(february_temperatures) < 2:
+        return "Массив должен содержать минимум 2 элемента"
+    
+    # Самый холодный - минимальная температура
+    # Инициализация
+    if february_temperatures[0] < february_temperatures[1]:
+        coldest, second_coldest = february_temperatures[0], february_temperatures[1]
+        coldest_day, second_coldest_day = 1, 2
+    else:
+        coldest, second_coldest = february_temperatures[1], february_temperatures[0]
+        coldest_day, second_coldest_day = 2, 1
+    
+    # Один проход по массиву
+    for i in range(2, len(february_temperatures)):
+        day = i + 1
+        temp = february_temperatures[i]
+        
+        if temp < coldest:
+            second_coldest, coldest = coldest, temp
+            second_coldest_day, coldest_day = coldest_day, day
+        elif temp < second_coldest and temp != coldest:
+            second_coldest, second_coldest_day = temp, day
+    
+    return coldest_day, second_coldest_day, coldest, second_coldest
+Задача 11.146
+python
+def task_11_146(running_times):
+    """Выбор 4 лучших бегунов для эстафеты (минимальная сумма времени)"""
+    if len(running_times) < 4:
+        return "Массив должен содержать минимум 4 элемента"
+    
+    # Создаем список индексов и времен
+    indexed_times = [(time, i) for i, time in enumerate(running_times)]
+    
+    # Сортируем по времени (лучшие - минимальное время)
+    indexed_times.sort(key=lambda x: x[0])
+    
+    # Берем 4 лучших
+    best_four = indexed_times[:4]
+    
+    # Сортируем индексы по возрастанию для условия i < j < k < m
+    best_indices = sorted([idx for _, idx in best_four])
+    
+    # Вычисляем суммарное время
+    total_time = sum(time for time, _ in best_four)
+    
+    return {
+        'best_indices': best_indices,
+        'corresponding_times': [running_times[i] for i in best_indices],
+        'total_time': total_time
+    }
+Задача 11.147
+python
+def task_11_147(arr):
+    """Изменить знак у максимального по модулю элемента"""
+    if not arr:
+        return "Массив пуст"
+    
+    # Находим индекс элемента с максимальным модулем
+    max_abs_index = 0
+    max_abs_value = abs(arr[0])
+    
+    for i in range(1, len(arr)):
+        if abs(arr[i]) > max_abs_value:
+            max_abs_value = abs(arr[i])
+            max_abs_index = i
+    
+    # Изменяем знак
+    arr[max_abs_index] = -arr[max_abs_index]
+    
+    return {
+        'changed_index': max_abs_index,
+        'original_value': -arr[max_abs_index],  # измененное значение с обратным знаком
+        'new_value': arr[max_abs_index],
+        'modified_array': arr.copy()
+    }
+Задача 11.148
+python
+def task_11_148(arr):
+    """Пузырьковая сортировка одного прохода"""
+    if len(arr) < 2:
+        return arr
+    
+    result = arr.copy()
+    
+    for i in range(len(result) - 1):
+        if result[i + 1] < result[i]:
+            result[i], result[i + 1] = result[i + 1], result[i]
+    
+    return result, result[-1]
+Задача 11.149
+python
+def task_11_149(arr):
+    """а) Увеличить все элементы в 2 раза
+       б) Умножить все элементы на -1 (изменить знак)"""
+    
+    # а) Увеличить в 2 раза
+    doubled = [x * 2 for x in arr]
+    
+    # б) Изменить знак
+    negated = [-x for x in arr]
+    
+    return doubled, negated
+Все задачи с 11.31 по 11.149 решены! Каждая функция решает соответствующую задачу из списка. Функции написаны так, чтобы их можно было легко протестировать с разными входными данными.
+
+Основные типы задач, которые были решены:
+
+Преобразование массивов (11.31-11.40)
+
+Вычисления сумм, произведений, средних (11.41-11.76)
+
+Подсчет элементов по условиям (11.77-11.86)
+
+Работа со статистикой (11.87-11.104)
+
+Анализ последовательностей (11.105-11.112)
+
+Поиск экстремумов (11.113-11.149)
+
+Каждая функция возвращает результат в понятном формате, который можно использовать для дальнейшей обработки или вывода.
+
+
