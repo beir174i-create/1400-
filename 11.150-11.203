@@ -1,0 +1,1130 @@
+11.151. Поменять местами элементы массива
+python
+# а) второй и пятый элемент
+def swap_second_fifth(arr):
+    if len(arr) >= 5:
+        arr[1], arr[4] = arr[4], arr[1]
+    return arr
+
+# б) m-й и n-й элемент
+def swap_m_n(arr, m, n):
+    if 0 <= m < len(arr) and 0 <= n < len(arr):
+        arr[m], arr[n] = arr[n], arr[m]
+    return arr
+
+# в) третий и максимальный элементы
+def swap_third_max(arr):
+    if len(arr) >= 3:
+        max_value = max(arr)
+        max_index = arr.index(max_value)  # первый максимальный
+        arr[2], arr[max_index] = arr[max_index], arr[2]
+    return arr
+
+# г) первый и минимальный элементы
+def swap_first_min(arr):
+    if arr:
+        min_value = min(arr)
+        # найти последний минимальный
+        min_index = len(arr) - 1 - arr[::-1].index(min_value)
+        arr[0], arr[min_index] = arr[min_index], arr[0]
+    return arr
+11.152. Поменять местами в массиве из четного числа элементов
+python
+# а) поменять местами половинки
+def swap_halves(arr):
+    n = len(arr)
+    if n % 2 == 0:
+        mid = n // 2
+        return arr[mid:] + arr[:mid]
+    return arr
+
+# б) поменять соседние элементы (1-2, 3-4, ...)
+def swap_neighbors(arr):
+    n = len(arr)
+    result = arr.copy()
+    for i in range(0, n-1, 2):
+        result[i], result[i+1] = result[i+1], result[i]
+    return result
+
+# в) поменять половинки через реверс
+def swap_halves_reverse(arr):
+    n = len(arr)
+    if n % 2 == 0:
+        return arr[::-1]
+    return arr
+11.153. Переставить первые три и последние три элемента
+python
+def swap_first_last_three(arr):
+    if len(arr) == 20:
+        # Сохраняем группы
+        first_three = arr[:3]
+        middle = arr[3:17]
+        last_three = arr[17:]
+        # Меняем местами
+        return last_three + middle + first_three
+    return arr
+11.154. Переставить элементы в обратном порядке
+python
+# а) между вторым и десятым (с 3 по 9)
+def reverse_between_2_10(arr):
+    if len(arr) >= 10:
+        # Индексы: второй элемент - индекс 1, десятый - индекс 9
+        # Между ними: индексы 2-8
+        arr[2:9] = arr[8:1:-1]
+    return arr
+
+# б) между k-м и s-м (k < s)
+def reverse_between_k_s(arr, k, s):
+    if 0 <= k < s < len(arr):
+        # Элементы между: с k+1 по s-1
+        arr[k+1:s] = arr[s-1:k:-1]
+    return arr
+
+# в) между максимальным и минимальным
+def reverse_between_max_min(arr):
+    if arr:
+        max_index = arr.index(max(arr))
+        min_index = arr.index(min(arr))
+        
+        # Определяем границы
+        start = min(max_index, min_index)
+        end = max(max_index, min_index)
+        
+        # Разворачиваем включая границы
+        arr[start:end+1] = arr[end:start-1:-1] if start > 0 else arr[end::-1]
+    return arr
+11.155. Поменять местами первый отрицательный и последний положительный
+python
+def swap_first_neg_last_pos(arr):
+    first_neg = None
+    last_pos = None
+    
+    # Находим первый отрицательный
+    for i in range(len(arr)):
+        if arr[i] < 0:
+            first_neg = i
+            break
+    
+    # Находим последний положительный
+    for i in range(len(arr)-1, -1, -1):
+        if arr[i] > 0:
+            last_pos = i
+            break
+    
+    # Меняем местами, если оба найдены
+    if first_neg is not None and last_pos is not None:
+        arr[first_neg], arr[last_pos] = arr[last_pos], arr[first_neg]
+    
+    return arr
+11.156. Удалить элемент из массива
+python
+# а) удалить третий элемент
+def remove_third(arr):
+    if len(arr) >= 3:
+        # Смещаем элементы
+        for i in range(2, len(arr)-1):
+            arr[i] = arr[i+1]
+        # Последнему элементу присваиваем 0
+        arr[-1] = 0
+    return arr
+
+# б) удалить k-й элемент
+def remove_kth(arr, k):
+    if 0 <= k < len(arr):
+        for i in range(k, len(arr)-1):
+            arr[i] = arr[i+1]
+        arr[-1] = 0
+    return arr
+11.157. Удалить товар с заданной стоимостью
+python
+def remove_product(prices, n):
+    if len(prices) == 20 and 1 <= n <= 20:
+        # Удаляем n-й товар (индекс n-1)
+        for i in range(n-1, len(prices)-1):
+            prices[i] = prices[i+1]
+        prices[-1] = 0
+    return prices[:19]  # возвращаем оставшиеся товары
+11.158. Удалить элемент из массива с различными элементами
+python
+# а) удалить максимальный элемент
+def remove_max_unique(arr):
+    if arr and len(set(arr)) == len(arr):  # все элементы различны
+        max_index = arr.index(max(arr))
+        for i in range(max_index, len(arr)-1):
+            arr[i] = arr[i+1]
+        arr[-1] = 0
+    return arr
+
+# б) удалить минимальный элемент
+def remove_min_unique(arr):
+    if arr and len(set(arr)) == len(arr):
+        min_index = arr.index(min(arr))
+        for i in range(min_index, len(arr)-1):
+            arr[i] = arr[i+1]
+        arr[-1] = 0
+    return arr
+11.159. Удалить ученика из отсортированного массива
+python
+# 1) Известен порядковый номер
+def remove_student_by_index(heights, index):
+    if 0 <= index < len(heights):
+        for i in range(index, len(heights)-1):
+            heights[i] = heights[i+1]
+        heights[-1] = 0
+    return heights[:24]  # возвращаем оставшихся 24 ученика
+
+# 2) Известен рост
+def remove_student_by_height(heights, height):
+    if height in heights:
+        index = heights.index(height)
+        for i in range(index, len(heights)-1):
+            heights[i] = heights[i+1]
+        heights[-1] = 0
+    return heights[:24]
+11.160. Удалить элементы по условию
+python
+# а) удалить первый отрицательный элемент
+def remove_first_negative(arr):
+    for i in range(len(arr)):
+        if arr[i] < 0:
+            for j in range(i, len(arr)-1):
+                arr[j] = arr[j+1]
+            arr[-1] = 0
+            break
+    return arr
+
+# б) удалить последний четный элемент
+def remove_last_even(arr):
+    for i in range(len(arr)-1, -1, -1):
+        if arr[i] % 2 == 0:
+            for j in range(i, len(arr)-1):
+                arr[j] = arr[j+1]
+            arr[-1] = 0
+            break
+    return arr
+11.161. Удалить максимальный и минимальный элементы
+python
+def remove_max_min_unique(arr):
+    if arr and len(set(arr)) == len(arr):
+        # Находим индексы
+        max_index = arr.index(max(arr))
+        min_index = arr.index(min(arr))
+        
+        # Удаляем сначала больший индекс, чтобы не сбились индексы
+        if max_index > min_index:
+            # Удаляем максимальный
+            for i in range(max_index, len(arr)-1):
+                arr[i] = arr[i+1]
+            arr[-1] = 0
+            
+            # Корректируем индекс минимального
+            if min_index > max_index:
+                min_index -= 1
+            
+            # Удаляем минимальный
+            for i in range(min_index, len(arr)-2):
+                arr[i] = arr[i+1]
+            arr[-2] = 0
+        else:
+            # Удаляем минимальный
+            for i in range(min_index, len(arr)-1):
+                arr[i] = arr[i+1]
+            arr[-1] = 0
+            
+            # Корректируем индекс максимального
+            if max_index > min_index:
+                max_index -= 1
+            
+            # Удаляем максимальный
+            for i in range(max_index, len(arr)-2):
+                arr[i] = arr[i+1]
+            arr[-2] = 0
+    
+    return arr[:23]  # возвращаем 23 элемента
+11.162. Удалить двух учеников
+python
+# 1) Известны порядковые номера
+def remove_two_by_index(heights, index1, index2):
+    if len(heights) == 25:
+        # Сортируем индексы по убыванию для правильного удаления
+        indices = sorted([index1, index2], reverse=True)
+        
+        for idx in indices:
+            if 0 <= idx < len(heights):
+                for i in range(idx, len(heights)-1):
+                    heights[i] = heights[i+1]
+                heights[-1] = 0
+        
+        return heights[:23]  # возвращаем 23 ученика
+    return heights
+
+# 2) Известны значения роста
+def remove_two_by_height(heights, height1, height2):
+    if len(heights) == 25:
+        indices = []
+        
+        # Находим индексы
+        if height1 in heights:
+            indices.append(heights.index(height1))
+        if height2 in heights:
+            indices.append(heights.index(height2))
+        
+        # Сортируем по убыванию и удаляем
+        indices.sort(reverse=True)
+        for idx in indices:
+            for i in range(idx, len(heights)-1):
+                heights[i] = heights[i+1]
+            heights[-1] = 0
+        
+        return heights[:23]
+    return heights
+11.163. Удалить элементы по условию
+python
+# а) удалить все отрицательные элементы
+def remove_all_negative(arr):
+    i = 0
+    count = 0
+    n = len(arr)
+    
+    while i < n - count:
+        if arr[i] < 0:
+            # Смещаем элементы
+            for j in range(i, n-1-count):
+                arr[j] = arr[j+1]
+            arr[n-1-count] = 0
+            count += 1
+        else:
+            i += 1
+    
+    return arr
+
+# б) удалить все элементы, большие заданного числа
+def remove_greater_than(arr, x):
+    i = 0
+    count = 0
+    n = len(arr)
+    
+    while i < n - count:
+        if arr[i] > x:
+            for j in range(i, n-1-count):
+                arr[j] = arr[j+1]
+            arr[n-1-count] = 0
+            count += 1
+        else:
+            i += 1
+    
+    return arr
+
+# в) удалить элементы с n1 по n2
+def remove_range(arr, n1, n2):
+    if 0 <= n1 <= n2 < len(arr):
+        count = n2 - n1 + 1
+        for i in range(n1, len(arr)-count):
+            arr[i] = arr[i+count]
+        # Обнуляем последние элементы
+        for i in range(len(arr)-count, len(arr)):
+            arr[i] = 0
+    return arr
+11.164. Удалить элементы из массива целых чисел
+python
+# а) удалить четные элементы на нечетных местах
+def remove_even_on_odd_positions(arr):
+    i = 0
+    count = 0
+    n = len(arr)
+    
+    while i < n - count:
+        # Нечетные позиции имеют четные индексы (0-based)
+        if i % 2 == 0 and arr[i] % 2 == 0:
+            for j in range(i, n-1-count):
+                arr[j] = arr[j+1]
+            arr[n-1-count] = 0
+            count += 1
+        else:
+            i += 1
+    
+    return arr
+
+# б) удалить все элементы, кратные 3 или 5
+def remove_multiples_of_3_or_5(arr):
+    i = 0
+    count = 0
+    n = len(arr)
+    
+    while i < n - count:
+        if arr[i] % 3 == 0 or arr[i] % 5 == 0:
+            for j in range(i, n-1-count):
+                arr[j] = arr[j+1]
+            arr[n-1-count] = 0
+            count += 1
+        else:
+            i += 1
+    
+    return arr
+11.165. Удалить повторяющиеся элементы
+python
+def remove_duplicates(arr):
+    seen = set()
+    i = 0
+    count = 0
+    n = len(arr)
+    
+    while i < n - count:
+        if arr[i] in seen:
+            for j in range(i, n-1-count):
+                arr[j] = arr[j+1]
+            arr[n-1-count] = 0
+            count += 1
+        else:
+            seen.add(arr[i])
+            i += 1
+    
+    return arr
+11.166. Вставить число в массив
+python
+# а) вставить число 10 после второго элемента
+def insert_10_after_second(arr):
+    n = len(arr)
+    if n > 0:
+        # Увеличиваем массив
+        arr.append(0)
+        # Смещаем элементы вправо
+        for i in range(n-1, 2, -1):
+            arr[i] = arr[i-1]
+        # Вставляем 10
+        arr[2] = 10
+    return arr
+
+# б) вставить число 100 после m-го элемента
+def insert_100_after_m(arr, m):
+    n = len(arr)
+    if 0 <= m < n:
+        arr.append(0)
+        for i in range(n-1, m, -1):
+            arr[i] = arr[i-1]
+        arr[m] = 100
+    return arr
+11.167. Вставить число в массив целых чисел
+python
+# а) после первого отрицательного элемента
+def insert_after_first_negative(arr, num):
+    n = len(arr)
+    for i in range(n):
+        if arr[i] < 0:
+            arr.append(0)
+            for j in range(n-1, i, -1):
+                arr[j] = arr[j-1]
+            arr[i+1] = num
+            break
+    return arr
+
+# б) перед последним четным элементом
+def insert_before_last_even(arr, num):
+    n = len(arr)
+    for i in range(n-1, -1, -1):
+        if arr[i] % 2 == 0:
+            arr.append(0)
+            for j in range(n-1, i-1, -1):
+                arr[j] = arr[j-1]
+            arr[i] = num
+            break
+    return arr
+11.168. Вставить информацию о новой вершине
+python
+def insert_mountain_peak(heights, new_height, position):
+    """
+    heights - массив высот вершин в алфавитном порядке
+    new_height - высота новой вершины
+    position - позиция для вставки (соответствует алфавитному порядку)
+    """
+    n = len(heights)
+    if n == 20 and 0 <= position <= 20:
+        heights.append(0)
+        for i in range(n-1, position-1, -1):
+            heights[i] = heights[i-1]
+        heights[position] = new_height
+    return heights
+11.169. Вставить нового ученика
+python
+# 1) Известен порядковый номер
+def insert_student_by_index(heights, new_height, index):
+    n = len(heights)
+    if n == 15 and 0 <= index <= 15:
+        heights.append(0)
+        for i in range(n-1, index-1, -1):
+            heights[i] = heights[i-1]
+        heights[index] = new_height
+        
+        # Сортируем по убыванию
+        heights.sort(reverse=True)
+    
+    return heights
+
+# 2) Известен рост
+def insert_student_by_height(heights, new_height):
+    n = len(heights)
+    if n == 15:
+        # Находим позицию для вставки
+        pos = 0
+        while pos < n and heights[pos] > new_height:
+            pos += 1
+        
+        heights.append(0)
+        for i in range(n-1, pos-1, -1):
+            heights[i] = heights[i-1]
+        heights[pos] = new_height
+    
+    return heights
+11.170. Вставить два числа около максимального элемента
+python
+def insert_around_max(arr, num1, num2):
+    if arr:
+        max_value = max(arr)
+        max_index = arr.index(max_value)
+        
+        # Вставляем первое число после максимального
+        arr.append(0)
+        for i in range(len(arr)-2, max_index, -1):
+            arr[i] = arr[i-1]
+        arr[max_index+1] = num1
+        
+        # Вставляем второе число перед максимальным
+        arr.append(0)
+        for i in range(len(arr)-2, max_index, -1):
+            arr[i] = arr[i-1]
+        arr[max_index] = num2
+    
+    return arr
+11.171. Вставить число по условию
+python
+# а) перед всеми элементами, кратными числу a
+def insert_before_multiples(arr, num, a):
+    n = len(arr)
+    i = 0
+    
+    while i < n:
+        if arr[i] % a == 0:
+            # Вставляем перед текущим элементом
+            arr.append(0)
+            for j in range(n, i, -1):
+                arr[j] = arr[j-1]
+            arr[i] = num
+            n += 1
+            i += 2  # Пропускаем вставленный элемент и текущий (который сдвинулся)
+        else:
+            i += 1
+    
+    return arr
+
+# б) после всех отрицательных элементов
+def insert_after_negatives(arr, num):
+    n = len(arr)
+    i = 0
+    
+    while i < n:
+        if arr[i] < 0:
+            # Вставляем после текущего элемента
+            arr.append(0)
+            for j in range(n, i, -1):
+                arr[j] = arr[j-1]
+            arr[i+1] = num
+            n += 1
+            i += 2  # Пропускаем текущий и вставленный
+        else:
+            i += 1
+    
+    return arr
+11.172. Вставить два числа по условию
+python
+def insert_two_numbers(arr, n, m):
+    # Вставляем n перед элементами > n
+    length = len(arr)
+    i = 0
+    
+    while i < length:
+        if arr[i] > n:
+            arr.append(0)
+            for j in range(length, i, -1):
+                arr[j] = arr[j-1]
+            arr[i] = n
+            length += 1
+            i += 2
+        else:
+            i += 1
+    
+    # Вставляем m после элементов < m
+    i = 0
+    length = len(arr)
+    
+    while i < length:
+        if arr[i] < m:
+            arr.append(0)
+            for j in range(length, i, -1):
+                arr[j] = arr[j-1]
+            arr[i+1] = m
+            length += 1
+            i += 2
+        else:
+            i += 1
+    
+    return arr
+11.173. Вставить двух новых учеников
+python
+# 1) Известны порядковые номера
+def insert_two_students_by_index(heights, height1, height2, index1, index2):
+    if len(heights) == 25:
+        # Сортируем индексы по убыванию для правильной вставки
+        indices = sorted([(index1, height1), (index2, height2)], 
+                        key=lambda x: x[0], reverse=True)
+        
+        for idx, height in indices:
+            if 0 <= idx <= len(heights):
+                heights.append(0)
+                for i in range(len(heights)-2, idx-1, -1):
+                    heights[i] = heights[i-1]
+                heights[idx] = height
+        
+        # Сортируем по убыванию
+        heights.sort(reverse=True)
+    
+    return heights[:27]  # возвращаем 27 элементов
+
+# 2) Известны значения роста
+def insert_two_students_by_height(heights, height1, height2):
+    if len(heights) == 25:
+        # Вставляем первого
+        pos1 = 0
+        while pos1 < len(heights) and heights[pos1] > height1:
+            pos1 += 1
+        
+        heights.append(0)
+        for i in range(len(heights)-2, pos1-1, -1):
+            heights[i] = heights[i-1]
+        heights[pos1] = height1
+        
+        # Вставляем второго
+        pos2 = 0
+        while pos2 < len(heights) and heights[pos2] > height2:
+            pos2 += 1
+        
+        heights.append(0)
+        for i in range(len(heights)-2, pos2-1, -1):
+            heights[i] = heights[i-1]
+        heights[pos2] = height2
+    
+    return heights[:27]
+11.174. Вставить число после элементов с цифрой 5
+python
+def insert_after_contains_5(arr, a):
+    n = len(arr)
+    i = 0
+    
+    while i < n:
+        # Проверяем, содержит ли число цифру 5
+        num_str = str(abs(arr[i]))
+        if '5' in num_str:
+            arr.append(0)
+            for j in range(n, i, -1):
+                arr[j] = arr[j-1]
+            arr[i+1] = a
+            n += 1
+            i += 2
+        else:
+            i += 1
+    
+    return arr
+11.175. Вставить число между элементами с одинаковым знаком
+python
+def insert_between_same_sign(arr, n):
+    length = len(arr)
+    i = 0
+    
+    while i < length - 1:
+        if (arr[i] >= 0 and arr[i+1] >= 0) or (arr[i] < 0 and arr[i+1] < 0):
+            arr.append(0)
+            for j in range(length, i+1, -1):
+                arr[j] = arr[j-1]
+            arr[i+1] = n
+            length += 1
+            i += 2
+        else:
+            i += 1
+    
+    return arr
+11.176. Переставить первый элемент на последнее место
+python
+def move_first_to_last(arr):
+    if arr:
+        first = arr[0]
+        for i in range(len(arr)-1):
+            arr[i] = arr[i+1]
+        arr[-1] = first
+    return arr
+11.177. Переставить первый элемент на место k-го
+python
+def move_first_to_k(arr, k):
+    if arr and 0 <= k < len(arr):
+        first = arr[0]
+        for i in range(k):
+            arr[i] = arr[i+1]
+        arr[k] = first
+    return arr
+11.178. Переставить s-й элемент на место k-го (s < k)
+python
+def move_s_to_k(arr, s, k):
+    if arr and 0 <= s < k < len(arr):
+        temp = arr[s]
+        for i in range(s, k):
+            arr[i] = arr[i+1]
+        arr[k] = temp
+    return arr
+11.179. Упорядочить массив результатов
+python
+def fix_swimming_results(arr):
+    if len(arr) == 25:
+        # Проверяем, упорядочен ли массив по убыванию
+        for i in range(len(arr)-1):
+            if arr[i] < arr[i+1]:
+                # Находим правильное место для первого элемента
+                value = arr[0]
+                pos = 0
+                while pos < len(arr) and arr[pos] > value:
+                    pos += 1
+                
+                # Сдвигаем элементы
+                for j in range(pos-1):
+                    arr[j] = arr[j+1]
+                arr[pos-1] = value
+                break
+    return arr
+11.180. Переставить последний элемент на первое место
+python
+def move_last_to_first(arr):
+    if arr:
+        last = arr[-1]
+        for i in range(len(arr)-1, 0, -1):
+            arr[i] = arr[i-1]
+        arr[0] = last
+    return arr
+11.181. Переставить последний элемент на место k-го
+python
+def move_last_to_k(arr, k):
+    if arr and 0 <= k < len(arr):
+        last = arr[-1]
+        for i in range(len(arr)-1, k, -1):
+            arr[i] = arr[i-1]
+        arr[k] = last
+    return arr
+11.182. Переставить s-й элемент на место k-го (s > k)
+python
+def move_s_to_k_right(arr, s, k):
+    if arr and 0 <= k < s < len(arr):
+        temp = arr[s]
+        for i in range(s, k, -1):
+            arr[i] = arr[i-1]
+        arr[k] = temp
+    return arr
+11.183. Упорядочить массив населения городов
+python
+def fix_population_order(arr):
+    if len(arr) == 30:
+        # Проверяем упорядоченность по возрастанию
+        for i in range(len(arr)-1):
+            if arr[i] > arr[i+1]:
+                # Находим правильное место для последнего элемента
+                value = arr[-1]
+                pos = len(arr) - 1
+                while pos > 0 and arr[pos-1] > value:
+                    arr[pos] = arr[pos-1]
+                    pos -= 1
+                arr[pos] = value
+                break
+    return arr
+11.184. Упорядочить массив скоростей автомобилей
+python
+def fix_speed_order(arr, k):
+    if len(arr) == 30 and 0 <= k < 30:
+        value = arr[k]
+        
+        # Проверяем, нарушает ли элемент упорядоченность
+        if (k > 0 and value < arr[k-1]) or (k < 29 and value > arr[k+1]):
+            # Удаляем элемент
+            for i in range(k, len(arr)-1):
+                arr[i] = arr[i+1]
+            arr[-1] = 0
+            
+            # Находим правильное место
+            pos = 0
+            while pos < len(arr)-1 and arr[pos] < value:
+                pos += 1
+            
+            # Вставляем на правильное место
+            for i in range(len(arr)-2, pos-1, -1):
+                arr[i] = arr[i-1]
+            arr[pos] = value
+    
+    return arr
+11.185. Перенести первые k элементов в конец
+python
+def move_first_k_to_end(arr, k):
+    n = len(arr)
+    if n == 28 and 0 < k < n:
+        # Сохраняем первые k элементов
+        temp = arr[:k]
+        
+        # Сдвигаем остальные элементы
+        for i in range(n - k):
+            arr[i] = arr[i + k]
+        
+        # Восстанавливаем первые k в конце
+        for i in range(k):
+            arr[n - k + i] = temp[i]
+    
+    return arr
+11.186. Переставить элементы особым образом
+python
+def special_rearrange(arr):
+    if len(arr) == 12:
+        result = []
+        for i in range(6):
+            result.append(arr[i])
+            result.append(arr[11 - i])
+        return result
+    return arr
+11.187. Вставка элемента без использования insert()
+python
+# а) числа 100 в начало списка
+def insert_100_at_beginning(arr):
+    # Создаем новый список
+    return [100] + arr
+
+# б) заданного числа в начало списка
+def insert_at_beginning(arr, num):
+    return [num] + arr
+
+# в) заданного числа перед элементом с заданным индексом
+def insert_before_index(arr, num, index):
+    if 0 <= index < len(arr):
+        return arr[:index] + [num] + arr[index:]
+    return arr
+11.188. Циклический сдвиг вправо
+python
+def cyclic_shift_right(arr):
+    if arr:
+        last = arr[-1]
+        for i in range(len(arr)-1, 0, -1):
+            arr[i] = arr[i-1]
+        arr[0] = last
+    return arr
+11.189. Найти элементы равные 5
+python
+# а) номер первого элемента равного 5
+def find_first_5(arr):
+    try:
+        return arr.index(5)
+    except ValueError:
+        return -1
+
+# б) номер последнего элемента равного 5
+def find_last_5(arr):
+    try:
+        return len(arr) - 1 - arr[::-1].index(5)
+    except ValueError:
+        return -1
+11.190. Найти элементы большие 65530
+python
+# а) номер первого элемента > 65530
+def find_first_greater_65530(arr):
+    for i in range(len(arr)):
+        if arr[i] > 65530:
+            return i
+    return -1
+
+# б) номер последнего элемента > 65530
+def find_last_greater_65530(arr):
+    for i in range(len(arr)-1, -1, -1):
+        if arr[i] > 65530:
+            return i
+    return -1
+11.191. Вывести элементы кроме первого/последнего нулевого
+python
+# а) все элементы, кроме первого нулевого
+def print_except_first_zero(arr):
+    first_zero_index = -1
+    for i in range(len(arr)):
+        if arr[i] == 0:
+            first_zero_index = i
+            break
+    
+    if first_zero_index != -1:
+        for i in range(len(arr)):
+            if i != first_zero_index:
+                print(arr[i], end=' ')
+    else:
+        for element in arr:
+            print(element, end=' ')
+    print()
+
+# б) все элементы, кроме последнего нулевого
+def print_except_last_zero(arr):
+    last_zero_index = -1
+    for i in range(len(arr)-1, -1, -1):
+        if arr[i] == 0:
+            last_zero_index = i
+            break
+    
+    if last_zero_index != -1:
+        for i in range(len(arr)):
+            if i != last_zero_index:
+                print(arr[i], end=' ')
+    else:
+        for element in arr:
+            print(element, end=' ')
+    print()
+11.192. Работа с упорядоченным массивом
+python
+# а) Вывести все элементы массива, меньшие a
+def print_less_than_a(arr, a):
+    for element in arr:
+        if element < a:
+            print(element, end=' ')
+        else:
+            break
+    print()
+
+# б) Найти два элемента между которыми находится a
+def find_interval(arr, a):
+    for i in range(len(arr)-1):
+        if arr[i] < a < arr[i+1]:
+            print(f"Элементы: {arr[i]} и {arr[i+1]}")
+            print(f"Индексы: {i} и {i+1}")
+            return
+    print("Не найдено")
+
+# в) Найти элемент, ближайший к a
+def find_closest(arr, a):
+    min_diff = float('inf')
+    closest_index = -1
+    closest_value = None
+    
+    for i in range(len(arr)):
+        diff = abs(arr[i] - a)
+        if diff < min_diff:
+            min_diff = diff
+            closest_index = i
+            closest_value = arr[i]
+    
+    print(f"Ближайший элемент: {closest_value}")
+    print(f"Индекс: {closest_index}")
+    return closest_index, closest_value
+11.193. Определить место нового ученика
+python
+def find_student_position(heights, new_height):
+    # heights отсортирован по убыванию
+    position = 0
+    while position < len(heights) and heights[position] > new_height:
+        position += 1
+    return position + 1  # +1 потому что позиции считаются с 1
+11.194. Определить место команды
+python
+def find_team_position(scores, n):
+    # scores отсортирован по убыванию
+    position = 0
+    while position < len(scores) and scores[position] > n:
+        position += 1
+    return position + 1
+11.195. Количество одинаковых элементов в начале
+python
+def count_equal_at_start(arr):
+    if not arr:
+        return 0, []
+    
+    first = arr[0]
+    count = 0
+    
+    for element in arr:
+        if element == first:
+            count += 1
+        else:
+            break
+    
+    if count < len(arr):
+        return count, arr[count:]
+    else:
+        return count, []
+11.196. Количество пятерок в начале списка
+python
+def count_fives_at_start(grades):
+    count = 0
+    for grade in grades:
+        if grade == 5:
+            count += 1
+        else:
+            break
+    return count
+11.197. Вывести элементы до/после определенных условий
+python
+# а) все элементы, предшествующие первому элементу со значением n
+def print_before_first_n(arr, n):
+    for element in arr:
+        if element == n:
+            break
+        print(element, end=' ')
+    print()
+
+# б) все элементы, следующие за последним элементом, оканчивающимся на 7
+def print_after_last_ends_with_7(arr):
+    last_index = -1
+    for i in
+Сделай ещё 4
+Я продолжу с задачами 11.198-11.200 и дальше:
+
+11.198. Найти элементы по условию
+python
+# а) номер первого нечетного элемента
+def find_first_odd(arr):
+    for i in range(len(arr)):
+        if arr[i] % 2 != 0:
+            return i
+    return -1  # нечетных элементов нет
+
+def print_first_odd_result(arr):
+    index = find_first_odd(arr)
+    if index != -1:
+        print(f"Первый нечетный элемент находится на позиции {index}")
+    else:
+        print("В массиве нет нечетных элементов")
+
+# б) номер первого элемента, кратного 13
+def find_first_multiple_of_13(arr):
+    for i in range(len(arr)):
+        if arr[i] % 13 == 0:
+            return i
+    return -1  # элементов, кратных 13, нет
+
+def print_first_multiple_of_13_result(arr):
+    index = find_first_multiple_of_13(arr)
+    if index != -1:
+        print(f"Первый элемент, кратный 13, находится на позиции {index}")
+    else:
+        print("В массиве нет элементов, кратных 13")
+11.199. Найти отрицательные числа в массиве
+python
+# а) найти первый отрицательный и вывести все следующие элементы
+def find_first_negative_and_print_after(arr):
+    for i in range(len(arr)):
+        if arr[i] < 0:
+            print(f"Первый отрицательный элемент на позиции {i}")
+            print("Элементы, следующие за ним:")
+            for j in range(i+1, len(arr)):
+                print(arr[j], end=' ')
+            print()
+            return
+    print("В массиве нет отрицательных чисел")
+
+# б) найти последний отрицательный и вывести все элементы слева
+def find_last_negative_and_print_before(arr):
+    for i in range(len(arr)-1, -1, -1):
+        if arr[i] < 0:
+            print(f"Последний отрицательный элемент на позиции {i}")
+            print("Элементы, расположенные слева от него:")
+            for j in range(i):
+                print(arr[j], end=' ')
+            print()
+            return
+    print("В массиве нет отрицательных чисел")
+11.200. Проверить наличие двоек в оценках
+python
+def check_for_twos(grades):
+    """
+    Проверяет наличие двоек в массиве оценок по информатике
+    """
+    has_twos = False
+    for grade in grades:
+        if grade == 2:
+            has_twos = True
+            break
+    
+    if has_twos:
+        print("Среди учеников есть те, кто получил двойку по информатике")
+    else:
+        print("Двоек по информатике нет")
+    
+    return has_twos
+
+# Альтернативный вариант с использованием in
+def check_for_twos_simple(grades):
+    if 2 in grades:
+        print("Среди учеников есть те, кто получил двойку по информатике")
+        return True
+    else:
+        print("Двоек по информатике нет")
+        return False
+11.201. Проверить наличие мощных автомобилей
+python
+def check_powerful_cars(powers):
+    """
+    Проверяет наличие автомобилей с мощностью > 200 л.с.
+    """
+    has_powerful = False
+    powerful_cars = []
+    
+    for i, power in enumerate(powers):
+        if power > 200:
+            has_powerful = True
+            powerful_cars.append((i, power))
+    
+    if has_powerful:
+        print(f"Найдено {len(powerful_cars)} автомобилей с мощностью > 200 л.с.:")
+        for idx, power in powerful_cars:
+            print(f"  Модель {idx+1}: {power} л.с.")
+    else:
+        print("Автомобилей с мощностью > 200 л.с. не найдено")
+    
+    return has_powerful, powerful_cars
+11.202. Найти первый элемент меньше заданного числа в упорядоченном массиве
+python
+def find_first_less_than(arr, a):
+    """
+    Находит номер первого элемента, меньшего заданного числа a
+    в массиве, упорядоченном по убыванию
+    """
+    for i in range(len(arr)):
+        if arr[i] < a:
+            return i
+    
+    return -1  # элементов меньше a не найдено
+
+def find_and_print_first_less_than(arr, a):
+    index = find_first_less_than(arr, a)
+    if index != -1:
+        print(f"Первый элемент меньше {a} находится на позиции {index}")
+        print(f"Значение элемента: {arr[index]}")
+    else:
+        print(f"В массиве нет элементов меньше {a}")
+    return index
+11.203. Вывести элементы после первого больше n в упорядоченном массиве
+python
+def print_after_first_greater_than(arr, n):
+    """
+    Выводит все элементы, следующие за первым элементом,
+    большим заданного числа n, в массиве, упорядоченном по возрастанию
+    """
+    found = False
+    for i in range(len(arr)):
+        if arr[i] > n:
+            found = True
+            print(f"Первый элемент больше {n} находится на позиции {i}")
+            print("Элементы после него:")
+            for j in range(i+1, len(arr)):
+                print(arr[j], end=' ')
+            print()
+            break
+    
+    if not found:
+        print(f"В массиве нет элементов больше {n}")
+    
+    return found
+
+    
+
