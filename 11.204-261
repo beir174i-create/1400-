@@ -1,0 +1,1056 @@
+11.204. Вывести элементы после первого меньшего a в упорядоченном массиве
+python
+def print_after_first_less_than_and_greater_a(arr, a):
+    """
+    Если в массиве, упорядоченном по убыванию, есть элементы меньше a,
+    выводит все элементы после первого такого и все элементы больше a
+    """
+    found_index = -1
+    
+    # Находим первый элемент меньше a
+    for i in range(len(arr)):
+        if arr[i] < a:
+            found_index = i
+            break
+    
+    if found_index != -1:
+        print(f"Первый элемент меньше {a} находится на позиции {found_index}")
+        
+        # Выводим элементы после первого меньше a
+        print("Элементы после первого элемента меньше a:")
+        for j in range(found_index + 1, len(arr)):
+            print(arr[j], end=' ')
+        print()
+        
+        # Выводим все элементы больше a
+        print(f"Элементы больше {a}:")
+        for element in arr:
+            if element > a:
+                print(element, end=' ')
+        print()
+    else:
+        print(f"В массиве нет элементов меньше {a}")
+    
+    return found_index != -1
+
+
+
+11.205. Определить наличие пары одинаковых соседних элементов
+python
+def find_first_adjacent_pair(arr):
+    """
+    Определяет, есть ли в массиве хотя бы одна пара одинаковых соседних элементов
+    Возвращает номера элементов первой такой пары
+    """
+    for i in range(len(arr) - 1):
+        if arr[i] == arr[i + 1]:
+            return i, i + 1
+    return None, None
+
+def check_adjacent_pairs(arr):
+    i, j = find_first_adjacent_pair(arr)
+    if i is not None:
+        print(f"Найдена пара одинаковых соседних элементов на позициях {i} и {j}")
+        print(f"Элементы: arr[{i}] = {arr[i]}, arr[{j}] = {arr[j]}")
+        return True
+    else:
+        print("Пар одинаковых соседних элементов не найдено")
+        return False
+11.206. Вывести элементы после первой пары одинаковых соседних
+python
+def print_after_first_adjacent_pair(arr):
+    """
+    Если есть пара одинаковых соседних элементов,
+    выводит все элементы после этой пары
+    """
+    found = False
+    for i in range(len(arr) - 1):
+        if arr[i] == arr[i + 1]:
+            found = True
+            print(f"Найдена пара одинаковых соседних элементов на позициях {i} и {i + 1}")
+            print("Элементы после этой пары:")
+            if i + 2 < len(arr):
+                for j in range(i + 2, len(arr)):
+                    print(arr[j], end=' ')
+                print()
+            else:
+                print("После этой пары элементов нет")
+            break
+    
+    if not found:
+        print("Пар одинаковых соседних элементов не найдено")
+    
+    return found
+11.207. Найти первую пару соседних нечетных чисел
+python
+def find_first_adjacent_odd_pair(arr):
+    """
+    Определяет, есть ли в массиве хотя бы одна пара соседних нечетных чисел
+    Возвращает номера элементов первой такой пары
+    """
+    for i in range(len(arr) - 1):
+        if arr[i] % 2 != 0 and arr[i + 1] % 2 != 0:
+            return i, i + 1
+    return None, None
+
+def check_adjacent_odd_pairs(arr):
+    i, j = find_first_adjacent_odd_pair(arr)
+    if i is not None:
+        print(f"Найдена пара соседних нечетных чисел на позициях {i} и {j}")
+        print(f"Элементы: {arr[i]} и {arr[j]}")
+        return True
+    else:
+        print("Пар соседних нечетных чисел не найдено")
+        return False
+11.208. Вывести элементы перед последней парой соседних четных чисел
+python
+def print_before_last_adjacent_even_pair(arr):
+    """
+    Если есть хотя бы одна пара соседних четных чисел,
+    выводит все элементы, предшествующие последней такой паре
+    """
+    last_pair_index = -1
+    
+    # Находим последнюю пару соседних четных чисел
+    for i in range(len(arr) - 1):
+        if arr[i] % 2 == 0 and arr[i + 1] % 2 == 0:
+            last_pair_index = i
+    
+    if last_pair_index != -1:
+        print(f"Последняя пара соседних четных чисел на позициях {last_pair_index} и {last_pair_index + 1}")
+        print("Элементы, предшествующие этой паре:")
+        if last_pair_index > 0:
+            for j in range(last_pair_index):
+                print(arr[j], end=' ')
+            print()
+        else:
+            print("Перед этой парой элементов нет")
+    else:
+        print("Пар соседних четных чисел не найдено")
+    
+    return last_pair_index != -1
+11.209. Проверить последовательность костей домино
+python
+def check_domino_sequence_case_a(arr):
+    """
+    Проверяет, соответствует ли последовательность чисел ряду костей домино
+    Случай а): последняя цифра каждого числа соответствует правой половине
+    """
+    if len(arr) != 22:
+        return False
+    
+    for i in range(len(arr) - 1):
+        current_right = arr[i] % 10  # последняя цифра текущего числа
+        next_left = arr[i + 1] // 10  # первая цифра следующего числа
+        
+        if current_right != next_left:
+            return False
+    
+    return True
+
+def check_domino_sequence_case_b(arr):
+    """
+    Случай б): любая цифра может соответствовать правой или левой половине
+    """
+    if len(arr) != 22:
+        return False
+    
+    for i in range(len(arr) - 1):
+        current_num = arr[i]
+        next_num = arr[i + 1]
+        
+        # Получаем цифры текущего числа
+        current_digit1 = current_num // 10
+        current_digit2 = current_num % 10
+        
+        # Получаем цифры следующего числа
+        next_digit1 = next_num // 10
+        next_digit2 = next_num % 10
+        
+        # Проверяем все возможные комбинации
+        if not (current_digit1 == next_digit1 or 
+                current_digit1 == next_digit2 or 
+                current_digit2 == next_digit1 or 
+                current_digit2 == next_digit2):
+            return False
+    
+    return True
+
+def check_domino(arr):
+    print("Проверка последовательности костей домино:")
+    print(f"Случай а): {check_domino_sequence_case_a(arr)}")
+    print(f"Случай б): {check_domino_sequence_case_b(arr)}")
+11.210. Найти первую тройку где средний элемент больше соседей
+python
+def find_first_triple_peak(arr):
+    """
+    Находит первую тройку соседних чисел, где средний элемент больше обоих соседей
+    """
+    for i in range(1, len(arr) - 1):
+        if arr[i] > arr[i - 1] and arr[i] > arr[i + 1]:
+            return i - 1, i, i + 1
+    return None, None, None
+
+def check_triple_peaks(arr):
+    i, j, k = find_first_triple_peak(arr)
+    if i is not None:
+        print(f"Найдена тройка: позиции {i}, {j}, {k}")
+        print(f"Элементы: {arr[i]}, {arr[j]}, {arr[k]}")
+        return True
+    else:
+        print("Троек, где средний элемент больше соседей, не найдено")
+        return False
+11.211. Вывести элементы перед последней тройкой-пиком
+python
+def print_before_last_triple_peak(arr):
+    """
+    Выводит все элементы перед последней тройкой, где средний элемент больше соседей
+    """
+    last_peak_index = -1
+    
+    # Находим последнюю тройку-пик
+    for i in range(1, len(arr) - 1):
+        if arr[i] > arr[i - 1] and arr[i] > arr[i + 1]:
+            last_peak_index = i - 1  # начало тройки
+    
+    if last_peak_index != -1:
+        print(f"Последняя тройка-пик начинается с позиции {last_peak_index}")
+        print("Элементы перед этой тройкой:")
+        if last_peak_index > 0:
+            for j in range(last_peak_index):
+                print(arr[j], end=' ')
+            print()
+        else:
+            print("Перед этой тройкой элементов нет")
+    else:
+        print("Троек-пиков не найдено")
+    
+    return last_peak_index != -1
+11.212. Проверить упорядоченность по возрастанию
+python
+def check_sorted_ascending(arr):
+    """
+    Проверяет, упорядочен ли массив по возрастанию
+    Возвращает номер первого элемента, нарушающего порядок, или -1 если массив упорядочен
+    """
+    for i in range(len(arr) - 1):
+        if arr[i] > arr[i + 1]:
+            return i + 1  # позиция элемента, нарушающего порядок
+    return -1  # массив упорядочен
+
+def verify_sorted_ascending(arr):
+    result = check_sorted_ascending(arr)
+    if result == -1:
+        print("Массив упорядочен по возрастанию")
+        return True
+    else:
+        print(f"Массив не упорядочен по возрастанию")
+        print(f"Первый элемент, нарушающий порядок, на позиции {result}: {arr[result]}")
+        return False
+11.213. Проверить упорядоченность роста учеников по убыванию
+python
+def check_students_sorted_descending(heights):
+    """
+    Проверяет, упорядочены ли ученики по убыванию роста
+    """
+    for i in range(len(heights) - 1):
+        if heights[i] < heights[i + 1]:
+            return False, i + 1  # позиция нарушения
+    return True, -1
+
+def verify_students_order(heights):
+    is_sorted, violation_index = check_students_sorted_descending(heights)
+    if is_sorted:
+        print("Ученики упорядочены по убыванию роста")
+        return True
+    else:
+        print(f"Ученики не упорядочены по убыванию роста")
+        print(f"Нарушение на позиции {violation_index}: {heights[violation_index]} см")
+        return False
+11.214. Проверить упорядоченность команд по местам
+python
+def check_teams_sorted_by_points(points):
+    """
+    Проверяет, упорядочены ли команды по убыванию очков
+    """
+    for i in range(len(points) - 1):
+        if points[i] < points[i + 1]:
+            return False, i + 1
+    return True, -1
+
+def verify_teams_order(points):
+    is_sorted, violation_index = check_teams_sorted_by_points(points)
+    if is_sorted:
+        print("Команды упорядочены по занятым местам")
+        return True
+    else:
+        print(f"Команды не упорядочены по занятым местам")
+        print(f"Нарушение на позиции {violation_index}: {points[violation_index]} очков")
+        return False
+11.215. Количество одинаковых элементов в начале (с обработкой всего массива)
+python
+def count_equal_at_start_complete(arr):
+    """
+    Определяет количество одинаковых элементов в начале массива
+    Обрабатывает случай, когда весь массив заполнен одинаковыми элементами
+    """
+    if not arr:
+        return 0, []
+    
+    first = arr[0]
+    count = 1
+    
+    for i in range(1, len(arr)):
+        if arr[i] == first:
+            count += 1
+        else:
+            break
+    
+    # Если все элементы одинаковы
+    if count == len(arr):
+        print(f"Весь массив заполнен одинаковыми элементами: {first}")
+        print(f"Количество элементов: {count}")
+        return count, []
+    else:
+        print(f"В начале массива {count} одинаковых элементов: {first}")
+        print(f"Элементы после них: {arr[count:]}")
+        return count, arr[count:]
+11.216. Количество пятерок в начале (с обработкой всех пятерок)
+python
+def count_fives_at_start_complete(grades):
+    """
+    Определяет количество учеников с оценкой 5 в начале списка
+    Обрабатывает случай, когда все ученики имеют оценку 5
+    """
+    count = 0
+    for grade in grades:
+        if grade == 5:
+            count += 1
+        else:
+            break
+    
+    if count == len(grades):
+        print(f"Все {count} учеников имеют оценку 5")
+    elif count > 0:
+        print(f"{count} учеников имеют оценку 5")
+    else:
+        print("Учеников с оценкой 5 нет в начале списка")
+    
+    return count
+11.217. Арифметические операции с большими числами
+python
+def add_big_numbers(num1, num2):
+    """
+    Сложение 20-значных чисел
+    Числа представлены как массивы цифр (младшие разряды в начале)
+    """
+    result = []
+    carry = 0
+    
+    # Дополняем числа до одинаковой длины
+    max_len = max(len(num1), len(num2))
+    num1 = num1 + [0] * (max_len - len(num1))
+    num2 = num2 + [0] * (max_len - len(num2))
+    
+    for i in range(max_len):
+        digit_sum = num1[i] + num2[i] + carry
+        result.append(digit_sum % 10)
+        carry = digit_sum // 10
+    
+    if carry > 0:
+        result.append(carry)
+    
+    return result
+
+def subtract_big_numbers(num1, num2):
+    """
+    Вычитание 30-значных чисел (num1 - num2)
+    Предполагается, что num1 >= num2
+    """
+    result = []
+    borrow = 0
+    
+    max_len = max(len(num1), len(num2))
+    num1 = num1 + [0] * (max_len - len(num1))
+    num2 = num2 + [0] * (max_len - len(num2))
+    
+    for i in range(max_len):
+        diff = num1[i] - num2[i] - borrow
+        
+        if diff < 0:
+            diff += 10
+            borrow = 1
+        else:
+            borrow = 0
+        
+        result.append(diff)
+    
+    # Удаляем ведущие нули
+    while len(result) > 1 and result[-1] == 0:
+        result.pop()
+    
+    return result
+
+# Пример использования
+def example_big_numbers():
+    # Число 12345678901234567890
+    num1 = [0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    # Число 98765432109876543210
+    num2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    
+    sum_result = add_big_numbers(num1, num2)
+    print(f"Сумма: {list(reversed(sum_result))}")
+    
+    # Для вычитания: 98765432109876543210 - 12345678901234567890
+    sub_result = subtract_big_numbers(num2, num1)
+    print(f"Разность: {list(reversed(sub_result))}")
+11.218. Количество различных элементов в массиве
+python
+def count_distinct_elements(arr):
+    """
+    Находит количество различных элементов в массиве
+    """
+    if not arr:
+        return 0
+    
+    # Используем множество для хранения уникальных элементов
+    unique_elements = set()
+    
+    for element in arr:
+        unique_elements.add(element)
+    
+    count = len(unique_elements)
+    print(f"Количество различных элементов: {count}")
+    print(f"Уникальные элементы: {sorted(unique_elements)}")
+    
+    return count
+
+# Альтернативный вариант без использования множества
+def count_distinct_elements_no_set(arr):
+    """
+    Находит количество различных элементов без использования множества
+    """
+    if not arr:
+        return 0
+    
+    distinct = []
+    
+    for element in arr:
+        if element not in distinct:
+            distinct.append(element)
+    
+    return len(distinct)
+11.219. Количество различных цифр в числе
+python
+def count_distinct_digits(n):
+    """
+    Определяет количество различных цифр в натуральном числе
+    """
+    if n <= 0:
+        return 0
+    
+    digits = set()
+    
+    while n > 0:
+        digit = n % 10
+        digits.add(digit)
+        n //= 10
+    
+    count = len(digits)
+    print(f"Число содержит {count} различных цифр: {sorted(digits)}")
+    
+    return count
+
+# Примеры использования
+def test_distinct_digits():
+    test_numbers = [1234, 22424, 333, 9876543210, 1001]
+    
+    for num in test_numbers:
+        print(f"\nЧисло: {num}")
+        count_distinct_digits(num)
+11.220. Найти два одинаковых элемента
+python
+def find_duplicate_pair(arr):
+    """
+    В массиве из 20 целых чисел имеются только два одинаковых элемента
+    Находит эти элементы
+    """
+    if len(arr) != 20:
+        return None
+    
+    seen = {}
+    
+    for i, element in enumerate(arr):
+        if element in seen:
+            print(f"Найден одинаковый элемент: {element}")
+            print(f"Первое вхождение на позиции {seen[element]}")
+            print(f"Второе вхождение на позиции {i}")
+            return element, seen[element], i
+        seen[element] = i
+    
+    print("Одинаковых элементов не найдено")
+    return None
+
+# Альтернативный вариант
+def find_duplicate_pair_alternative(arr):
+    """
+    Находит два одинаковых элемента другим способом
+    """
+    if len(arr) != 20:
+        return None
+    
+    arr_sorted = sorted(arr)
+    
+    for i in range(len(arr_sorted) - 1):
+        if arr_sorted[i] == arr_sorted[i + 1]:
+            # Находим позиции в исходном массиве
+            first_index = arr.index(arr_sorted[i])
+            second_index = arr.index(arr_sorted[i], first_index + 1)
+            
+            print(f"Найден одинаковый элемент: {arr_sorted[i]}")
+            print(f"Позиции: {first_index} и {second_index}")
+            return arr_sorted[i], first_index, second_index
+    
+    return None
+11.221. Получить цифры числа 2^100
+python
+def power_of_two_digits(power=100):
+    """
+    Получает последовательность десятичных цифр числа 2^power
+    """
+    # Начинаем с 1 (2^0)
+    digits = [1]
+    
+    for _ in range(power):
+        carry = 0
+        for i in range(len(digits)):
+            product = digits[i] * 2 + carry
+            digits[i] = product % 10
+            carry = product // 10
+        
+        # Добавляем новый разряд, если есть перенос
+        while carry > 0:
+            digits.append(carry % 10)
+            carry //= 10
+    
+    # Переворачиваем, чтобы получить правильный порядок цифр
+    result = list(reversed(digits))
+    
+    print(f"2^{power} = {''.join(map(str, result))}")
+    print(f"Количество цифр: {len(result)}")
+    
+    return result
+
+# Пример для меньшей степени для проверки
+def test_power_of_two():
+    # Проверяем 2^10 = 1024
+    result = power_of_two_digits(10)
+    print(f"\nПроверка: 2^10 = {2**10}")
+    print(f"Наши цифры: {result}")
+11.222. Получить цифры числа 100!
+python
+def factorial_digits(n=100):
+    """
+    Получает последовательность десятичных цифр числа n!
+    """
+    # Начинаем с 1
+    digits = [1]
+    
+    for multiplier in range(2, n + 1):
+        carry = 0
+        for i in range(len(digits)):
+            product = digits[i] * multiplier + carry
+            digits[i] = product % 10
+            carry = product // 10
+        
+        # Обрабатываем оставшийся перенос
+        while carry > 0:
+            digits.append(carry % 10)
+            carry //= 10
+    
+    # Переворачиваем цифры
+    result = list(reversed(digits))
+    
+    print(f"{n}! содержит {len(result)} цифр")
+    print(f"Первые 20 цифр: {''.join(map(str, result[:20]))}...")
+    print(f"Последние 20 цифр: ...{''.join(map(str, result[-20:]))}")
+    
+    return result
+
+# Пример для меньшего факториала для проверки
+def test_factorial_digits():
+    # Проверяем 10! = 3628800
+    result = factorial_digits(10)
+    actual = 3628800
+    print(f"\nПроверка: 10! = {actual}")
+    print(f"Наши цифры дают число: {int(''.join(map(str, result)))}")
+    print(f"Совпадают: {int(''.join(map(str, result))) == actual}")
+11.223. Общая стоимость проданных товаров
+python
+def total_sales(shop1_july, shop1_aug, shop2_july, shop2_aug):
+    """
+    Вычисляет общую стоимость проданных товаров за два месяца
+    """
+    # Проверяем, что массивы имеют одинаковую длину (31 день в июле, 31 в августе)
+    if len(shop1_july) != 31 or len(shop1_aug) != 31 or len(shop2_july) != 31 or len(shop2_aug) != 31:
+        print("Ошибка: массивы должны содержать данные за 31 день")
+        return 0
+    
+    total = 0
+    
+    # Суммируем продажи за июль
+    for sales in shop1_july:
+        total += sales
+    for sales in shop2_july:
+        total += sales
+    
+    # Суммируем продажи за август
+    for sales in shop1_aug:
+        total += sales
+    for sales in shop2_aug:
+        total += sales
+    
+    print(f"Общая стоимость проданных товаров за два месяца: {total}")
+    
+    return total
+
+# Пример использования
+def example_sales():
+    # Создаем тестовые данные (упрощенные)
+    shop1_july = [100] * 31  # 100 каждый день
+    shop1_aug = [120] * 31   # 120 каждый день
+    shop2_july = [80] * 31   # 80 каждый день
+    shop2_aug = [90] * 31    # 90 каждый день
+    
+    total = total_sales(shop1_july, shop1_aug, shop2_july, shop2_aug)
+    print(f"Проверка: {31*100 + 31*120 + 31*80 + 31*90} = {total}")
+11.224. Общее количество забитых мячей в двух чемпионатах
+python
+def total_goals(championship1, championship2):
+    """
+    Вычисляет общее количество мя
+ 
+# 11.224. Общее количество забитых мячей в двух чемпионатах
+def total_goals(champ1, champ2):
+    return sum(champ1) + sum(champ2)
+
+# 11.225. Средняя урожайность пшеницы
+def average_yield(areas, harvests):
+    # Без доп. массива
+    total_area = sum(areas)
+    total_harvest = sum(harvests)
+    region_yields = [harvests[i]/areas[i] for i in range(20)]
+    region_avg = sum(region_yields)/20
+    overall_avg = total_harvest/total_area
+    return region_avg, overall_avg
+
+# 11.226. Количество пшеницы и средняя урожайность по области
+def wheat_statistics(areas, yields):
+    total_area = sum(areas)
+    total_wheat = sum(areas[i] * yields[i] for i in range(10))
+    avg_yield = total_wheat / total_area
+    return total_wheat, avg_yield
+
+# 11.227. Объемы параллелепипедов
+def volumes(lengths, widths, heights):
+    # Без доп. массива
+    for i in range(12):
+        print(f"Объем {i+1}: {lengths[i] * widths[i] * heights[i]}")
+    
+    # С доп. массивом
+    vols = [lengths[i] * widths[i] * heights[i] for i in range(12)]
+    return vols
+
+# 11.228. Стоимость автомобилей с мощностью <= 80 л.с.
+def cheap_cars(powers, prices):
+    return [prices[i] for i in range(30) if powers[i] <= 80]
+
+# 11.229. Вместимость винчестеров дороже s рублей
+def expensive_disks(capacities, prices, s):
+    return [capacities[i] for i in range(22) if prices[i] > s]
+
+# 11.230. Результаты баскетбольных матчей
+def basketball_results(scored, conceded):
+    # Без доп. массива
+    for i in range(15):
+        if scored[i] > conceded[i]:
+            print("выигрыш")
+        else:
+            print("проигрыш")
+    
+    # С доп. массивом
+    results = ["выигрыш" if scored[i] > conceded[i] else "проигрыш" for i in range(15)]
+    return results
+
+# 11.231. Результаты футбольных матчей
+def football_results(scored, conceded):
+    results = []
+    for i in range(20):
+        if scored[i] > conceded[i]:
+            results.append("выигрыш")
+        elif scored[i] < conceded[i]:
+            results.append("проигрыш")
+        else:
+            results.append("ничья")
+    return results
+
+# 11.232. Анализ футбольных результатов
+def analyze_football(scored, conceded):
+    # а) словесные результаты
+    results = []
+    for i in range(20):
+        if scored[i] > conceded[i]:
+            results.append("выигрыш")
+        elif scored[i] < conceded[i]:
+            results.append("проигрыш")
+        else:
+            results.append("ничья")
+    
+    # б) количество выигрышей
+    wins = sum(1 for i in range(20) if scored[i] > conceded[i])
+    
+    # в) выигрыши и проигрыши
+    losses = sum(1 for i in range(20) if scored[i] < conceded[i])
+    
+    # г) все три категории
+    draws = sum(1 for i in range(20) if scored[i] == conceded[i])
+    
+    # д) игры с разностью >= 3
+    big_wins = sum(1 for i in range(20) if scored[i] - conceded[i] >= 3)
+    
+    # е) общее число очков
+    points = wins * 3 + draws
+    
+    return results, wins, losses, draws, big_wins, points
+
+# 11.233. Анализ из одного массива
+def analyze_combined(games):
+    wins = draws = losses = big_wins = points = 0
+    results = []
+    
+    for game in games:
+        scored = game // 10
+        conceded = game % 10
+        
+        if scored > conceded:
+            results.append("выигрыш")
+            wins += 1
+            points += 3
+        elif scored < conceded:
+            results.append("проигрыш")
+            losses += 1
+        else:
+            results.append("ничья")
+            draws += 1
+            points += 1
+        
+        if scored - conceded >= 3:
+            big_wins += 1
+    
+    return results, wins, draws, losses, big_wins, points
+
+# 11.234. Общая численность государств с большой площадью
+def total_population_large(populations, areas, threshold=5):
+    return sum(populations[i] for i in range(28) if areas[i] > threshold)
+
+# 11.235. Общая стоимость мощных автомобилей
+def total_cost_powerful(powers, prices, threshold=100):
+    return sum(prices[i] for i in range(30) if powers[i] > threshold)
+
+# 11.236. Осадки в виде снега и дождя
+def precipitation_type(precipitation, temperatures):
+    snow = rain = 0
+    for i in range(len(precipitation)):
+        if temperatures[i] > 0:
+            rain += precipitation[i]
+        else:
+            snow += precipitation[i]
+    return snow, rain
+
+# 11.237. Население в маленьких государствах
+def population_small_states(populations, areas, A):
+    return sum(populations[i] for i in range(28) if areas[i] <= A)
+
+# 11.238. Сравнение осадков по месяцам
+def compare_precipitation(january, march):
+    jan_total = sum(january)
+    mar_total = sum(march)
+    if jan_total > mar_total:
+        return "январь"
+    elif mar_total > jan_total:
+        return "март"
+    else:
+        return "одинаково"
+
+# 11.239. Сравнение доходов магазинов
+def compare_income(shop1, shop2):
+    total1 = sum(shop1)
+    total2 = sum(shop2)
+    if total1 < total2:
+        return 1
+    elif total2 < total1:
+        return 2
+    else:
+        return 0
+
+# 11.240. Максимальная плотность
+def max_density(masses, volumes):
+    # Без доп. массива
+    max_dens = 0
+    for i in range(20):
+        dens = masses[i] / volumes[i]
+        if dens > max_dens:
+            max_dens = dens
+    
+    # С доп. массивом
+    densities = [masses[i] / volumes[i] for i in range(20)]
+    return max(densities)
+
+# 11.241. Минимальная средняя скорость
+def min_average_speed(distances, times):
+    # Без доп. массива
+    min_speed = float('inf')
+    for i in range(25):
+        speed = distances[i] / times[i]
+        if speed < min_speed:
+            min_speed = speed
+    
+    # С доп. массивом
+    speeds = [distances[i] / times[i] for i in range(25)]
+    return min(speeds)
+
+# 11.242. Анализ параллелепипедов
+def analyze_parallelepipeds(lengths, widths, heights):
+    volumes = [lengths[i] * widths[i] * heights[i] for i in range(15)]
+    max_vol = max(volumes)
+    min_vol = min(volumes)
+    max_idx = volumes.index(max_vol)
+    min_idx = volumes.index(min_vol)
+    return max_vol, min_vol, max_idx, min_idx
+
+# 11.243. Прямоугольник, содержащий точки
+def bounding_rectangle(points):
+    x_coords = [p[0] for p in points]
+    y_coords = [p[1] for p in points]
+    left_bottom = (min(x_coords), min(y_coords))
+    right_top = (max(x_coords), max(y_coords))
+    return left_bottom, right_top
+
+# 11.244. Копирование массива
+def copy_array(arr):
+    # а) в том же порядке
+    copy1 = arr[:]
+    
+    # б) в обратном порядке
+    copy2 = arr[::-1]
+    
+    return copy1, copy2
+
+# 11.245. Преобразование по правилу
+def transform_array_a(arr):
+    result = []
+    for i in range(len(arr)):
+        if (i+1) % 2 == 0:  # четный индекс (начинаем с 1)
+            result.append(arr[i] ** 2)
+        else:
+            result.append(2 * arr[i])
+    return result
+
+# 11.246. Преобразование по правилу
+def transform_array_b(arr):
+    result = []
+    for i in range(len(arr)):
+        if (i+1) % 2 != 0:  # нечетный индекс
+            result.append((i+1) * arr[i])
+        else:
+            result.append(arr[i] / (i+1))
+    return result
+
+# 11.247. Преобразование с особыми условиями
+def transform_array_c(arr):
+    result = []
+    for i in range(len(arr)):
+        if 2 <= i <= 9:  # от 3-го по 10-й (индексы 2-9)
+            result.append(-arr[i])
+        else:
+            result.append(arr[i] * (i+1))
+    return result
+
+# 11.248. Четные удвоить, нечетные оставить
+def transform_even_double(arr):
+    return [x*2 if x%2==0 else x for x in arr]
+
+# 11.249. Преобразование по знаку
+def transform_by_sign(arr):
+    result = []
+    for x in arr:
+        if x >= 0:
+            result.append(x/3)
+        else:
+            result.append(x**2)
+    return result
+
+# 11.250. Копировать четные позиции
+def copy_even_positions(arr):
+    # а) на тех же местах
+    copy1 = [0] * len(arr)
+    for i in range(1, len(arr), 2):
+        copy1[i] = arr[i]
+    
+    # б) подряд с начала
+    copy2 = [arr[i] for i in range(1, len(arr), 2)]
+    
+    return copy1, copy2
+
+# 11.251. Копировать нечетные элементы
+def copy_odd_elements(arr):
+    # а) на тех же местах
+    copy1 = [0] * len(arr)
+    for i in range(len(arr)):
+        if arr[i] % 2 != 0:
+            copy1[i] = arr[i]
+    
+    # б) подряд с начала
+    copy2 = [x for x in arr if x % 2 != 0]
+    
+    return copy1, copy2
+
+# 11.252. Разделить на четные и нечетные позиции
+def split_by_position(arr):
+    even_pos = [arr[i] for i in range(0, 20, 2)]
+    odd_pos = [arr[i] for i in range(1, 20, 2)]
+    return even_pos, odd_pos
+
+# 11.253. Разделить на положительные и остальные
+def split_by_sign(arr):
+    # а) на тех же местах
+    pos1 = [0] * len(arr)
+    other1 = [0] * len(arr)
+    for i in range(len(arr)):
+        if arr[i] > 0:
+            pos1[i] = arr[i]
+        else:
+            other1[i] = arr[i]
+    
+    # б) подряд с начала
+    pos2 = [x for x in arr if x > 0]
+    other2 = [x for x in arr if x <= 0]
+    
+    return (pos1, other1), (pos2, other2)
+
+# 11.254. Переупорядочить: сначала отрицательные
+def reorder_negatives_first(arr):
+    result = []
+    for x in arr:
+        if x < 0:
+            result.append(x)
+    for x in arr:
+        if x >= 0:
+            result.append(x)
+    return result
+
+# 11.255. Операции с двумя массивами
+def arrays_operations(arr1, arr2):
+    # а) сумма
+    sum_arr = [arr1[i] + arr2[i] for i in range(len(arr1))]
+    
+    # б) произведение
+    prod_arr = [arr1[i] * arr2[i] for i in range(len(arr1))]
+    
+    # в) максимум
+    max_arr = [max(arr1[i], arr2[i]) for i in range(len(arr1))]
+    
+    return sum_arr, prod_arr, max_arr
+
+# 11.256. Сравнение знаков элементов
+def compare_signs(arr1, arr2):
+    result = []
+    for i in range(len(arr1)):
+        if (arr1[i] > 0 and arr2[i] > 0) or (arr1[i] < 0 and arr2[i] < 0):
+            result.append(1)
+        else:
+            result.append(0)
+    return result
+
+# 11.257. Объединение данных о ветре
+def merge_wind_data(obs1, obs2):
+    merged = []
+    for i in range(len(obs1)):
+        if i % 2 == 0:
+            merged.append(obs1[i])
+        else:
+            merged.append(obs2[i])
+    return merged
+
+# 11.258. Отрицательные числа в новый массив
+def extract_negatives(arr):
+    # Без генератора
+    result = []
+    for x in arr:
+        if x < 0:
+            result.append(x)
+    
+    # С генератором
+    result_gen = [x for x in arr if x < 0]
+    
+    return result, result_gen
+
+# 11.259. Массив без элемента по индексу k
+def array_without_index(arr, k):
+    # Без генератора
+    result = []
+    for i in range(len(arr)):
+        if i != k:
+            result.append(arr[i])
+    
+    # С генератором
+    result_gen = [arr[i] for i in range(len(arr)) if i != k]
+    
+    return result, result_gen
+
+# 11.260. Массив без чисел 13
+def array_without_13(arr):
+    # Без генератора
+    result = []
+    for x in arr:
+        if x != 13:
+            result.append(x)
+    
+    # С генератором
+    result_gen = [x for x in arr if x != 13]
+    
+    return result, result_gen
+
+# 11.261. Анализ массива слов
+def analyze_words(words):
+    # а) средняя длина
+    avg_len = sum(len(w) for w in words) / len(words)
+    
+    # б) слов больше 5 символов
+    long_words = sum(1 for w in words if len(w) > 5)
+    
+    # в) длина самого длинного слова
+    max_len = max(len(w) for w in words)
+    
+    # г) номер первого самого короткого слова
+    min_len = min(len(w) for w in words)
+    first_short = next(i for i, w in enumerate(words) if len(w) == min_len)
+    
+    # д) длина слова больше всех кроме самого длинного
+    if len(words) >= 2:
+        lengths = sorted(set(len(w) for w in words))
+        if len(lengths) >= 2:
+            second_max = lengths[-2]
+        else:
+            second_max = lengths[0]
+    else:
+        second_max = 0
+    
+    # е) слов на 'к' или 'К'
+    k_words = sum(1 for w in words if w.lower().startswith('к'))
+    
+    # сортировка по алфавиту
+    sorted_words = sorted(words, key=lambda x: x.lower())
+    
+    return avg_len, long_words, max_len, first_short, second_max, k_words, sorted_words
+
