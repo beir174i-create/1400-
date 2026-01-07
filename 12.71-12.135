@@ -1,0 +1,1696 @@
+
+
+12.71
+pascal
+var
+  sentence: string;
+  i, count: integer;
+begin
+  write('Введите предложение (слова через 1 пробел): ');
+  readln(sentence);
+  
+  count := 1;  // первое слово
+  for i := 1 to length(sentence) do
+    if sentence[i] = ' ' then
+      count := count + 1;
+      
+  if count > 3 then
+    writeln('Да, число слов больше трех')
+  else
+    writeln('Нет, число слов не больше трех');
+end.
+12.72
+pascal
+var
+  sentence: string;
+  i, posC, posT: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  // Находим последние позиции букв с и т
+  posC := 0;
+  posT := 0;
+  for i := 1 to length(sentence) do
+  begin
+    if sentence[i] = 'с' then
+      posC := i;
+    if sentence[i] = 'т' then
+      posT := i;
+  end;
+  
+  if posC > posT then
+    writeln('Буква "с" встречается позже')
+  else if posT > posC then
+    writeln('Буква "т" встречается позже')
+  else if (posC > 0) and (posT > 0) then
+    writeln('Буквы встречаются на одной позиции')
+  else
+    writeln('Одной из букв нет в предложении');
+end.
+12.73
+pascal
+var
+  text: string;
+  i: integer;
+  found: boolean;
+begin
+  write('Введите текст: ');
+  readln(text);
+  
+  found := false;
+  for i := 1 to length(text)-4 do
+    if (text[i] = text[i+1]) and (text[i] = text[i+2]) and 
+       (text[i] = text[i+3]) and (text[i] = text[i+4]) then
+      found := true;
+      
+  if found then
+    writeln('Да, есть пять идущих подряд одинаковых символов')
+  else
+    writeln('Нет, нет пяти идущих подряд одинаковых символов');
+end.
+12.74
+pascal
+var
+  sentence: string;
+  i, commaPos: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  commaPos := pos(',', sentence);
+  
+  // Случай 1: известно, что запятые есть
+  if commaPos > 0 then
+  begin
+    writeln('Случай 1 (запятые есть):');
+    for i := 1 to commaPos-1 do
+      write(sentence[i]);
+    writeln;
+  end;
+  
+  // Случай 2: запятых может не быть
+  writeln('Случай 2 (запятых может не быть):');
+  if commaPos > 0 then
+  begin
+    for i := 1 to commaPos-1 do
+      write(sentence[i]);
+  end
+  else
+    write(sentence);  // если запятых нет, выводим всё предложение
+  writeln;
+end.
+12.75
+pascal
+var
+  sentence, firstWord: string;
+  i: integer;
+begin
+  write('Введите предложение (слова через 2 пробела): ');
+  readln(sentence);
+  
+  firstWord := '';
+  i := 1;
+  // Пропускаем возможные пробелы в начале
+  while (i <= length(sentence)) and (sentence[i] = ' ') do
+    i := i + 1;
+    
+  // Читаем первое слово до двойного пробела
+  while (i <= length(sentence)) and (sentence[i] <> ' ') do
+  begin
+    firstWord := firstWord + sentence[i];
+    i := i + 1;
+  end;
+  
+  writeln('Первое слово: ', firstWord);
+end.
+12.76
+pascal
+var
+  sentence, lastWord: string;
+  i: integer;
+begin
+  write('Введите предложение (слова через 1 пробел): ');
+  readln(sentence);
+  
+  lastWord := '';
+  i := length(sentence);
+  
+  // Пропускаем возможные пробелы в конце
+  while (i > 0) and (sentence[i] = ' ') do
+    i := i - 1;
+    
+  // Читаем последнее слово
+  while (i > 0) and (sentence[i] <> ' ') do
+  begin
+    lastWord := sentence[i] + lastWord;
+    i := i - 1;
+  end;
+  
+  writeln('Последнее слово: ', lastWord);
+end.
+12.77
+pascal
+var
+  sentence, word: string;
+  i, wordCount: integer;
+begin
+  write('Введите предложение (слова через 2 пробела, не менее 4 слов): ');
+  readln(sentence);
+  
+  wordCount := 0;
+  word := '';
+  i := 1;
+  
+  // Пропускаем возможные пробелы в начале
+  while (i <= length(sentence)) and (sentence[i] = ' ') do
+    i := i + 1;
+    
+  while (i <= length(sentence)) and (wordCount < 3) do
+  begin
+    if sentence[i] <> ' ' then
+      word := word + sentence[i]
+    else
+    begin
+      if word <> '' then
+      begin
+        wordCount := wordCount + 1;
+        case wordCount of
+          1: writeln('Первое слово: ', word);
+          2: writeln('Второе слово: ', word);
+          3: writeln('Третье слово: ', word);
+        end;
+        word := '';
+      end;
+      // Пропускаем двойные пробелы
+      while (i <= length(sentence)) and (sentence[i] = ' ') do
+        i := i + 1;
+      continue;
+    end;
+    i := i + 1;
+  end;
+end.
+12.78
+pascal
+var
+  sentence, word1, word2, currentWord: string;
+  i: integer;
+begin
+  write('Введите предложение (слова через 1 пробел, не менее 3 слов): ');
+  readln(sentence);
+  
+  word1 := '';
+  word2 := '';
+  currentWord := '';
+  
+  for i := 1 to length(sentence) do
+  begin
+    if sentence[i] <> ' ' then
+      currentWord := currentWord + sentence[i]
+    else
+    begin
+      if currentWord <> '' then
+      begin
+        word1 := word2;
+        word2 := currentWord;
+        currentWord := '';
+      end;
+    end;
+  end;
+  
+  // Обработка последнего слова
+  if currentWord <> '' then
+  begin
+    word1 := word2;
+    word2 := currentWord;
+  end;
+  
+  writeln('Предпоследнее слово: ', word1);
+  writeln('Последнее слово: ', word2);
+end.
+12.79
+pascal
+var
+  sentence, currentWord: string;
+  i, wordCount: integer;
+begin
+  write('Введите предложение (слова через 1 пробел, не менее 7 слов): ');
+  readln(sentence);
+  
+  wordCount := 0;
+  currentWord := '';
+  
+  for i := 1 to length(sentence) do
+  begin
+    if sentence[i] <> ' ' then
+      currentWord := currentWord + sentence[i]
+    else
+    begin
+      if currentWord <> '' then
+      begin
+        wordCount := wordCount + 1;
+        if wordCount <= 6 then
+          writeln('Слово ', wordCount, ': ', currentWord);
+        currentWord := '';
+      end;
+    end;
+  end;
+  
+  // Обработка последнего слова
+  if (currentWord <> '') and (wordCount < 6) then
+  begin
+    wordCount := wordCount + 1;
+    if wordCount <= 6 then
+      writeln('Слово ', wordCount, ': ', currentWord);
+  end;
+end.
+12.80
+pascal
+var
+  filename, part: string;
+  i: integer;
+begin
+  write('Введите полное имя файла: ');
+  readln(filename);
+  
+  part := '';
+  for i := 1 to length(filename) do
+  begin
+    if filename[i] <> '\' then
+      part := part + filename[i]
+    else
+    begin
+      writeln(part);
+      part := '';
+    end;
+  end;
+  
+  // Выводим последнюю часть (имя файла)
+  if part <> '' then
+    writeln(part);
+end.
+12.81
+pascal
+var
+  sentence, currentWord, longestWord: string;
+  i, maxLength: integer;
+begin
+  write('Введите предложение (слова через 1 пробел): ');
+  readln(sentence);
+  
+  currentWord := '';
+  longestWord := '';
+  maxLength := 0;
+  
+  for i := 1 to length(sentence) do
+  begin
+    if sentence[i] <> ' ' then
+      currentWord := currentWord + sentence[i]
+    else
+    begin
+      if length(currentWord) > maxLength then
+      begin
+        maxLength := length(currentWord);
+        longestWord := currentWord;
+      end;
+      currentWord := '';
+    end;
+  end;
+  
+  // Проверяем последнее слово
+  if length(currentWord) > maxLength then
+    longestWord := currentWord;
+  
+  writeln('Самое длинное слово: ', longestWord);
+  writeln('Его длина: ', length(longestWord));
+end.
+12.82
+pascal
+var
+  sentence: string;
+  i, firstE, lastE: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  firstE := 0;
+  lastE := 0;
+  
+  for i := 1 to length(sentence) do
+  begin
+    if sentence[i] = 'е' then
+    begin
+      if firstE = 0 then
+        firstE := i;
+      lastE := i;
+    end;
+  end;
+  
+  if firstE > 0 then
+  begin
+    writeln('а) Порядковый номер первой буквы "е": ', firstE);
+    writeln('б) Порядковый номер последней буквы "е": ', lastE);
+  end
+  else
+    writeln('Буквы "е" не найдены');
+end.
+12.83
+pascal
+var
+  sentence: string;
+  i: integer;
+  found: boolean;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  found := false;
+  for i := 1 to length(sentence) do
+  begin
+    if sentence[i] = 'а' then
+    begin
+      found := true;
+      writeln('Буква "а" есть в предложении');
+      writeln('Порядковый номер первой буквы "а": ', i);
+      break;
+    end;
+  end;
+  
+  if not found then
+    writeln('Буквы "а" нет в предложении');
+end.
+12.84
+pascal
+var
+  word: string;
+  i: integer;
+  isPalindrome: boolean;
+begin
+  write('Введите слово: ');
+  readln(word);
+  
+  isPalindrome := true;
+  for i := 1 to length(word) div 2 do
+  begin
+    if word[i] <> word[length(word)-i+1] then
+    begin
+      isPalindrome := false;
+      break;
+    end;
+  end;
+  
+  if isPalindrome then
+    writeln('Слово является палиндромом')
+  else
+    writeln('Слово не является палиндромом');
+end.
+12.85
+pascal
+var
+  text: string;
+  i, count, firstSentenceEnd: integer;
+begin
+  write('Введите текст: ');
+  readln(text);
+  
+  // Находим конец первого предложения
+  firstSentenceEnd := 0;
+  for i := 1 to length(text) do
+    if (text[i] = '.') or (text[i] = '!') or (text[i] = '?') then
+    begin
+      firstSentenceEnd := i;
+      break;
+    end;
+  
+  // Случай 1: известно, что буквы и есть
+  if firstSentenceEnd > 0 then
+  begin
+    count := 0;
+    for i := 1 to firstSentenceEnd do
+      if text[i] = 'и' then
+        count := count + 1;
+    writeln('Случай 1 (буквы "и" есть): ', count, ' букв "и"');
+  end;
+  
+  // Случай 2: букв и может не быть
+  count := 0;
+  if firstSentenceEnd = 0 then
+    firstSentenceEnd := length(text);  // если нет конца предложения, берем весь текст
+    
+  for i := 1 to firstSentenceEnd do
+    if text[i] = 'и' then
+      count := count + 1;
+      
+  if count > 0 then
+    writeln('Случай 2 (букв "и" может не быть): ', count, ' букв "и"')
+  else
+    writeln('Случай 2 (букв "и" может не быть): букв "и" нет');
+end.
+12.86
+pascal
+var
+  sequence: string;
+  i, count: integer;
+begin
+  write('Введите последовательность символов: ');
+  readln(sequence);
+  
+  // Случай 1: известно, что не все символы одинаковы
+  if length(sequence) > 0 then
+  begin
+    count := 1;
+    for i := 2 to length(sequence) do
+    begin
+      if sequence[i] = sequence[1] then
+        count := count + 1
+      else
+        break;
+    end;
+    writeln('Случай 1 (не все одинаковы): ', count, ' одинаковых символов в начале');
+  end;
+  
+  // Случай 2: все символы могут быть одинаковыми
+  count := 1;
+  for i := 2 to length(sequence) do
+  begin
+    if sequence[i] = sequence[1] then
+      count := count + 1
+    else
+      break;
+  end;
+  
+  if count = length(sequence) then
+    writeln('Случай 2 (все одинаковые): все ', count, ' символов одинаковы')
+  else
+    writeln('Случай 2 (все одинаковые): ', count, ' одинаковых символов в начале');
+end.
+12.87
+pascal
+var
+  word1, word2: string;
+  i, count: integer;
+begin
+  write('Введите первое слово: ');
+  readln(word1);
+  write('Введите второе слово: ');
+  readln(word2);
+  
+  // Случай 1: известно, что слова разные
+  if word1 <> word2 then
+  begin
+    count := 0;
+    for i := 1 to min(length(word1), length(word2)) do
+    begin
+      if word1[i] = word2[i] then
+        count := count + 1
+      else
+        break;
+    end;
+    writeln('Случай 1 (слова разные): ', count, ' совпадающих начальных букв');
+  end;
+  
+  // Случай 2: слова могут быть одинаковыми
+  count := 0;
+  for i := 1 to min(length(word1), length(word2)) do
+  begin
+    if word1[i] = word2[i] then
+      count := count + 1
+    else
+      break;
+  end;
+  
+  if (count = length(word1)) and (count = length(word2)) then
+    writeln('Случай 2 (слова могут быть одинаковыми): слова полностью совпадают')
+  else
+    writeln('Случай 2 (слова могут быть одинаковыми): ', count, ' совпадающих начальных букв');
+end.
+12.88
+pascal
+var
+  sentence: string;
+  i, count: integer;
+  inFirstWord: boolean;
+begin
+  write('Введите предложение (без символа "-"): ');
+  readln(sentence);
+  
+  // Пропускаем начальные пробелы
+  i := 1;
+  while (i <= length(sentence)) and (sentence[i] = ' ') do
+    i := i + 1;
+    
+  // Считаем буквы о в первом слове
+  count := 0;
+  inFirstWord := true;
+  
+  while (i <= length(sentence)) and inFirstWord do
+  begin
+    if sentence[i] = ' ' then
+      inFirstWord := false
+    else if sentence[i] = 'о' then
+      count := count + 1;
+    i := i + 1;
+  end;
+  
+  writeln('Количество букв "о" в первом слове: ', count);
+end.
+12.89
+pascal
+var
+  sentence: string;
+  i, count, commaPos: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  commaPos := pos(',', sentence);
+  
+  // Случай 1: известно, что запятые есть
+  if commaPos > 0 then
+  begin
+    count := 0;
+    for i := 1 to commaPos-1 do
+      if sentence[i] = 'н' then
+        count := count + 1;
+    writeln('Случай 1 (запятые есть): ', count, ' букв "н" перед первой запятой');
+  end;
+  
+  // Случай 2: запятых может не быть
+  count := 0;
+  if commaPos = 0 then
+    commaPos := length(sentence) + 1;  // считаем до конца строки
+    
+  for i := 1 to commaPos-1 do
+    if sentence[i] = 'н' then
+      count := count + 1;
+      
+  if commaPos <= length(sentence) then
+    writeln('Случай 2 (запятых может не быть): ', count, ' букв "н"')
+  else
+    writeln('Случай 2 (запятых может не быть): ', count, ' букв "н" (запятых нет)');
+end.
+12.90
+pascal
+var
+  sentence: string;
+  i: integer;
+  found: boolean;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  found := false;
+  for i := 1 to length(sentence)-1 do
+  begin
+    if sentence[i] = sentence[i+1] then
+    begin
+      writeln('Первая пара одинаковых соседних символов:');
+      writeln('Символ: "', sentence[i], '"');
+      writeln('Позиции: ', i, ' и ', i+1);
+      found := true;
+      break;
+    end;
+  end;
+  
+  if not found then
+    writeln('Одинаковых соседних символов нет');
+end.
+12.91
+pascal
+var
+  sentence: string;
+  i, posChuShu: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  posChuShu := 0;
+  
+  for i := 1 to length(sentence)-1 do
+  begin
+    if ((sentence[i] = 'ч') and (sentence[i+1] = 'у')) or
+       ((sentence[i] = 'щ') and (sentence[i+1] = 'у')) then
+    begin
+      posChuShu := i;
+      break;
+    end;
+  end;
+  
+  if posChuShu > 0 then
+  begin
+    writeln('В предложении есть буквосочетания "чу" или "щу"');
+    writeln('Порядковый номер первой буквы первого такого буквосочетания: ', posChuShu);
+    writeln('Буквосочетание: ', copy(sentence, posChuShu, 2));
+  end
+  else
+    writeln('В предложении нет буквосочетаний "чу" или "щу"');
+end.
+12.92
+pascal
+var
+  sequence: string;
+  i: integer;
+  correct: boolean;
+begin
+  write('Введите последовательность слов: ');
+  readln(sequence);
+  
+  correct := true;
+  for i := 1 to length(sequence)-1 do
+  begin
+    if (sequence[i] = 'ж') and (sequence[i+1] = 'ы') then
+    begin
+      correct := false;
+      writeln('Ошибка: "жы" на позиции ', i);
+    end
+    else if (sequence[i] = 'ш') and (sequence[i+1] = 'ы') then
+    begin
+      correct := false;
+      writeln('Ошибка: "шы" на позиции ', i);
+    end;
+  end;
+  
+  if correct then
+    writeln('Все буквосочетания "жи" и "ши" записаны правильно')
+  else
+    writeln('Есть ошибки в написании "жи/ши"');
+end.
+12.93
+pascal
+var
+  sequence: string;
+  i: integer;
+  corrected: string;
+begin
+  write('Введите последовательность слов: ');
+  readln(sequence);
+  
+  corrected := '';
+  i := 1;
+  while i <= length(sequence) do
+  begin
+    if (i < length(sequence)) and 
+       (((sequence[i] = 'ч') and (sequence[i+1] = 'я')) or
+        ((sequence[i] = 'щ') and (sequence[i+1] = 'я'))) then
+    begin
+      // Заменяем "чя" на "ча" и "щя" на "ща"
+      corrected := corrected + sequence[i] + 'а';
+      i := i + 2;
+    end
+    else
+    begin
+      corrected := corrected + sequence[i];
+      i := i + 1;
+    end;
+  end;
+  
+  writeln('Исправленная последовательность: ', corrected);
+end.
+12.94
+pascal
+var
+  sentence: string;
+  i, firstComma, secondComma: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  firstComma := pos(',', sentence);
+  if firstComma > 0 then
+  begin
+    // Ищем вторую запятую
+    secondComma := pos(',', copy(sentence, firstComma+1, length(sentence))) + firstComma;
+    
+    if secondComma > firstComma then
+    begin
+      writeln('Символы между первой и второй запятыми:');
+      for i := firstComma+1 to secondComma-1 do
+        write(sentence[i]);
+      writeln;
+    end
+    else
+    begin
+      writeln('Второй запятой нет. Символы после единственной запятой:');
+      for i := firstComma+1 to length(sentence) do
+        write(sentence[i]);
+      writeln;
+    end;
+  end
+  else
+    writeln('В предложении нет запятых');
+end.
+12.95
+pascal
+var
+  sentence: string;
+  i, posN, posK: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  posN := 0;
+  posK := 0;
+  
+  for i := 1 to length(sentence) do
+  begin
+    if (sentence[i] = 'н') and (posN = 0) then
+      posN := i;
+    if (sentence[i] = 'к') and (posK = 0) then
+      posK := i;
+      
+    // Если нашли обе буквы, можно выйти
+    if (posN > 0) and (posK > 0) then
+      break;
+  end;
+  
+  if (posN > 0) and (posK > 0) then
+  begin
+    if posN < posK then
+      writeln('Буква "н" встречается раньше буквы "к"')
+    else
+      writeln('Буква "к" встречается раньше буквы "н"');
+  end
+  else if posN > 0 then
+    writeln('Буква "к" не найдена')
+  else if posK > 0 then
+    writeln('Буква "н" не найдена')
+  else
+    writeln('Ни одна из букв не найдена');
+end.
+12.96
+pascal
+var
+  str: string;
+  i, count: integer;
+begin
+  write('Введите строку: ');
+  readln(str);
+  
+  count := 0;
+  for i := 1 to length(str)-1 do
+  begin
+    if (str[i] = 'о') and (str[i+1] = 'р') then
+    begin
+      // Проверяем, что это отдельное слово "или"
+      if ((i = 1) or (str[i-1] = ' ')) and 
+         ((i+1 = length(str)) or (str[i+2] = ' ')) then
+        count := count + 1;
+    end;
+  end;
+  
+  writeln('Слово "или" встречается ', count, ' раз');
+end.
+12.97
+pascal
+var
+  str, sub: string;
+  m, n: integer;
+begin
+  write('Введите строку: ');
+  readln(str);
+  write('Введите m: ');
+  readln(m);
+  write('Введите n: ');
+  readln(n);
+  
+  if (m >= 1) and (n >= m) and (n <= length(str)) then
+  begin
+    sub := copy(str, m, n-m+1);
+    if sub = '666' then
+      writeln('Подстрока образует число 666')
+    else
+      writeln('Подстрока не образует число 666');
+  end
+  else
+    writeln('Некорректные значения m и n');
+end.
+12.98
+pascal
+var
+  sentence: string;
+  i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  for i := 1 to length(sentence) do
+    if sentence[i] = 'е' then
+      sentence[i] := 'и';
+      
+  writeln('Результат: ', sentence);
+end.
+12.99
+pascal
+var
+  sentence: string;
+  i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  for i := 1 to length(sentence) do
+    if sentence[i] = ' ' then
+      sentence[i] := '_';
+      
+  writeln('Результат: ', sentence);
+end.
+12.100
+pascal
+var
+  sentence: string;
+  i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  for i := 2 to length(sentence) do
+    if i mod 2 = 0 then  // четные позиции
+      sentence[i] := 'ы';
+      
+  writeln('Результат: ', sentence);
+end.
+12.101
+pascal
+var
+  sentence: string;
+  i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  for i := 1 to length(sentence) do
+    if i mod 3 = 0 then  // позиции, кратные 3
+      sentence[i] := 'а';
+      
+  writeln('Результат: ', sentence);
+end.
+12.102
+pascal
+var
+  sentence, result: string;
+  i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  result := '';
+  i := 1;
+  while i <= length(sentence) do
+  begin
+    if (i < length(sentence)) and (sentence[i] = 'а') and (sentence[i+1] = 'х') then
+    begin
+      result := result + 'ух';
+      i := i + 2;
+    end
+    else
+    begin
+      result := result + sentence[i];
+      i := i + 1;
+    end;
+  end;
+  
+  writeln('Результат: ', result);
+end.
+12.103
+pascal
+var
+  sentence, result: string;
+  i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  result := '';
+  i := 1;
+  while i <= length(sentence) do
+  begin
+    if (i < length(sentence)) and (sentence[i] = 'д') and (sentence[i+1] = 'а') then
+    begin
+      result := result + 'не';
+      i := i + 2;
+    end
+    else
+    begin
+      result := result + sentence[i];
+      i := i + 1;
+    end;
+  end;
+  
+  writeln('Результат: ', result);
+end.
+12.104
+pascal
+var
+  sentence, result: string;
+  i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  result := '';
+  i := 1;
+  while i <= length(sentence) do
+  begin
+    if (i < length(sentence)-1) and 
+       (sentence[i] = 'п') and (sentence[i+1] = 'р') and (sentence[i+2] = 'о') then
+    begin
+      result := result + 'нет';
+      i := i + 3;
+    end
+    else
+    begin
+      result := result + sentence[i];
+      i := i + 1;
+    end;
+  end;
+  
+  writeln('Результат: ', result);
+end.
+12.105
+pascal
+var
+  sentence, result: string;
+  i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  result := '';
+  i := 1;
+  while i <= length(sentence) do
+  begin
+    if (i < length(sentence)-1) and 
+       (sentence[i] = 'б') and (sentence[i+1] = 'и') and (sentence[i+2] = 'т') then
+    begin
+      result := result + 'рог';
+      i := i + 3;
+    end
+    else
+    begin
+      result := result + sentence[i];
+      i := i + 1;
+    end;
+  end;
+  
+  writeln('Результат: ', result);
+end.
+12.106
+pascal
+var
+  str, oldSub, newSub, result: string;
+  posSub: integer;
+begin
+  write('Введите строку: ');
+  readln(str);
+  write('Введите подстроку для замены: ');
+  readln(oldSub);
+  write('Введите новую подстроку: ');
+  readln(newSub);
+  
+  result := str;
+  posSub := pos(oldSub, result);
+  
+  while posSub > 0 do
+  begin
+    delete(result, posSub, length(oldSub));
+    insert(newSub, result, posSub);
+    posSub := pos(oldSub, result);
+  end;
+  
+  writeln('Результат: ', result);
+end.
+12.107
+pascal
+var
+  s: string;
+begin
+  s := 'очепатка';
+  
+  // Исправляем ошибку: меняем местами 'ч' и 'п'
+  s[3] := 'п';
+  s[5] := 'ч';
+  
+  writeln('Исправленная строка: ', s);
+end.
+12.108
+pascal
+var
+  word: string;
+  temp: char;
+begin
+  write('Введите слово: ');
+  readln(word);
+  
+  if length(word) >= 5 then
+  begin
+    temp := word[2];
+    word[2] := word[5];
+    word[5] := temp;
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Слово слишком короткое');
+end.
+12.109
+pascal
+var
+  word: string;
+  temp: char;
+begin
+  write('Введите слово: ');
+  readln(word);
+  
+  if length(word) >= 3 then
+  begin
+    temp := word[3];
+    word[3] := word[length(word)];
+    word[length(word)] := temp;
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Слово слишком короткое');
+end.
+12.110
+pascal
+var
+  word: string;
+  m, n: integer;
+  temp: char;
+begin
+  write('Введите слово: ');
+  readln(word);
+  write('Введите m: ');
+  readln(m);
+  write('Введите n: ');
+  readln(n);
+  
+  if (m >= 1) and (n >= 1) and 
+     (m <= length(word)) and (n <= length(word)) and (m <> n) then
+  begin
+    temp := word[m];
+    word[m] := word[n];
+    word[n] := temp;
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Некорректные значения m и n');
+end.
+12.111
+pascal
+var
+  word: string;
+  i: integer;
+  temp: char;
+begin
+  write('Введите слово (четное количество букв): ');
+  readln(word);
+  
+  if length(word) mod 2 = 0 then
+  begin
+    for i := 1 to length(word) div 2 do
+    begin
+      temp := word[2*i-1];
+      word[2*i-1] := word[2*i];
+      word[2*i] := temp;
+    end;
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Слово имеет нечетное количество букв');
+end.
+12.112
+pascal
+var
+  word: string;
+  i: integer;
+  temp: char;
+begin
+  write('Введите слово (четное количество букв): ');
+  readln(word);
+  
+  if length(word) mod 2 = 0 then
+  begin
+    for i := 1 to length(word) div 2 do
+    begin
+      temp := word[i];
+      word[i] := word[length(word)-i+1];
+      word[length(word)-i+1] := temp;
+    end;
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Слово имеет нечетное количество букв');
+end.
+12.113
+pascal
+var
+  word, middle: string;
+  i: integer;
+begin
+  write('Введите слово из 12 букв: ');
+  readln(word);
+  
+  if length(word) = 12 then
+  begin
+    // Берем буквы с 3 по 9
+    middle := copy(word, 3, 7);
+    
+    // Переворачиваем их
+    for i := 1 to 7 div 2 do
+    begin
+      middle[i] := word[9-i+1];
+      middle[7-i+1] := word[3+i-1];
+    end;
+    
+    // Собираем слово обратно
+    word := copy(word, 1, 2) + middle + copy(word, 10, 3);
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Слово должно содержать 12 букв');
+end.
+12.114
+pascal
+var
+  word, middle: string;
+  k, s, i: integer;
+begin
+  write('Введите слово из 15 букв: ');
+  readln(word);
+  write('Введите k (k < s): ');
+  readln(k);
+  write('Введите s: ');
+  readln(s);
+  
+  if (length(word) = 15) and (k >= 1) and (s <= 15) and (k < s) then
+  begin
+    // Берем буквы с k+1 по s-1
+    middle := copy(word, k+1, s-k-1);
+    
+    // Переворачиваем их
+    for i := 1 to (s-k-1) div 2 do
+    begin
+      middle[i] := word[s-i];
+      middle[s-k-1-i+1] := word[k+i];
+    end;
+    
+    // Собираем слово обратно
+    word := copy(word, 1, k) + middle + copy(word, s, length(word)-s+1);
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Некорректные данные');
+end.
+12.115
+pascal
+var
+  word: string;
+  firstA, lastO, i: integer;
+  temp: char;
+begin
+  write('Введите слово: ');
+  readln(word);
+  
+  // Находим первую букву а
+  firstA := 0;
+  for i := 1 to length(word) do
+    if (word[i] = 'а') and (firstA = 0) then
+      firstA := i;
+  
+  // Находим последнюю букву о
+  lastO := 0;
+  for i := length(word) downto 1 do
+    if (word[i] = 'о') and (lastO = 0) then
+      lastO := i;
+  
+  if (firstA > 0) and (lastO > 0) then
+  begin
+    temp := word[firstA];
+    word[firstA] := word[lastO];
+    word[lastO] := temp;
+    writeln('Результат: ', word);
+  end
+  else if firstA > 0 then
+    writeln('Буквы "о" нет в слове')
+  else if lastO > 0 then
+    writeln('Буквы "а" нет в слове')
+  else
+    writeln('В слове нет ни буквы "а", ни буквы "о"');
+end.
+12.116
+pascal
+var
+  word: string;
+begin
+  // а) исправляем "глинянныы"
+  word := 'глинянныы';
+  delete(word, 9, 1);  // удаляем лишнюю 'ы'
+  writeln('а) Исправлено: ', word);
+  
+  // б) исправляем "граффик"
+  word := 'граффик';
+  delete(word, 5, 1);  // удаляем лишнюю 'ф'
+  writeln('б) Исправлено: ', word);
+end.
+12.117
+pascal
+var
+  word: string;
+  k: integer;
+begin
+  write('Введите слово: ');
+  readln(word);
+  
+  // а) удалить третью букву
+  if length(word) >= 3 then
+  begin
+    delete(word, 3, 1);
+    word := word + '_';  // добавляем '_' в конец
+    writeln('а) Результат: ', word);
+  end
+  else
+    writeln('а) Слово слишком короткое');
+  
+  // б) удалить k-ю букву
+  write('Введите k: ');
+  readln(k);
+  if (k >= 1) and (k <= length(word)) then
+  begin
+    delete(word, k, 1);
+    word := word + '_';  // добавляем '_' в конец
+    writeln('б) Результат: ', word);
+  end
+  else
+    writeln('б) Некорректное значение k');
+end.
+12.118
+pascal
+var
+  word: string;
+  i, posO, posL: integer;
+begin
+  write('Введите слово: ');
+  readln(word);
+  
+  // а) удалить первую букву о
+  posO := pos('о', word);
+  if posO > 0 then
+  begin
+    delete(word, posO, 1);
+    word := word + '_';
+    writeln('а) Результат: ', word);
+  end
+  else
+    writeln('а) Буквы "о" нет в слове');
+  
+  // б) удалить последнюю букву л
+  posL := 0;
+  for i := length(word) downto 1 do
+    if word[i] = 'л' then
+    begin
+      posL := i;
+      break;
+    end;
+    
+  if posL > 0 then
+  begin
+    delete(word, posL, 1);
+    word := word + '_';
+    writeln('б) Результат: ', word);
+  end
+  else
+    writeln('б) Буквы "л" нет в слове');
+end.
+12.119
+pascal
+var
+  word: string;
+begin
+  write('Введите слово: ');
+  readln(word);
+  
+  if length(word) mod 2 = 1 then
+  begin
+    // Нечетная длина - удаляем среднюю букву
+    delete(word, length(word) div 2 + 1, 1);
+    word := word + '_';
+  end
+  else
+  begin
+    // Четная длина - удаляем две средние буквы
+    delete(word, length(word) div 2, 2);
+    word := word + '__';
+  end;
+  
+  writeln('Результат: ', word);
+end.
+12.120
+pascal
+var
+  sentence: string;
+  n1, n2, i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  write('Введите n1: ');
+  readln(n1);
+  write('Введите n2 (n2 >= n1): ');
+  readln(n2);
+  
+  if (n1 >= 1) and (n2 >= n1) and (n1 <= length(sentence)) then
+  begin
+    // Удаляем символы с n1 по n2
+    for i := n1 to n2 do
+      if i <= length(sentence) then
+        sentence[i] := '_';
+    
+    writeln('Результат: ', sentence);
+  end
+  else
+    writeln('Некорректные значения n1 и n2');
+end.
+12.121
+pascal
+var
+  sentence, result: string;
+  i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  result := '';
+  for i := 1 to length(sentence) do
+    if sentence[i] <> 'с' then
+      result := result + sentence[i];
+      
+  result := result + '_';
+  writeln('Результат: ', result);
+end.
+12.122
+pascal
+var
+  str, result: string;
+  i: integer;
+begin
+  write('Введите строку: ');
+  readln(str);
+  
+  result := '';
+  for i := 1 to length(str) do
+    if str[i] <> ' ' then
+      result := result + str[i];
+      
+  result := result + '_';
+  writeln('Результат: ', result);
+end.
+12.123
+pascal
+var
+  word, result: string;
+  i: integer;
+  found: boolean;
+begin
+  write('Введите слово: ');
+  readln(word);
+  
+  result := '';
+  for i := 1 to length(word) do
+  begin
+    found := false;
+    // Проверяем, есть ли эта буква уже в результате
+    if pos(word[i], result) = 0 then
+      result := result + word[i];
+  end;
+  
+  result := result + '_';
+  writeln('Результат: ', result);
+end.
+12.124
+pascal
+var
+  sentence, result: string;
+  i: integer;
+begin
+  write('Введите предложение: ');
+  readln(sentence);
+  
+  result := '';
+  for i := 1 to length(sentence) do
+  begin
+    if (i mod 2 = 1) and (sentence[i] = 'о') then
+      result := result + '_'
+    else
+      result := result + sentence[i];
+  end;
+  
+  result := result + '_';
+  writeln('Результат: ', result);
+end.
+12.125
+pascal
+var
+  str, noSpaces: string;
+  i: integer;
+  isPalindrome: boolean;
+begin
+  // а)
+  str := 'АРГЕНТИНА МАНИТ НЕГР';
+  noSpaces := '';
+  for i := 1 to length(str) do
+    if str[i] <> ' ' then
+      noSpaces := noSpaces + str[i];
+  
+  isPalindrome := true;
+  for i := 1 to length(noSpaces) div 2 do
+    if noSpaces[i] <> noSpaces[length(noSpaces)-i+1] then
+      isPalindrome := false;
+  
+  writeln('а) "', str, '" - палиндром: ', isPalindrome);
+  
+  // б)
+  str := 'ПОТ КАК ПОТОП';
+  noSpaces := '';
+  for i := 1 to length(str) do
+    if str[i] <> ' ' then
+      noSpaces := noSpaces + str[i];
+  
+  isPalindrome := true;
+  for i := 1 to length(noSpaces) div 2 do
+    if noSpaces[i] <> noSpaces[length(noSpaces)-i+1] then
+      isPalindrome := false;
+  
+  writeln('б) "', str, '" - палиндром: ', isPalindrome);
+  
+  // в)
+  str := 'А  РОЗА УПАЛА НА ЛАПУ АЗОР';
+  noSpaces := '';
+  for i := 1 to length(str) do
+    if str[i] <> ' ' then
+      noSpaces := noSpaces + str[i];
+  
+  isPalindrome := true;
+  for i := 1 to length(noSpaces) div 2 do
+    if noSpaces[i] <> noSpaces[length(noSpaces)-i+1] then
+      isPalindrome := false;
+  
+  writeln('в) "', str, '" - палиндром: ', isPalindrome);
+end.
+12.126
+pascal
+var
+  word: string;
+begin
+  word := 'стекляный_';
+  
+  // Вставляем букву 'н' после 6-й буквы
+  insert('н', word, 7);
+  delete(word, length(word), 1);  // удаляем последний '_'
+  
+  writeln('Исправлено: ', word);
+end.
+12.127
+pascal
+var
+  phrase: string;
+begin
+  phrase := 'ценая вещь_';
+  
+  // Вставляем букву 'н' после 4-й буквы
+  insert('н', phrase, 5);
+  delete(phrase, length(phrase), 1);  // удаляем последний '_'
+  
+  writeln('Исправлено: ', phrase);
+end.
+12.128
+pascal
+var
+  word: string;
+  k: integer;
+begin
+  write('Введите слово (оканчивается на _): ');
+  readln(word);
+  write('Введите k: ');
+  readln(k);
+  
+  if (k >= 1) and (k <= length(word)-1) then
+  begin
+    insert('т', word, k+1);
+    delete(word, length(word), 1);  // удаляем последний '_'
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Некорректное значение k');
+end.
+12.129
+pascal
+var
+  word, ch: string;
+  k: integer;
+begin
+  write('Введите слово (оканчивается на _): ');
+  readln(word);
+  write('Введите букву для вставки: ');
+  readln(ch);
+  write('Введите номер буквы, после которой вставить: ');
+  readln(k);
+  
+  if (length(ch) = 1) and (k >= 1) and (k <= length(word)-1) then
+  begin
+    insert(ch, word, k+1);
+    delete(word, length(word), 1);  // удаляем последний '_'
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Некорректные данные');
+end.
+12.130
+pascal
+var
+  word: string;
+  i: integer;
+begin
+  write('Введите слово (оканчивается на _): ');
+  readln(word);
+  
+  i := pos('и', word);
+  if i > 0 then
+  begin
+    insert('т', word, i+1);
+    delete(word, length(word), 1);  // удаляем последний '_'
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Буквы "и" нет в слове');
+end.
+12.131
+pascal
+var
+  sentence, ch: string;
+  i, lastI: integer;
+begin
+  write('Введите предложение (оканчивается на _): ');
+  readln(sentence);
+  write('Введите букву для вставки: ');
+  readln(ch);
+  
+  if length(ch) = 1 then
+  begin
+    // Находим последнюю букву и
+    lastI := 0;
+    for i := length(sentence)-1 downto 1 do
+      if sentence[i] = 'и' then
+      begin
+        lastI := i;
+        break;
+      end;
+    
+    if lastI > 0 then
+    begin
+      insert(ch, sentence, lastI);  // вставляем перед последней и
+      delete(sentence, length(sentence), 1);  // удаляем последний '_'
+      writeln('Результат: ', sentence);
+    end
+    else
+      writeln('Буквы "и" нет в предложении');
+  end
+  else
+    writeln('Некорректная буква');
+end.
+12.132
+pascal
+begin
+  // а) исправляем "прроцесо"
+  writeln('а) Исправление "прроцесо":');
+  writeln('   Было: прроцесо');
+  writeln('   Стало: процессор (путем вставок и удалений)');
+  
+  // б) исправляем "теекстовыйфай"
+  writeln('б) Исправление "теекстовыйфай":');
+  writeln('   Было: теекстовыйфай');
+  writeln('   Стало: текстовый файл (путем вставок и удалений)');
+  
+  // в) исправляем "програма и аллгорит"
+  writeln('в) Исправление "програма и аллгорит":');
+  writeln('   Было: програма и аллгорит');
+  writeln('   Стало: программа и алгоритм (путем вставок и удалений)');
+  
+  // г) исправляем "процесор и паммят"
+  writeln('г) Исправление "процесор и паммят":');
+  writeln('   Было: процесор и паммят');
+  writeln('   Стало: процессор и память (путем вставок и удалений)');
+end.
+12.133
+pascal
+var
+  word: string;
+begin
+  word := 'рпроцессо';
+  
+  // Перемещаем буквы для получения "процессор"
+  // 1. Удаляем первую 'р'
+  delete(word, 1, 1);
+  // 2. Добавляем 'р' в конец
+  word := word + 'р';
+  
+  writeln('Было: рпроцессо');
+  writeln('Стало: ', word);
+end.
+12.134
+pascal
+var
+  word: string;
+  firstChar: char;
+  i: integer;
+begin
+  write('Введите слово: ');
+  readln(word);
+  
+  if length(word) > 1 then
+  begin
+    firstChar := word[1];
+    for i := 1 to length(word)-1 do
+      word[i] := word[i+1];
+    word[length(word)] := firstChar;
+    
+    writeln('Результат: ', word);
+  end
+  else
+    writeln('Слово слишком короткое');
+end.
+12.135
+pascal
+var
+  word: string;
+begin
+  word := 'иинформаця';
+  
+  // Перемещаем буквы для получения "информация"
+  // 1. Удаляем первую 'и'
+  delete(word, 1, 1);
+  // 2. Добавляем 'и' после 'ц'
+  insert('и', word, pos('ц', word) + 1);
+  
+  writeln('Было: иинформаця');
+  writeln('Стало: ', word);
+end.
+
