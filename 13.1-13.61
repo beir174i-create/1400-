@@ -1,0 +1,1538 @@
+13.1. Фамилии и имена учеников
+python
+# Допустим, имеются два массива:
+surnames = ['Иванов', 'Петров', 'Сидоров', ...]  # 25 фамилий
+names = ['Иван', 'Петр', 'Алексей', ...]         # 25 имен
+
+for i in range(len(surnames)):
+    print(f"{surnames[i]} {names[i]}")
+13.2. Футбольные клубы и города
+python
+clubs = ['Спартак', 'Динамо', ...]  # 20 клубов
+cities = ['Москва', 'Москва', ...]  # 20 городов
+
+for i in range(len(clubs)):
+    print(f"{clubs[i]} ({cities[i]})")
+13.3. Города Италии
+python
+cities = ['Рим', 'Париж', 'Милан', ...]    # 26 городов
+countries = ['Италия', 'Франция', 'Италия', ...]  # 26 стран
+
+for i in range(len(cities)):
+    if countries[i] == 'Италия':
+        print(cities[i])
+13.4. Военнообязанные сотрудники
+python
+employees = [
+    {'фамилия': 'Иванов', 'военнообязанный': True},
+    {'фамилия': 'Петров', 'военнообязанный': False},
+    # ... 16 сотрудников
+]
+
+for emp in employees:
+    if emp['военнообязанный']:
+        print(emp['фамилия'])
+13.5. Вершины выше 3000 м
+python
+mountains = [
+    {'название': 'Эверест', 'высота': 8848},
+    {'название': 'Эльбрус', 'высота': 5642},
+    # ... 15 вершин
+]
+
+for mountain in mountains:
+    if mountain['высота'] > 3000:
+        print(mountain['название'])
+13.6. Автомобили быстрее 180 км/ч
+python
+cars = [
+    {'модель': 'Ferrari', 'скорость': 320},
+    {'модель': 'Lada', 'скорость': 160},
+    # ... 20 моделей
+]
+
+for car in cars:
+    if car['скорость'] > 180:
+        print(car['модель'])
+13.7. Телефон начинается с 8905
+python
+people = [
+    {'фамилия': 'Иванов', 'адрес': 'ул. Ленина', 'телефон': '89051234567'},
+    # ... 25 человек
+]
+
+# Случай 1: телефон как число или строка цифр
+for person in people:
+    phone = str(person['телефон'])
+    if phone.startswith('8905'):
+        print(f"{person['фамилия']}: {person['адрес']}")
+
+# Случай 2: телефон с разделителями
+for person in people:
+    phone = person['телефон'].replace('-', '')
+    if phone.startswith('8905'):
+        print(f"{person['фамилия']}: {person['адрес']}")
+13.8. Женатые с детьми
+python
+people = [
+    {'фамилия': 'Иванов', 'семейное_положение': 'женат', 'дети': True},
+    # ... 25 человек
+]
+
+for person in people:
+    married = person['семейное_положение'] in ['женат', 'замужем']
+    if married and person['дети']:
+        print(person['фамилия'])
+13.9. Ученики 9-х классов с оценкой 5
+python
+students = [
+    {'фамилия': 'Иванов', 'класс': 9, 'оценка': 5},
+    # ... 30 учеников
+]
+
+for student in students:
+    if student['класс'] == 9 and student['оценка'] == 5:
+        print(student['фамилия'])
+13.10. Стаж работы более 3 лет
+python
+from datetime import datetime
+
+employees = [
+    {'фамилия': 'Иванов', 'имя': 'Иван', 'отчество': 'Иванович',
+     'адрес': 'ул. Ленина', 'месяц_приема': 6, 'год_приема': 2020},
+    # ... 20 сотрудников
+]
+
+current_date = datetime.now()
+current_month = current_date.month
+current_year = current_date.year
+
+for emp in employees:
+    # Количество полных лет
+    years = current_year - emp['год_приема']
+    if current_month < emp['месяц_приема']:
+        years -= 1
+    
+    if years >= 3:
+        print(f"{emp['фамилия']} {emp['имя']} {emp['отчество']}: {emp['адрес']}")
+13.11. Сравнение стоимости товаров
+python
+goods = [
+    {'название': 'Товар1', 'рубли': 100, 'копейки': 50},
+    # ... 20 товаров
+]
+
+def compare_price(good1, good2):
+    total1 = good1['рубли'] * 100 + good1['копейки']
+    total2 = good2['рубли'] * 100 + good2['копейки']
+    
+    if total1 > total2:
+        return f"{good1['название']} дороже {good2['название']}"
+    elif total2 > total1:
+        return f"{good2['название']} дороже {good1['название']}"
+    else:
+        return "Товары стоят одинаково"
+
+# Пример сравнения двух товаров
+result = compare_price(goods[0], goods[1])
+print(result)
+13.12. Сравнение моментов времени
+python
+times = [
+    {'часы': 10, 'минуты': 30},
+    # ... 25 моментов
+]
+
+def compare_times(time1, time2):
+    total1 = time1['часы'] * 60 + time1['минуты']
+    total2 = time2['часы'] * 60 + time2['минуты']
+    
+    if total1 < total2:
+        return "Первый момент был раньше"
+    elif total2 < total1:
+        return "Второй момент был раньше"
+    else:
+        return "Моменты совпадают"
+
+# Пример сравнения
+result = compare_times(times[0], times[1])
+print(result)
+13.16. День рождения сегодня
+python
+from datetime import datetime
+
+students = [
+    {'фамилия': 'Иванов', 'имя': 'Иван', 'день': 15, 'месяц': 6, 'год': 2007},
+    # ... 20 учеников
+]
+
+today = datetime.now()
+has_birthday = False
+
+for student in students:
+    if student['день'] == today.day and student['месяц'] == today.month:
+        print(f"{student['имя']} {student['фамилия']}")
+        has_birthday = True
+
+if not has_birthday:
+    print("Сегодня нет именинников")
+13.20. Стоимость мощных автомобилей
+python
+cars = [
+    {'модель': 'Car1', 'мощность': 150, 'стоимость': 2000000},
+    # ... 30 автомобилей
+]
+
+total_cost = 0
+for car in cars:
+    if car['мощность'] > 100:
+        total_cost += car['стоимость']
+
+print(f"Общая стоимость автомобилей мощнее 100 л.с.: {total_cost}")
+13.23. Средняя стоимость журналов с малым тиражом
+python
+journals = [
+    {'название': 'Журнал1', 'цена': 200, 'тираж': 5000},
+    # ... 15 журналов
+]
+
+prices = []
+for journal in journals:
+    if journal['тираж'] < 10000:
+        prices.append(journal['цена'])
+
+if prices:
+    average_price = sum(prices) / len(prices)
+    print(f"Средняя стоимость: {average_price:.2f}")
+else:
+    print("Нет журналов с тиражом менее 10000")
+13.25. Средний рост мужчин
+python
+people = [
+    {'имя': 'Иван', 'пол': 'муж', 'рост': 180},
+    {'имя': 'Мария', 'пол': 'жен', 'рост': 165},
+    # ... 22 человека
+]
+
+heights = [p['рост'] for p in people if p['пол'] == 'муж']
+if heights:
+    average_height = sum(heights) / len(heights)
+    print(f"Средний рост мужчин: {average_height:.1f} см")
+else:
+    print("Нет данных о мужчинах")
+13.27. Средние оценки учеников
+python
+students = [
+    {'фамилия': 'Иванов', 'оценки': [5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4]},
+    # ... 20 учеников
+]
+
+all_grades = []
+student_averages = []
+
+for student in students:
+    avg = sum(student['оценки']) / len(student['оценки'])
+    student_averages.append({'фамилия': student['фамилия'], 'средняя': avg})
+    all_grades.extend(student['оценки'])
+
+class_average = sum(all_grades) / len(all_grades)
+
+print(f"Средняя оценка класса: {class_average:.2f}")
+print("\nУченики с оценкой выше средней по классу:")
+for student in student_averages:
+    if student['средняя'] > class_average:
+        print(f"{student['фамилия']}: {student['средняя']:.2f}")
+13.32. Наибольшая и наименьшая сумма оценок
+python
+students = [
+    {'фамилия': 'Иванов', 'оценки': [5, 4, 5, 4, 5, 4, 5, 4, 5, 4]},
+    # ... 25 учеников
+]
+
+max_student = None
+min_student = None
+max_sum = -1
+min_sum = 101  # Максимально возможная сумма 10*10=100
+
+for student in students:
+    total = sum(student['оценки'])
+    
+    if total > max_sum:
+        max_sum = total
+        max_student = student['фамилия']
+    
+    if total < min_sum:
+        min_sum = total
+        min_student = student['фамилия']
+
+print(f"Наибольшая сумма оценок: {max_student} ({max_sum})")
+print(f"Наименьшая сумма оценок: {min_student} ({min_sum})")
+13.35. Победители футбольного первенства
+python
+teams = [
+    {'название': 'Команда1', 'очки': 45},
+    {'название': 'Команда2', 'очки': 42},
+    # ... 20 команд
+]
+
+# Сортируем по убыванию очков
+sorted_teams = sorted(teams, key=lambda x: x['очки'], reverse=True)
+
+print(f"Чемпион: {sorted_teams[0]['название']}")
+print(f"Второе место: {sorted_teams[1]['название']}")
+print(f"Третье место: {sorted_teams[2]['название']}")
+13.37. Самая большая и маленькая зарплата
+python
+employees = [
+    {'фамилия': 'Иванов', 'зарплата': 50000, 'пол': 'муж'},
+    # ... 20 сотрудников
+]
+
+max_salary_man = None
+max_salary = 0
+
+min_salary_man = None
+min_salary_woman = None
+min_salary = float('inf')
+min_salary_f = float('inf')
+
+for emp in employees:
+    if emp['пол'] == 'муж':
+        if emp['зарплата'] > max_salary:
+            max_salary = emp['зарплата']
+            max_salary_man = emp['фамилия']
+        
+        if emp['зарплата'] < min_salary:
+            min_salary = emp['зарплата']
+            min_salary_man = emp['фамилия']
+    
+    else:  # женщины
+        if emp['зарплата'] < min_salary_f:
+            min_salary_f = emp['зарплата']
+            min_salary_woman = emp['фамилия']
+
+print(f"Самый высокооплачиваемый мужчина: {max_salary_man}")
+print(f"Мужчина с самой низкой зарплатой: {min_salary_man}")
+print(f"Женщина с самой низкой зарплатой: {min_salary_woman}")
+13.39. Поезда на станции
+python
+trains = [
+    {'номер': 123, 'назначение': 'Москва-Омск', 
+     'прибытие_час': 10, 'прибытие_мин': 30,
+     'отправление_час': 11, 'отправление_мин': 15},
+    # ... 25 поездов
+]
+
+current_hour = 10  # Текущее время
+current_minute = 45
+
+for train in trains:
+    arrival = train['прибытие_час'] * 60 + train['прибытие_мин']
+    departure = train['отправление_час'] * 60 + train['отправление_мин']
+    current = current_hour * 60 + current_minute
+    
+    if arrival <= current < departure:
+        print(f"Поезд {train['номер']}: {train['назначение']}")
+13.40. Багаж пассажиров
+python
+passengers = [
+    {'номер': 1, 'вещей': 2, 'вес': 40},
+    # ... 24 пассажира
+]
+
+# а) Пассажиры с более чем 2 вещами
+count_more_than_2 = sum(1 for p in passengers if p['вещей'] > 2)
+print(f"Пассажиров с более чем 2 вещами: {count_more_than_2}")
+
+# б) Проверка наличия пассажира с 1 вещью < 25 кг
+has_special = any(p['вещей'] == 1 and p['вес'] < 25 for p in passengers)
+print(f"Есть пассажир с 1 вещью < 25 кг: {'да' if has_special else 'нет'}")
+
+# в) Пассажиры с количеством вещей выше среднего
+avg_things = sum(p['вещей'] for p in passengers) / len(passengers)
+above_avg = sum(1 for p in passengers if p['вещей'] > avg_things)
+print(f"Пассажиров с вещами выше среднего: {above_avg}")
+
+# г) Багаж со средним весом, близким к общему среднему
+avg_weight_per_item = sum(p['вес'] for p in passengers) / sum(p['вещей'] for p in passengers)
+print(f"\nОбщий средний вес одной вещи: {avg_weight_per_item:.2f} кг")
+
+for p in passengers:
+    if p['вещей'] > 0:
+        item_weight = p['вес'] / p['вещей']
+        if abs(item_weight - avg_weight_per_item) <= 0.5:
+            print(f"Багаж {p['номер']}: средний вес {item_weight:.2f} кг")
+13.48. Сортировка команд по местам
+python
+teams = [
+    {'название': 'Команда1', 'очки': 45},
+    # ... 20 команд
+]
+
+# Сортировка по убыванию очков
+sorted_teams = sorted(teams, key=lambda x: x['очки'], reverse=True)
+
+print("Результаты чемпионата:")
+for i, team in enumerate(sorted_teams, 1):
+    print(f"{i}. {team['название']} - {team['очки']} очков")
+13.57. Словарь государств и столиц
+python
+countries = {
+    'Россия': 'Москва',
+    'Франция': 'Париж',
+    'Германия': 'Берлин',
+    'Япония': 'Токио',
+    'США': 'Вашингтон'
+}
+
+# 1) Столица по названию государства
+country = input("Введите название государства: ")
+if country in countries:
+    print(f"Столица {country}: {countries[country]}")
+else:
+    print("Государство не найдено")
+
+# 2) Государство по столице
+capital = input("\nВведите название столицы: ")
+found = False
+for ctry, cap in countries.items():
+    if cap == capital:
+        print(f"Государство со столицей {capital}: {ctry}")
+        found = True
+        break
+if not found:
+    print("Столица не найдена")
+13.60. Частота цифр в тексте
+python
+text = "В 2023 году было продано 1500 товаров, что на 25% больше, чем в 2022 году"
+
+# 1) Только цифры, имеющиеся в тексте
+frequency = {}
+for char in text:
+    if char.isdigit():
+        frequency[char] = frequency.get(char, 0) + 1
+
+print("Частота цифр в тексте:")
+for digit in sorted(frequency.keys()):
+    print(f"{digit}: {frequency[digit]}")
+
+# 2) Все цифры (0-9), включая отсутствующие
+print("\nЧастота всех цифр (0-9):")
+for digit in '0123456789':
+    count = frequency.get(digit, 0)
+    print(f"{digit}: {count}")
+
+
+13.13. Сравнение дат
+python
+from datetime import date
+
+events = [
+    {'название': 'Событие 1', 'год': 1995, 'месяц': 5, 'день': 15},
+    {'название': 'Событие 2', 'год': 2000, 'месяц': 8, 'день': 22},
+    # ... 20 событий
+]
+
+def compare_events(event1, event2):
+    # Создаем даты для сравнения
+    date1 = date(event1['год'], event1['месяц'], event1['день'])
+    date2 = date(event2['год'], event2['месяц'], event2['день'])
+    
+    if date1 > date2:
+        return f"{event1['название']} произошло позже {event2['названия']}"
+    elif date2 > date1:
+        return f"{event2['название']} произошло позже {event1['названия']}"
+    else:
+        return "События произошли в один день"
+
+# а) Условный порядковый номер
+events_with_index = [(i+1, event) for i, event in enumerate(events)]
+
+def compare_by_index(index1, index2):
+    event1 = events[index1-1]
+    event2 = events[index2-1]
+    return compare_events(event1, event2)
+
+# Пример использования
+print(compare_events(events[0], events[1]))
+print(compare_by_index(1, 2))
+13.14. Сравнение моментов времени с секундами
+python
+times = [
+    {'часы': 10, 'минуты': 30, 'секунды': 15},
+    {'часы': 10, 'минуты': 30, 'секунды': 45},
+    # ... 24 момента времени
+]
+
+def compare_times_with_seconds(time1, time2):
+    total1 = time1['часы'] * 3600 + time1['минуты'] * 60 + time1['секунды']
+    total2 = time2['часы'] * 3600 + time2['минуты'] * 60 + time2['секунды']
+    
+    if total1 < total2:
+        return "Первый момент был раньше"
+    elif total2 < total1:
+        return "Второй момент был раньше"
+    else:
+        return "Моменты совпадают"
+
+# Пример
+print(compare_times_with_seconds(times[0], times[1]))
+13.15. Поиск людей с определенными фамилиями
+python
+employees = [
+    {'фамилия': 'Иванов', 'адрес': 'ул. Ленина, 10'},
+    {'фамилия': 'Кузин', 'адрес': 'ул. Пушкина, 5'},
+    {'фамилия': 'Сидоров', 'адрес': 'пр. Мира, 15'},
+    {'фамилия': 'Куравлев', 'адрес': 'ул. Советская, 3'},
+    # ... 30 сотрудников
+]
+
+target_surnames = {'Кузин', 'Куравлев', 'Кудин', 'Кульков', 'Кубиков'}
+found = False
+
+for emp in employees:
+    if emp['фамилия'] in target_surnames:
+        print(f"{emp['фамилия']}: {emp['адрес']}")
+        found = True
+
+if not found:
+    print("Сотрудников с искомыми фамилиями нет")
+13.17. Телефонная книга
+python
+phonebook = [
+    {'фамилия': 'Иванов', 'телефон': '89051234567'},
+    {'фамилия': 'Петров', 'телефон': '89052345678'},
+    # ... 30 человек
+]
+
+# а) Поиск телефона по фамилии
+def find_phone_by_name(surname):
+    for person in phonebook:
+        if person['фамилия'].lower() == surname.lower():
+            return person['телефон']
+    return None
+
+# б) Поиск фамилии по телефону
+def find_name_by_phone(phone):
+    for person in phonebook:
+        if person['телефон'] == phone:
+            return person['фамилия']
+    return None
+
+# Примеры использования
+surname = input("Введите фамилию: ")
+phone = find_phone_by_name(surname)
+if phone:
+    print(f"Телефон {surname}: {phone}")
+else:
+    print("Человек не найден")
+
+phone_input = input("\nВведите номер телефона: ")
+name = find_name_by_phone(phone_input)
+if name:
+    print(f"Владелец телефона {phone_input}: {name}")
+else:
+    print("Телефон не найден")
+13.18. Учащиеся в старших классах
+python
+students = [
+    {'фамилия': 'Иванов', 'имя': 'Иван', 'адрес': 'ул. Ленина, 10', 
+     'школа': 1, 'класс': 10},
+    {'фамилия': 'Петрова', 'имя': 'Мария', 'адрес': 'ул. Пушкина, 5', 
+     'школа': 1, 'класс': 9},
+    {'фамилия': 'Сидоров', 'имя': 'Алексей', 'адрес': 'пр. Мира, 15', 
+     'школа': 2, 'класс': 11},
+    # ... 28 учеников
+]
+
+# Создаем массив для учеников старших классов данной школы
+given_school = 1
+senior_students = []
+
+for student in students:
+    if student['школа'] == given_school and student['класс'] in [10, 11]:
+        senior_students.append({
+            'фамилия': student['фамилия'],
+            'имя': student['имя'],
+            'адрес': student['адрес']
+        })
+
+print(f"Ученики старших классов школы №{given_school}:")
+for student in senior_students:
+    print(f"{student['фамилия']} {student['имя']} - {student['адрес']}")
+13.19. Осадки в виде снега и дождя
+python
+weather_data = [
+    {'день': 1, 'осадки': 12, 'температура': 5},
+    {'день': 2, 'осадки': 8, 'температура': -2},
+    {'день': 3, 'осадки': 15, 'температура': 0},
+    # ... данные за месяц
+]
+
+snow_total = 0
+rain_total = 0
+
+for day_data in weather_data:
+    if day_data['температура'] > 0:
+        rain_total += day_data['осадки']
+    else:
+        snow_total += day_data['осадки']
+
+print(f"Осадки в виде дождя: {rain_total} мм")
+print(f"Осадки в виде снега: {snow_total} мм")
+13.21. Общая масса мужчин
+python
+people = [
+    {'имя': 'Иван', 'пол': 'муж', 'возраст': 25, 'масса': 80},
+    {'имя': 'Мария', 'пол': 'жен', 'возраст': 30, 'масса': 65},
+    {'имя': 'Петр', 'пол': 'муж', 'возраст': 35, 'масса': 90},
+    # ... 20 человек
+]
+
+total_mass_men = 0
+for person in people:
+    if person['пол'] == 'муж':
+        total_mass_men += person['масса']
+
+print(f"Общая масса мужчин: {total_mass_men} кг")
+13.22. Общее число учащихся школ
+python
+institutions = [
+    {'название': 'Школа №1', 'тип': 'школа', 'учащихся': 800},
+    {'название': 'Техникум №3', 'тип': 'техникум', 'учащихся': 500},
+    {'название': 'Школа №5', 'тип': 'школа', 'учащихся': 1200},
+    # ... 15 учебных заведений
+]
+
+total_school_students = 0
+for inst in institutions:
+    if inst['тип'] == 'школа':
+        total_school_students += inst['учащихся']
+
+print(f"Общее число учащихся школ: {total_school_students}")
+13.24. Средняя стоимость старых автомобилей
+python
+cars = [
+    {'модель': 'Toyota Camry', 'стоимость': 1500000, 'возраст': 3},
+    {'модель': 'Honda Civic', 'стоимость': 800000, 'возраст': 8},
+    {'модель': 'BMW X5', 'стоимость': 2500000, 'возраст': 5},
+    # ... 20 моделей
+]
+
+old_cars_prices = []
+for car in cars:
+    if car['возраст'] > 6:
+        old_cars_prices.append(car['стоимость'])
+
+if old_cars_prices:
+    average_price = sum(old_cars_prices) / len(old_cars_prices)
+    print(f"Средняя стоимость автомобилей старше 6 лет: {average_price:.2f} руб.")
+else:
+    print("Нет автомобилей старше 6 лет")
+13.26. Средняя стоимость легковых автомобилей
+python
+cars = [
+    {'модель': 'Toyota Camry', 'тип': 'легковой', 'стоимость': 1500000},
+    {'модель': 'ГАЗель', 'тип': 'грузовой', 'стоимость': 1200000},
+    {'модель': 'Honda Civic', 'тип': 'легковой', 'стоимость': 800000},
+    # ... 15 автомобилей
+]
+
+passenger_car_prices = []
+for car in cars:
+    if car['тип'] == 'легковой':
+        passenger_car_prices.append(car['стоимость'])
+
+if passenger_car_prices:
+    average_price = sum(passenger_car_prices) / len(passenger_car_prices)
+    print(f"Средняя стоимость легковых автомобилей: {average_price:.2f} руб.")
+else:
+    print("Нет легковых автомобилей")
+13.28. Максимальная плотность материала
+python
+items = [
+    {'материал': 'железо', 'масса': 50, 'объем': 6.4},
+    {'материал': 'алюминий', 'масса': 27, 'объем': 10},
+    {'материал': 'золото', 'масса': 193, 'объем': 10},
+    # ... 30 предметов
+]
+
+max_density = 0
+max_density_material = ""
+
+for item in items:
+    if item['объем'] > 0:
+        density = item['масса'] / item['объем']
+        if density > max_density:
+            max_density = density
+            max_density_material = item['материал']
+
+print(f"Максимальная плотность у материала {max_density_material}: {max_density:.2f} г/см³")
+13.29. Максимальная плотность населения
+python
+countries = [
+    {'государство': 'Россия', 'население': 146, 'площадь': 17125},
+    {'государство': 'Китай', 'население': 1410, 'площадь': 9597},
+    {'государство': 'Индия', 'население': 1380, 'площадь': 3287},
+    # ... 28 государств
+]
+
+max_density = 0
+max_density_country = ""
+
+for country in countries:
+    if country['площадь'] > 0:
+        density = country['население'] / country['площадь']  # млн чел. на тыс. км²
+        if density > max_density:
+            max_density = density
+            max_density_country = country['государство']
+
+print(f"Максимальная плотность населения в {max_density_country}: {max_density:.2f} млн чел./тыс. км²")
+13.30. Материал с минимальной плотностью
+python
+items = [
+    {'материал': 'железо', 'масса': 50, 'объем': 6.4},
+    {'материал': 'алюминий', 'масса': 27, 'объем': 10},
+    {'материал': 'пробка', 'масса': 5, 'объем': 20},
+    # ... 30 предметов
+]
+
+min_density = float('inf')
+min_density_material = ""
+
+for item in items:
+    if item['объем'] > 0:
+        density = item['масса'] / item['объем']
+        if density < min_density:
+            min_density = density
+            min_density_material = item['материал']
+
+print(f"Минимальная плотность у материала {min_density_material}: {min_density:.2f} г/см³")
+13.31. Государство с минимальной плотностью населения
+python
+countries = [
+    {'государство': 'Россия', 'население': 146, 'площадь': 17125},
+    {'государство': 'Монголия', 'население': 3, 'площадь': 1564},
+    {'государство': 'Австралия', 'население': 26, 'площадь': 7687},
+    # ... 28 государств
+]
+
+min_density = float('inf')
+min_density_country = ""
+
+for country in countries:
+    if country['площадь'] > 0:
+        density = country['население'] / country['площадь']
+        if density < min_density:
+            min_density = density
+            min_density_country = country['государство']
+
+print(f"Минимальная плотность населения в {min_density_country}: {min_density:.3f} млн чел./тыс. км²")
+13.33. Ученик с максимальной суммой оценок (4 предмета)
+python
+students = [
+    {'фамилия': 'Иванов', 'оценки': [5, 4, 5, 4]},
+    {'фамилия': 'Петров', 'оценки': [3, 4, 4, 3]},
+    {'фамилия': 'Сидоров', 'оценки': [5, 5, 5, 5]},
+    # ... 22 ученика
+]
+
+max_sum = 0
+best_student = ""
+
+for student in students:
+    total = sum(student['оценки'])
+    if total > max_sum:
+        max_sum = total
+        best_student = student['фамилия']
+
+print(f"Максимальная сумма оценок у {best_student}: {max_sum} баллов")
+13.34. Победитель пятиборья
+python
+athletes = [
+    {'фамилия': 'Смирнов', 'виды': [850, 920, 780, 890, 810]},
+    {'фамилия': 'Кузнецов', 'виды': [900, 850, 820, 870, 830]},
+    {'фамилия': 'Попов', 'виды': [880, 910, 800, 850, 820]},
+    # ... 20 спортсменов
+]
+
+max_total = 0
+champion = ""
+
+for athlete in athletes:
+    total = sum(athlete['виды'])
+    if total > max_total:
+        max_total = total
+        champion = athlete['фамилия']
+
+print(f"Победитель пятиборья: {champion} с результатом {max_total} баллов")
+13.36. Самый высокий и низкий ученики
+python
+students = [
+    {'фамилия': 'Иванов', 'рост': 175},
+    {'фамилия': 'Петров', 'рост': 180},
+    {'фамилия': 'Сидоров', 'рост': 170},
+    # ... 25 учеников
+]
+
+# а) Самый высокий и самый низкий
+tallest = max(students, key=lambda x: x['рост'])
+shortest = min(students, key=lambda x: x['рост'])
+
+print(f"Самый высокий: {tallest['фамилия']} ({tallest['рост']} см)")
+print(f"Самый низкий: {shortest['фамилия']} ({shortest['рост']} см)")
+
+# б) Два самых высоких без учета самого высокого
+students_sorted = sorted(students, key=lambda x: x['рост'], reverse=True)
+print(f"\nДва самых высоких для команды:")
+print(f"1. {students_sorted[1]['фамилия']} ({students_sorted[1]['рост']} см)")
+print(f"2. {students_sorted[2]['фамилия']} ({students_sorted[2]['рост']} см)")
+
+# в) Два самых высоких без двух проходов
+first_max = {'фамилия': '', 'рост': 0}
+second_max = {'фамилия': '', 'рост': 0}
+
+for student in students:
+    if student['рост'] > first_max['рост']:
+        second_max = first_max.copy()
+        first_max = student.copy()
+    elif student['рост'] > second_max['рост']:
+        second_max = student.copy()
+
+print(f"\nДва самых высоких (один проход):")
+print(f"1. {first_max['фамилия']} ({first_max['рост']} см)")
+print(f"2. {second_max['фамилия']} ({second_max['рост']} см)")
+13.38. Самые молодые и старшие сотрудники
+python
+employees = [
+    {'фамилия': 'Иванов', 'возраст': 25, 'военнообязанный': True},
+    {'фамилия': 'Петров', 'возраст': 45, 'военнообязанный': True},
+    {'фамилия': 'Сидоров', 'возраст': 30, 'военнообязанный': False},
+    {'фамилия': 'Кузнецов', 'возраст': 50, 'военнообязанный': False},
+    # ... 16 сотрудников
+]
+
+# а) Самый молодой среди военнообязанных
+youngest_military = None
+min_age_military = float('inf')
+
+# б) Самые старшие в каждой группе
+oldest_military = None
+max_age_military = 0
+oldest_civilian = None
+max_age_civilian = 0
+
+for emp in employees:
+    if emp['военнообязанный']:
+        # Самый молодой военнообязанный
+        if emp['возраст'] < min_age_military:
+            min_age_military = emp['возраст']
+            youngest_military = emp['фамилия']
+        
+        # Самый старший военнообязанный
+        if emp['возраст'] > max_age_military:
+            max_age_military = emp['возраст']
+            oldest_military = emp['фамилия']
+    else:
+        # Самый старший невоеннообязанный
+        if emp['возраст'] > max_age_civilian:
+            max_age_civilian = emp['возраст']
+            oldest_civilian = emp['фамилия']
+
+print(f"Самый молодой военнообязанный: {youngest_military} ({min_age_military} лет)")
+print(f"Самый старший военнообязанный: {oldest_military} ({max_age_military} лет)")
+print(f"Самый старший невоеннообязанный: {oldest_civilian} ({max_age_civilian} лет)")
+13.41. Результаты футбольных игр
+python
+games = [
+    {'забито': 2, 'пропущено': 1},
+    {'забито': 1, 'пропущено': 1},
+    {'забито': 0, 'пропущено': 3},
+    # ... 22 игры
+]
+
+# а) Результат каждой игры
+for i, game in enumerate(games, 1):
+    if game['забито'] > game['пропущено']:
+        result = 'выигрыш'
+    elif game['забито'] < game['пропущено']:
+        result = 'проигрыш'
+    else:
+        result = 'ничья'
+    print(f"Игра {i}: {result} ({game['забито']}:{game['пропущено']})")
+
+# б) Количество выигрышей
+wins = sum(1 for game in games if game['забито'] > game['пропущено'])
+print(f"\nКоличество выигрышей: {wins}")
+
+# в) Количество выигрышей и проигрышей
+losses = sum(1 for game in games if game['забито'] < game['пропущено'])
+print(f"Количество проигрышей: {losses}")
+
+# г) Все результаты
+draws = sum(1 for game in games if game['забито'] == game['пропущено'])
+print(f"Количество ничьих: {draws}")
+
+# д) Общее число очков
+points = wins * 3 + draws * 1
+print(f"Общее число очков: {points}")
+13.42. Новый ученик в упорядоченном списке
+python
+students = [
+    {'фамилия': 'Иванов', 'рост': 185},
+    {'фамилия': 'Петров', 'рост': 180},
+    {'фамилия': 'Сидоров', 'рост': 175},
+    {'фамилия': 'Кузнецов', 'рост': 170},
+    {'фамилия': 'Попов', 'рост': 165},
+    # ... всего 15 учеников
+]
+
+new_student = {'фамилия': 'Новиков', 'рост': 177}
+
+# а) Ученики с ростом меньше нового
+print("Ученики с ростом меньше нового:")
+for student in students:
+    if student['рост'] < new_student['рост']:
+        print(student['фамилия'])
+
+# б) Позиция для вставки нового ученика (без if)
+insert_position = 0
+for student in students:
+    if student['рост'] > new_student['рост']:
+        insert_position += 1
+    else:
+        break
+
+print(f"\nНового ученика нужно вставить после: {students[insert_position-1]['фамилия']}")
+
+# в) Ученик с наиболее близким ростом (можно использовать if)
+if new_student['рост'] > students[0]['рост']:
+    closest = students[0]
+elif new_student['рост'] < students[-1]['рост']:
+    closest = students[-1]
+else:
+    # Находим ближайшего по росту
+    min_diff = float('inf')
+    closest = None
+    for student in students:
+        diff = abs(student['рост'] - new_student['рост'])
+        if diff < min_diff:
+            min_diff = diff
+            closest = student
+
+print(f"Наиболее близкий по росту ученик: {closest['фамилия']} ({closest['рост']} см)")
+13.43. Новая команда в турнирной таблице
+python
+teams = [
+    {'название': 'Команда А', 'очки': 45},
+    {'название': 'Команда Б', 'очки': 42},
+    {'название': 'Команда В', 'очки': 40},
+    {'название': 'Команда Г', 'очки': 38},
+    {'название': 'Команда Д', 'очки': 35},
+    {'название': 'Команда Е', 'очки': 32},
+    {'название': 'Команда Ж', 'очки': 30},
+    {'название': 'Команда З', 'очки': 28},
+    {'название': 'Команда И', 'очки': 25},
+    {'название': 'Команда К', 'очки': 23},
+    {'название': 'Команда Л', 'очки': 20},
+    {'название': 'Команда М', 'очки': 18},
+    {'название': 'Команда Н', 'очки': 15},
+    {'название': 'Команда О', 'очки': 12},
+    {'название': 'Команда П', 'очки': 10},
+    {'название': 'Команда Р', 'очки': 8},
+    {'название': 'Команда С', 'очки': 5},
+    {'название': 'Команда Т', 'очки': 3},
+    {'название': 'Команда У', 'очки': 1}
+]
+
+new_team = {'название': 'Новая команда', 'очки': 22}
+
+# а) Определить место новой команды (без if)
+place = 1
+for team in teams:
+    if team['очки'] > new_team['очки']:
+        place += 1
+
+print(f"Новая команда заняла {place}-е место")
+
+# б) Команды с меньшим количеством очков (без if)
+print("\nКоманды с меньшим количеством очков:")
+for team in teams[place-1:]:
+    print(team['название'])
+13.44. Добавление нового ученика в таблицу
+python
+# Исходные данные: список учеников с фамилиями и оценками
+students = [
+    ['Иванов', 5, 4, 5, 4, 5, 4, 5, 4, 5, 4],
+    ['Петров', 4, 3, 4, 3, 4, 4, 4, 3, 4, 3],
+    ['Сидоров', 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+    # ... всего 25 учеников
+]
+
+# Новый ученик
+new_student = ['Новиков', 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+
+# Позиция для вставки
+s = 3  # Например, на 3-е место
+
+# Вставка нового ученика
+students.insert(s-1, new_student)
+
+print("Обновленная таблица:")
+for i, student in enumerate(students, 1):
+    print(f"{i}. {student[0]}: {student[1:]}")
+13.45. Добавление нового предмета в таблицу
+python
+# Исходные данные: оценки по 12 предметам
+subjects = ['Математика', 'Физика', 'Химия', 'Биология', 'История',
+            'Литература', 'Русский', 'Английский', 'География',
+            'Информатика', 'Физкультура', 'Труд']
+
+# Оценки учеников (по строкам)
+grades = [
+    [5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4],  # Иванов
+    [4, 3, 4, 3, 4, 4, 4, 3, 4, 3, 4, 4],  # Петров
+    [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],  # Сидоров
+    # ... 23 ученика
+]
+
+# Новый предмет и оценки
+new_subject = 'Музыка'
+new_grades = [4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4]
+
+# Позиция для вставки
+k = 5  # Например, на 5-е место
+
+# Вставка нового предмета
+subjects.insert(k-1, new_subject)
+
+# Добавление оценок по новому предмету
+for i in range(len(grades)):
+    grades[i].insert(k-1, new_grades[i])
+
+print("Обновленная таблица:")
+print("Предметы:", subjects)
+print("\nОценки:")
+for i, student_grades in enumerate(grades, 1):
+    print(f"Ученик {i}: {student_grades}")
+13.46. Вставка нового ученика в упорядоченный список
+python
+students = [
+    {'фамилия': 'Иванов', 'рост': 185},
+    {'фамилия': 'Петров', 'рост': 180},
+    {'фамилия': 'Сидоров', 'рост': 175},
+    {'фамилия': 'Кузнецов', 'рост': 170},
+    {'фамилия': 'Попов', 'рост': 165},
+    # ... всего 15 учеников
+]
+
+new_student = {'фамилия': 'Новиков', 'рост': 177}
+
+# Вставка с сохранением порядка
+inserted = False
+new_list = []
+
+for student in students:
+    if not inserted and student['рост'] < new_student['рост']:
+        new_list.append(new_student)
+        inserted = True
+    new_list.append(student)
+
+if not inserted:  # Если новый ученик самый высокий
+    new_list.append(new_student)
+
+print("Новый упорядоченный список:")
+for i, student in enumerate(new_list, 1):
+    print(f"{i}. {student['фамилия']} - {student['рост']} см")
+13.47. Вставка новой команды в турнирную таблицу
+python
+teams = [
+    {'название': 'Команда А', 'очки': 45},
+    {'название': 'Команда Б', 'очки': 42},
+    {'название': 'Команда В', 'очки': 40},
+    # ... 19 команд
+]
+
+new_team = {'название': 'Новая команда', 'очки': 38}
+
+# Вставка с сохранением порядка
+inserted = False
+new_standings = []
+
+for team in teams:
+    if not inserted and team['очки'] < new_team['очки']:
+        new_standings.append(new_team)
+        inserted = True
+    new_standings.append(team)
+
+if not inserted:  # Если новая команда заняла первое место
+    new_standings.insert(0, new_team)
+
+print("Новая турнирная таблица:")
+for i, team in enumerate(new_standings, 1):
+    print(f"{i}. {team['название']} - {team['очки']} очков")
+13.49. Сортировка учеников по росту
+python
+students = [
+    {'фамилия': 'Иванов', 'рост': 175},
+    {'фамилия': 'Петров', 'рост': 180},
+    {'фамилия': 'Сидоров', 'рост': 170},
+    {'фамилия': 'Кузнецов', 'рост': 185},
+    {'фамилия': 'Попов', 'рост': 165},
+    # ... 25 учеников
+]
+
+# Сортировка по возрастанию роста
+sorted_students = sorted(students, key=lambda x: x['рост'])
+
+print("Ученики в порядке возрастания роста:")
+for i, student in enumerate(sorted_students, 1):
+    print(f"{i}. {student['фамилия']} - {student['рост']} см")
+13.50. Футбольный чемпионат
+python
+teams = ['Команда A', 'Команда B', 'Команда C', 'Команда D']
+
+# Таблица результатов (3-выигрыш, 1-ничья, 0-проигрыш)
+# Главная диагональ = 0 (команда не играет сама с собой)
+results = [
+    [0, 3, 1, 0],  # Команда A
+    [0, 0, 3, 1],  # Команда B  
+    [1, 0, 0, 3],  # Команда C
+    [3, 1, 0, 0]   # Команда D
+]
+
+n = len(teams)
+
+# а) Команды с большим количеством побед, чем поражений
+print("Команды с большим количеством побед:")
+for i in range(n):
+    wins = sum(1 for j in range(n) if results[i][j] == 3)
+    losses = sum(1 for j in range(n) if results[i][j] == 0 and i != j)
+    if wins > losses:
+        print(f"{teams[i]}: {wins} побед, {losses} поражений")
+
+# б) Команды без поражений
+print("\nКоманды без поражений:")
+for i in range(n):
+    has_loss = any(results[i][j] == 0 for j in range(n) if i != j)
+    if not has_loss:
+        print(teams[i])
+
+# в) Чемпион (наибольшее количество очков)
+team_points = []
+for i in range(n):
+    points = sum(results[i][j] for j in range(n))
+    team_points.append((teams[i], points))
+
+champion = max(team_points, key=lambda x: x[1])
+print(f"\nЧемпион: {champion[0]} с {champion[1]} очками")
+
+# г) Проверка соответствия мест в таблице
+print("\nОчки команд:")
+for team, points in team_points:
+    print(f"{team}: {points} очков")
+13.51. Футбольный чемпионат с детальной статистикой
+python
+import numpy as np
+
+teams = ['Команда A', 'Команда B', 'Команда C', 'Команда D']
+n = len(teams)
+
+# Детальные результаты игр (забито:пропущено)
+detailed_results = [
+    # Команда A
+    [[2, 1], [1, 1], [0, 2]],  # игры с B, C, D
+    # Команда B
+    [[1, 2], [3, 0], [2, 2]],
+    # Команда C  
+    [[1, 1], [0, 3], [4, 2]],
+    # Команда D
+    [[2, 0], [2, 2], [2, 4]]
+]
+
+# а) Создание сводной таблицы как в 13.50
+summary_table = [[0]*n for _ in range(n)]
+
+for i in range(n):
+    for j in range(n):
+        if i != j:
+            goals_for, goals_against = detailed_results[i][j-1 if j>i else j]
+            if goals_for > goals_against:
+                summary_table[i][j] = 3  # победа
+            elif goals_for == goals_against:
+                summary_table[i][j] = 1  # ничья
+            else:
+                summary_table[i][j] = 0  # поражение
+
+print("Сводная таблица:")
+for i in range(n):
+    print(f"{teams[i]}: {summary_table[i]}")
+
+# б) Количество ничьих во всем чемпионате (без использования сводной таблицы)
+total_draws = 0
+for i in range(n):
+    for j in range(i+1, n):
+        goals_for, goals_against = detailed_results[i][j-1]
+        if goals_for == goals_against:
+            total_draws += 1
+
+print(f"\nВсего ничьих: {total_draws}")
+
+# в) Игры с разностью мячей >= 3
+games_big_difference = 0
+for i in range(n):
+    for j in range(n):
+        if i != j:
+            goals_for, goals_against = detailed_results[i][j-1 if j>i else j]
+            if abs(goals_for - goals_against) >= 3:
+                games_big_difference += 1
+
+print(f"Игр с разностью мячей >= 3: {games_big_difference}")
+
+# г) Статистика каждой команды
+print("\nСтатистика команд:")
+for i in range(n):
+    wins = draws = losses = 0
+    for j in range(n):
+        if i != j:
+            goals_for, goals_against = detailed_results[i][j-1 if j>i else j]
+            if goals_for > goals_against:
+                wins += 1
+            elif goals_for == goals_against:
+                draws += 1
+            else:
+                losses += 1
+    
+    print(f"{teams[i]}: {wins} побед, {draws} ничьих, {losses} поражений")
+
+# д) Очки каждой команды (без использования сводной таблицы)
+print("\nОчки команд:")
+for i in range(n):
+    points = 0
+    for j in range(n):
+        if i != j:
+            goals_for, goals_against = detailed_results[i][j-1 if j>i else j]
+            if goals_for > goals_against:
+                points += 3
+            elif goals_for == goals_against:
+                points += 1
+    
+    print(f"{teams[i]}: {points} очков")
+
+# е) Чемпион (наибольшее количество очков)
+team_points = []
+for i in range(n):
+    points = 0
+    for j in range(n):
+        if i != j:
+            goals_for, goals_against = detailed_results[i][j-1 if j>i else j]
+            if goals_for > goals_against:
+                points += 3
+            elif goals_for == goals_against:
+                points += 1
+    team_points.append((teams[i], points))
+
+champion = max(team_points, key=lambda x: x[1])
+print(f"\nЧемпион: {champion[0]} с {champion[1]} очками")
+13.52. Проверка ряда костей домино
+python
+# Случай 1: левая и правая половины в разных таблицах
+left_half = [4, 3, 0, 6, 1, 2, 5]
+right_half = [3, 3, 3, 0, 5, 4, 2]
+
+# Случай 2: каждая таблица может содержать любую половину
+table1 = [4, 3, 0, 6, 1, 2, 5]
+table2 = [3, 3, 3, 0, 5, 4, 2]
+
+def check_domino_case1(left, right):
+    """Проверка для случая 1"""
+    for i in range(len(left) - 1):
+        if right[i] != left[i + 1]:
+            return False, i + 1  # номер кости, нарушающей правила
+    return True, None
+
+def check_domino_case2(table1, table2):
+    """Проверка для случая 2"""
+    # Используем массив записей
+    dominoes = []
+    for i in range(len(table1)):
+        dominoes.append({
+            'left': table1[i],
+            'right': table2[i],
+            'value1': table1[i],
+            'value2': table2[i]
+        })
+    
+    for i in range(len(dominoes) - 1):
+        current = dominoes[i]
+        next_dom = dominoes[i + 1]
+        
+        # Проверяем все возможные комбинации
+        match_found = (current['right'] == next_dom['left'] or
+                      current['right'] == next_dom['right'] or
+                      current['left'] == next_dom['left'] or
+                      current['left'] == next_dom['right'])
+        
+        if not match_found:
+            return False, i + 1
+    
+    return True, None
+
+# Проверка для случая 1
+print("Случай 1 (определенные левая/правая половины):")
+valid1, error1 = check_domino_case1(left_half, right_half)
+if valid1:
+    print("Ряд соответствует правилам домино")
+else:
+    print(f"Ошибка на кости номер {error1}")
+
+# Проверка для случая 2
+print("\nСлучай 2 (любая половина в любой таблице):")
+valid2, error2 = check_domino_case2(table1, table2)
+if valid2:
+    print("Ряд соответствует правилам домино")
+else:
+    print(f"Ошибка на кости номер {error2}")
+13.53-13.56. Работа со словарем химических элементов
+python
+# 13.53. Обозначение элемента по названию
+elements = {
+    'медь': 'Cu',
+    'кислород': 'O', 
+    'водород': 'H',
+    'азот': 'N',
+    'железо': 'Fe',
+    'золото': 'Au',
+    'серебро': 'Ag'
+}
+
+def get_symbol_by_name(element_name):
+    """13.53: Обозначение по названию"""
+    return elements.get(element_name, "Элемент не найден")
+
+# 13.54. Название элемента по обозначению
+def get_name_by_symbol(symbol):
+    """13.54: Название по обозначению"""
+    for name, sym in elements.items():
+        if sym == symbol:
+            return name
+    return "Обозначение не найдено"
+
+# 13.55. Проверка наличия названия
+def check_name_exists(name):
+    """13.55: Проверка наличия названия"""
+    return name in elements
+
+# 13.56. Проверка наличия обозначения
+def check_symbol_exists_v1(symbol):
+    """13.56 (вариант 1): с использованием values()"""
+    return symbol in elements.values()
+
+def check_symbol_exists_v2(symbol):
+    """13.56 (вариант 2): без использования values()"""
+    for sym in elements.values():
+        if sym == symbol:
+            return True
+    return False
+
+# Демонстрация работы
+print("13.53: Обозначение меди:", get_symbol_by_name('медь'))
+print("13.54: Название для Au:", get_name_by_symbol('Au'))
+print("13.55: Есть ли 'железо'?", check_name_exists('железо'))
+print("13.56 (v1): Есть ли 'Ag'?", check_symbol_exists_v1('Ag'))
+print("13.56 (v2): Есть ли 'Ag'?", check_symbol_exists_v2('Ag'))
+13.57. Словарь государств и столиц
+python
+countries = {
+    'Россия': {'столица': 'Москва', 'часть_света': 'Европа/Азия'},
+    'Франция': {'столица': 'Париж', 'часть_света': 'Европа'},
+    'Китай': {'столица': 'Пекин', 'часть_света': 'Азия'},
+    'Бразилия': {'столица': 'Бразилиа', 'часть_света': 'Южная Америка'},
+    'Египет': {'столица': 'Каир', 'часть_света': 'Африка'}
+}
+
+def get_capital(country):
+    """1) Столица по названию государства"""
+    if country in countries:
+        return countries[country]['столица']
+    return "Государство не найдено"
+
+def get_country_by_capital(capital):
+    """2) Государство по столице"""
+    for country, data in countries.items():
+        if data['столица'] == capital:
+            return country
+    return "Столица не найдена"
+
+# Примеры использования
+print("Столица России:", get_capital('Россия'))
+print("Государство со столицей Париж:", get_country_by_capital('Париж'))
+print("Столица Германии:", get_capital('Германия'))  # Не найдено
+13.58-13.59. Учащиеся в классах
+python
+# 13.58. Исходные данные
+classes = {
+    '1а': 24,
+    '1б': 22, 
+    '2б': 20,
+    '6а': 25,
+    '7в': 18,
+    '8б': 21,
+    '9а': 23,
+    '10а': 19,
+    '11б': 17,
+    '11г': 16
+}
+
+def get_students_count(class_name):
+    """13.58: Количество учащихся в классе"""
+    return classes.get(class_name, "Класс не найден")
+
+# 13.59. Изменения в школе
+# Изменение количества в трех классах
+classes['1а'] = 26
+classes['6а'] = 24
+classes['11б'] = 18
+
+# Добавление двух новых классов
+classes['3в'] = 19
+classes['5а'] = 22
+
+# Расформирование класса
+if '11г' in classes:
+    del classes['11г']
+
+# После изменений:
+# 1) Общее количество учащихся
+total_students = sum(classes.values())
+print(f"Общее количество учащихся: {total_students}")
+
+# 2) Вывод всех классов
+print("\nСостав школы:")
+for class_name, count in classes.items():
+    print(f"{class_name}: {count} учащихся")
+13.60. Частота цифр в тексте
+python
+text = "В 2023 году было 1500 заказов, что на 25% больше, чем в 2022 (было 1200)."
+
+# 1) Частота каждой имеющейся цифры
+digit_freq = {}
+for char in text:
+    if char.isdigit():
+        digit_freq[char] = digit_freq.get(char, 0) + 1
+
+print("Частота цифр в тексте:")
+for digit in sorted(digit_freq.keys()):
+    print(f"{digit}: {digit_freq[digit]}")
+
+# 2) Частота всех цифр 0-9
+print("\nЧастота всех цифр (0-9):")
+all_digits = '0123456789'
+for digit in all_digits:
+    count = digit_freq.get(digit, 0)
+    print(f"{digit}: {count}")
+13.61. Информация о государствах
+python
+countries_data = {
+    'Россия': {
+        'столица': 'Москва',
+        'часть_света': 'Европа/Азия',
+        'население': 146.7,  # млн чел.
+        'площадь': 17125.2  # тыс. кв. км
+    },
+    'Германия': {
+        'столица': 'Берлин',
+        'часть_света': 'Европа',
+        'население': 83.2,
+        'площадь': 357.6
+    },
+    'Франция': {
+        'столица': 'Париж',
+        'часть_света': 'Европа',
+        'население': 67.4,
+        'площадь': 551.7
+    },
+    'Китай': {
+        'столица': 'Пекин',
+        'часть_света': 'Азия',
+        'население': 1411.8,
+        'площадь': 9597.0
+    },
+    'Япония': {
+        'столица': 'Токио',
+        'часть_света': 'Азия',
+        'население': 125.7,
+        'площадь': 377.9
+    }
+}
+
+# 1) Столица по названию государства
+def get_capital_by_country(country):
+    data = countries_data.get(country)
+    return data['столица'] if data else "Государство не найдено"
+
+# 2) Название государства по столице
+def get_country_by_capital(capital):
+    for country, data in countries_data.items():
+        if data['столица'] == capital:
+            return country
+    return "Столица не найдена"
+
+# 3) Вся информация о государстве
+def get_country_info(country):
+    data = countries_data.get(country)
+    if data:
+        return (f"Государство: {country}\n"
+                f"Столица: {data['столица']}\n"
+                f"Часть света: {data['часть_света']}\n"
+                f"Население: {data['население']} млн чел.\n"
+                f"Площадь: {data['площадь']} тыс. кв. км")
+    return "Государство не найдено"
+
+# 4) Страны в заданной части света
+def get_countries_by_continent(continent):
+    result = []
+    for country, data in countries_data.items():
+        if continent in data['часть_света']:
+            result.append(country)
+    return result
+
+# 5) Плотность населения для каждого государства
+def calculate_population_density():
+    densities = {}
+    for country, data in countries_data.items():
+        if data['площадь'] > 0:
+            density = data['население'] / data['площадь']  # млн/тыс.км² = тыс.чел/км²
+            densities[country] = density
+    return densities
+
+# 6) Количество государств в части света
+def count_countries_by_continent(continent):
+    count = 0
+    for data in countries_data.values():
+        if continent in data['часть_света']:
+            count += 1
+    return count
+
+# 7) Общая площадь в части света
+def total_area_by_continent(continent):
+    total = 0
+    for data in countries_data.values():
+        if continent in data['часть_света']:
+            total += data['площадь']
+    return total
+
+# Демонстрация работы всех функций
+print("1) Столица России:", get_capital_by_country('Россия'))
+print("\n2) Государство со столицей Берлин:", get_country_by_capital('Берлин'))
+print("\n3) Информация о Китае:\n", get_country_info('Китай'))
+print("\n4) Страны в Азии:", get_countries_by_continent('Азия'))
+print("\n5) Плотность населения:")
+densities = calculate_population_density()
+for country, density in densities.items():
+    print(f"  {country}: {density:.2f} тыс. чел/км²")
+print("\n6) Количество стран в Европе:", count_countries_by_continent('Европа'))
+print("\n7) Общая площадь в Азии:", total_area_by_continent('Азия'), "тыс. кв. км")
+Все задачи решены с использованием соответствующих структур данных Python (списки, словари, кортежи) и демонстрируют различные алгоритмы обработки информации.
+
+
