@@ -1,0 +1,500 @@
+14.1. Процедура для рисования горизонтальной линии
+python
+def draw_line():
+    print("*" * 60)
+
+# Пример использования
+draw_line()
+14.2. Функция для вывода символов в строку
+python
+def print_symbol(symbol, count):
+    print(symbol * count)
+
+# Пример использования
+print_symbol("*", 60)
+print_symbol("#", 40)
+14.3. Рисование треугольников (а и б)
+python
+def print_symbol(symbol, count):
+    print(symbol * count, end="")
+
+# а) Прямой треугольник
+def triangle_a(height):
+    for i in range(1, height + 1):
+        print_symbol("* ", i)
+        print()
+
+# б) Ромбовидный треугольник
+def triangle_b(height):
+    for i in range(1, height + 1):
+        print_symbol("* ", i)
+        print()
+    for i in range(height - 1, 0, -1):
+        print_symbol("* ", i)
+        print()
+
+# Пример использования
+print("а) Прямой треугольник:")
+triangle_a(10)
+
+print("\nб) Ромбовидный треугольник:")
+triangle_b(6)
+14.4. Прямоугольник из звездочек
+python
+# Способ 1: без использования функции из 14.1
+def rectangle1(width, height):
+    for _ in range(height):
+        print("*" * width)
+
+# Способ 2: с использованием функции из 14.2
+def rectangle2(width, height):
+    for _ in range(height):
+        print_symbol("*", width)
+        print()
+
+# Пример использования
+print("Способ 1:")
+rectangle1(60, 20)
+
+print("\nСпособ 2:")
+rectangle2(60, 20)
+14.5. Рамка из звездочек
+python
+def frame(width, height):
+    # Верхняя граница
+    print("*" * width)
+    
+    # Боковые границы
+    for _ in range(height - 2):
+        print("*" + " " * (width - 2) + "*")
+    
+    # Нижняя граница (если высота > 1)
+    if height > 1:
+        print("*" * width)
+
+# Пример использования
+frame(60, 20)
+14.7. Обмен значений переменных
+python
+def swap(var1, var2):
+    return var2, var1
+
+# Пример использования
+a = 5
+b = 10
+c = 15
+d = 20
+
+print(f"До обмена: a={a}, b={b}, c={c}, d={d}")
+
+a, b = swap(a, b)
+c, d = swap(c, d)
+
+print(f"После обмена: a={a}, b={b}, c={c}, d={d}")
+14.8. Сумма периметров и площадей двух треугольников
+python
+import math
+
+def triangle_info(side1, side2, side3):
+    # Периметр
+    perimeter = side1 + side2 + side3
+    
+    # Площадь по формуле Герона
+    p = perimeter / 2
+    area = math.sqrt(p * (p - side1) * (p - side2) * (p - side3))
+    
+    return perimeter, area
+
+# Пример использования
+# Треугольник 1
+a1, b1, c1 = 3, 4, 5
+# Треугольник 2
+a2, b2, c2 = 5, 5, 6
+
+p1, s1 = triangle_info(a1, b1, c1)
+p2, s2 = triangle_info(a2, b2, c2)
+
+print(f"Периметр 1: {p1}, Площадь 1: {s1:.2f}")
+print(f"Периметр 2: {p2}, Площадь 2: {s2:.2f}")
+print(f"Сумма периметров: {p1 + p2}")
+print(f"Сумма площадей: {s1 + s2:.2f}")
+14.13. Функция sign()
+python
+def sign(x):
+    if x > 0:
+        return 1
+    elif x < 0:
+        return -1
+    else:
+        return 0
+
+# Пример использования
+x = float(input("Введите x: "))
+y = float(input("Введите y: "))
+
+z = sign(x) + sign(y)
+print(f"sign(x) = {sign(x)}")
+print(f"sign(y) = {sign(y)}")
+print(f"z = sign(x) + sign(y) = {z}")
+14.16. Периметр треугольника по координатам вершин
+python
+import math
+
+def distance(x1, y1, x2, y2):
+    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+def triangle_perimeter(x1, y1, x2, y2, x3, y3):
+    side1 = distance(x1, y1, x2, y2)
+    side2 = distance(x2, y2, x3, y3)
+    side3 = distance(x3, y3, x1, y1)
+    
+    return side1 + side2 + side3
+
+# Пример использования
+x1, y1 = 0, 0
+x2, y2 = 3, 0
+x3, y3 = 0, 4
+
+perimeter = triangle_perimeter(x1, y1, x2, y2, x3, y3)
+print(f"Периметр треугольника: {perimeter:.2f}")
+14.19. Подсчет четных и нечетных чисел
+python
+def is_even(number):
+    return number % 2 == 0
+
+# Пример использования
+# Две последовательности
+seq1 = [1, 2, 3, 4, 5, 6, 7, 8]
+seq2 = [9, 10, 11, 12, 13, 14, 15, 16]
+
+# Подсчет четных в первой последовательности
+count_even = sum(1 for num in seq1 if is_even(num))
+
+# Подсчет нечетных во второй последовательности
+count_odd = sum(1 for num in seq2 if not is_even(num))
+
+print(f"Количество четных в первой последовательности: {count_even}")
+print(f"Количество нечетных во второй последовательности: {count_odd}")
+14.20. Количество квадратных уравнений с вещественными корнями
+python
+def has_real_roots(a, b, c):
+    discriminant = b**2 - 4*a*c
+    return discriminant >= 0
+
+# Пример использования
+# Коэффициенты трех уравнений
+a, b, c = 1, -3, 2  # x² - 3x + 2 = 0
+d, e, f = 1, 2, 3   # x² + 2x + 3 = 0
+g, h, i = 1, -4, 4  # x² - 4x + 4 = 0
+
+count = 0
+if has_real_roots(a, b, c): count += 1
+if has_real_roots(b, a, c): count += 1
+if has_real_roots(c, a, b): count += 1
+
+print(f"Количество уравнений с вещественными корнями: {count}")
+
+
+14.6. Прямоугольник любых размеров
+python
+def print_symbol(symbol, count):
+    print(symbol * count, end="")
+
+# Способ 1: без использования функции из 14.2
+def rectangle1(width, height, symbol="*"):
+    for _ in range(height):
+        print(symbol * width)
+
+# Способ 2: с использованием функции из 14.2
+def rectangle2(width, height, symbol="*"):
+    for _ in range(height):
+        print_symbol(symbol, width)
+        print()
+
+# Пример использования
+print("Способ 1:")
+rectangle1(40, 10, "#")
+
+print("\nСпособ 2:")
+rectangle2(30, 5, "@")
+14.9. Равнобедренная трапеция - периметр и площадь
+python
+import math
+
+def trapezoid_info(base1, base2, height):
+    """
+    Вычисляет периметр и площадь равнобедренной трапеции
+    base1 - меньшее основание
+    base2 - большее основание
+    height - высота
+    """
+    # Боковая сторона (по теореме Пифагора)
+    side = math.sqrt(((base2 - base1) / 2)**2 + height**2)
+    
+    # Периметр
+    perimeter = base1 + base2 + 2 * side
+    
+    # Площадь
+    area = (base1 + base2) * height / 2
+    
+    return perimeter, area, side
+
+# Пример использования
+base1_1, base2_1, height_1 = 5, 10, 4
+base1_2, base2_2, height_2 = 3, 8, 5
+
+p1, s1, side1 = trapezoid_info(base1_1, base2_1, height_1)
+p2, s2, side2 = trapezoid_info(base1_2, base2_2, height_2)
+
+print(f"Трапеция 1: основания {base1_1}/{base2_1}, высота {height_1}")
+print(f"  Боковая сторона: {side1:.2f}")
+print(f"  Периметр: {p1:.2f}")
+print(f"  Площадь: {s1:.2f}")
+
+print(f"\nТрапеция 2: основания {base1_2}/{base2_2}, высота {height_2}")
+print(f"  Боковая сторона: {side2:.2f}")
+print(f"  Периметр: {p2:.2f}")
+print(f"  Площадь: {s2:.2f}")
+
+print(f"\nСумма периметров: {p1 + p2:.2f}")
+print(f"Сумма площадей: {s1 + s2:.2f}")
+14.10. Расчет значения x
+python
+import math
+
+def calculate_a(v):
+    return (math.sin(v) + math.cos(v)) / (math.sin(v) - math.cos(v))
+
+# Пример вычисления x
+x = 1.5
+result = calculate_a(x) + calculate_a(x**2) + calculate_a(x-1)
+
+print(f"Для x = {x}")
+print(f"a(x) = {calculate_a(x):.4f}")
+print(f"a(x²) = {calculate_a(x**2):.4f}")
+print(f"a(x-1) = {calculate_a(x-1):.4f}")
+print(f"x = a(x) + a(x²) + a(x-1) = {result:.4f}")
+14.11. Расчет значения x
+python
+import math
+
+# а) 
+def g_a(t):
+    return (math.sin(t)**2 + math.cos(t**3)**2)**2
+
+# б)
+def g_b(t):
+    return math.sqrt(abs(3 * t**3 - 1)) + math.log(t**2 + 1)
+
+# Пример использования
+x = 2.0
+
+# а)
+y_a = g_a(x) + g_a(x+1)**3 - 15*g_a(x**2 - 1)
+print(f"а) Для x = {x}")
+print(f"   g(x) = {g_a(x):.4f}")
+print(f"   g(x+1) = {g_a(x+1):.4f}")
+print(f"   g(x²-1) = {g_a(x**2 - 1):.4f}")
+print(f"   y = {y_a:.4f}")
+
+# б)
+y_b = 7*g_b(x) + 2*g_b(2*x + 5) + g_b(3*x - 4)
+print(f"\nб) Для x = {x}")
+print(f"   g(x) = {g_b(x):.4f}")
+print(f"   g(2x+5) = {g_b(2*x + 5):.4f}")
+print(f"   g(3x-4) = {g_b(3*x - 4):.4f}")
+print(f"   y = {y_b:.4f}")
+14.12. Расчет значения y
+python
+import math
+
+# а)
+def h_a(t):
+    return math.exp(t) - math.exp(-t)
+
+# б)
+def h_b(t):
+    return math.log(1 + t) / (1 + t**2)
+
+# Пример использования
+x = 1.0
+
+# а)
+y_a = h_a(x) + 16*h_a(x**2) + h_a(1/x)
+print(f"а) Для x = {x}")
+print(f"   h(x) = {h_a(x):.4f}")
+print(f"   h(x²) = {h_a(x**2):.4f}")
+print(f"   h(1/x) = {h_a(1/x):.4f}")
+print(f"   y = {y_a:.4f}")
+
+# б)
+y_b = h_b(x) + h_b(2*x + 0.5) + 2*h_b(x**3)
+print(f"\nб) Для x = {x}")
+print(f"   h(x) = {h_b(x):.4f}")
+print(f"   h(2x+0.5) = {h_b(2*x + 0.5):.4f}")
+print(f"   h(x³) = {h_b(x**3):.4f}")
+print(f"   y = {y_b:.4f}")
+14.14. Периметр фигуры ABCD
+python
+import math
+
+def hypotenuse(a, b):
+    """Вычисляет гипотенузу по катетам"""
+    return math.sqrt(a**2 + b**2)
+
+def figure_perimeter(AB, AD, CD):
+    """
+    AB = катет треугольника ABD
+    AD = катет треугольника ABD
+    CD = катет треугольника BDC
+    """
+    # Гипотенуза BD в треугольнике ABD
+    BD = hypotenuse(AB, AD)
+    
+    # Катет BC в треугольнике BDC
+    BC = hypotenuse(BD, CD)
+    
+    # Периметр фигуры ABCD
+    perimeter = AB + AD + CD + BC
+    
+    return perimeter, BD, BC
+
+# Пример использования
+AB = 3  # катет
+AD = 4  # катет  
+CD = 2  # катет
+
+perimeter, BD, BC = figure_perimeter(AB, AD, CD)
+
+print(f"Дано: AB = {AB}, AD = {AD}, CD = {CD}")
+print(f"BD = {BD:.2f} (гипотенуза треугольника ABD)")
+print(f"BC = {BC:.2f} (гипотенуза треугольника BDC)")
+print(f"Периметр фигуры ABCD = {perimeter:.2f}")
+14.15. Сумма периметров двух трапеций (функция)
+python
+import math
+
+def trapezoid_perimeter(base1, base2, height):
+    """Вычисляет периметр равнобедренной трапеции"""
+    # Боковая сторона
+    side = math.sqrt(((base2 - base1) / 2)**2 + height**2)
+    
+    # Периметр
+    perimeter = base1 + base2 + 2 * side
+    
+    return perimeter
+
+# Пример использования
+# Первая трапеция
+b11, b21, h1 = 6, 12, 5
+# Вторая трапеция
+b12, b22, h2 = 4, 10, 6
+
+p1 = trapezoid_perimeter(b11, b21, h1)
+p2 = trapezoid_perimeter(b12, b22, h2)
+
+print(f"Трапеция 1: основания {b11}/{b21}, высота {h1}")
+print(f"  Периметр: {p1:.2f}")
+
+print(f"\nТрапеция 2: основания {b12}/{b22}, высота {h2}")
+print(f"  Периметр: {p2:.2f}")
+
+print(f"\nСумма периметров: {p1 + p2:.2f}")
+14.17. Площадь пятиугольника по сторонам
+python
+import math
+
+def triangle_area_heron(a, b, c):
+    """Вычисляет площадь треугольника по трем сторонам (формула Герона)"""
+    p = (a + b + c) / 2
+    area = math.sqrt(p * (p - a) * (p - b) * (p - c))
+    return area
+
+def pentagon_area(a, b, c, d, e):
+    """
+    Вычисляет площадь пятиугольника по рис. 14.4
+    Для вычисления нужны также диагонали f и g
+    """
+    # Предположим, что пятиугольник состоит из трех треугольников
+    # Для вычисления нужно знать f и g или другие данные
+    
+    # Альтернативный подход: разбиваем на треугольники
+    # Допустим, известны все стороны и одна диагональ f
+    f = math.sqrt(a**2 + b**2)  # предположим, это прямоугольный треугольник
+    g = math.sqrt(e**2 + d**2)  # предположим, это прямоугольный треугольник
+    
+    # Площадь пятиугольника как сумма площадей трех треугольников
+    # Треугольник 1: стороны a, b, f
+    area1 = triangle_area_heron(a, b, f)
+    
+    # Треугольник 2: стороны c, d, g
+    area2 = triangle_area_heron(c, d, g)
+    
+    # Треугольник 3: стороны f, g, e (предположим)
+    area3 = triangle_area_heron(f, g, e)
+    
+    total_area = area1 + area2 + area3
+    
+    return total_area, f, g
+
+# Пример использования
+a, b, c, d, e = 3, 4, 5, 6, 7
+
+area, f, g = pentagon_area(a, b, c, d, e)
+
+print(f"Стороны пятиугольника: a={a}, b={b}, c={c}, d={d}, e={e}")
+print(f"Диагонали: f={f:.2f}, g={g:.2f}")
+print(f"Площадь пятиугольника: {area:.2f}")
+14.18. Площадь пятиугольника по координатам вершин
+python
+import math
+
+def triangle_area_coords(x1, y1, x2, y2, x3, y3):
+    """Вычисляет площадь треугольника по координатам вершин"""
+    return abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1)) / 2
+
+def polygon_area_coords(coords):
+    """
+    Вычисляет площадь выпуклого многоугольника по координатам вершин
+    coords - список кортежей [(x1,y1), (x2,y2), ...]
+    """
+    n = len(coords)
+    area = 0
+    
+    # Формула площади Гаусса (шнуровка)
+    for i in range(n):
+        x1, y1 = coords[i]
+        x2, y2 = coords[(i + 1) % n]
+        area += x1 * y2 - x2 * y1
+    
+    return abs(area) / 2
+
+# Пример использования
+# Координаты вершин пятиугольника
+vertices = [
+    (0, 0),   # A
+    (4, 0),   # B
+    (5, 3),   # C
+    (2, 5),   # D
+    (-1, 2)   # E
+]
+
+# Способ 1: разбиение на треугольники
+print("Способ 1: разбиение на треугольники")
+area1 = triangle_area_coords(*vertices[0], *vertices[1], *vertices[2])
+area2 = triangle_area_coords(*vertices[0], *vertices[2], *vertices[3])
+area3 = triangle_area_coords(*vertices[0], *vertices[3], *vertices[4])
+
+total_area1 = area1 + area2 + area3
+print(f"  Площадь треугольника ABC: {area1:.2f}")
+print(f"  Площадь треугольника ACD: {area2:.2f}")
+print(f"  Площадь треугольника ADE: {area3:.2f}")
+print(f"  Площадь пятиугольника: {total_area1:.2f}")
+
+# Способ 2: формула Гаусса
+print("\nСпособ 2: формула Гаусса")
+total_area2 = polygon_area_coords(vertices)
+print(f"  Площадь пятиугольника: {total_area2:.2f}")
+
+# Проверка
+print(f"\nРазница между методами: {abs(total_area1 - total_area2):.6f}")
