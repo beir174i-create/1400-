@@ -1,0 +1,748 @@
+14.21. Полные квадраты
+python
+def is_perfect_square(num):
+    """Проверяет, является ли число полным квадратом"""
+    if num < 0:
+        return False
+    root = int(num ** 0.5)
+    return root * root == num
+
+def count_perfect_squares(numbers):
+    """Считает количество полных квадратов в списке"""
+    count = 0
+    for num in numbers:
+        if is_perfect_square(num):
+            count += 1
+    return count
+
+# Пример использования
+n = 10
+numbers = [1, 4, 5, 9, 16, 25, 30, 36, 49, 64]
+
+print(f"Числа: {numbers}")
+print(f"Количество полных квадратов: {count_perfect_squares(numbers)}")
+print("Полные квадраты:", [num for num in numbers if is_perfect_square(num)])
+14.22. Степени пятерки
+python
+def is_power_of_five(num):
+    """Проверяет, является ли число степенью пятерки"""
+    if num <= 0:
+        return False
+    while num % 5 == 0:
+        num //= 5
+    return num == 1
+
+def count_powers_of_five(numbers):
+    """Считает количество степеней пятерки в списке"""
+    count = 0
+    for num in numbers:
+        if is_power_of_five(num):
+            count += 1
+    return count
+
+# Пример использования
+n = 10
+numbers = [1, 5, 10, 25, 50, 125, 250, 625, 1000, 3125]
+
+print(f"Числа: {numbers}")
+print(f"Количество степеней пятерки: {count_powers_of_five(numbers)}")
+print("Степени пятерки:", [num for num in numbers if is_power_of_five(num)])
+14.23. Трехзначные простые числа
+python
+def is_prime(num):
+    """Проверяет, является ли число простым"""
+    if num < 2:
+        return False
+    if num == 2:
+        return True
+    if num % 2 == 0:
+        return False
+    
+    for i in range(3, int(num**0.5) + 1, 2):
+        if num % i == 0:
+            return False
+    return True
+
+def three_digit_primes():
+    """Находит все трехзначные простые числа"""
+    primes = []
+    for num in range(100, 1000):
+        if is_prime(num):
+            primes.append(num)
+    return primes
+
+# Пример использования
+primes = three_digit_primes()
+print(f"Количество трехзначных простых чисел: {len(primes)}")
+print("Первые 20 трехзначных простых чисел:", primes[:20])
+print("Последние 10 трехзначных простых чисел:", primes[-10:])
+14.24. Близнецы-простые числа
+python
+def is_prime(num):
+    """Проверяет, является ли число простым"""
+    if num < 2:
+        return False
+    if num == 2:
+        return True
+    if num % 2 == 0:
+        return False
+    
+    for i in range(3, int(num**0.5) + 1, 2):
+        if num % i == 0:
+            return False
+    return True
+
+def find_twin_primes(limit):
+    """Находит все пары близнецов-простых чисел до limit"""
+    twins = []
+    for num in range(2, limit - 1):
+        if is_prime(num) and is_prime(num + 2):
+            twins.append((num, num + 2))
+    return twins
+
+# Пример использования
+limit = 200
+twin_primes = find_twin_primes(limit)
+
+print(f"Пары близнецов-простых чисел до {limit}:")
+for i, (p1, p2) in enumerate(twin_primes):
+    print(f"{p1:3} и {p2:3}", end=" | ")
+    if (i + 1) % 5 == 0:
+        print()
+print(f"\nВсего пар: {len(twin_primes)}")
+14.25. Выражение с факториалами
+python
+def factorial(n):
+    """Вычисляет факториал числа n"""
+    if n < 0:
+        return 0
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
+def calculate_expression(n):
+    """Вычисляет выражение: sum(i=1 to n) (2i-1)!! / (2i)!!"""
+    total = 0
+    for i in range(1, n + 1):
+        # (2i-1)!! = произведение нечетных чисел от 1 до (2i-1)
+        double_fact_odd = 1
+        for j in range(1, 2*i, 2):
+            double_fact_odd *= j
+        
+        # (2i)!! = произведение четных чисел от 2 до 2i
+        double_fact_even = 1
+        for j in range(2, 2*i + 1, 2):
+            double_fact_even *= j
+        
+        total += double_fact_odd / double_fact_even
+    
+    return total
+
+# Альтернативная формула через факториалы
+def calculate_expression_alt(n):
+    """Альтернативное вычисление через факториалы"""
+    total = 0
+    for i in range(1, n + 1):
+        numerator = factorial(2*i - 1)
+        denominator = factorial(i) * (2**i) * factorial(i-1)
+        total += numerator / denominator
+    return total
+
+# Пример использования
+n = 5
+result1 = calculate_expression(n)
+result2 = calculate_expression_alt(n)
+
+print(f"n = {n}")
+print(f"Результат (через двойные факториалы): {result1:.6f}")
+print(f"Результат (через обычные факториалы): {result2:.6f}")
+print(f"Разница: {abs(result1 - result2):.10f}")
+14.26. Сравнение сумм цифр
+python
+def sum_of_digits(num):
+    """Вычисляет сумму цифр числа"""
+    total = 0
+    num = abs(num)
+    while num > 0:
+        total += num % 10
+        num //= 10
+    return total
+
+def compare_sum_of_digits(num1, num2):
+    """Сравнивает суммы цифр двух чисел"""
+    sum1 = sum_of_digits(num1)
+    sum2 = sum_of_digits(num2)
+    
+    if sum1 > sum2:
+        return f"Сумма цифр больше в числе {num1} ({sum1} > {sum2})"
+    elif sum2 > sum1:
+        return f"Сумма цифр больше в числе {num2} ({sum2} > {sum1})"
+    else:
+        return f"Суммы цифр равны ({sum1})"
+
+# Пример использования
+num1 = 12345
+num2 = 54321
+
+print(f"Число 1: {num1}")
+print(f"Число 2: {num2}")
+print(compare_sum_of_digits(num1, num2))
+14.27. Сравнение количества цифр
+python
+def count_digits(num):
+    """Считает количество цифр в числе"""
+    if num == 0:
+        return 1
+    count = 0
+    num = abs(num)
+    while num > 0:
+        count += 1
+        num //= 10
+    return count
+
+def compare_digit_count(num1, num2):
+    """Сравнивает количество цифр в двух числах"""
+    count1 = count_digits(num1)
+    count2 = count_digits(num2)
+    
+    if count1 > count2:
+        return f"Больше цифр в числе {num1} ({count1} > {count2})"
+    elif count2 > count1:
+        return f"Больше цифр в числе {num2} ({count2} > {count1})"
+    else:
+        return f"Количество цифр одинаково ({count1})"
+
+# Пример использования
+num1 = 123
+num2 = 4567
+
+print(f"Число 1: {num1}")
+print(f"Число 2: {num2}")
+print(compare_digit_count(num1, num2))
+14.28. Счастливые билеты
+python
+# Вариант 1: с функцией для суммы цифр трехзначного числа
+def sum_of_three_digits(num):
+    """Сумма цифр трехзначного числа"""
+    return (num // 100) + (num // 10 % 10) + (num % 10)
+
+def count_lucky_tickets_v1():
+    """Подсчет счастливых билетов (вариант 1)"""
+    count = 0
+    for ticket in range(100000, 1000000):
+        first_part = ticket // 1000
+        second_part = ticket % 1000
+        
+        if sum_of_three_digits(first_part) == sum_of_three_digits(second_part):
+            count += 1
+    return count
+
+# Вариант 2: с дополнительной функцией проверки
+def is_lucky_ticket(ticket):
+    """Проверяет, является ли билет счастливым"""
+    if ticket < 100000 or ticket >= 1000000:
+        return False
+    
+    first_part = ticket // 1000
+    second_part = ticket % 1000
+    
+    return sum_of_three_digits(first_part) == sum_of_three_digits(second_part)
+
+def count_lucky_tickets_v2():
+    """Подсчет счастливых билетов (вариант 2)"""
+    count = 0
+    lucky_tickets = []
+    
+    for ticket in range(100000, 1000000):
+        if is_lucky_ticket(ticket):
+            count += 1
+            if count <= 10:  # Сохраним первые 10 для примера
+                lucky_tickets.append(ticket)
+    
+    return count, lucky_tickets
+
+# Пример использования
+print("Вариант 1:")
+count1 = count_lucky_tickets_v1()
+print(f"Количество счастливых билетов: {count1}")
+
+print("\nВариант 2:")
+count2, first_tickets = count_lucky_tickets_v2()
+print(f"Количество счастливых билетов: {count2}")
+print(f"Первые 10 счастливых билетов: {first_tickets}")
+14.29. Сравнение массивов
+python
+def count_common_elements(arr1, arr2):
+    """Считает, сколько элементов из arr1 есть в arr2"""
+    count = 0
+    for num in arr1:
+        if num in arr2:
+            count += 1
+    return count
+
+def compare_arrays_with_m3(m1, m2, m3):
+    """Сравнивает, в каком массиве больше чисел из m3"""
+    count1 = count_common_elements(m1, m3)
+    count2 = count_common_elements(m2, m3)
+    
+    print(f"m1 = {m1}")
+    print(f"m2 = {m2}")
+    print(f"m3 = {m3}")
+    print(f"Чисел из m3 в m1: {count1}")
+    print(f"Чисел из m3 в m2: {count2}")
+    
+    if count1 > count2:
+        return "В массиве m1 больше чисел из m3"
+    elif count2 > count1:
+        return "В массиве m2 больше чисел из m3"
+    else:
+        return "В массивах m1 и m2 одинаковое количество чисел из m3"
+
+# Пример использования
+m1 = [1, 2, 3, 4, 5]
+m2 = [3, 4, 5, 6, 7]
+m3 = [2, 4, 6, 8]
+
+result = compare_arrays_with_m3(m1, m2, m3)
+print(f"\nРезультат: {result}")
+14.30. Палиндромы-числа
+python
+def is_palindrome_number(num):
+    """Проверяет, является ли число палиндромом"""
+    str_num = str(num)
+    return str_num == str_num[::-1]
+
+def check_palindromes(num1, num2):
+    """Проверяет, являются ли числа палиндромами"""
+    result = []
+    
+    if is_palindrome_number(num1):
+        result.append(f"Число {num1} является палиндромом")
+    else:
+        result.append(f"Число {num1} НЕ является палиндромом")
+    
+    if is_palindrome_number(num2):
+        result.append(f"Число {num2} является палиндромом")
+    else:
+        result.append(f"Число {num2} НЕ является палиндромом")
+    
+    if is_palindrome_number(num1) or is_palindrome_number(num2):
+        result.append("Хоть одно из чисел является палиндромом")
+    else:
+        result.append("Ни одно из чисел не является палиндромом")
+    
+    return result
+
+# Пример использования
+num1 = 12321
+num2 = 12345
+
+print(f"Число 1: {num1}")
+print(f"Число 2: {num2}")
+
+results = check_palindromes(num1, num2)
+for result in results:
+    print(result)
+14.31. Наименьшее общее кратное
+python
+def gcd(a, b):
+    """Находит наибольший общий делитель (алгоритм Евклида)"""
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
+
+def lcm(a, b):
+    """Находит наименьшее общее кратное"""
+    return abs(a * b) // gcd(a, b)
+
+# Пример использования
+a = 12
+b = 18
+
+print(f"Числа: {a} и {b}")
+print(f"НОД({a}, {b}) = {gcd(a, b)}")
+print(f"НОК({a}, {b}) = {lcm(a, b)}")
+print(f"Проверка: {a} * {b} = {a * b}, НОД * НОК = {gcd(a, b) * lcm(a, b)}")
+14.32. Сокращение дроби
+python
+def gcd(a, b):
+    """Находит наибольший общий делитель (алгоритм Евклида)"""
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
+
+def reduce_fraction(a, b):
+    """Сокращает дробь a/b"""
+    if b == 0:
+        raise ValueError("Знаменатель не может быть равен 0")
+    
+    divisor = gcd(a, b)
+    p = a // divisor
+    q = b // divisor
+    
+    return p, q, divisor
+
+# Пример использования
+a = 24
+b = 36
+
+print(f"Исходная дробь: {a}/{b}")
+p, q, divisor = reduce_fraction(a, b)
+print(f"НОД({a}, {b}) = {divisor}")
+print(f"Сокращенная дробь: {p}/{q}")
+print(f"Проверка: {a}/{b} = {a/b:.4f}, {p}/{q} = {p/q:.4f}")
+14.33. НОД трех чисел
+python
+def gcd(a, b):
+    """Находит наибольший общий делитель (алгоритм Евклида)"""
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
+
+def gcd_three(a, b, c):
+    """Находит НОД трех чисел"""
+    return gcd(gcd(a, b), c)
+
+# Пример использования
+a, b, c = 24, 36, 60
+
+print(f"Числа: {a}, {b}, {c}")
+print(f"НОД({a}, {b}) = {gcd(a, b)}")
+print(f"НОД({gcd(a, b)}, {c}) = {gcd(gcd(a, b), c)}")
+print(f"НОД({a}, {b}, {c}) = {gcd_three(a, b, c)}")
+14.34. НОД n чисел
+python
+def gcd(a, b):
+    """Находит наибольший общий делитель (алгоритм Евклида)"""
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
+
+def gcd_list(numbers):
+    """Находит НОД списка чисел"""
+    if len(numbers) == 0:
+        return 0
+    if len(numbers) == 1:
+        return abs(numbers[0])
+    
+    result = numbers[0]
+    for num in numbers[1:]:
+        result = gcd(result, num)
+        if result == 1:  # Оптимизация: если НОД стал 1, дальше можно не считать
+            return 1
+    
+    return result
+
+# Пример использования
+numbers = [24, 36, 48, 60, 72]
+
+print(f"Числа: {numbers}")
+print(f"НОД всех чисел: {gcd_list(numbers)}")
+
+# Проверка поэтапно
+print("\nПоэтапное вычисление:")
+result = numbers[0]
+for i, num in enumerate(numbers[1:], 1):
+    new_result = gcd(result, num)
+    print(f"НОД({result}, {num}) = {new_result}")
+    result = new_result
+14.35. Количество букв 'н' в двух предложениях
+python
+def count_letter_n(sentence):
+    """Считает количество букв 'н' в предложении"""
+    count = 0
+    for char in sentence.lower():
+        if char == 'н':
+            count += 1
+    return count
+
+def total_letters_n(sentence1, sentence2):
+    """Общее количество букв 'н' в двух предложениях"""
+    total = count_letter_n(sentence1) + count_letter_n(sentence2)
+    
+    print(f"Предложение 1: '{sentence1}'")
+    print(f"Букв 'н': {count_letter_n(sentence1)}")
+    print(f"Предложение 2: '{sentence2}'")
+    print(f"Букв 'н': {count_letter_n(sentence2)}")
+    print(f"Общее количество букв 'н': {total}")
+    
+    return total
+
+# Пример использования
+sentence1 = "Наш невероятный настрой не знает никаких назойливых нот ностальгии."
+sentence2 = "Новый научный подход направлен на нахождение нестандартных решений."
+
+total_letters_n(sentence1, sentence2)
+14.36. Общее количество заданной буквы
+python
+def count_letter(sentence, letter):
+    """Считает количество заданной буквы в предложении"""
+    count = 0
+    letter = letter.lower()
+    for char in sentence.lower():
+        if char == letter:
+            count += 1
+    return count
+
+def total_letter_count(sentences, letter):
+    """Общее количество заданной буквы в списке предложений"""
+    total = 0
+    letter = letter.lower()
+    
+    print(f"Ищем букву '{letter}' в {len(sentences)} предложениях:")
+    
+    for i, sentence in enumerate(sentences, 1):
+        count = count_letter(sentence, letter)
+        total += count
+        print(f"  Предложение {i}: '{sentence}'")
+        print(f"    Букв '{letter}': {count}")
+    
+    print(f"\nОбщее количество букв '{letter}': {total}")
+    return total
+
+# Пример использования
+sentences = [
+    "Солнце светит ярко.",
+    "Луна освещает ночь.",
+    "Звезды мерцают на небе."
+]
+letter = "с"
+
+total_letter_count(sentences, letter)
+14.37. Доля буквы 'о' в предложениях
+python
+def letter_percentage(sentence, letter):
+    """Вычисляет долю заданной буквы в предложении (в %)"""
+    if len(sentence) == 0:
+        return 0
+    
+    letter = letter.lower()
+    sentence_lower = sentence.lower()
+    
+    count = sentence_lower.count(letter)
+    percentage = (count / len(sentence)) * 100
+    
+    return percentage
+
+def compare_letter_percentage(sentence1, sentence2, letter='о'):
+    """Сравнивает долю буквы в двух предложениях"""
+    perc1 = letter_percentage(sentence1, letter)
+    perc2 = letter_percentage(sentence2, letter)
+    
+    print(f"Предложение 1: '{sentence1}'")
+    print(f"  Длина: {len(sentence1)} символов")
+    print(f"  Букв '{letter}': {sentence1.lower().count(letter.lower())}")
+    print(f"  Доля буквы '{letter}': {perc1:.2f}%")
+    
+    print(f"\nПредложение 2: '{sentence2}'")
+    print(f"  Длина: {len(sentence2)} символов")
+    print(f"  Букв '{letter}': {sentence2.lower().count(letter.lower())}")
+    print(f"  Доля буквы '{letter}': {perc2:.2f}%")
+    
+    if perc1 > perc2:
+        return f"\nДоля буквы '{letter}' больше в первом предложении"
+    elif perc2 > perc1:
+        return f"\nДоля буквы '{letter}' больше во втором предложении"
+    else:
+        return f"\nДоля буквы '{letter}' одинакова в обоих предложениях"
+
+# Пример использования
+sentence1 = "Около озера осенью опадают осенние листья."
+sentence2 = "Облако обходит огромный океан осторожно."
+
+result = compare_letter_percentage(sentence1, sentence2, 'о')
+print(result)
+14.38. Последнее вхождение буквы 'й'
+python
+def last_index_of_letter(sentence, letter):
+    """Находит порядковый номер последнего вхождения буквы"""
+    letter = letter.lower()
+    sentence_lower = sentence.lower()
+    
+    # Ищем с конца
+    for i in range(len(sentence) - 1, -1, -1):
+        if sentence_lower[i] == letter:
+            return i + 1  # +1 потому что порядковый номер с 1
+    
+    return 0  # Буква не найдена
+
+def compare_last_y_position(sentence1, sentence2):
+    """Сравнивает позиции последней буквы 'й' в предложениях"""
+    pos1 = last_index_of_letter(sentence1, 'й')
+    pos2 = last_index_of_letter(sentence2, 'й')
+    
+    print(f"Предложение 1: '{sentence1}'")
+    if pos1 > 0:
+        print(f"  Последняя буква 'й' на позиции: {pos1}")
+    else:
+        print(f"  Буква 'й' не найдена")
+    
+    print(f"\nПредложение 2: '{sentence2}'")
+    if pos2 > 0:
+        print(f"  Последняя буква 'й' на позиции: {pos2}")
+    else:
+        print(f"  Буква 'й' не найдена")
+    
+    if pos1 == 0 and pos2 == 0:
+        return "\nБуква 'й' не найдена ни в одном предложении"
+    elif pos1 == 0:
+        return "\nБуква 'й' найдена только во втором предложении"
+    elif pos2 == 0:
+        return "\nБуква 'й' найдена только в первом предложении"
+    elif pos1 > pos2:
+        return f"\nПоследняя буква 'й' дальше от начала в первом предложении ({pos1} > {pos2})"
+    elif pos2 > pos1:
+        return f"\nПоследняя буква 'й' дальше от начала во втором предложении ({pos2} > {pos1})"
+    else:
+        return f"\nПоследняя буква 'й' на одинаковой позиции ({pos1})"
+
+# Пример использования
+sentence1 = "Мой йогурт сегодня йодированный."
+sentence2 = "Йогурт с йодом - мой любимый."
+
+result = compare_last_y_position(sentence1, sentence2)
+print(result)
+14.39. Слова-палиндромы
+python
+def is_palindrome_word(word):
+    """Проверяет, является ли слово палиндромом"""
+    word = word.lower().replace(" ", "")
+    return word == word[::-1]
+
+def check_palindrome_words(words):
+    """Проверяет список слов на палиндромы"""
+    results = []
+    palindrome_found = False
+    
+    print(f"Проверяем слова: {words}")
+    
+    for word in words:
+        if is_palindrome_word(word):
+            results.append(f"Слово '{word}' является палиндромом")
+            palindrome_found = True
+        else:
+            results.append(f"Слово '{word}' НЕ является палиндромом")
+    
+    if palindrome_found:
+        results.append("Хоть одно слово является палиндромом")
+    else:
+        results.append("Ни одно слово не является палиндромом")
+    
+    return results
+
+# Пример использования
+words = ["казак", "радар", "машина", "шалаш", "программа"]
+
+results = check_palindrome_words(words)
+for result in results:
+    print(result)
+14.40. Дата следующего/предыдущего дня
+python
+def is_leap_year(year):
+    """Проверяет, является ли год високосным"""
+    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+
+def days_in_month(year, month):
+    """Возвращает количество дней в месяце"""
+    days_in_months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    
+    if month == 2 and is_leap_year(year):
+        return 29
+    
+    if 1 <= month <= 12:
+        return days_in_months[month - 1]
+    
+    return 0
+
+def next_day(g, m, n, consider_leap=True):
+    """Возвращает дату следующего дня"""
+    year, month, day = g, m, n
+    
+    if not consider_leap:
+        # Игнорируем високосность
+        is_leap = False
+    else:
+        is_leap = is_leap_year(year)
+    
+    # Проверяем валидность даты
+    if m < 1 or m > 12 or n < 1 or n > days_in_month(year, month):
+        return None
+    
+    day += 1
+    
+    if day > days_in_month(year, month):
+        day = 1
+        month += 1
+        
+        if month > 12:
+            month = 1
+            year += 1
+    
+    return year, month, day
+
+def previous_day(g, m, n, consider_leap=True):
+    """Возвращает дату предыдущего дня"""
+    year, month, day = g, m, n
+    
+    if not consider_leap:
+        # Игнорируем високосность
+        is_leap = False
+    else:
+        is_leap = is_leap_year(year)
+    
+    # Проверяем валидность даты
+    if m < 1 or m > 12 or n < 1 or n > days_in_month(year, month):
+        return None
+    
+    day -= 1
+    
+    if day < 1:
+        month -= 1
+        
+        if month < 1:
+            month = 12
+            year -= 1
+        
+        day = days_in_month(year, month)
+    
+    return year, month, day
+
+# Пример использования
+year, month, day = 2024, 2, 28  # Високосный год
+
+print(f"Текущая дата: {day:02d}.{month:02d}.{year}")
+
+# а) Предыдущий день
+print("\nа) Предыдущий день:")
+prev1 = previous_day(year, month, day, consider_leap=False)
+prev2 = previous_day(year, month, day, consider_leap=True)
+
+print(f"  Без учета високосности: {prev1[2]:02d}.{prev1[1]:02d}.{prev1[0]}")
+print(f"  С учетом високосности: {prev2[2]:02d}.{prev2[1]:02d}.{prev2[0]}")
+
+# б) Следующий день
+print("\nб) Следующий день:")
+next1 = next_day(year, month, day, consider_leap=False)
+next2 = next_day(year, month, day, consider_leap=True)
+
+print(f"  Без учета високосности: {next1[2]:02d}.{next1[1]:02d}.{next1[0]}")
+print(f"  С учетом високосности: {next2[2]:02d}.{next2[1]:02d}.{next2[0]}")
+
+# Проверка на граничные условия
+print("\nПроверка граничных условий:")
+test_dates = [
+    (2023, 12, 31),  # Конец года
+    (2024, 1, 1),    # Начало года
+    (2024, 2, 29),   # 29 февраля високосного года
+]
+
+for test_year, test_month, test_day in test_dates:
+    print(f"\nДата: {test_day:02d}.{test_month:02d}.{test_year}")
+    next_d = next_day(test_year, test_month, test_day)
+    prev_d = previous_day(test_year, test_month, test_day)
+    
+    if next_d:
+        print(f"  Следующий день: {next_d[2]:02d}.{next_d[1]:02d}.{next_d[0]}")
+    if prev_d:
+        print(f"  Предыдущий день: {prev_d[2]:02d}.{prev_d[1]:02d}.{prev_d[0]}")
