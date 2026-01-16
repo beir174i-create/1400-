@@ -1,0 +1,281 @@
+Приложение 2: Задания на определение значений переменных величин
+python
+# П2.1
+def task_p2_1():
+    print("П2.1:")
+    # а)
+    s = 25
+    s = 55
+    s = 0
+    print(f"а) s = {s}")  # 0
+    
+    # б)
+    s = 5
+    s = -2 * s
+    s = 5 * s
+    print(f"б) s = {s}")  # -50
+    
+    # в)
+    s = -3.5
+    s = 4 * s
+    print(f"в) s = {s}")  # -14.0
+    
+    # г)
+    s = 20
+    s = -21
+    print(f"г) s = {s}")  # -21
+    print()
+
+# П2.2
+def task_p2_2():
+    print("П2.2:")
+    # а)
+    x = 20
+    x = -20
+    x = 0
+    print(f"а) x = {x}")  # 0
+    
+    # б)
+    x = 23.5
+    x = x * 2
+    print(f"б) x = {x}")  # 47.0
+    
+    # в)
+    x = 50
+    x = x + 5
+    print(f"в) x = {x}")  # 55
+    
+    # г)
+    x = -30
+    k = -40
+    x = x + k
+    print(f"г) x = {x}")  # -70
+    print()
+
+# П2.3
+def task_p2_3():
+    print("П2.3:")
+    a = 5
+    a = a + 6
+    b = -a
+    c = a - 2 * b
+    print(f"c = {c}")  # 33
+    print()
+
+# П2.4
+def task_p2_4():
+    print("П2.4:")
+    a = 40
+    b = 10
+    b = -a/2 * b
+    v = b + a * 2
+    print(f"v = {v}")  # -120.0
+    print()
+
+# П2.5
+def task_p2_5():
+    print("П2.5:")
+    # а)
+    s = 13
+    k = -5
+    d = s + 2
+    s = d
+    k = 2 * s
+    print(f"а) s = {s}, k = {k}")  # s=15, k=30
+    
+    # б)
+    s = 0
+    k = 15
+    d = k - 2
+    s = d
+    k = 3 * d
+    print(f"б) s = {s}, k = {k}")  # s=13, k=39
+    print()
+
+# П2.6
+def task_p2_6():
+    print("П2.6:")
+    # а)
+    a = 3.4
+    b = -5.1
+    b = a
+    a = b
+    print(f"а) a = {a}, b = {b}")  # a=3.4, b=3.4
+    
+    # б)
+    a = 9.4
+    b = 15.1
+    b = a
+    a = b
+    print(f"б) a = {a}, b = {b}")  # a=9.4, b=9.4
+    print()
+
+# П2.7
+def task_p2_7():
+    print("П2.7:")
+    s = 14
+    k = -3
+    d = s + 1
+    s = d
+    k = 2 * s
+    print(f"s = {s}, k = {k}")  # s=15, k=30
+    print()
+
+# П2.8
+def task_p2_8():
+    print("П2.8:")
+    p = 0
+    q = 30
+    d = q - 5
+    q = 2 * d
+    p = q - 100
+    print(f"p = {p}, q = {q}")  # p=-50, q=50
+    print()
+
+# П2.9
+def task_p2_9():
+    print("П2.9:")
+    a = 40
+    b = 10
+    b = -a/2 * b
+    
+    if a < b:
+        c = b - a
+    else:
+        c = a - 2 * b
+        
+    print(f"c = {c}")  # 240.0
+    print()
+
+# П2.10
+def task_p2_10():
+    print("П2.10:")
+    a = 100
+    b = 30
+    a = a - b * 3
+    
+    if a > b:
+        c = a - b
+    else:
+        c = b - a
+        
+    print(f"c = {c}")  # 10
+    print()
+
+# П2.11
+def task_p2_11():
+    print("П2.11:")
+    a = 32
+    b = -1
+    b = a - b * 4
+    
+    if a > b:
+        c = 6 * b - 4 * a
+    else:
+        c = a - b
+        
+    print(f"c = {c}")  # -56
+    print()
+
+# П2.12
+def task_p2_12():
+    print("П2.12:")
+    a = 56
+    b = 77
+    
+    if a > b:
+        b = b - a
+    else:
+        a = a - b
+        
+    print(f"a = {a}")  # -21
+    print()
+
+# П2.13
+def task_p2_13():
+    print("П2.13:")
+    x = 55
+    y = 75
+    
+    if x != y:
+        if x > y:
+            x = x - y
+        else:
+            y = y - x
+            
+    print(f"x = {x}")  # 55 (ничего не меняется)
+    print()
+
+# П2.14
+def task_p2_14():
+    print("П2.14:")
+    s = 0
+    k = 0
+    
+    while s < 1024:
+        s = s + 10
+        k = k + 1
+        
+    print(f"k = {k}")  # 103
+    print()
+
+# П2.15
+def task_p2_15():
+    print("П2.15:")
+    a = 6
+    s = 0
+    
+    while a >= 2:  # пока a >= 2
+        s = s + a
+        a = a - 1
+        
+    print(f"s = {s}")  # 5+4+3+2 = 14? Проверим: 6+5+4+3+2 = 20?
+    # Давайте точно: a=6: s=0+6=6, a=5; a>=2: s=6+5=11, a=4; ...
+    # Получается: 6+5+4+3+2 = 20
+    print(f"s = {s}")  # 20
+    print()
+
+# П2.16
+def task_p2_16():
+    print("П2.16:")
+    a = 256
+    b = 0
+    
+    while a > 1:  # пока a > 1
+        a = a / 2
+        b = b + a + 1
+        
+    print(f"b = {b}")  # Посчитаем: 
+    # 1: a=128, b=0+128+1=129
+    # 2: a=64, b=129+64+1=194
+    # 3: a=32, b=194+32+1=227
+    # 4: a=16, b=227+16+1=244
+    # 5: a=8, b=244+8+1=253
+    # 6: a=4, b=253+4+1=258
+    # 7: a=2, b=258+2+1=261
+    # 8: a=1, условие a>1 ложно, выходим
+    print(f"b = {b}")  # 261
+    print()
+
+# Запуск всех задач из Приложения 2
+def run_appendix_2():
+    print("="*50)
+    print("ПРИЛОЖЕНИЕ 2: Определение значений переменных")
+    print("="*50)
+    
+    task_p2_1()
+    task_p2_2()
+    task_p2_3()
+    task_p2_4()
+    task_p2_5()
+    task_p2_6()
+    task_p2_7()
+    task_p2_8()
+    task_p2_9()
+    task_p2_10()
+    task_p2_11()
+    task_p2_12()
+    task_p2_13()
+    task_p2_14()
+    task_p2_15()
+    task_p2_16()
