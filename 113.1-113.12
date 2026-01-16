@@ -1,0 +1,148 @@
+# П3.1
+A = True
+B = False
+C = False
+
+print("П3.1:")
+print("а) А или В:", A or B)           # True or False = True
+print("б) А и В:", A and B)            # True and False = False
+print("в) В или С:", B or C)           # False or False = False
+print()
+
+# П3.2
+X = False
+Y = True
+Z = False
+
+print("П3.2:")
+print("а) X или Z:", X or Z)           # False or False = False
+print("б) X и Y:", X and Y)            # False and True = False
+print("в) X и Z:", X and Z)            # False and False = False
+print()
+
+# П3.3
+A = True
+B = False
+C = False
+
+print("П3.3:")
+print("а) не А и В:", (not A) and B)    # False and False = False
+print("б) А или не В:", A or (not B))   # True or True = True
+print("в) А и В или С:", (A and B) or C) # False or False = False
+print()
+
+# П3.4
+X = True
+Y = True
+Z = False
+
+print("П3.4:")
+print("а) не X и Y:", (not X) and Y)    # False and True = False
+print("б) X или не Y:", X or (not Y))   # True or False = True
+print("в) X или Y и Z:", X or (Y and Z)) # True or False = True
+print()
+
+# П3.5
+A = True
+B = False
+C = False
+
+print("П3.5:")
+print("а) А или В и не С:", A or (B and (not C)))           # True or False = True
+print("б) не А и не В:", (not A) and (not B))               # False and True = False
+print("в) не (А и С) или В:", (not (A and C)) or B)         # True or False = True
+print("г) А и не В или С:", (A and (not B)) or C)           # True or False = True
+print("д) А и (не В или С):", A and ((not B) or C))         # True and (True or False) = True
+print("е) А или (не (В и С)):", A or (not (B and C)))       # True or True = True
+print()
+
+# П3.6
+X = False
+Y = False
+Z = True
+
+print("П3.6:")
+print("а) X или Y и не Z:", X or (Y and (not Z)))           # False or False = False
+print("б) не X и не Y:", (not X) and (not Y))               # True and True = True
+print("в) не (X и Z) или Y:", (not (X and Z)) or Y)         # True or False = True
+print("г) X и не Y или Z:", (X and (not Y)) or Z)           # False or True = True
+print("д) X и (не Y или Z):", X and ((not Y) or Z))         # False and (True or True) = False
+print("е) X или (не (Y или Z)):", X or (not (Y or Z)))      # False or False = False
+print()
+
+# П3.7
+A = True
+B = False
+C = False
+
+print("П3.7:")
+print("а) А или не (А и В) или С:", A or (not (A and B)) or C)  # True or True or False = True
+print("б) не А или А и (В или С):", (not A) or (A and (B or C))) # False or (True and False) = False
+print("в) (А или В и не С) и С:", ((A or (B and (not C))) and C) # (True or False) and False = False
+print()
+
+# П3.8
+X = False
+Y = True
+Z = False
+
+print("П3.8:")
+print("а) X и не (Z или Y) или не Z:", (X and (not (Z or Y))) or (not Z)) # False or True = True
+print("б) не X или X и (Y или Z):", (not X) or (X and (Y or Z)))          # True or False = True
+print("в) (X или Y и не Z) и Z:", ((X or (Y and (not Z))) and Z)          # (False or True) and False = False
+print()
+
+# П3.9
+X = True
+Y = False
+Z = False
+
+print("П3.9:")
+print("а) не X или не Y или не Z:", (not X) or (not Y) or (not Z))  # False or True or True = True
+print("б) (не X или не Y) и (X или Y):", ((not X) or (not Y)) and (X or Y))  # (False or True) and True = True
+print("в) X и Y или X и Z или не Z:", (X and Y) or (X and Z) or (not Z))  # False or False or True = True
+print()
+
+# П3.10
+A = False
+B = False
+C = True
+
+print("П3.10:")
+print("а) (не А или не В) и не С:", ((not A) or (not B)) and (not C))  # (True or True) and False = False
+print("б) (не А или не В) и (А или В):", ((not A) or (not B)) and (A or B))  # (True or True) and False = False
+print("в) А и В или А и С или не С:", (A and B) or (A and C) or (not C))  # False or False or False = False
+print()
+
+# П3.11
+x, y = 1, -1
+print("П3.11:")
+print("а) x^2 + y^2 ≤ 4 при x=1, y=-1:", x**2 + y**2 <= 4)  # 1 + 1 <= 4 → True
+x, y = 1, 2
+print("б) (x ≥ 0) или (y^2 ≠ 4):", (x >= 0) or (y**2 != 4))  # True or False = True
+print("в) (x ≥ 0) и (y^2 ≠ 4):", (x >= 0) and (y**2 != 4))    # True and False = False
+x, y = 2, 1
+print("г) (x*y ≠ 0) и (y > x):", (x * y != 0) and (y > x))    # True and False = False
+print("д) (x*y ≠ 0) или (y < x):", (x * y != 0) or (y < x))   # True or True = True
+print("е) (не (x*y < 0)) и (y > x):", (not (x * y < 0)) and (y > x))  # True and False = False
+x, y = 1, 2
+print("ж) (не (x*y < 0)) или (y > x):", (not (x * y < 0)) or (y > x)) # True or True = True
+print()
+
+# П3.12
+x, y = 1, -1
+print("П3.12:")
+print("а) x^2 - y^2 ≤ 0 при x=1, y=-1:", x**2 - y**2 <= 0)  # 1 - 1 <= 0 → True
+x, y = 2, -2
+print("б) (x ≥ 2) или (y^2 ≠ 4):", (x >= 2) or (y**2 != 4))  # True or False = True
+x, y = 2, 2
+print("в) (x ≥ 0) и (y^2 > 4):", (x >= 0) and (y**2 > 4))    # True and False = False
+x, y = 1, 2
+print("г) (x*y ≠ 4) и (y > x):", (x * y != 4) and (y > x))   # True and True = True
+x, y = 2, 1
+print("д) (x*y ≠ 0) или (y < x):", (x * y != 0) or (y < x))  # True or True = True
+x, y = 1, 2
+print("е) (не (x*y < 1)) и (y > x):", (not (x * y < 1)) and (y > x))  # False and True = False
+x, y = 2, 1
+print("ж) (не (x*y < 0)) или (y > x):", (not (x * y < 0)) or (y > x)) # True or False = True
+print()
